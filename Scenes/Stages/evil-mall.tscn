@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv6wr8d5tnc1v"]
+
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_3gvx8"]
+[ext_resource type="Texture2D" uid="uid://qcppwk0q6ap6" path="res://Assets/Images/Stages/evil-mall/evilBG.png" id="3_x66ap"]
+[ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://c2up5ktoemk57" path="res://Assets/Images/Stages/evil-mall/evilTree.png" id="4_201sx"]
+[ext_resource type="Texture2D" uid="uid://cy7omicde44wi" path="res://Assets/Images/Stages/evil-mall/evilSnow.png" id="5_q0qt4"]
+
+[node name="evil-mall" type="Node2D"]
+script = ExtResource("4")
+player_camera_offset = Vector2(150, 100)
+
+[node name="0-2" type="Node2D" parent="."]
+script = ExtResource("2_3gvx8")
+parallax_factor = Vector2(0.2, 0.2)
+
+[node name="EvilBg" type="Sprite2D" parent="0-2"]
+position = Vector2(-400, -500)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_x66ap")
+centered = false
+
+[node name="EvilTree" type="Sprite2D" parent="0-2"]
+position = Vector2(300, -300)
+texture = ExtResource("4_201sx")
+centered = false
+
+[node name="EvilSnow" type="Sprite2D" parent="."]
+position = Vector2(-539, 694)
+texture = ExtResource("5_q0qt4")
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1149, 809)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(224, 809)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(599, 762)

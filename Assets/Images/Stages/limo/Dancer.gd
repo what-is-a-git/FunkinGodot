@@ -1,4 +1,4 @@
-dextends AnimatedSprite
+extends AnimatedSprite
 
 var left := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

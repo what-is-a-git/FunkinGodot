@@ -1,32 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvmqjapwuxv84"]
+[gd_scene load_steps=5 format=3 uid="uid://dvmqjapwuxv84"]
 
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school-thorns/animatedEvilSchool.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_ygsuv"]
 [ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="4_cgna4"]
 
 [node name="school-evil" type="Node2D"]
 script = ExtResource("4")
 camera_zoom = 1.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxLayer" type="Node2D" parent="."]
+script = ExtResource("2_ygsuv")
+parallax_factor = Vector2(0.8, 0.9)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.8, 0.9)
-motion_offset = Vector2(-256, -72)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer"]
+texture_filter = 1
 position = Vector2(440, 200)
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("1")
 animation = &"background 2 instance 1"
-frame = 23
+frame_progress = 0.252286
 centered = false
 offset = Vector2(-200, -210)
+script = ExtResource("4_cgna4")
+playing = true
 
 [node name="Player Point" type="Node2D" parent="."]
-position = Vector2(1000, 800)
+position = Vector2(1184, 872)
 
 [node name="Dad Point" type="Node2D" parent="."]
-position = Vector2(256, 800)
+position = Vector2(440, 872)
 
 [node name="GF Point" type="Node2D" parent="."]
-position = Vector2(600, 750)
+position = Vector2(784, 822)

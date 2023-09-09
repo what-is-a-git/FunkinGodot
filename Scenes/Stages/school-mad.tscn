@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://2rjeoms3nctt"]
+[gd_scene load_steps=15 format=3 uid="uid://dd6caoo1gikjc"]
 
-[ext_resource type="Texture2D" uid="uid://b1qptlad100i3" path="res://Assets/Images/Stages/school/weebSky.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c7rowaxqg6tyb" path="res://Assets/Images/Stages/school/weebSky.png" id="1"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school/petals.res" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_qohvj"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school/weebTrees.res" id="3"]
 [ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://dym5i6ldbfsg" path="res://Assets/Images/Stages/school/weebStreet.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://b4no381xsrvep" path="res://Assets/Images/Stages/school/weebTreesBack.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://cusi5hevck65o" path="res://Assets/Images/Stages/school/weebSchool.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cx4qj60ltkrn2" path="res://Assets/Images/Stages/school/weebStreet.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dqdm1djft870o" path="res://Assets/Images/Stages/school/weebTreesBack.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://b4n6jfg5wuvd1" path="res://Assets/Images/Stages/school/weebSchool.png" id="7"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school/bgFreaks.res" id="8"]
 [ext_resource type="Script" path="res://Assets/Images/Stages/limo/Dancer.gd" id="9"]
 
@@ -63,7 +64,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["BG fangirls dissuaded"]
+"values": [&"BG fangirls dissuaded"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -104,7 +105,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["BG fangirls dissuaded"]
+"values": [&"BG fangirls dissuaded"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -131,7 +132,7 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qf1vk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n7glc"]
 _data = {
 "RESET": SubResource("1"),
 "danceLeft": SubResource("2"),
@@ -141,74 +142,80 @@ _data = {
 [node name="school-mad" type="Node2D"]
 script = ExtResource("4")
 camera_zoom = 1.0
+player_camera_offset = Vector2(0, -40)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
+[node name="ParallaxBackground" type="Node2D" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.1, 0.1)
-motion_offset = Vector2(-640, -360)
+[node name="ParallaxLayer" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
 scale = Vector2(6, 6)
 texture = ExtResource("1")
 centered = false
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.6, 0.9)
-motion_offset = Vector2(-384, -72)
+[node name="ParallaxLayer2" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.6, 0.6)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_filter = 1
 position = Vector2(-200, 0)
 scale = Vector2(6, 6)
 texture = ExtResource("7")
 centered = false
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.95, 0.95)
-motion_offset = Vector2(-64, -36)
+[node name="ParallaxLayer3" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.95, 0.95)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_filter = 1
 position = Vector2(-200, 0)
 scale = Vector2(6, 6)
 texture = ExtResource("5")
 centered = false
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.9, 0.9)
-motion_offset = Vector2(-128, -72)
+[node name="ParallaxLayer4" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.9, 0.9)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_filter = 1
 position = Vector2(-30, 130)
 scale = Vector2(4.8, 4.8)
 texture = ExtResource("6")
 centered = false
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.85, 0.85)
-motion_offset = Vector2(-192, -108)
+[node name="ParallaxLayer5" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.85, 0.85)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture_filter = 1
 position = Vector2(-580, -800)
 scale = Vector2(5.1, 5.1)
 sprite_frames = ExtResource("3")
 animation = &"trees"
-frame = 19
 centered = false
 
 [node name="AnimatedSprite2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture_filter = 1
 position = Vector2(-200, -40)
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("2")
 animation = &"PETALS ALL"
-frame = 35
+frame = 45
 centered = false
 
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.9, 0.9)
-motion_offset = Vector2(-128, -72)
+[node name="ParallaxLayer6" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_qohvj")
+parallax_factor = Vector2(0.9, 0.9)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+texture_filter = 1
 position = Vector2(-100, 190)
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("8")
@@ -218,14 +225,14 @@ script = ExtResource("9")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer6/AnimatedSprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_qf1vk")
+"": SubResource("AnimationLibrary_n7glc")
 }
 
 [node name="Player Point" type="Node2D" parent="."]
-position = Vector2(889, 899)
+position = Vector2(993, 944)
 
 [node name="Dad Point" type="Node2D" parent="."]
-position = Vector2(211, 920)
+position = Vector2(379, 928)
 
 [node name="GF Point" type="Node2D" parent="."]
-position = Vector2(558, 759)
+position = Vector2(709, 856)

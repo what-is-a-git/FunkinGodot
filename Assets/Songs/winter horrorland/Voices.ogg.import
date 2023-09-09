@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7dmhw8jdetvb"
+path="res://.godot/imported/Voices.ogg-595a9c7c05035852eaf208d1950cf065.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Songs/winter horrorland/Voices.ogg"
+dest_files=["res://.godot/imported/Voices.ogg-595a9c7c05035852eaf208d1950cf065.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
