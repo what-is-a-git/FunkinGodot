@@ -1,89 +1,90 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://c2ea05xhwsqgu"]
 
-[ext_resource path="res://Assets/Images/Stages/mall/bgWalls.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Images/Stages/mall/upperBop.res" type="SpriteFrames" id=2]
-[ext_resource path="res://Scenes/Stages/wasteland_watcher.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Images/Stages/mall/bgEscalator.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/Stages/mall/bottomBop.res" type="SpriteFrames" id=6]
-[ext_resource path="res://Assets/Images/Stages/mall/christmasTree.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/Stages/mall/fgSnow.png" type="Texture2D" id=8]
-[ext_resource path="res://Assets/Images/Stages/mall/santa.res" type="SpriteFrames" id=9]
+[ext_resource type="Texture2D" uid="uid://cn45ce7gle7hu" path="res://Assets/Images/Stages/mall/bgWalls.png" id="1"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/mall/upperBop.res" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_w5fwp"]
+[ext_resource type="Script" path="res://Scenes/Stages/wasteland_watcher.gd" id="3"]
+[ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://bso8pxhrbwfkm" path="res://Assets/Images/Stages/mall/bgEscalator.png" id="5"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/mall/bottomBop.res" id="6"]
+[ext_resource type="Texture2D" uid="uid://bc18xk6y2msk0" path="res://Assets/Images/Stages/mall/christmasTree.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://hp5adiimcdoi" path="res://Assets/Images/Stages/mall/fgSnow.png" id="8"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/mall/santa.res" id="9"]
 
 [node name="mall" type="Node2D"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 camera_zoom = 0.7
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="Node2D" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 0.2 )
-motion_offset = Vector2( -512, -288 )
+[node name="ParallaxLayer" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_w5fwp")
+parallax_factor = Vector2(0.2, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( -1000, -500 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 1 )
+position = Vector2(-1000, -500)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1")
 centered = false
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.3, 0.3 )
-motion_offset = Vector2( -448, -252 )
+[node name="ParallaxLayer2" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_w5fwp")
+parallax_factor = Vector2(0.3, 0.3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2( -240, -90 )
-scale = Vector2( 0.85, 0.85 )
-frames = ExtResource( 2 )
-animation = "idle"
+position = Vector2(-240, -90)
+scale = Vector2(0.85, 0.85)
+sprite_frames = ExtResource("2")
+animation = &"idle"
 centered = false
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2( -1100, -600 )
-scale = Vector2( 0.9, 0.9 )
-texture = ExtResource( 5 )
+position = Vector2(-1100, -600)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5")
 centered = false
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.4, 0.4 )
-motion_offset = Vector2( -384, -216 )
+[node name="ParallaxLayer3" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_w5fwp")
+parallax_factor = Vector2(0.4, 0.4)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 370, -250 )
-texture = ExtResource( 7 )
+position = Vector2(370, -250)
+texture = ExtResource("7")
 centered = false
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 0.9 )
-motion_offset = Vector2( -64, -36 )
+[node name="ParallaxLayer4" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_w5fwp")
+parallax_factor = Vector2(0.9, 0.9)
 
 [node name="AnimatedSprite2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-position = Vector2( -300, 140 )
-frames = ExtResource( 6 )
-animation = "idle"
+position = Vector2(-300, 140)
+sprite_frames = ExtResource("6")
+animation = &"idle"
 frame = 13
 centered = false
-script = ExtResource( 3 )
+script = ExtResource("3")
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer5" type="Node2D" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2( -600, 700 )
-texture = ExtResource( 8 )
+position = Vector2(-600, 700)
+texture = ExtResource("8")
 centered = false
 
 [node name="AnimatedSprite2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2( -840, 150 )
-frames = ExtResource( 9 )
-animation = "idle"
+position = Vector2(-840, 150)
+sprite_frames = ExtResource("9")
+animation = &"idle"
 centered = false
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Player Point" type="Node2D" parent="."]
-position = Vector2( 1182, 850 )
+position = Vector2(1182, 850)
 
 [node name="Dad Point" type="Node2D" parent="."]
-position = Vector2( 95, 850 )
+position = Vector2(95, 850)
 
 [node name="GF Point" type="Node2D" parent="."]
-position = Vector2( 697, 800 )
+position = Vector2(697, 800)
