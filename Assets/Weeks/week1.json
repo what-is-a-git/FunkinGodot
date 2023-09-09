@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "song": "bopeebo",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "fresh",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "dad battle",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "dad",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Daddy Dearest",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

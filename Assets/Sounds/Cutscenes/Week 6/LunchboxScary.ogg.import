@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://hpfvb70j78py"
+path="res://.godot/imported/LunchboxScary.ogg-4a7ad74637cdaf5572c0b66f97a59ea9.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/LunchboxScary.ogg"
+dest_files=["res://.godot/imported/LunchboxScary.ogg-4a7ad74637cdaf5572c0b66f97a59ea9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

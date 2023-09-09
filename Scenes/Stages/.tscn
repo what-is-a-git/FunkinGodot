@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[node name="[Unknown]" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.9
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1000, 800 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 256, 800 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 750 )

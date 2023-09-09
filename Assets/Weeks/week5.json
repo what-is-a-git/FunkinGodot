@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "song": "cocoa",
+            "icon": "parents-christmas-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "eggnog",
+            "icon": "parents-christmas-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "winter horrorland",
+            "icon": "monster-icons",
+            "color": "F5FF6B",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "parents",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Red Snow",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

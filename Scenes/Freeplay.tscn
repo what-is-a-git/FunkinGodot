@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgp2llipx46n5"]
+
+[ext_resource type="Texture2D" uid="uid://cagmirudlfjtd" path="res://Assets/Images/UI/menuDesat.png" id="1"]
+[ext_resource type="Script" path="res://Scenes/Freeplay Handler.gd" id="3"]
+[ext_resource type="FontFile" uid="uid://c7euvp5baixmv" path="res://Assets/Fonts/alphabet.png" id="3_wy2pe"]
+[ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnsa2ny07mjvm" path="res://Assets/Images/Icons/bf-icons.png" id="5"]
+[ext_resource type="Script" path="res://Scenes/Freeplay Song.gd" id="6"]
+
+[node name="Freeplay" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-116, -58)
+scale = Vector2(1.09452, 1.09452)
+texture = ExtResource("1")
+centered = false
+
+[node name="Songs" type="Node2D" parent="."]
+script = ExtResource("3")
+
+[node name="Template" type="Label" parent="Songs"]
+offset_left = 37.0
+offset_top = 38.0
+offset_right = 437.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("3_wy2pe")
+text = "TEMPLATE"
+uppercase = true
+script = ExtResource("6")
+
+[node name="Icon" type="Sprite2D" parent="Songs/Template"]
+z_index = -1
+position = Vector2(500, 49)
+texture = ExtResource("5")
+hframes = 3
+
+[node name="Dif BG" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Difficulty" type="Label" parent="."]
+offset_right = 1280.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 24
+text = "Best Score: N/A
+< NORMAL > ~ 1x Rate"
+horizontal_alignment = 1
+vertical_alignment = 1

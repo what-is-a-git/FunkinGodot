@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Tankman Part 1.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 4 Section 1.res" type="SpriteFrames" id=3]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Tankman Part 2.res" type="SpriteFrames" id=4]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 4 Section 3.res" type="SpriteFrames" id=6]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 1.res" type="SpriteFrames" id=7]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 6.res" type="SpriteFrames" id=8]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 4 Section 2.res" type="SpriteFrames" id=9]
+[ext_resource path="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 2.res" type="SpriteFrames" id=10]
+[ext_resource path="res://Assets/Sounds/Cutscenes/Stress/stressCutscene.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/Cutscenes/stress.gd" type="Script" id=12]
+
+[node name="Stress Cutscene" type="Node2D"]
+script = ExtResource( 12 )
+
+[node name="Cutscene" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="Part 1" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 7 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -412, -667 )
+
+[node name="Part 2" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 10 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -636, -1112 )
+
+[node name="Part 3" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 3 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -1154, -1002 )
+
+[node name="Part 4" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 9 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -328, -844 )
+
+[node name="Part 5" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 6 )
+animation = "cutscene"
+frame = 83
+centered = false
+offset = Vector2( -1122, -805 )
+
+[node name="Part 6" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 8 )
+animation = "cutscene"
+frame = 13
+playing = true
+centered = false
+offset = Vector2( -307, -664 )
+
+[node name="Tankman 1" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 4 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -309, -592 )
+
+[node name="Tankman 2" type="AnimatedSprite2D" parent="."]
+visible = false
+frames = ExtResource( 2 )
+animation = "cutscene"
+centered = false
+offset = Vector2( -219, -586 )

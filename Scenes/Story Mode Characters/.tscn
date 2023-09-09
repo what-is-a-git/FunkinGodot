@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cescvna7kmrb4"]
+
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="1_wj5oa"]
+
+[node name="EMPTY" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -184)
+scale = Vector2(0.9, 0.9)
+animation = &""
+script = ExtResource("1_wj5oa")

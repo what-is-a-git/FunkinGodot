@@ -1,0 +1,22 @@
+{
+    "songs": [
+        {
+            "song": "tutorial",
+            "icon": "gf-icons",
+            "color": "B72863",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "",
+        "bf",
+        "gf"
+    ],
+    "week_name": "",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

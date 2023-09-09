@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "song": "spookeez",
+            "icon": "spooky-icons",
+            "color": "DD8B13",
+            "story": true
+        },
+        {
+            "song": "south",
+            "icon": "spooky-icons",
+            "color": "DD8B13",
+            "story": true
+        },
+        {
+            "song": "monster",
+            "icon": "monster-icons",
+            "color": "F5FF6B",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "spooky",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Spooky Kids",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

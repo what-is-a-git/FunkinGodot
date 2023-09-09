@@ -1,0 +1,125 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmxe0y6qpwvgo"]
+
+[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://x8w40nqw77s2" path="res://Assets/Fonts/alphabet.png" id="2_wwag8"]
+[ext_resource type="Script" path="res://Scenes/Pause Menu.gd" id="3"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/28/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/28/0 = Vector2(0, 0)
+
+[node name="Pause Menu" type="CanvasLayer"]
+process_mode = 3
+layer = 25
+
+[node name="Pause Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3")
+
+[node name="BG" type="ColorRect" parent="Pause Menu"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Resume" type="Label" parent="Pause Menu"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 0
+offset_right = 342.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("2_wwag8")
+text = "RESUME"
+uppercase = true
+
+[node name="Restart Song" type="Label" parent="Pause Menu"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 79.0
+offset_right = 685.0
+offset_bottom = 169.0
+theme_override_fonts/font = ExtResource("2_wwag8")
+text = "RESTART SONG"
+uppercase = true
+
+[node name="Options" type="Label" parent="Pause Menu"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 0
+offset_left = -2.0
+offset_top = 156.0
+offset_right = 635.0
+offset_bottom = 246.0
+theme_override_fonts/font = ExtResource("2_wwag8")
+text = "OPTIONS"
+uppercase = true
+
+[node name="Exit Menu" type="Label" parent="Pause Menu"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 230.0
+offset_right = 685.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("2_wwag8")
+text = "EXIT TO MENU"
+uppercase = true
+
+[node name="Song Name" type="Label" parent="Pause Menu"]
+layout_mode = 0
+offset_left = -167.0
+offset_top = -5.0
+offset_right = 1277.0
+offset_bottom = 24.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Bopeebo"
+horizontal_alignment = 2
+
+[node name="Song Difficulty" type="Label" parent="Pause Menu"]
+layout_mode = 0
+offset_left = -126.0
+offset_top = 36.0
+offset_right = 1272.0
+offset_bottom = 65.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "HARD"
+horizontal_alignment = 2

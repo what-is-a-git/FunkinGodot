@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh8kba6cgromo"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/Characters/tankman.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="2_47fe7"]
+
+[node name="tankman" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -181)
+scale = Vector2(1.2, 1.2)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 2
+script = ExtResource("2_47fe7")

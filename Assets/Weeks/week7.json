@@ -1,0 +1,37 @@
+{
+    "songs": [
+        {
+            "song": "ugh",
+            "icon": "tankman-icons",
+            "color": "F6B604",
+            "story": true
+        },
+        {
+            "song": "guns",
+            "icon": "tankman-icons",
+            "color": "F6B604",
+            "story": true
+        },
+        {
+            "song": "stress",
+            "icon": "tankman-icons",
+            "color": "F6B604",
+            "story": true,
+            "ignore_difficulties": [
+                "picospeaker"
+            ]
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "tankman",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Tankman",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

@@ -1,0 +1,143 @@
+[gd_scene load_steps=19 format=3 uid="uid://bkmhaikyccuff"]
+
+[ext_resource type="Texture2D" uid="uid://be36vtfll43ep" path="res://Assets/Images/Stages/philly/sky.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://8ht48oktfd4f" path="res://Assets/Images/Stages/philly/city.png" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_4ur0y"]
+[ext_resource type="Texture2D" uid="uid://d1hnmmipbm84u" path="res://Assets/Images/Stages/philly/behindTrain.png" id="3"]
+[ext_resource type="Script" path="res://Scenes/Stages/philly.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://d1chp7i5iljjb" path="res://Assets/Images/Stages/philly/train.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cxsa3bka2wfx4" path="res://Assets/Images/Stages/philly/street.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://sify56g5lubs" path="res://Assets/Images/Stages/philly/win0.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://updsnvsxdvxv" path="res://Assets/Images/Stages/philly/win3.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bkcb1icjy28bd" path="res://Assets/Images/Stages/philly/win1.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://cty77r1rf5fmw" path="res://Assets/Images/Stages/philly/win4.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://cn14fs7aguvb0" path="res://Assets/Images/Stages/philly/win2.png" id="11"]
+[ext_resource type="AudioStream" uid="uid://obofj1vn82xx" path="res://Assets/Sounds/Stages/philly/train_passes.ogg" id="12"]
+[ext_resource type="Script" path="res://Scenes/Stages/philly_particles.gd" id="13"]
+[ext_resource type="Material" uid="uid://dluthuk0c0eom" path="res://Assets/Shaders/Philly Building Shader.tres" id="14"]
+
+[sub_resource type="Curve" id="1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.744565, 1), -3.22566e-07, -3.22566e-07, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="2"]
+curve = SubResource("1")
+
+[sub_resource type="ParticleProcessMaterial" id="3"]
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("2")
+
+[node name="philly" type="Node2D"]
+script = ExtResource("4")
+
+[node name="ParallaxBackground" type="Node2D" parent="."]
+
+[node name="Far BG" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_4ur0y")
+parallax_factor = Vector2(0.1, 0.1)
+
+[node name="Sky" type="Sprite2D" parent="ParallaxBackground/Far BG"]
+position = Vector2(-100, 0)
+texture = ExtResource("1")
+centered = false
+
+[node name="BG" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_4ur0y")
+parallax_factor = Vector2(0.3, 0.3)
+
+[node name="City" type="Sprite2D" parent="ParallaxBackground/BG"]
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2")
+centered = false
+
+[node name="Light3D 1" type="Sprite2D" parent="ParallaxBackground/BG"]
+visible = false
+material = ExtResource("14")
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("7")
+centered = false
+
+[node name="Light3D 2" type="Sprite2D" parent="ParallaxBackground/BG"]
+visible = false
+material = ExtResource("14")
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("9")
+centered = false
+
+[node name="Light3D 3" type="Sprite2D" parent="ParallaxBackground/BG"]
+visible = false
+material = ExtResource("14")
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("11")
+centered = false
+
+[node name="Light3D 4" type="Sprite2D" parent="ParallaxBackground/BG"]
+visible = false
+material = ExtResource("14")
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("8")
+centered = false
+
+[node name="Light3D 5" type="Sprite2D" parent="ParallaxBackground/BG"]
+visible = false
+material = ExtResource("14")
+position = Vector2(-10, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("10")
+centered = false
+
+[node name="Foreground" type="Node2D" parent="ParallaxBackground"]
+
+[node name="Behind Train" type="Sprite2D" parent="ParallaxBackground/Foreground"]
+position = Vector2(-40, 50)
+texture = ExtResource("3")
+centered = false
+
+[node name="Train" type="Sprite2D" parent="ParallaxBackground/Foreground"]
+position = Vector2(2000, 360)
+texture = ExtResource("5")
+centered = false
+
+[node name="Particles" type="Node2D" parent="ParallaxBackground/Foreground"]
+script = ExtResource("13")
+
+[node name="Particle1" type="GPUParticles2D" parent="ParallaxBackground/Foreground/Particles"]
+position = Vector2(745, 653)
+emitting = false
+amount = 100
+process_material = SubResource("3")
+
+[node name="Particle2" type="GPUParticles2D" parent="ParallaxBackground/Foreground/Particles"]
+position = Vector2(391, 653)
+emitting = false
+amount = 100
+process_material = SubResource("3")
+
+[node name="Particle3" type="GPUParticles2D" parent="ParallaxBackground/Foreground/Particles"]
+position = Vector2(1083, 653)
+emitting = false
+amount = 100
+process_material = SubResource("3")
+
+[node name="Street" type="Sprite2D" parent="ParallaxBackground/Foreground"]
+position = Vector2(-40, 50)
+texture = ExtResource("6")
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(974, 800)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(417, 816)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(700, 716)
+
+[node name="Train" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12")

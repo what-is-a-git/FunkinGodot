@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccnpe3clsrr10"]
+
+[ext_resource type="Texture2D" uid="uid://wgv2m1os0nkk" path="res://Assets/Images/Stages/stage/stageback.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c50xdumv0w1ir" path="res://Assets/Images/Stages/stage/stagefront.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://s1jv1nrbeeh" path="res://Assets/Images/Stages/stage/stagecurtains.png" id="3"]
+[ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="5"]
+
+[node name="stage" type="Node2D"]
+script = ExtResource("4")
+camera_zoom = 0.9
+
+[node name="0-9" type="Node2D" parent="."]
+script = ExtResource("5")
+parallax_factor = Vector2(0.9, 0.9)
+
+[node name="BG" type="Sprite2D" parent="0-9"]
+position = Vector2(-600, -200)
+texture = ExtResource("1")
+centered = false
+
+[node name="Front" type="Sprite2D" parent="0-9"]
+position = Vector2(-650, 600)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2")
+centered = false
+
+[node name="1-3" type="Node2D" parent="."]
+script = ExtResource("5")
+parallax_factor = Vector2(1.3, 1.3)
+
+[node name="Curtains" type="Sprite2D" parent="1-3"]
+position = Vector2(-500, -300)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3")
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1000, 800)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(256, 800)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(600, 750)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://qi8o6uh83otb"
+path="res://.godot/imported/Lights_Turn_On.ogg-279c94be17d7624a2eeb7400640256ba.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Winter Horrorland/Lights_Turn_On.ogg"
+dest_files=["res://.godot/imported/Lights_Turn_On.ogg-279c94be17d7624a2eeb7400640256ba.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

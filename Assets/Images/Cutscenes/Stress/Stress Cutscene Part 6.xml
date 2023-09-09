@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Stress Cutscene Part 6.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10000" x="1" y="1320" width="700" height="650" frameX="0" frameY="-12" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10001" x="1" y="1320" width="700" height="650" frameX="0" frameY="-12" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10002" x="1" y="664" width="700" height="655" frameX="0" frameY="-7" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10003" x="1" y="664" width="700" height="655" frameX="0" frameY="-7" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10004" x="702" y="663" width="700" height="656" frameX="0" frameY="-6" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10005" x="702" y="663" width="700" height="656" frameX="0" frameY="-6" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10006" x="702" y="1" width="700" height="661" frameX="0" frameY="-1" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10007" x="702" y="1" width="700" height="661" frameX="0" frameY="-1" frameWidth="700" frameHeight="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10008" x="1" y="1" width="700" height="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10009" x="1" y="1" width="700" height="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10010" x="1" y="1" width="700" height="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10011" x="1" y="1" width="700" height="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10012" x="1" y="1" width="700" height="662"/>
+	<SubTexture name="Pico Dual Wield on Speaker idle instance 10013" x="1" y="1" width="700" height="662"/>
+</TextureAtlas>

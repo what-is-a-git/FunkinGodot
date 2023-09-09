@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Notes/Player Strums.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Gameplay/Strum.tscn" type="PackedScene" id=2]
+
+[node name="5 Key" type="Node2D"]
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 1 )
+
+[node name="left" parent="." instance=ExtResource( 2 )]
+position = Vector2( -34.2857, 0 )
+
+[node name="down" parent="." instance=ExtResource( 2 )]
+position = Vector2( 103.857, 0 )
+direction = "down"
+
+[node name="square" parent="." instance=ExtResource( 2 )]
+position = Vector2( 241.429, 0 )
+direction = "square"
+
+[node name="up" parent="." instance=ExtResource( 2 )]
+position = Vector2( 378.143, 0 )
+direction = "up"
+
+[node name="right" parent="." instance=ExtResource( 2 )]
+position = Vector2( 516.286, 0 )
+direction = "right"

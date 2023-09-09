@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtr672g5qdf8n"]
+
+[ext_resource type="Script" path="res://Assets/Songs/ugh/modchart.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Effects/Camera Shake.gd" id="2"]
+
+[node name="modchart" type="Node"]
+script = ExtResource("1")
+
+[node name="Shaker" type="Node2D" parent="."]
+script = ExtResource("2")

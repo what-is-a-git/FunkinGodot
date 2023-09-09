@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/Notes/Types/caution/held.png" type="Texture2D" id=1]
+[ext_resource path="res://Scripts/Notes/Note.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Notes/Types/caution/note.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Images/Notes/Types/caution/end held.png" type="Texture2D" id=4]
+
+[node name="Note" type="Node2D"]
+script = ExtResource( 2 )
+single_held_texture = ExtResource( 1 )
+single_end_held_texture = ExtResource( 4 )
+miss_damage = 500000.0
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array( 0, 0, 0, 0 )
+width = 50.0
+default_color = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource( 3 )

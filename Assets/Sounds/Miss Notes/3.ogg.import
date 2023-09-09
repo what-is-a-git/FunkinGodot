@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dv24rxk5ne0t2"
+path="res://.godot/imported/3.ogg-c70d766b19c9c0d629306d219bc47ab6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Miss Notes/3.ogg"
+dest_files=["res://.godot/imported/3.ogg-c70d766b19c9c0d629306d219bc47ab6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

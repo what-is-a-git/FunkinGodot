@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rc2rorxghmka"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/Characters/christmas-parents.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="2_86o08"]
+
+[node name="parents" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -174)
+scale = Vector2(0.9, 0.9)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 1
+script = ExtResource("2_86o08")

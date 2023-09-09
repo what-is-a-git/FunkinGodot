@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cq0li4nivfi1n"
+path="res://.godot/imported/pixelText.ogg-a43dcba22e17828cd5506f9b6b183854.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/pixelText.ogg"
+dest_files=["res://.godot/imported/pixelText.ogg-a43dcba22e17828cd5506f9b6b183854.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://btw0equ015amu"
+path="res://.godot/imported/freakyNightMenu.ogg-1abb0729228e763f25ad785ba3f6325f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Title Screen/freakyNightMenu.ogg"
+dest_files=["res://.godot/imported/freakyNightMenu.ogg-1abb0729228e763f25ad785ba3f6325f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

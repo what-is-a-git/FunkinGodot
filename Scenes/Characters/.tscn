@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://by7fpdiwv60di"]
+
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://xlpy08n5oqd" path="res://Assets/Images/Icons/placeholder-icon.png" id="2"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="3_x2qb8"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "idle"
+length = 0.625001
+step = 0.0416667
+
+[sub_resource type="Animation" id="4"]
+resource_name = "singDOWN"
+length = 0.625001
+step = 0.0416667
+
+[sub_resource type="Animation" id="5"]
+resource_name = "singLEFT"
+length = 0.666667
+step = 0.0416667
+
+[sub_resource type="Animation" id="6"]
+resource_name = "singRIGHT"
+length = 0.625001
+step = 0.0416667
+
+[sub_resource type="Animation" id="7"]
+resource_name = "singUP"
+length = 0.625001
+step = 0.0416667
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8fd7s"]
+_data = {
+"idle": SubResource("2"),
+"singDOWN": SubResource("4"),
+"singLEFT": SubResource("5"),
+"singRIGHT": SubResource("6"),
+"singUP": SubResource("7")
+}
+
+[node name="_" type="Node2D"]
+script = ExtResource("1")
+camOffset = Vector2(300, -450)
+health_bar_color = Color(0.738281, 0.738281, 0.738281, 1)
+health_icon = ExtResource("2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-185.182, -762.727)
+centered = false
+offset = Vector2(6, -50)
+script = ExtResource("3_x2qb8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8fd7s")
+}

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dncyalcjv3esx"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/spooky/halloween_bg.res" id="1"]
+[ext_resource type="Script" path="res://Scenes/Stages/spooky.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://cusx7ej131in4" path="res://Assets/Sounds/Stages/spooky/thunder_1.ogg" id="3"]
+[ext_resource type="AudioStream" uid="uid://boe5oln66a1uy" path="res://Assets/Sounds/Stages/spooky/thunder_2.ogg" id="4"]
+[ext_resource type="Script" path="res://Scripts/Effects/Camera Shake.gd" id="5"]
+
+[node name="spooky" type="Node2D"]
+script = ExtResource("2")
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2(-200, -100)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Background"]
+sprite_frames = ExtResource("1")
+animation = &"idle"
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1000, 800)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(265, 800)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(600, 750)
+
+[node name="Strike 1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3")
+
+[node name="Strike 2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4")
+
+[node name="Shaker" type="Node2D" parent="."]
+script = ExtResource("5")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvmqjapwuxv84"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school-thorns/animatedEvilSchool.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+
+[node name="school-evil" type="Node2D"]
+script = ExtResource("4")
+camera_zoom = 1.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.9)
+motion_offset = Vector2(-256, -72)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(440, 200)
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("1")
+animation = &"background 2 instance 1"
+frame = 23
+centered = false
+offset = Vector2(-200, -210)
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1000, 800)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(256, 800)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(600, 750)

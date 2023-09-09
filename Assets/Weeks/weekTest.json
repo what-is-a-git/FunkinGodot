@@ -1,0 +1,10 @@
+{
+    "songs": [
+        {
+            "song": "test",
+            "icon": "bf-pixel-icons",
+            "color": "7bd6f6"
+        }
+    ],
+    "hide_from_story_mode": true
+}

@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bdc0sc8as4tts"]
+
+[sub_resource type="Shader" id="7"]
+code = "shader_type canvas_item;
+
+uniform float uSpeed;
+uniform float uFrequency;
+uniform float uWaveAmplitude;
+
+void fragment() {
+	vec2 good_uv = UV;
+	good_uv = good_uv + vec2(
+		sin(good_uv.y * uFrequency + TIME * uSpeed) * (uWaveAmplitude / good_uv.x * good_uv.y),
+		sin(good_uv.x * uFrequency - TIME * uSpeed) * (uWaveAmplitude / good_uv.y * good_uv.x)
+	);
+	
+	COLOR = texture(TEXTURE, good_uv);
+}"
+
+[resource]
+shader = SubResource("7")
+shader_parameter/uSpeed = 3.0
+shader_parameter/uFrequency = 10.0
+shader_parameter/uWaveAmplitude = 0.25

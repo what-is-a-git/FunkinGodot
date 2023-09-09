@@ -1,0 +1,94 @@
+[gd_scene load_steps=20 format=3 uid="uid://cksiqdf7ybvs0"]
+
+[ext_resource type="AudioStream" uid="uid://biqwirncvnew1" path="res://Assets/Sounds/Title Screen/freakyMenu.ogg" id="1"]
+[ext_resource type="AudioStream" uid="uid://d3upcuqld8dfg" path="res://Assets/Sounds/volumeSwitch.ogg" id="2"]
+[ext_resource type="Script" path="res://Scripts/Autoload/Audio Handler.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://dckuk57d8g06l" path="res://Assets/Sounds/scrollMenu.ogg" id="4"]
+[ext_resource type="AudioStream" uid="uid://chv70vxvyn5p2" path="res://Assets/Sounds/confirmMenu.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://c1tndwn07yxnk" path="res://Assets/Sounds/death.ogg" id="6"]
+[ext_resource type="AudioStream" uid="uid://dl1ax6wbgj3av" path="res://Assets/Sounds/loop.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://cy60wsobcoq7r" path="res://Assets/Sounds/retry.ogg" id="8"]
+[ext_resource type="AudioStream" uid="uid://c2e1umf215jrq" path="res://Assets/Sounds/Countdown/intro2.ogg" id="9"]
+[ext_resource type="AudioStream" uid="uid://bbdixur1x8n15" path="res://Assets/Sounds/Countdown/introGo.ogg" id="10"]
+[ext_resource type="AudioStream" uid="uid://bbntnexqpk3pd" path="res://Assets/Sounds/Countdown/intro3.ogg" id="11"]
+[ext_resource type="AudioStream" uid="uid://bypokaat4agqf" path="res://Assets/Sounds/Countdown/intro1.ogg" id="12"]
+[ext_resource type="AudioStream" uid="uid://b1e0f3tt28v06" path="res://Assets/Sounds/Miss Notes/3.ogg" id="13"]
+[ext_resource type="AudioStream" uid="uid://d230b7a78i2s5" path="res://Assets/Sounds/Miss Notes/2.ogg" id="14"]
+[ext_resource type="AudioStream" uid="uid://b26btjpgm1cyj" path="res://Assets/Sounds/Miss Notes/1.ogg" id="15"]
+[ext_resource type="AudioStream" uid="uid://28xog48oodgl" path="res://Assets/Sounds/charterHitsound.ogg" id="16"]
+[ext_resource type="AudioStream" uid="uid://cwwlq5rwjca6a" path="res://Assets/Sounds/toolsMenu.ogg" id="17"]
+[ext_resource type="AudioStream" uid="uid://c6eyu8581wfmy" path="res://Assets/Sounds/volumeUp.ogg" id="18"]
+[ext_resource type="AudioStream" uid="uid://g7kryxm1ff26" path="res://Assets/Sounds/volumeDown.ogg" id="19"]
+
+[node name="Audio Handler" type="Node2D"]
+process_mode = 3
+script = ExtResource("3")
+
+[node name="Title Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1")
+
+[node name="Scroll Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4")
+
+[node name="Confirm Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5")
+
+[node name="Gameover Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6")
+
+[node name="Gameover Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7")
+
+[node name="Gameover Retry" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8")
+
+[node name="Inst" type="AudioStreamPlayer" parent="."]
+
+[node name="Voices" type="AudioStreamPlayer" parent="."]
+
+[node name="Countdown" type="Node2D" parent="."]
+
+[node name="3" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource("11")
+
+[node name="2" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource("9")
+
+[node name="1" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource("12")
+
+[node name="Go" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource("10")
+
+[node name="Misses" type="Node2D" parent="."]
+
+[node name="1" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource("15")
+volume_db = -10.0
+
+[node name="2" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource("14")
+volume_db = -10.0
+
+[node name="3" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource("13")
+volume_db = -10.0
+
+[node name="Hitsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16")
+volume_db = -4.0
+
+[node name="Tools Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17")
+
+[node name="Volume Up" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18")
+volume_db = 8.0
+
+[node name="Volume Down" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19")
+volume_db = 12.0
+
+[node name="Volume Switch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2")
+volume_db = 8.0

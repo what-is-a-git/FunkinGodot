@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Stress Cutscene Part 3.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="PICO ARRIVES PART 1 instance 10000" x="5079" y="2395" width="900" height="843" frameX="-119" frameY="0" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10001" x="5980" y="2395" width="900" height="843" frameX="-119" frameY="0" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10002" x="2812" y="3180" width="920" height="817" frameX="-115" frameY="-26" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10003" x="3733" y="3180" width="920" height="817" frameX="-115" frameY="-26" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10004" x="1548" y="3176" width="1263" height="753" frameX="-70" frameY="-149" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10005" x="1548" y="2420" width="1338" height="755" frameX="-70" frameY="-236" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10006" x="3713" y="2395" width="1365" height="784" frameX="-75" frameY="-207" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10007" x="5738" y="807" width="1543" height="777" frameX="-75" frameY="-207" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10008" x="5260" y="1613" width="1541" height="781" frameX="-77" frameY="-203" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10009" x="5820" y="1" width="1503" height="781" frameX="-77" frameY="-203" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10010" x="3713" y="1613" width="1546" height="781" frameX="-77" frameY="-203" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10011" x="1" y="2401" width="1546" height="797" frameX="-77" frameY="-187" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10012" x="1" y="1614" width="1719" height="786" frameX="-77" frameY="-198" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10013" x="1916" y="1613" width="1796" height="806" frameX="0" frameY="-178" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10014" x="1" y="807" width="1914" height="806" frameX="0" frameY="-178" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10015" x="3833" y="807" width="1904" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10016" x="1916" y="807" width="1916" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10017" x="1916" y="807" width="1916" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10018" x="3885" y="1" width="1934" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10019" x="3885" y="1" width="1934" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10020" x="1945" y="1" width="1939" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10021" x="1945" y="1" width="1939" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10022" x="1" y="1" width="1943" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+	<SubTexture name="PICO ARRIVES PART 1 instance 10023" x="1" y="1" width="1943" height="805" frameX="-10" frameY="-179" frameWidth="1953" frameHeight="991"/>
+</TextureAtlas>

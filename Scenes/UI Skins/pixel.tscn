@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgf3gqffka2rw"]
+
+[ext_resource type="Script" path="res://Scenes/UI Skins/UI Skin.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Notes/pixel/default.res" id="2"]
+[ext_resource type="Texture2D" uid="uid://c6rr8age8apgo" path="res://Assets/Images/UI/Countdown/pixel/set.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cdckv2fel1t1j" path="res://Assets/Images/UI/Countdown/pixel/ready.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://sh858qyq4n0o" path="res://Assets/Images/UI/Countdown/pixel/go.png" id="5"]
+
+[node name="pixel" type="Node"]
+script = ExtResource("1")
+ready_texture = ExtResource("4")
+set_texture = ExtResource("3")
+go_texture = ExtResource("5")
+notes_texture = ExtResource("2")
+strums_texture = ExtResource("2")
+rating_path = "res://Assets/Images/UI/Ratings/pixel/"
+numbers_path = "res://Assets/Images/UI/Ratings/pixel/"
+held_note_path = "res://Assets/Images/Notes/pixel/held/"
+countdown_scale = 6.0
+rating_scale = 5.0
+number_scale = 6.0
+note_scale = 9.0
+note_hold_scale = Vector2(0.133, 1)
+strum_scale = 9.0
+texture_filter = 1

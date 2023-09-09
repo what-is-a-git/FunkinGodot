@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "song": "senpai",
+            "icon": "senpai-icons",
+            "color": "ffaa6f",
+            "story": true
+        },
+        {
+            "song": "roses",
+            "icon": "senpai-angry-icons",
+            "color": "ffaa6f",
+            "story": true
+        },
+        {
+            "song": "thorns",
+            "icon": "spirit-icons",
+            "color": "ff3c6e",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "senpai",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Hating Simulator Ft. Moawling",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

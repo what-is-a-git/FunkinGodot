@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dklqm1nhtpb2a"]
+
+[ext_resource type="Script" path="res://Scripts/Autoload/FPS.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://dh3jmmra1ppga" path="res://Assets/Fonts/mono.ttf" id="2_3hdh8"]
+
+[node name="FPS" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1")
+
+[node name="fps" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 69.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = ExtResource("2_3hdh8")
+theme_override_font_sizes/font_size = 14
+text = "?fps
+?mb / ?mb
+?mb (vram)"

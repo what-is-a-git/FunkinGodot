@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck6ebq5mtlh5o"]
+
+[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="1"]
+[ext_resource type="Script" path="res://Scenes/Options Menus/Binds Menu.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bmuwwqpd6fuam" path="res://Assets/Images/UI/menuDesat.png" id="3"]
+[ext_resource type="Script" path="res://Scenes/Options Menus/Bind Template.gd" id="4"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[node name="Binds Menu" type="Node2D"]
+script = ExtResource("2")
+
+[node name="Magenta" type="Sprite2D" parent="."]
+modulate = Color(0.917647, 0.443137, 0.992157, 1)
+position = Vector2(-116, -58)
+scale = Vector2(1.095, 1.095)
+texture = ExtResource("3")
+centered = false
+
+[node name="Cover" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Notes" type="Node2D" parent="."]
+position = Vector2(470, 360)
+
+[node name="Binds" type="Node2D" parent="."]
+
+[node name="Bind Template" type="Label" parent="Binds"]
+offset_right = 19.0
+offset_bottom = 29.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 24
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+script = ExtResource("4")
+
+[node name="Bind Test Text" type="Label" parent="."]
+offset_top = 555.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 32
+text = "[ Press ENTER to test binds. ]"
+horizontal_alignment = 1
+vertical_alignment = 1

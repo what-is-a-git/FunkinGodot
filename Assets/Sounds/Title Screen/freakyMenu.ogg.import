@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://by8tmhjgudob1"
+path="res://.godot/imported/freakyMenu.ogg-dd432e9cc2265a5755e404ca0b873be8.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Title Screen/freakyMenu.ogg"
+dest_files=["res://.godot/imported/freakyMenu.ogg-dd432e9cc2265a5755e404ca0b873be8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

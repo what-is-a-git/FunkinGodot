@@ -1,0 +1,152 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnec0w5f36tg"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/shaggy-godeater/god_bg.res" id="1"]
+[ext_resource type="Script" path="res://Scenes/Stages/shaggy-godeater.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_7ti7q"]
+
+[node name="shaggy-godeater" type="Node2D"]
+script = ExtResource("2")
+camera_zoom = 0.55
+
+[node name="ParallaxBackground" type="Node2D" parent="."]
+
+[node name="Sky" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.1, 0.1)
+
+[node name="BG" type="AnimatedSprite2D" parent="ParallaxBackground/Sky"]
+position = Vector2(-650, -850)
+sprite_frames = ExtResource("1")
+animation = &"bg"
+centered = false
+
+[node name="ParallaxLayer" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.3, 0.3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-1050, -1400)
+sprite_frames = ExtResource("1")
+animation = &"cloud_smol"
+centered = false
+
+[node name="debs" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.4, 0.4)
+
+[node name="deb1" type="AnimatedSprite2D" parent="ParallaxBackground/debs"]
+position = Vector2(100, -800)
+scale = Vector2(0.54, 0.54)
+sprite_frames = ExtResource("1")
+animation = &"deb_norm"
+centered = false
+
+[node name="deb2" type="AnimatedSprite2D" parent="ParallaxBackground/debs"]
+position = Vector2(400, -300)
+scale = Vector2(0.54, 0.54)
+sprite_frames = ExtResource("1")
+animation = &"deb_tiny"
+centered = false
+
+[node name="deb3" type="AnimatedSprite2D" parent="ParallaxBackground/debs"]
+position = Vector2(-750, -400)
+scale = Vector2(0.54, 0.54)
+sprite_frames = ExtResource("1")
+animation = &"deb_spike"
+centered = false
+
+[node name="deb4" type="AnimatedSprite2D" parent="ParallaxBackground/debs"]
+position = Vector2(-950, -850)
+scale = Vector2(0.54, 0.54)
+sprite_frames = ExtResource("1")
+animation = &"deb_small"
+centered = false
+
+[node name="debs2" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.75, 0.75)
+
+[node name="deb5" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(-500, -1700)
+sprite_frames = ExtResource("1")
+animation = &"deb_norm"
+centered = false
+
+[node name="deb6" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(-1200, -1750)
+sprite_frames = ExtResource("1")
+animation = &"deb_rect"
+centered = false
+
+[node name="deb7" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(-800, -1100)
+sprite_frames = ExtResource("1")
+animation = &"deb_tiny"
+centered = false
+
+[node name="deb8" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(700, -1850)
+sprite_frames = ExtResource("1")
+animation = &"deb_spike"
+centered = false
+
+[node name="deb9" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(1300, -1300)
+sprite_frames = ExtResource("1")
+animation = &"deb_small"
+centered = false
+
+[node name="deb10" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(-800, -800)
+sprite_frames = ExtResource("1")
+animation = &"deb_spike"
+centered = false
+
+[node name="deb11" type="AnimatedSprite2D" parent="ParallaxBackground/debs2"]
+position = Vector2(-1200, -900)
+sprite_frames = ExtResource("1")
+animation = &"deb_small"
+centered = false
+
+[node name="clods" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.9, 0.9)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/clods"]
+position = Vector2(-1350, -3200)
+sprite_frames = ExtResource("1")
+animation = &"cloud_big"
+centered = false
+
+[node name="fard" type="Node2D" parent="ParallaxBackground"]
+script = ExtResource("2_7ti7q")
+parallax_factor = Vector2(0.95, 0.95)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/fard"]
+position = Vector2(-200, -20)
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1")
+animation = &"broken_techo"
+centered = false
+
+[node name="gf rock" type="AnimatedSprite2D" parent="."]
+position = Vector2(700, -1700)
+scale = Vector2(1.3, 1.3)
+sprite_frames = ExtResource("1")
+animation = &"gf_rock"
+centered = false
+
+[node name="bf rock" type="AnimatedSprite2D" parent="."]
+position = Vector2(500, -1700)
+sprite_frames = ExtResource("1")
+animation = &"rock"
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(850, -2000)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(-400, -1993)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(0, -2000)

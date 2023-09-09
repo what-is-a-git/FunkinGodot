@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "song": "pico",
+            "icon": "pico-icons",
+            "color": "CAE46C",
+            "story": true
+        },
+        {
+            "song": "philly nice",
+            "icon": "pico-icons",
+            "color": "CAE46C",
+            "story": true
+        },
+        {
+            "song": "blammed",
+            "icon": "pico-icons",
+            "color": "CAE46C",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "pico",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Pico",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

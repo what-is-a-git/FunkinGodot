@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dej0ni82ou2wi"
+path="res://.godot/imported/Lunchbox.ogg-b10807989a9a2d7b681347ffdfe25103.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/Lunchbox.ogg"
+dest_files=["res://.godot/imported/Lunchbox.ogg-b10807989a9a2d7b681347ffdfe25103.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

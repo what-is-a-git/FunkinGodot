@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dgbshdl5ebjdc"
+path="res://.godot/imported/ANGRY_TEXT_BOX.ogg-a6af95c251b167fb34c11034a8ecf7ad.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/ANGRY_TEXT_BOX.ogg"
+dest_files=["res://.godot/imported/ANGRY_TEXT_BOX.ogg-a6af95c251b167fb34c11034a8ecf7ad.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

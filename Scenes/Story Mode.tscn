@@ -1,0 +1,197 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwch25g1fttv1"]
+
+[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="1"]
+[ext_resource type="PackedScene" uid="uid://duvsfi3a8r656" path="res://Scenes/Story Mode Characters/bf.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://08x0l2gip3ph" path="res://Scenes/Story Mode Characters/dad.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dp4dcc0v8megt" path="res://Scenes/Story Mode Characters/gf.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bal2w6pb7j13c" path="res://Assets/Images/UI/Story Mode/Weeks/week0.png" id="5"]
+[ext_resource type="Script" path="res://Scripts/Week.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://dxums4p8h1cep" path="res://Assets/Images/UI/Story Mode/lock.png" id="7"]
+[ext_resource type="Script" path="res://Scenes/Story Mode.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://ew80v3sr0xkq" path="res://Assets/Images/UI/Story Mode/Difficulties/normal.png" id="9"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/ui_arrow.res" id="10"]
+[ext_resource type="Texture2D" uid="uid://cq7siksmdb6fp" path="res://Assets/Images/Icons/bf-icons.png" id="11"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/16/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/16/0/glyphs/0/size = Vector2(0, 0)
+cache/0/16/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/16/0/glyphs/0/texture_idx = -1
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/24/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/24/0/glyphs/0/size = Vector2(0, 0)
+cache/0/24/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/24/0/glyphs/0/texture_idx = -1
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/32/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/32/0/glyphs/0/size = Vector2(0, 0)
+cache/0/32/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/32/0/glyphs/0/texture_idx = -1
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/28/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/28/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/28/0/glyphs/0/size = Vector2(0, 0)
+cache/0/28/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/28/0/glyphs/0/texture_idx = -1
+cache/0/28/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/28/0 = Vector2(0, 0)
+
+[node name="Story Mode" type="Node2D"]
+script = ExtResource("8")
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG" type="ColorRect" parent="BG"]
+offset_top = 56.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="Weeks" type="Node2D" parent="."]
+
+[node name="Week Template" type="Node2D" parent="Weeks"]
+position = Vector2(610, 507)
+script = ExtResource("6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weeks/Week Template"]
+texture = ExtResource("5")
+
+[node name="Lock" type="Sprite2D" parent="Weeks/Week Template"]
+visible = false
+position = Vector2(272, 0)
+texture = ExtResource("7")
+
+[node name="Main UI" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Yellow Thingy" type="ColorRect" parent="Main UI"]
+offset_top = 56.0
+offset_right = 1280.0
+offset_bottom = 456.0
+color = Color(0.976471, 0.811765, 0.317647, 1)
+
+[node name="Cover Top" type="ColorRect" parent="Main UI"]
+offset_right = 1280.0
+offset_bottom = 56.0
+color = Color(0, 0, 0, 1)
+
+[node name="Week Score" type="Label" parent="Main UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 295.0
+offset_bottom = 39.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "SCORE: N/A"
+vertical_alignment = 1
+
+[node name="Week Name" type="Label" parent="Main UI"]
+modulate = Color(1, 1, 1, 0.698039)
+offset_left = 233.0
+offset_top = 10.0
+offset_right = 1261.0
+offset_bottom = 39.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Tutorial"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Tracks" type="Label" parent="Main UI"]
+offset_left = 1.0
+offset_top = 472.0
+offset_right = 360.0
+offset_bottom = 717.0
+theme_override_colors/font_color = Color(0.898039, 0.341176, 0.466667, 1)
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Tracks
+
+
+"
+horizontal_alignment = 1
+
+[node name="Left Arrow" type="AnimatedSprite2D" parent="Main UI"]
+position = Vector2(871, 505)
+sprite_frames = ExtResource("10")
+animation = &"arrow"
+
+[node name="Difficulty" type="Sprite2D" parent="Main UI"]
+position = Vector2(1061, 505)
+texture = ExtResource("9")
+
+[node name="Right Arrow" type="AnimatedSprite2D" parent="Main UI"]
+position = Vector2(1250, 505)
+sprite_frames = ExtResource("10")
+animation = &"arrow"
+flip_h = true
+
+[node name="Characters" type="Node2D" parent="Main UI"]
+
+[node name="dad" parent="Main UI/Characters" instance=ExtResource("3")]
+position = Vector2(200, 438)
+
+[node name="bf" parent="Main UI/Characters" instance=ExtResource("2")]
+position = Vector2(608, 438)
+
+[node name="gf" parent="Main UI/Characters" instance=ExtResource("4")]
+position = Vector2(1045, 438)
+
+[node name="Icons" type="Node2D" parent="Main UI"]
+z_index = 1
+
+[node name="Icon" type="Sprite2D" parent="Main UI/Icons"]
+visible = false
+position = Vector2(37, 419)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11")
+hframes = 3
+
+[node name="BG" type="ColorRect" parent="Main UI/Icons/Icon"]
+z_index = -1
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0

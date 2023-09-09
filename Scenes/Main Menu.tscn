@@ -1,0 +1,159 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgsh2fra2gvvy"]
+
+[ext_resource type="Texture2D" uid="uid://cy6l83bq3fh15" path="res://Assets/Images/UI/menuBG.png" id="1"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="1_5jryt"]
+[ext_resource type="Texture2D" uid="uid://bmuwwqpd6fuam" path="res://Assets/Images/UI/menuDesat.png" id="2"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/story mode.res" id="3"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/options.res" id="4"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/freeplay.res" id="5"]
+[ext_resource type="Script" path="res://Scripts/UI/Main Menu Controller.gd" id="8"]
+[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="9"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "blinking"
+length = 0.333333
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Regular:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Magenta:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "idle"
+length = 0.0416667
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Regular:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Magenta:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yx3rn"]
+_data = {
+"blinking": SubResource("1"),
+"idle": SubResource("2")
+}
+
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("9")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="Main Menu" type="Node2D"]
+
+[node name="1-0-2" type="Node2D" parent="."]
+script = ExtResource("1_5jryt")
+parallax_factor = Vector2(1, 0.2)
+
+[node name="BG" type="Node2D" parent="1-0-2"]
+
+[node name="Regular" type="Sprite2D" parent="1-0-2/BG"]
+position = Vector2(-160, -95)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("1")
+centered = false
+
+[node name="Magenta" type="Sprite2D" parent="1-0-2/BG"]
+visible = false
+modulate = Color(0.992157, 0.443137, 0.607843, 1)
+position = Vector2(-160, -95)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("2")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="1-0-2/BG"]
+libraries = {
+"": SubResource("AnimationLibrary_yx3rn")
+}
+
+[node name="Options" type="CanvasLayer" parent="."]
+script = ExtResource("8")
+
+[node name="Story Mode" type="Node2D" parent="Options"]
+position = Vector2(640, 214)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Options/Story Mode"]
+sprite_frames = ExtResource("3")
+animation = &"unselected"
+frame = 8
+
+[node name="Freeplay" type="Node2D" parent="Options"]
+position = Vector2(640, 426)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Options/Freeplay"]
+position = Vector2(-4, -55)
+sprite_frames = ExtResource("5")
+animation = &"unselected"
+
+[node name="Options" type="Node2D" parent="Options"]
+position = Vector2(640, 561)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Options/Options"]
+position = Vector2(-6, -32)
+sprite_frames = ExtResource("4")
+animation = &"unselected"
+frame = 7
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Version Text" type="Label" parent="UI"]
+offset_left = 6.0
+offset_top = 595.0
+offset_right = 1281.0
+offset_bottom = 715.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("3")
+text = "Funkin' Godot v1.0.0"
+vertical_alignment = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+visible = false
+position = Vector2(736, 386)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0

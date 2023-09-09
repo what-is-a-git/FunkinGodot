@@ -1,0 +1,785 @@
+[gd_scene load_steps=17 format=3 uid="uid://drx8st2rmjra1"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Options.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Bool Option.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bmuwwqpd6fuam" path="res://Assets/Images/UI/menuDesat.png" id="3"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Options/checkbox.res" id="5"]
+[ext_resource type="Script" path="res://Scripts/Scene Option.gd" id="6"]
+[ext_resource type="FontFile" uid="uid://x8w40nqw77s2" path="res://Assets/Fonts/alphabet.png" id="6_opgdj"]
+[ext_resource type="Script" path="res://Scripts/Offset Option.gd" id="7"]
+[ext_resource type="Script" path="res://Scripts/Hitsound Option.gd" id="8"]
+[ext_resource type="Script" path="res://Scripts/Tool Option.gd" id="9"]
+[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="10"]
+[ext_resource type="Script" path="res://Scenes/Options Side Bar.gd" id="11"]
+[ext_resource type="Script" path="res://Scripts/Array Option.gd" id="12"]
+[ext_resource type="Script" path="res://Scripts/Scroll Speed Option.gd" id="13"]
+[ext_resource type="Script" path="res://Scripts/FPS Cap Option.gd" id="14"]
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("10")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("10")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/4/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/29/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/4/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/29/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/4/0/ascent = 0.0
+cache/0/4/0/descent = 0.0
+cache/0/4/0/underline_position = 0.0
+cache/0/4/0/underline_thickness = 0.0
+cache/0/4/0/scale = 1.0
+cache/0/4/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/4/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/4/0/kerning_overrides/4/0 = Vector2(0, 0)
+cache/0/4/0/kerning_overrides/29/0 = Vector2(0, 0)
+cache/0/4/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/29/0/ascent = 0.0
+cache/0/29/0/descent = 0.0
+cache/0/29/0/underline_position = 0.0
+cache/0/29/0/underline_thickness = 0.0
+cache/0/29/0/scale = 1.0
+cache/0/29/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/29/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/29/0/kerning_overrides/4/0 = Vector2(0, 0)
+cache/0/29/0/kerning_overrides/29/0 = Vector2(0, 0)
+cache/0/29/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/4/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/29/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[node name="Options Menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG" type="Node2D" parent="CanvasLayer"]
+
+[node name="Magenta" type="Sprite2D" parent="CanvasLayer/BG"]
+modulate = Color(0.917647, 0.443137, 0.992157, 1)
+position = Vector2(-118, -60)
+scale = Vector2(1.095, 1.095)
+texture = ExtResource("3")
+centered = false
+
+[node name="Options" type="Node2D" parent="."]
+position = Vector2(158, -33)
+script = ExtResource("1")
+
+[node name="Side Bar" type="Node2D" parent="."]
+script = ExtResource("11")
+
+[node name="BG" type="ColorRect" parent="Side Bar"]
+offset_right = 208.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Top" type="ColorRect" parent="Side Bar"]
+offset_left = 208.0
+offset_right = 1280.0
+offset_bottom = 42.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Option Description" type="Label" parent="Side Bar"]
+offset_left = 207.0
+offset_top = 2.0
+offset_right = 1280.0
+offset_bottom = 42.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Option Description Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabBar" type="Node2D" parent="Side Bar"]
+
+[node name="Gameplay" type="Label" parent="Side Bar/TabBar"]
+offset_left = 13.0
+offset_top = 255.0
+offset_right = 165.0
+offset_bottom = 284.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Gameplay"
+vertical_alignment = 1
+
+[node name="Binds" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(274, 1453)
+script = ExtResource("6")
+description = "Keybinds"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Binds"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 300.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "BINDS"
+uppercase = true
+
+[node name="Downscroll" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(287, -288)
+script = ExtResource("2")
+description = "Do the arrows scroll down or up?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Downscroll"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 552.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "DOWNSCROLL"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Gameplay/Downscroll"]
+position = Vector2(591, 60)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Middlescroll" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(285, 212)
+script = ExtResource("2")
+save_name = "middlescroll"
+description = "Are the arrows centered in game?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Middlescroll"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "MIDDLESCROLL"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Gameplay/Middlescroll"]
+position = Vector2(690, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Offset" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(285, 308)
+script = ExtResource("7")
+description = "Offset of the notes (helps with audio delay)"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Offset"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "OFFSET: 0"
+uppercase = true
+
+[node name="Bot" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(285, 116)
+script = ExtResource("2")
+save_name = "bot"
+description = "Plays the song for you."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Bot"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "BOT"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Gameplay/Bot"]
+position = Vector2(242, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 3
+
+[node name="Custom Scroll Speed" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(285, 663)
+script = ExtResource("2")
+save_name = "custom_scroll_bool"
+description = "Will the Custom Scroll Speed be used?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Custom Scroll Speed"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "CUSTOM SCROLL"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Gameplay/Custom Scroll Speed"]
+position = Vector2(737, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Scroll Speed" type="Node2D" parent="Side Bar/TabBar/Gameplay"]
+visible = false
+position = Vector2(285, 308)
+script = ExtResource("13")
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Gameplay/Scroll Speed"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "SCROLL: 1.0"
+uppercase = true
+
+[node name="Graphics" type="Label" parent="Side Bar/TabBar"]
+offset_left = 13.0
+offset_top = 296.0
+offset_right = 165.0
+offset_bottom = 325.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Graphics"
+vertical_alignment = 1
+
+[node name="Flashing Lights" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, -228)
+script = ExtResource("2")
+save_name = "flashingLights"
+description = "Disables some flashing lights (doesn't work for all mods)"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Flashing Lights"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 794.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "FLASHING LIGHTS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Flashing Lights"]
+position = Vector2(843, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Camera3D Zooms" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, -125)
+script = ExtResource("2")
+save_name = "cameraZooms"
+description = "Do you want the camera to bounce to the song beat?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Camera3D Zooms"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 639.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "CAMERA ZOOMS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Camera3D Zooms"]
+position = Vector2(692, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+
+[node name="VSync" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, 355)
+script = ExtResource("2")
+save_name = "vsync"
+description = "VSync makes the game run at the same framerate as your screen."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/VSync"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "VSYNC"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/VSync"]
+position = Vector2(346, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Ultra Performance" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, 931)
+script = ExtResource("2")
+save_name = "ultra_performance"
+description = "Turns off all characters, and other assets besides notes and ui."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Ultra Performance"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "ULTRA PERFORMANCE"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Ultra Performance"]
+position = Vector2(938, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+
+[node name="Scene Transitions" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, 1035)
+script = ExtResource("2")
+save_name = "scene_transitions"
+description = "Transition between parts of the game?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Scene Transitions"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "SCENE TRANSITIONS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Scene Transitions"]
+position = Vector2(938, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 3
+
+[node name="Enemy Strum Glow" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, -25)
+script = ExtResource("2")
+save_name = "opponent_note_glow"
+description = "The opponent's notes glow when they hit a note?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Enemy Strum Glow"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "ENEMY STRUM GLOW"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Enemy Strum Glow"]
+position = Vector2(898, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+
+[node name="Progress Bar" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, -25)
+script = ExtResource("2")
+save_name = "progress_bar_enabled"
+description = "Enable the progress bar?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Progress Bar"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "PROGRESS BAR"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Graphics/Progress Bar"]
+position = Vector2(694, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+
+[node name="Note Display" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, 471)
+script = ExtResource("12")
+save_name = "note_render_style"
+options = ["default", "manual"]
+description = "The way the note is made."
+base_name = "NOTE DISPLAY"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/Note Display"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 10017.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "NEW ICON BOUNCE"
+uppercase = true
+
+[node name="FPS Cap" type="Node2D" parent="Side Bar/TabBar/Graphics"]
+visible = false
+position = Vector2(285, 267)
+script = ExtResource("14")
+description = "Cap of the game's framerate."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Graphics/FPS Cap"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "FPS CAP: 0"
+uppercase = true
+
+[node name="Sounds" type="Label" parent="Side Bar/TabBar"]
+offset_left = 13.0
+offset_top = 334.0
+offset_right = 165.0
+offset_bottom = 363.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Sounds"
+vertical_alignment = 1
+
+[node name="Hitsounds" type="Node2D" parent="Side Bar/TabBar/Sounds"]
+visible = false
+position = Vector2(285, 1093)
+script = ExtResource("2")
+save_name = "hitsounds"
+description = "Toggle for hitsounds."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Sounds/Hitsounds"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "HITSOUNDS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Sounds/Hitsounds"]
+position = Vector2(538, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Hitsound" type="Node2D" parent="Side Bar/TabBar/Sounds"]
+visible = false
+position = Vector2(285, 1293)
+script = ExtResource("8")
+description = "The hitsound to play."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Sounds/Hitsound"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 3717.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "HITSOUND: OSU MANIA"
+uppercase = true
+
+[node name="Miss Sounds" type="Node2D" parent="Side Bar/TabBar/Sounds"]
+visible = false
+position = Vector2(285, 797)
+script = ExtResource("2")
+save_name = "miss_sounds"
+description = "Play sounds when missing notes?"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Sounds/Miss Sounds"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "MISS SOUNDS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Sounds/Miss Sounds"]
+position = Vector2(642, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Freeplay Music" type="Node2D" parent="Side Bar/TabBar/Sounds"]
+visible = false
+position = Vector2(285, 797)
+script = ExtResource("2")
+save_name = "freeplay_music"
+description = "Plays song's Inst when hovering over it in Freeplay."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Sounds/Freeplay Music"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "FREEPLAY MUSIC"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Sounds/Freeplay Music"]
+position = Vector2(805, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Misc" type="Label" parent="Side Bar/TabBar"]
+offset_left = 13.0
+offset_top = 372.0
+offset_right = 165.0
+offset_bottom = 401.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Misc"
+vertical_alignment = 1
+
+[node name="Health Icon Bounce" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 471)
+script = ExtResource("12")
+save_name = "health_icon_bounce"
+options = ["default", "centered", "psych", "haxeflixel", "twist", "wide", "spin", "inverted", "on step", "by bpm", "yoshi", "single image", "classic"]
+description = "The bounce animation for the health icons."
+base_name = "ICON BOUNCE"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Health Icon Bounce"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 10017.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "NEW ICON BOUNCE"
+uppercase = true
+
+[node name="Status Text Mode" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 471)
+script = ExtResource("12")
+save_name = "status_text_mode"
+options = ["default", "classic", "score", "misses", "accuracy", "rating", "ac rank", "sc mis", "none"]
+description = "Mode used on the text that displays your in-game stats."
+base_name = "STATUS MODE"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Status Text Mode"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 10017.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "STATUS MODE"
+uppercase = true
+
+[node name="New Sustain Animations" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 567)
+script = ExtResource("2")
+save_name = "new_sustain_animations"
+description = "New Sustain Animations (not just a still frame)."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/New Sustain Animations"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "NEW HELD ANIMS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/New Sustain Animations"]
+position = Vector2(794, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 3
+
+[node name="Freeplay Cutscenes" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 1151)
+script = ExtResource("2")
+save_name = "freeplay_cutscenes"
+description = "Cutscenes play when entering from Freeplay."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Freeplay Cutscenes"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "FREEPLAY CUTSCENES"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Freeplay Cutscenes"]
+position = Vector2(998, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Memory Leaks" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 663)
+script = ExtResource("2")
+save_name = "memory_leaks"
+description = "Preloads all game assets (can cause a lot of memory usage)."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Memory Leaks"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "MEMORY LEAKS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Memory Leaks"]
+position = Vector2(698, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Debug Menus" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 375)
+script = ExtResource("2")
+save_name = "debug_menus"
+description = "Whether or not you can access debug menus (aka charter) from the game."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Debug Menus"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "DEBUG MENUS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Debug Menus"]
+position = Vector2(642, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 1
+
+[node name="Story Mode Icons" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 375)
+script = ExtResource("2")
+save_name = "story_mode_icons"
+description = "Small little icons next to songs in story mode."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Story Mode Icons"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "STORY MODE ICONS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Story Mode Icons"]
+position = Vector2(893, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+
+[node name="Preload Notes" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 375)
+script = ExtResource("2")
+save_name = "preload_notes"
+description = "Preloads notes at song start (may impact performance) (experimental)"
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Preload Notes"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 694.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "PRELOAD NOTES"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Preload Notes"]
+position = Vector2(744, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 3
+
+[node name="Side Ratings" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 375)
+script = ExtResource("2")
+save_name = "side_ratings_enabled"
+description = "Enables or disables the rating counter on the side."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Side Ratings"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 694.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "SIDE RATINGS"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Side Ratings"]
+position = Vector2(695, 58)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Tools Menu" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(274, 1432)
+script = ExtResource("9")
+scene = "Tools Menu"
+description = "Some in-game tools to make modding easier."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Tools Menu"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 300.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "TOOLS"
+uppercase = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_enabled = true

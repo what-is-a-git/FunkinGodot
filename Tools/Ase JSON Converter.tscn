@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Fonts/vcr.ttf" type="FontFile" id=1]
+[ext_resource path="res://Tools/Ase JSON Converter.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontFile" id=3]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="FontFile" id=2]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Aseprite JSON Converter" type="Node2D"]
+
+[node name="BG" type="Panel" parent="."]
+offset_left = 3.0
+offset_top = 205.0
+offset_right = 613.0
+offset_bottom = 497.0
+theme_override_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="SpriteData" type="AnimatedSprite2D" parent="BG"]
+position = Vector2( 942, 230 )
+z_index = -1
+
+[node name="Path3D" type="LineEdit" parent="BG"]
+offset_left = 37.0
+offset_top = 116.0
+offset_right = 568.0
+offset_bottom = 155.0
+placeholder_text = "Path3D to image (ex: res://Assets/Images/Characters/bf/assets.png)"
+
+[node name="Title" type="Label" parent="BG"]
+offset_left = -61.0
+offset_top = -5.0
+offset_right = 661.0
+offset_bottom = 85.0
+theme_override_fonts/font = SubResource( 3 )
+text = "Aseprite JSON to SpriteFrame Converter"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="BG"]
+offset_left = 206.0
+offset_top = 235.0
+offset_right = 376.0
+offset_bottom = 273.0
+text = "Convert"
+
+[node name="ConvertedSprites" type="Label" parent="BG"]
+offset_left = 680.0
+offset_top = -97.0
+offset_right = 1212.0
+offset_bottom = -7.0
+theme_override_fonts/font = SubResource( 2 )
+text = "Converted Sprites:"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="BG/Button" to="BG" method="convert_xml"]

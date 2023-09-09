@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://08x0l2gip3ph"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/Characters/dad.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="2_fa4ed"]
+
+[node name="dad" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -185)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 13
+script = ExtResource("2_fa4ed")

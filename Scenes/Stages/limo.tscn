@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfscirsjwjhch"]
+
+[ext_resource type="Texture2D" uid="uid://caiqp73ruijad" path="res://Assets/Images/Stages/limo/limoSunset.png" id="1"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/limo/bgLimo.res" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_t4gwv"]
+[ext_resource type="PackedScene" uid="uid://vjiqjy8of1b" path="res://Assets/Images/Stages/limo/Dancer.tscn" id="3"]
+[ext_resource type="Script" path="res://Scenes/Stages/limo.gd" id="4"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/limo/limoDrive.res" id="5"]
+
+[node name="limo" type="Node2D"]
+script = ExtResource("4")
+camera_zoom = 0.9
+
+[node name="0-1" type="Node2D" parent="."]
+script = ExtResource("2_t4gwv")
+parallax_factor = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="0-1"]
+z_index = -1
+position = Vector2(-120, -50)
+texture = ExtResource("1")
+centered = false
+
+[node name="0-4" type="Node2D" parent="."]
+script = ExtResource("2_t4gwv")
+parallax_factor = Vector2(0.4, 0.4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="0-4"]
+z_index = -1
+position = Vector2(-200, 480)
+sprite_frames = ExtResource("2")
+animation = &"background limo pink"
+frame = 2
+centered = false
+
+[node name="Dancer4" parent="0-4" instance=ExtResource("3")]
+z_index = -1
+position = Vector2(130, 80)
+
+[node name="Dancer1" parent="0-4" instance=ExtResource("3")]
+z_index = -1
+position = Vector2(500, 80)
+
+[node name="Dancer2" parent="0-4" instance=ExtResource("3")]
+z_index = -1
+position = Vector2(870, 80)
+
+[node name="Dancer3" parent="0-4" instance=ExtResource("3")]
+z_index = -1
+position = Vector2(1240, 80)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-120, 550)
+sprite_frames = ExtResource("5")
+animation = &"Limo stage"
+frame = 3
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1200, 600)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(225, 875)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(600, 766)

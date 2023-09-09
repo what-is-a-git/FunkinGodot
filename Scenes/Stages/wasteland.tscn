@@ -1,0 +1,199 @@
+[gd_scene load_steps=23 format=3 uid="uid://oykdmuxixwhp"]
+
+[ext_resource type="Texture2D" uid="uid://dme76lw301qi4" path="res://Assets/Images/Stages/wasteland/tankSky.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dfi6a5fulurce" path="res://Assets/Images/Stages/wasteland/tankClouds.png" id="2"]
+[ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_0lqy2"]
+[ext_resource type="Texture2D" uid="uid://rjq4a2qyvo2g" path="res://Assets/Images/Stages/wasteland/tankMountains.png" id="3"]
+[ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://dwk0qdvc00gvr" path="res://Assets/Images/Stages/wasteland/tankRuins.png" id="5"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/smokeLeft.res" id="6"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/smokeRight.res" id="7"]
+[ext_resource type="Script" path="res://Scenes/Stages/wasteland_watcher.gd" id="8"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tankWatchtower.res" id="9"]
+[ext_resource type="Script" path="res://Scenes/Stages/wasteland_roller.gd" id="10"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tankRolling.res" id="11"]
+[ext_resource type="Texture2D" uid="uid://cc1rt6b016xdi" path="res://Assets/Images/Stages/wasteland/tankGround.png" id="12"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank4.res" id="13"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank3.res" id="14"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank5.res" id="15"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank0.res" id="16"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank1.res" id="17"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank2.res" id="18"]
+[ext_resource type="Script" path="res://Scenes/Stages/Runner.gd" id="19"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tankmanKilled1.res" id="20"]
+[ext_resource type="Script" path="res://Scenes/Stages/wasteland_tankmen_killed.gd" id="21"]
+
+[node name="wasteland" type="Node2D"]
+script = ExtResource("4")
+camera_zoom = 0.9
+
+[node name="0" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="0"]
+position = Vector2(-400, -400)
+texture = ExtResource("1")
+centered = false
+
+[node name="0-1" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="0-1"]
+position = Vector2(-400, 0)
+texture = ExtResource("2")
+centered = false
+
+[node name="0-2" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="0-2"]
+position = Vector2(-300, -20)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3")
+centered = false
+
+[node name="0-3" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="0-3"]
+position = Vector2(-200, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3")
+centered = false
+
+[node name="0-35" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.35, 0.35)
+
+[node name="Sprite2D" type="Sprite2D" parent="0-35"]
+position = Vector2(-200, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("5")
+centered = false
+
+[node name="0-4" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.4, 0.4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="0-4"]
+position = Vector2(1100, -100)
+sprite_frames = ExtResource("7")
+animation = &"SmokeRight instance 1"
+frame = 44
+centered = false
+
+[node name="AnimatedSprite2" type="AnimatedSprite2D" parent="0-4"]
+position = Vector2(-186, -100)
+sprite_frames = ExtResource("6")
+animation = &"SmokeBlurLeft instance 1"
+frame = 32
+centered = false
+
+[node name="0-5" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(0.5, 0.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="0-5"]
+position = Vector2(100, 50)
+sprite_frames = ExtResource("9")
+animation = &"idle"
+frame = 13
+centered = false
+script = ExtResource("8")
+
+[node name="AnimatedSprite2" type="AnimatedSprite2D" parent="0-5"]
+position = Vector2(300, 300)
+sprite_frames = ExtResource("11")
+animation = &"BG tank w lighting instance 1"
+frame = 2
+centered = false
+script = ExtResource("10")
+playing = true
+
+[node name="Killed" type="Node2D" parent="."]
+script = ExtResource("21")
+
+[node name="Runner" type="AnimatedSprite2D" parent="Killed"]
+position = Vector2(500, 250)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("20")
+animation = &"shot2"
+centered = false
+script = ExtResource("19")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(-420, -150)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("12")
+centered = false
+
+[node name="1-5" type="Node2D" parent="."]
+script = ExtResource("2_0lqy2")
+parallax_factor = Vector2(1.5, 1.5)
+
+[node name="Tank0" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(-398, 669)
+sprite_frames = ExtResource("16")
+animation = &"idle"
+frame = 13
+centered = false
+script = ExtResource("8")
+
+[node name="Tank1" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(-142, 1032)
+sprite_frames = ExtResource("17")
+animation = &"idle"
+frame = 14
+centered = false
+script = ExtResource("8")
+
+[node name="Tank2" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(396, 977)
+sprite_frames = ExtResource("18")
+animation = &"idle"
+frame = 13
+centered = false
+script = ExtResource("8")
+
+[node name="Tank3" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(696, 1041)
+sprite_frames = ExtResource("14")
+animation = &"idle"
+frame = 14
+centered = false
+script = ExtResource("8")
+
+[node name="Tank4" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(1266, 917)
+sprite_frames = ExtResource("13")
+animation = &"idle"
+frame = 13
+centered = false
+script = ExtResource("8")
+
+[node name="Tank5" type="AnimatedSprite2D" parent="1-5"]
+z_index = 1
+position = Vector2(1544, 750)
+sprite_frames = ExtResource("15")
+animation = &"idle"
+frame = 13
+centered = false
+script = ExtResource("8")
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2(1065, 920)
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2(238, 918)
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2(655, 775)

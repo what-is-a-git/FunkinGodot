@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp4dcc0v8megt"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/Characters/girlfriend.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="2_qn4hf"]
+
+[node name="gf" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -160)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 26
+script = ExtResource("2_qn4hf")

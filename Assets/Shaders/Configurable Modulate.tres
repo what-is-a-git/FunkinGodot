@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bboi748k1x18w"]
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+
+uniform float pixelation;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV) * vec4(1, 1, 1, sin(TIME * 0.1));
+}"
+
+[resource]
+shader = SubResource("1")
+shader_parameter/pixelation = null

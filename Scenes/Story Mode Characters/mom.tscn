@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo2bomsetxjwb"]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Story Mode/Characters/mom.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="2_jq47k"]
+
+[node name="mom" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, -182)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 2
+script = ExtResource("2_jq47k")
