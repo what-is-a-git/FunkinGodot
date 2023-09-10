@@ -36,6 +36,7 @@ var combo: int = 0
 var score: int = 0
 
 var accuracy: float = 0.0
+@onready var accuracy_calculator: Node = $AccuracyCalculator
 
 var key_count: int = 4
 
@@ -572,8 +573,13 @@ var can_leave_game:bool = true
 
 var camera_zooming: bool = false
 
-func position_hud() -> void:
-	ui.offset = Vector2(-640 * (ui.scale.x - 1), -360 * (ui.scale.y - 1))
+var lerp_hud_offset: bool = false
+
+func position_hud(delta: float = 0.0) -> void:
+	if lerp_hud_offset:
+		ui.offset = lerp(ui.offset, Vector2(-640.0 * (ui.scale.x - 1), -360.0 * (ui.scale.y - 1)), delta * 4.0)
+	else:
+		ui.offset = Vector2(-640.0 * (ui.scale.x - 1), -360.0 * (ui.scale.y - 1))
 
 func _process(delta: float) -> void:
 	if camera_zooming:
@@ -587,7 +593,7 @@ func _process(delta: float) -> void:
 		
 		ui.scale = Vector2(Globals.glerp(ui.scale.x, default_hud_zoom, 0.05, delta),
 				Globals.glerp(ui.scale.y, default_hud_zoom, 0.05, delta))
-		position_hud()
+		position_hud(delta)
 	
 	if !in_cutscene: Conductor.songPosition += (delta * 1000.0) * Globals.song_multiplier
 	if Input.is_action_just_pressed("restart_song"): Scenes.switch_scene("Gameplay")
@@ -642,6 +648,10 @@ func _process(delta: float) -> void:
 					
 					countdown_node.queue_free()
 					Conductor.songPosition = 0.0
+	
+	if OS.is_debug_build() and Input.is_action_just_pressed('skip_song'):
+		Conductor.songPosition = inst.stream.get_length() * 1000.0 + 5.0
+		can_leave_game = true
 	
 	if Conductor.songPosition > inst.stream.get_length() * 1000.0 and can_leave_game:
 		can_leave_game = false
@@ -755,6 +765,7 @@ func _process(delta: float) -> void:
 					if combo >= 10 and gf: gf.play_animation("sad", true)
 					combo = 0
 					
+					accuracy_calculator.record_hit(Conductor.safeZoneOffset)
 					voices.volume_db = -500
 					update_gameplay_text()
 					
@@ -867,10 +878,11 @@ const wife_conditions: Array = [
 @onready var status_mode: String = Settings.get_data('status_text_mode')
 
 func update_gameplay_text() -> void:
-	if total_hit != 0 and total_notes != 0:
-		accuracy = clamp((total_hit / total_notes) * 100.0, 0.0, INF)
-	else:
-		accuracy = 0.0
+	# if total_hit != 0 and total_notes != 0:
+		# accuracy = clamp((total_hit / total_notes) * 100.0, 0.0, INF)
+	# else:
+	#	accuracy = 0.0
+	accuracy = accuracy_calculator.get_accuracy() * 100.0
 	
 	var rating_string: String = 'BOT' if bot else \
 			return_score_rating_string()
@@ -961,7 +973,7 @@ const timings: Array = [22.5, 45.0, 90.0, 135.0] # [25.0, 50.0, 70.0, 100.0]
 const scores: Array = [400.0, 350.0, 200.0, 50.0, -150.0]
 
 func popup_rating(strum_time: float) -> void:
-	var ms_dif: float = (strum_time - Conductor.songPosition) / Globals.song_multiplier
+	var ms_dif: float = (Conductor.songPosition - strum_time) / Globals.song_multiplier
 	var rating: int = 4
 	
 	for i in timings.size():
@@ -1009,31 +1021,31 @@ func popup_rating(strum_time: float) -> void:
 	match(rating):
 		0, 1:
 			if rating == 0:
-				if abs(ms_dif) <= 5:
-					total_hit += 1
-				else: 
-					total_hit += 0.999
+				# if abs(ms_dif) <= 5:
+				# 	total_hit += 1
+				# else: 
+				# 	total_hit += 0.999
 				
 				health += 0.035
 				ratings.marvelous += 1
 			else:
-				total_hit += 0.95
+				# total_hit += 0.95
 				health += 0.02
 				ratings.sick += 1
 		2:
 			health += 0.01
-			total_hit += 0.85
+			# total_hit += 0.85
 			ratings.good += 1
 		3:
 			health -= 0.05
-			total_hit += 0.4
+			# total_hit += 0.4
 			ratings.bad += 1
 		4:
 			health -= 0.125
-			total_hit += -0.35
+			# total_hit += -0.35
 			ratings.shit += 1
 	
-	total_notes += 1
+	accuracy_calculator.record_hit(ms_dif)
 	
 	update_gameplay_text()
 	update_rating_text()

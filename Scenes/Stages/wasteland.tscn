@@ -1,18 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://oykdmuxixwhp"]
+[gd_scene load_steps=24 format=3 uid="uid://oykdmuxixwhp"]
 
-[ext_resource type="Texture2D" uid="uid://dme76lw301qi4" path="res://Assets/Images/Stages/wasteland/tankSky.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://dfi6a5fulurce" path="res://Assets/Images/Stages/wasteland/tankClouds.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cbbay6o8pyon7" path="res://Assets/Images/Stages/wasteland/tankSky.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c5d77d51gje52" path="res://Assets/Images/Stages/wasteland/tankClouds.png" id="2"]
 [ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="2_0lqy2"]
-[ext_resource type="Texture2D" uid="uid://rjq4a2qyvo2g" path="res://Assets/Images/Stages/wasteland/tankMountains.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://btn30xbpr8nfr" path="res://Assets/Images/Stages/wasteland/tankMountains.png" id="3"]
 [ext_resource type="Script" path="res://Scripts/Stage.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://dwk0qdvc00gvr" path="res://Assets/Images/Stages/wasteland/tankRuins.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bauaigqy6oat4" path="res://Assets/Images/Stages/wasteland/tankRuins.png" id="5"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/smokeLeft.res" id="6"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/smokeRight.res" id="7"]
 [ext_resource type="Script" path="res://Scenes/Stages/wasteland_watcher.gd" id="8"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="8_3f6gr"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tankWatchtower.res" id="9"]
 [ext_resource type="Script" path="res://Scenes/Stages/wasteland_roller.gd" id="10"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tankRolling.res" id="11"]
-[ext_resource type="Texture2D" uid="uid://cc1rt6b016xdi" path="res://Assets/Images/Stages/wasteland/tankGround.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://d0316m4gf57a3" path="res://Assets/Images/Stages/wasteland/tankGround.png" id="12"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank4.res" id="13"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank3.res" id="14"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/wasteland/tank5.res" id="15"]
@@ -83,15 +84,19 @@ parallax_factor = Vector2(0.4, 0.4)
 position = Vector2(1100, -100)
 sprite_frames = ExtResource("7")
 animation = &"SmokeRight instance 1"
-frame = 44
+frame_progress = 0.480358
 centered = false
+script = ExtResource("8_3f6gr")
+playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite2D" parent="0-4"]
 position = Vector2(-186, -100)
 sprite_frames = ExtResource("6")
 animation = &"SmokeBlurLeft instance 1"
-frame = 32
+frame_progress = 0.735495
 centered = false
+script = ExtResource("8_3f6gr")
+playing = true
 
 [node name="0-5" type="Node2D" parent="."]
 script = ExtResource("2_0lqy2")

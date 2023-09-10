@@ -1,17 +1,22 @@
-[gd_scene load_steps=21 format=3 uid="uid://5321surrsnva"]
+[gd_scene load_steps=23 format=3 uid="uid://5321surrsnva"]
 
 [ext_resource type="Script" path="res://Scenes/Gameplay.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cq7siksmdb6fp" path="res://Assets/Images/Icons/bf-icons.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://c1lhrchuo2pdn" path="res://Assets/Images/Icons/dad-icons.png" id="3"]
-[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="4"]
-[ext_resource type="Texture2D" uid="uid://bg4f3667mgn2q" path="res://Assets/Images/UI/healthBar.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bnsa2ny07mjvm" path="res://Assets/Images/Icons/bf-icons.png" id="2"]
+[ext_resource type="Script" path="res://Scripts/AccuracyCalculator.gd" id="2_g4mb3"]
+[ext_resource type="Texture2D" uid="uid://c73eh3gvk78kj" path="res://Assets/Images/Icons/dad-icons.png" id="3"]
+[ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="4"]
+[ext_resource type="Texture2D" uid="uid://5odsoj0320qe" path="res://Assets/Images/UI/healthBar.png" id="5"]
 [ext_resource type="Script" path="res://Scripts/UI/Health Bar.gd" id="6"]
-[ext_resource type="Texture2D" uid="uid://crpwnj4juwpoq" path="res://Assets/Images/UI/Countdown/ready.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://baw00gqq8s62u" path="res://Assets/Images/UI/Countdown/set.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://dvnbomaxlwt8g" path="res://Assets/Images/UI/Countdown/go.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://bktm3c6ioyvbf" path="res://Assets/Images/UI/Ratings/sick.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://yn171aspun47" path="res://Assets/Images/UI/Ratings/num0.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://diqioixw5k5bv" path="res://Assets/Images/UI/Countdown/ready.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://duu0o5fgo4xl2" path="res://Assets/Images/UI/Countdown/set.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dman7d7tmt7x8" path="res://Assets/Images/UI/Countdown/go.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://yunin8widpsj" path="res://Assets/Images/UI/Ratings/sick.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://hnald8xugmd0" path="res://Assets/Images/UI/Ratings/num0.png" id="11"]
 [ext_resource type="Script" path="res://Scenes/Progress Bar.gd" id="12"]
+
+[sub_resource type="Curve" id="Curve_wee5r"]
+_data = [Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.357377, 0.810526), -1.07018, -1.07018, 0, 0, Vector2(0.521312, 0.736842), -0.802631, -0.802631, 0, 0, Vector2(0.72459, 0.473684), -0.702303, -0.702303, 0, 0, Vector2(1, 0.2), -1.09628, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2n63"]
 bg_color = Color(0, 0, 0, 1)
@@ -109,6 +114,10 @@ cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1")
+
+[node name="AccuracyCalculator" type="Node" parent="."]
+script = ExtResource("2_g4mb3")
+accuracy_curve = SubResource("Curve_wee5r")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(640, 355)

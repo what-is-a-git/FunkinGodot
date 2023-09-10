@@ -49,9 +49,6 @@ func _process(delta: float) -> void:
 		Scenes.switch_scene('Gameplay')
 		Globals.do_cutscenes = false
 	
-	if not line.playing:
-		AudioHandler.get_node('Gameover Music').volume_db = -4
-	
 	var death_sprite: AnimatedSprite2D = death_character.anim_sprite
 	
 	if not death_sprite:

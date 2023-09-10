@@ -3,6 +3,7 @@ extends Cutscene
 @onready var cutscene: AudioStreamPlayer = $Cutscene
 
 @onready var hud: CanvasLayer = $"../UI"
+var hud_offset: float = -720.0
 var move_hud: bool = true
 
 @onready var tank_1: AnimatedSprite2D = $"Tankman 1"
@@ -115,7 +116,7 @@ func _ready():
 	bf.play_animation("singUPmiss")
 	bf.dances = false
 	
-	good_cam_zoom = Vector2(0.7, 0.7)
+	good_cam_zoom = Vector2(1.3, 1.3)
 	
 	await get_tree().create_timer(0.75).timeout
 	
@@ -144,13 +145,17 @@ func _ready():
 	await get_tree().create_timer(0.5).timeout
 	
 	game.cam_locked = false
-	queue_free()
 
-func _physics_process(_delta):
+func _process(delta: float) -> void:
 	if move_hud:
-		hud.offset.y = -720
-
-func _process(_delta):
+		hud.offset.y = -720.0
+	else:
+		hud_offset = lerp(hud_offset, 0.0, delta * 4.0)
+		hud.offset.y = hud_offset
+		
+		if hud.offset.y > -1.0:
+			queue_free()
+	
 	camera.zoom = good_cam_zoom
 
 func play_part(part_index: int, hide_previous: bool = true):

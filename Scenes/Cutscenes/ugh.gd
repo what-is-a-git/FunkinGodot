@@ -10,6 +10,7 @@ extends Cutscene
 @onready var music = $Music
 
 @onready var hud = $"../UI"
+var hud_offset: float = -720.0
 
 var move_hud = true
 
@@ -78,12 +79,15 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	
 	game.cam_locked = false
-	
-	queue_free()
 
-func _physics_process(_delta):
+func _process(delta: float) -> void:
 	if move_hud:
-		hud.offset.y = -720
-
-func _process(_delta):
+		hud.offset.y = -720.0
+	else:
+		hud_offset = lerp(hud_offset, 0.0, delta * 4.0)
+		hud.offset.y = hud_offset
+		
+		if hud.offset.y > -1.0:
+			queue_free()
+	
 	camera.zoom = good_cam_zoom

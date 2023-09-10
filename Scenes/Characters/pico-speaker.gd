@@ -3,12 +3,11 @@ extends Character
 var animation_notes: Array = []
 
 func _ready() -> void:
-	var file: File = File.new()
-	file.open("res://Assets/Songs/stress/picospeaker.json", File.READ)
+	var file := FileAccess.open("res://Assets/Songs/stress/picospeaker.json", FileAccess.READ)
 	
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(file.get_as_text()).result["song"]
-	var data: Dictionary = test_json_conv.get_data()
+	var test_json_conv := JSON.new()
+	test_json_conv.parse(file.get_as_text())
+	var data: Dictionary = test_json_conv.get_data()["song"]
 	
 	for section in data.notes:
 		for note in section.sectionNotes:
@@ -26,18 +25,14 @@ func _process(delta: float) -> void:
 		shot_direction += round(randf_range(0, 1))
 		
 		play_animation('shoot' + str(shot_direction), true)
-		
 		animation_notes.pop_front()
 	
-	if anim_player:
-		if anim_player.current_animation == "":
-			if last_anim == "idle":
-				last_anim = "shoot2"
-			
-			play_animation(last_anim, true)
-			
-			anim_player.seek(anim_player.current_animation_length - ((1.0/24.0) * 3), true)
-			anim_sprite.frame = anim_sprite.frames.get_frame_count(anim_sprite.animation) - 3
+	if anim_sprite and anim_sprite.frame >= anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) - 1:
+		if last_anim == "idle":
+			last_anim = "shoot2"
+		
+		anim_sprite.frame = anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) - 4
+		anim_sprite.playing = true
 
 func note_sort(a, b):
 	return a[0] < b[0]
