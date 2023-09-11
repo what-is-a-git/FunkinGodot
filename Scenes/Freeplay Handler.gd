@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 	
 	for i in get_child_count():
 		var song: Label = get_child(i)
-		_set_pos_text(song, i - selected, delta)
+		Globals.position_menu_alphabet(song, i - selected, delta)
 		
 		song.visible = not (
 			song.position.y <= -song.size.y or \
@@ -182,9 +182,6 @@ func _difficulty_menu_input() -> void:
 		
 		if not difficulties.is_empty():
 			score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty].to_lower())
-		
-		Discord.update_presence('In the Freeplay Menu', 'Selecting: %s (%s)' % [songs[selected], \
-				difficulties[selected_difficulty]])
 
 func _speed_menu_input(delta: float) -> void:
 	if Input.is_action_just_pressed('ui_reset'):
@@ -265,9 +262,6 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 		score = Scores.get_song_score(songs[selected].to_lower(), \
 				difficulties[selected_difficulty])
 	
-	Discord.update_presence('In the Freeplay Menu', 'Selecting: %s (%s)' % [songs[selected], \
-			difficulties[selected_difficulty]])
-	
 	if Settings.get_data('freeplay_music'):
 		inst.stream = load('res://Assets/Songs/' + songs[selected].to_lower() + '/Inst.ogg')
 		inst.volume_db = 0
@@ -284,15 +278,6 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())
 		Conductor.change_bpm(float(test_json_conv.get_data()['song']['bpm']))
-
-# goofy
-func _set_pos_text(text: Control, target_y: int, delta: float):
-	var scaled_y: float = remap(target_y, 0, 1, 0, 1.3)
-	var lerp_value: float = clamp(delta * 9.6, 0.0, 1.0)
-	
-	# 120 = yMult, 720 = FlxG.height
-	text.position.x = lerp(text.position.x, (target_y * 20.0) + 90.0, lerp_value)
-	text.position.y = lerp(text.position.y, (scaled_y * 120.0) + (720.0 * 0.48), lerp_value)
 
 func beat_hit() -> void:
 	get_child(selected).get_node('Icon').scale = Vector2(1.2, 1.2)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtnug7w7mjvbc"]
+
+[ext_resource type="Script" path="res://Scripts/Notes/Player Strums.gd" id="1_7r56c"]
+[ext_resource type="PackedScene" path="res://Scenes/Gameplay/Strum.tscn" id="2_s3muo"]
+
+[node name="1 Key" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_7r56c")
+
+[node name="square" parent="." instance=ExtResource("2_s3muo")]
+position = Vector2(225.714, 0)
+direction = "square"

@@ -7,8 +7,6 @@ var started: bool = false
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	
-	Discord.update_presence("On the Title Screen")
-	
 	Conductor.change_bpm(102)
 	AudioHandler.play_audio("Title Music")
 	

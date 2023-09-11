@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Gameplay.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bnsa2ny07mjvm" path="res://Assets/Images/Icons/bf-icons.png" id="2"]
-[ext_resource type="Script" path="res://Scripts/AccuracyCalculator.gd" id="2_g4mb3"]
+[ext_resource type="Script" path="res://Scripts/AccuracyCalculator.gd" id="2_rn6lx"]
 [ext_resource type="Texture2D" uid="uid://c73eh3gvk78kj" path="res://Assets/Images/Icons/dad-icons.png" id="3"]
 [ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="4"]
 [ext_resource type="Texture2D" uid="uid://5odsoj0320qe" path="res://Assets/Images/UI/healthBar.png" id="5"]
@@ -116,7 +116,7 @@ cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
 script = ExtResource("1")
 
 [node name="AccuracyCalculator" type="Node" parent="."]
-script = ExtResource("2_g4mb3")
+script = ExtResource("2_rn6lx")
 accuracy_curve = SubResource("Curve_wee5r")
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -141,7 +141,7 @@ z_index = 2
 position = Vector2(640, 700)
 script = ExtResource("12")
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Progress Bar"]
+[node name="BG" type="Sprite2D" parent="UI/Progress Bar"]
 scale = Vector2(0.75, 1)
 texture = ExtResource("5")
 
@@ -176,7 +176,7 @@ script = ExtResource("6")
 
 [node name="Bar" type="Node2D" parent="UI/Health Bar"]
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Health Bar/Bar"]
+[node name="BG" type="Sprite2D" parent="UI/Health Bar/Bar"]
 texture = ExtResource("5")
 centered = false
 
@@ -253,14 +253,14 @@ texture = ExtResource("9")
 
 [node name="Ratings" type="Node2D" parent="UI"]
 visible = false
-position = Vector2(641, 354)
+position = Vector2(640, 360)
 
 [node name="Rating" type="Sprite2D" parent="UI/Ratings"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10")
 
 [node name="Numbers" type="Node2D" parent="UI/Ratings"]
-position = Vector2(-115, 86)
+position = Vector2(-137, 48)
 
 [node name="0" type="Sprite2D" parent="UI/Ratings/Numbers"]
 position = Vector2(23.5, 29.75)
@@ -293,12 +293,13 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
 [node name="Accuracy Text" type="Label" parent="UI/Ratings"]
-offset_left = -110.0
-offset_top = 54.0
-offset_right = 114.0
-offset_bottom = 91.0
+offset_left = -641.0
+offset_top = 108.0
+offset_right = 639.0
+offset_bottom = 156.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = SubResource("4")
 theme_override_font_sizes/font_size = 24
 text = "0 ms"
+horizontal_alignment = 1

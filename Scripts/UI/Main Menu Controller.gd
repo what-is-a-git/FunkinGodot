@@ -72,5 +72,3 @@ func change_item(amount: int = 0) -> void:
 		camera.position.y = get_child(selected).position.y - 25
 	else:
 		camera.position.y = get_child(selected).position.y
-	
-	Discord.update_presence("In the Main Menu", "Selecting " + get_child(selected).name)

@@ -81,7 +81,7 @@ var enemy_strums: Node2D
 @onready var set: Sprite2D = countdown_node.get_node("Set")
 @onready var go: Sprite2D = countdown_node.get_node("Go")
 
-@onready var health_bar_bg: Sprite2D = health_bar.get_node("Bar/Sprite2D")
+@onready var health_bar_bg: Sprite2D = health_bar.get_node("Bar/BG")
 
 var events: Array = []
 var event_nodes: Dictionary = {}
@@ -476,13 +476,6 @@ func _ready() -> void:
 				var modchart = scene.instantiate()
 				add_child(modchart)
 	
-	Discord.update_presence("Starting " + song_data["song"] + " (" + Globals.songDifficulty + ")")
-	
-	add_child(presence_timer)
-	
-	presence_timer.start(0.5 / clamp(Globals.song_multiplier, 0.001, 5))
-	presence_timer.connect("timeout", Callable(self, "update_presence"))
-	
 	if preload_notes:
 		for note in note_data_array:
 			var is_player_note: bool = true
@@ -521,8 +514,6 @@ func _ready() -> void:
 	rating_text.visible = side_ratings_enabled
 	# threaded_note_loading = true
 	Globals.emit_signal('_ready_post')
-
-var presence_timer: Timer = Timer.new()
 
 @onready var inst = AudioHandler.get_node("Inst")
 @onready var voices = AudioHandler.get_node("Voices")
@@ -985,20 +976,21 @@ func popup_rating(strum_time: float) -> void:
 		rating = 0
 		ms_dif = 0.0
 	
-	ratings_thing.visible = true
-	cool_rating.texture = rating_textures[rating]
+	var combo_str: String = str(combo).pad_zeros(3)
 	
-	var combo_str: String = str(combo)
+	var i: int = 0
 	
-	for child in numbers_obj.get_children():
-		child.visible = false
-	
-	for letter in len(combo_str):
-		var number = get_node("UI/Ratings/Numbers/" + str(letter))
+	for number in numbers_obj.get_children():
+		number.visible = false if i > len(combo_str) - 1 else true
 		
-		if number:
-			number.visible = true
-			number.texture = numbers[int(combo_str[letter])]
+		if number.visible:
+			number.texture = numbers[int(combo_str[i])]
+		
+		i += 1
+	
+	ratings_thing.visible = true
+	numbers_obj.position.x = -42 + (-19 * (len(combo_str) - 1))
+	cool_rating.texture = rating_textures[rating]
 	
 	if tween != null:
 		tween.stop()
@@ -1090,12 +1082,6 @@ func event_sort(a: Array, b: Array) -> bool:
 func preloaded_sort(a: Note, b: Note) -> bool:
 	return a.strum_time < b.strum_time
 
-func update_presence() -> void:
-	if !in_cutscene and inst.stream:
-		Discord.update_presence("Playing " + song_data["song"] + " (" + Globals.songDifficulty + ")", "Time Left: " + Globals.format_time(inst.stream.get_length() - (Conductor.songPosition / 1000.0)), song_data["player2"], song_data["player2"])
-	else:
-		Discord.update_presence("In Cutscene in " + song_data["song"] + " (" + Globals.songDifficulty + ")", "", song_data["player2"], song_data["player2"])
-
 func load_potential_notes() -> void:
 	for note in note_data_array:
 		if float(note[0]) > Conductor.songPosition + (2500.0 * Globals.song_multiplier):
@@ -1159,3 +1145,11 @@ func load_potential_notes() -> void:
 			spawn_note.emit(note)
 		else:
 			break
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not event is InputEventKey:
+		return
+	
+	if Input.is_action_just_pressed('ui_confirm'):
+		PauseMenu.open()

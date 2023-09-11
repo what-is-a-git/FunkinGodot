@@ -1,11 +1,109 @@
-extends Control
+extends CanvasLayer
 
+
+var selected: int = 0
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var modulate: CanvasModulate = $Modulate
+
+@onready var selections: Node2D = $Selections
+
+# If the pause menu ever needs changing options, you'll have to update this.
+@onready var selection_labels: Array[Node] = selections.get_children()
+
+@onready var scene_tree: SceneTree = get_tree()
+
+@onready var inst: AudioStreamPlayer = AudioHandler.get_node('Inst')
+@onready var voices: AudioStreamPlayer = AudioHandler.get_node('Voices')
+
+
+func _ready() -> void:
+	hide()
+
+
+func _process(delta: float) -> void:
+	if not visible:
+		return
+	
+	var i: int = 0
+	
+	for label in selection_labels:
+		Globals.position_menu_alphabet(label, i - selected, delta)
+		i += 1
+
+
+func open() -> void:
+	if animation_player.is_playing():
+		return
+	scene_tree.paused = true
+	animation_player.play('open')
+	
+	inst.stream_paused = true
+	voices.stream_paused = true
+	selected = 0
+	_update_selection()
+
+
+func close() -> void:
+	if animation_player.is_playing():
+		return
+	scene_tree.paused = false
+	animation_player.play('close')
+	
+	inst.stream_paused = false
+	voices.stream_paused = false
+
+
+func _update_selection() -> void:
+	for i in selection_labels.size():
+		selection_labels[i].modulate.a = 1.0 if i == selected else 0.5
+	
+	AudioHandler.play_audio('Scroll Menu')
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not (event is InputEventKey and visible):
+		return
+	
+	var axis: float = Input.get_axis('ui_up', 'ui_down')
+	
+	if axis:
+		if axis <= -0.75:
+			selected = wrapi(selected - 1, 0, selection_labels.size())
+		elif axis >= 0.75:
+			selected = wrapi(selected + 1, 0, selection_labels.size())
+		if absf(axis) >= 0.75:
+			_update_selection()
+	
+	if Input.is_action_just_pressed('ui_confirm'):
+		var selection_name: StringName = selection_labels[selected].name
+		
+		match selection_name.to_lower():
+			'resume':
+				close()
+			'restart song':
+				visible = false
+				scene_tree.paused = false
+				Globals.do_cutscenes = false
+				scene_tree.reload_current_scene()
+			'options':
+				visible = false
+				scene_tree.paused = false
+				OptionsSideBar.returning_scene = 'Gameplay'
+				Scenes.switch_scene('Options Menu')
+			'exit menu':
+				close()
+				Scenes.switch_scene('Freeplay' if Globals.freeplay else 'Story Mode')
+			_:
+				printerr('No supported action for selection %s.' % selection_name)
+
+"""
 var selected: int = 0
 var showing = false
 
 var tween: Tween
 
-@onready var bg = $BG
+@onready var modulate: CanvasModulate = $Modulate
 
 @onready var resume = $Resume
 @onready var restart_song = $"Restart Song"
@@ -15,10 +113,10 @@ var tween: Tween
 @onready var song_name = $"Song Name"
 @onready var song_difficulty = $"Song Difficulty"
 
-func _ready():
+func _ready() -> void:
 	hide()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_confirm") and Scenes.current_scene == "Gameplay" and !showing:
 		get_tree().paused = true
 		
@@ -30,9 +128,9 @@ func _process(delta):
 		set_pos_text(options, 2 - selected, 1)
 		set_pos_text(exit_menu, 3 - selected, 1)
 		
-		bg.modulate.a = 0
+		modulate.a = 0.0
 		tween = create_tween().set_trans(Tween.TRANS_QUART).set_parallel()
-		tween.tween_property(bg, "modulate:a", 0.9, 0.4)
+		tween.tween_property(self, "modulate:a", 1.0, 0.5).set_ease(Tween.EASE_OUT)
 		
 		song_name.modulate.a = 0
 		song_difficulty.modulate.a = 0
@@ -121,3 +219,4 @@ func set_pos_text(text, targetY, elapsed):
 	# 120 = yMult, 720 = FlxG.height
 	text.position.y = lerp(text.position.y, (scaledY * 120.0) + (720 * 0.48), lerpVal);
 	text.position.x = lerp(text.position.x, (targetY * 20.0) + 90, lerpVal)
+"""

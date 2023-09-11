@@ -24,7 +24,6 @@ config/windows_native_icon="res://Assets/Images/icon.ico"
 
 Settings="*res://Scripts/Autoload/Settings.gd"
 Scores="*res://Scripts/Autoload/Scores.gd"
-Discord="*res://Scripts/Autoload/Discord.gd"
 Globals="*res://Scripts/Autoload/Globals.gd"
 Paths="*res://Scripts/Autoload/Paths.gd"
 Transition="*res://Scenes/Transition.tscn"
@@ -32,8 +31,7 @@ Scenes="*res://Scripts/Autoload/SceneHandler.gd"
 AudioHandler="*res://Scenes/Audio Handler.tscn"
 Conductor="*res://Scripts/Autoload/Conductor.gd"
 VolumeSelector="*res://Scenes/Volume Selector.tscn"
-Fps="*res://Scenes/FPS.tscn"
-ModLoader="*res://Scripts/Autoload/Mod Loader.gd"
+FPS="*res://Scenes/FPS.tscn"
 PauseMenu="*res://Scenes/Pause Menu.tscn"
 
 [display]

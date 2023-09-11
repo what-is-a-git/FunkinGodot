@@ -280,4 +280,3 @@ func change_difficulty(change: int = 0):
 		week_score_data += Scores.get_song_score(song[0].to_lower(), difficulties[selected_difficulty].to_lower())
 	
 	week_score.text = "SCORE: " + str(week_score_data)
-	Discord.update_presence("In the Story Menu", "Selecting " + weeks_node.get_children()[selected].name + " (" + difficulties[selected_difficulty] + ")")

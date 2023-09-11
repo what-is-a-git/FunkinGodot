@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://1i6dyeuluqww"]
+
+[ext_resource type="Script" path="res://Scripts/Notes/Player Strums.gd" id="1_4ktpy"]
+[ext_resource type="PackedScene" path="res://Scenes/Gameplay/Strum.tscn" id="2_64bfw"]
+
+[node name="3 Key" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_4ktpy")
+
+[node name="left" parent="." instance=ExtResource("2_64bfw")]
+position = Vector2(77.1429, 0)
+
+[node name="square" parent="." instance=ExtResource("2_64bfw")]
+position = Vector2(238.143, 0)
+direction = "square"
+note_data = 1
+
+[node name="right" parent="." instance=ExtResource("2_64bfw")]
+position = Vector2(398.143, 0)
+direction = "right"
+note_data = 2

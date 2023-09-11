@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://cgsh2fra2gvvy"]
 
-[ext_resource type="Texture2D" uid="uid://cy6l83bq3fh15" path="res://Assets/Images/UI/menuBG.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://0732v4hbfk" path="res://Assets/Images/UI/menuBG.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="1_5jryt"]
-[ext_resource type="Texture2D" uid="uid://bmuwwqpd6fuam" path="res://Assets/Images/UI/menuDesat.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cagmirudlfjtd" path="res://Assets/Images/UI/menuDesat.png" id="2"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/story mode.res" id="3"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/options.res" id="4"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Main Menu/freeplay.res" id="5"]
 [ext_resource type="Script" path="res://Scripts/UI/Main Menu Controller.gd" id="8"]
-[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="9"]
+[ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="9"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "blinking"

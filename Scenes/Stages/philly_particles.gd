@@ -20,21 +20,26 @@ extends Node2D
 @onready var enemy_icon = game.get_node("UI/Health Bar/Opponent")
 
 @onready var bar = game.get_node("UI/Health Bar/Bar/ProgressBar")
-@onready var bar_outline = game.get_node("UI/Health Bar/Bar/Sprite2D")
+@onready var bar_outline = game.get_node("UI/Health Bar/Bar/BG")
 
 @onready var progress_bar = game.get_node("UI/Progress Bar/ProgressBar")
-@onready var progress_bar_outline = game.get_node("UI/Progress Bar/Sprite2D")
+@onready var progress_bar_outline = game.get_node("UI/Progress Bar/BG")
+
+@onready var world_environment: WorldEnvironment = $'../../../WorldEnvironment'
 
 var tween: Tween
 
 # created for blammed lol
 func _ready() -> void:
+	world_environment.environment.glow_enabled = false
+	
 	if Globals.songName.to_lower() != "blammed":
 		queue_free()
 	else:
 		set_particles_emitting(false)
 		visible = false
 		
+		game.stage.connect('lights_updated', beat_hit)
 		Conductor.connect("beat_hit", Callable(self, "beat_hit"))
 		
 		if "anim_sprite" in game.bf:
@@ -93,8 +98,7 @@ func beat_hit() -> void:
 		progress_bar.get("theme_override_styles/fill").bg_color = Color.WHITE
 		
 		game.default_camera_zoom = stage.camera_zoom
-		
-		Conductor.disconnect("beat_hit", Callable(self, "beat_hit"))
+		set_particles_emitting(false)
 		queue_free()
 	elif cur_beat >= 128:
 		sky.visible = false
@@ -160,6 +164,7 @@ func _physics_process(delta: float) -> void:
 		train.modulate = get_light_color()
 
 func set_particles_emitting(val: bool) -> void:
+	world_environment.environment.glow_enabled = val
 	part1.emitting = val
 	part2.emitting = val
 	part3.emitting = val

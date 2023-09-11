@@ -1,31 +1,36 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bwdhxclq4ur0m"]
 
-[ext_resource path="res://Scripts/Notes/Player Strums.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Gameplay/Strum.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://Scripts/Notes/Player Strums.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Gameplay/Strum.tscn" id="2"]
 
 [node name="6 Key" type="Node2D"]
-scale = Vector2( 0.62, 0.62 )
-script = ExtResource( 1 )
+scale = Vector2(0.62, 0.62)
+script = ExtResource("1")
 
-[node name="left" parent="." instance=ExtResource( 2 )]
-position = Vector2( -36.5324, 0 )
+[node name="left" parent="." instance=ExtResource("2")]
+position = Vector2(-36.5324, 0)
 
-[node name="up" parent="." instance=ExtResource( 2 )]
-position = Vector2( 92.4677, 0 )
+[node name="up" parent="." instance=ExtResource("2")]
+position = Vector2(92.4677, 0)
 direction = "up"
+note_data = 1
 
-[node name="right" parent="." instance=ExtResource( 2 )]
-position = Vector2( 213.468, 0 )
+[node name="right" parent="." instance=ExtResource("2")]
+position = Vector2(213.468, 0)
 direction = "right"
+note_data = 2
 
-[node name="left2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 339.468, 0 )
+[node name="left2" parent="." instance=ExtResource("2")]
+position = Vector2(339.468, 0)
 direction = "left2"
+note_data = 3
 
-[node name="down" parent="." instance=ExtResource( 2 )]
-position = Vector2( 468.468, 0 )
+[node name="down" parent="." instance=ExtResource("2")]
+position = Vector2(468.468, 0)
 direction = "down"
+note_data = 4
 
-[node name="right2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 597.468, 0 )
+[node name="right2" parent="." instance=ExtResource("2")]
+position = Vector2(597.468, 0)
 direction = "right2"
+note_data = 5

@@ -19,6 +19,8 @@ var trainFinishing: bool = false
 
 var light: Sprite2D
 
+signal lights_updated
+
 func _ready() -> void:
 	randomize()
 	Conductor.connect("beat_hit", Callable(self, "on_beat"))
@@ -50,6 +52,8 @@ func on_beat() -> void:
 		
 		if light.material:
 			light.material.set("shader_parameter/alpha_shit", 0)
+		
+		lights_updated.emit()
 
 	if Conductor.curBeat % 8 == 4 and randf_range(0, 100) < 20 and not trainMoving and trainCooldown > 8:
 		trainCooldown = int(randf_range(-4, 0))

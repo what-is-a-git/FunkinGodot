@@ -12,11 +12,14 @@ script = ExtResource("1")
 [node name="down" parent="." instance=ExtResource("2")]
 position = Vector2(161, 0)
 direction = "down"
+note_data = 1
 
 [node name="up" parent="." instance=ExtResource("2")]
 position = Vector2(321, 0)
 direction = "up"
+note_data = 2
 
 [node name="right" parent="." instance=ExtResource("2")]
 position = Vector2(482, 0)
 direction = "right"
+note_data = 3

@@ -3,7 +3,6 @@ extends Node2D
 @onready var iconP1 = $Player
 @onready var iconP2 = $Opponent
 
-@onready var barBG = $Bar/Sprite2D
 @onready var bar = $Bar/ProgressBar
 
 @onready var game = $"../../"
