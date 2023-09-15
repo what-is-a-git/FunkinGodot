@@ -1,9 +1,12 @@
-extends Node2D
+@icon('res://Assets/Images/Godot/Icons/freeplay_handler.svg')
+class_name FreeplayHandler extends Node2D
 
 static var selected: int = 0
 var selected_song: bool = false
+var cur_icon: Sprite2D
 
 var songs: Array = []
+var song_nodes: Array[FreeplaySong] = []
 
 var difficulties: Array = [
 	'easy',
@@ -14,7 +17,9 @@ var difficulties: Array = [
 static var selected_difficulty: int = 1
 
 @onready var tween: Tween
-@onready var bg: Sprite2D = $'../BG'
+@onready var bg: Sprite2D = $BG
+@onready var songs_node: Node2D = $Songs
+@onready var template: FreeplaySong = songs_node.get_node('Template')
 
 @onready var inst: AudioStreamPlayer = AudioHandler.get_node('Inst')
 
@@ -36,8 +41,7 @@ func _ready() -> void:
 	var index: int = 0
 	
 	# make freeplay songs
-	var template: Label = $Template
-	remove_child(template)
+	songs_node.remove_child(template)
 	
 	for week in weeks:
 		var week_file := FileAccess.open('res://Assets/Weeks/%s.json' % week, FileAccess.READ)
@@ -56,11 +60,11 @@ func _ready() -> void:
 			else:
 				song = song_data.song
 			
-			var new_song: Label = template.duplicate()
+			var new_song: FreeplaySong = template.duplicate()
 			new_song.visible = true
 			new_song.text = song.to_upper()
 			new_song.name = song.to_lower() + '_' + str(index)
-			new_song.size = Vector2(0, 0)
+			new_song.size = Vector2.ZERO
 			
 			if not is_legacy_song_data:
 				var cool_color: String = song_data.color
@@ -69,7 +73,8 @@ func _ready() -> void:
 				if 'ignore_difficulties' in song_data:
 					new_song.ignore_difficulties = song_data.ignore_difficulties
 			
-			add_child(new_song)
+			songs_node.add_child(new_song)
+			song_nodes.push_back(new_song)
 			
 			var icon: Sprite2D = new_song.get_node('Icon')
 			icon.global_position.x = new_song.position.x + new_song.size.x + 100.0
@@ -99,12 +104,12 @@ func _ready() -> void:
 	Conductor.change_bpm(102)
 	
 	_change_item()
-	bg.modulate = get_children()[selected].freeplay_color
+	bg.modulate = songs_node.get_child(selected).freeplay_color
 	
 	Conductor.connect('beat_hit', Callable(self, 'beat_hit'))
 
-@onready var dif_text: Label = $'../Difficulty'
-@onready var dif_bg: ColorRect = $'../Dif BG'
+@onready var dif_text: Label = $Difficulty
+@onready var dif_bg: ColorRect = $'Difficulty Background'
 
 var multi_timer: float = 0
 var score: int = 0
@@ -119,20 +124,14 @@ func _process(delta: float) -> void:
 		dif_text.text = 'PB: %d (%.2fx)\n< %s >' % [cur_score, Globals.song_multiplier,
 				difficulties[selected_difficulty].to_upper()]
 	
-	var cur_icon:Sprite2D = get_child(selected).get_node('Icon')
-	cur_icon.scale = lerp(cur_icon.scale, Vector2(1.0, 1.0), delta * 9.0)
+	cur_icon.scale = lerp(cur_icon.scale, Vector2.ONE, delta * 9.0)
 	
 	Conductor.songPosition = inst.get_playback_position() * 1000.0
 	inst.pitch_scale = Globals.song_multiplier
 	
-	for i in get_child_count():
-		var song: Label = get_child(i)
+	for i in song_nodes.size():
+		var song: FreeplaySong = song_nodes[i]
 		Globals.position_menu_alphabet(song, i - selected, delta)
-		
-		song.visible = not (
-			song.position.y <= -song.size.y or \
-			song.position.y >= 720 + song.size.y
-		)
 	
 	if Input.is_action_just_pressed('ui_accept') and not selected_song:
 		selected_song = true
@@ -205,18 +204,13 @@ func _change_speed(amount: float) -> void:
 	Globals.song_multiplier = clamp(Globals.song_multiplier + amount, 0.05, INF)
 
 func _change_item(amount: int = 0, delta: float = 0.0) -> void:
-	selected += amount
-	
-	if selected < 0:
-		selected = get_child_count() - 1
-	if selected > get_child_count() - 1:
-		selected = 0
+	selected = wrapi(selected + amount, 0, song_nodes.size())
 	
 	AudioHandler.play_audio('Scroll Menu')
 	
-	var selected_child = get_child(selected)
+	var selected_child := songs_node.get_child(selected)
 	
-	for child in get_children():
+	for child in songs_node.get_children():
 		if child != selected_child:
 			child.modulate.a = 0.5
 			
@@ -256,7 +250,7 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 		tween = null
 	
 	tween = create_tween()
-	tween.tween_property(bg, 'modulate', get_child(selected).freeplay_color, 0.5)
+	tween.tween_property(bg, 'modulate', selected_child.freeplay_color, 0.5)
 	
 	if not difficulties.is_empty():
 		score = Scores.get_song_score(songs[selected].to_lower(), \
@@ -278,9 +272,11 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())
 		Conductor.change_bpm(float(test_json_conv.get_data()['song']['bpm']))
+	
+	cur_icon = songs_node.get_child(selected).get_node('Icon')
 
 func beat_hit() -> void:
-	get_child(selected).get_node('Icon').scale = Vector2(1.2, 1.2)
+	songs_node.get_child(selected).get_node('Icon').scale = Vector2(1.2, 1.2)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

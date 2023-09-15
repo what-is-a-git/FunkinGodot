@@ -215,7 +215,7 @@ static func format_float(input: float, precision: int) -> float:
 
 # lerp value
 static func lerpv(value_60: float, delta: float) -> float:
-	return delta * (value_60 / (1.0 / 60.0))
+	return delta * 60.0 * value_60
 
 # good lerp
 static func glerp(value_1, value_2, lerp_value: float, delta: float):

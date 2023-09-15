@@ -1,11 +1,12 @@
-extends Node2D
+@icon('res://Assets/Images/Godot/Icons/funkin_health_bar.svg')
+class_name FunkinHealthBar extends Node2D
 
 @onready var iconP1 = $Player
 @onready var iconP2 = $Opponent
 
 @onready var bar = $Bar/ProgressBar
 
-@onready var game = $"../../"
+@onready var game: Gameplay = get_tree().current_scene
 
 @onready var bounce_type: String = Settings.get_data('health_icon_bounce')
 

@@ -27,7 +27,7 @@ func shake(_intensity: float, _duration: float, is_hud: bool = false):
 	camera = game.camera
 	hud = game.ui
 	
-	if !is_hud:
+	if not is_hud:
 		duration_left = _duration
 		intensity = _intensity
 	else:
@@ -48,10 +48,8 @@ func _physics_process(delta):
 	if hud_duration_left > 0:
 		hud_duration_left -= delta
 		
-		if hud_duration_left <= 0:
-			hud.offset = Vector2(-650 * (hud.scale.x - 1), -400 * (hud.scale.y - 1))
+		hud.offset = Vector2(-640 * (hud.scale.x - 1), -360 * (hud.scale.y - 1))
 		
 		if hud_duration_left > 0:
-			game.position_hud()
 			hud.offset.x += randf_range(-hud_intensity * 1280, hud_intensity * 1280) * hud.scale.x
 			hud.offset.y += randf_range(-hud_intensity * 720, hud_intensity * 720) * hud.scale.y

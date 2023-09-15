@@ -3,7 +3,7 @@ extends Event
 var character_cache:Dictionary = {}
 
 func setup_event(arg_1, arg_2):
-	if !character_cache.has(arg_2) and ResourceLoader.exists("res://Scenes/Characters/" + arg_2 + ".tscn"):
+	if not character_cache.has(arg_2) and ResourceLoader.exists("res://Scenes/Characters/" + arg_2 + ".tscn"):
 		character_cache[arg_2] = load("res://Scenes/Characters/" + arg_2 + ".tscn")
 
 func process_event(arg_1, arg_2):

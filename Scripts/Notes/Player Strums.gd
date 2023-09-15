@@ -2,9 +2,9 @@ class_name Strumline extends Node2D
 
 @export var is_player: bool = true
 
-var key_count = Globals.key_count
+var key_count: int = Globals.key_count
 
-@onready var game: Node2D = $"../../"
+@onready var game: Gameplay = $"../../../"
 
 @export var disabled: bool = false
 

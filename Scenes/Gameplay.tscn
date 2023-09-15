@@ -128,24 +128,27 @@ position_smoothing_speed = 2.4
 
 [node name="Modulate" type="CanvasModulate" parent="UI"]
 
-[node name="Enemy Notes" type="Node2D" parent="UI"]
+[node name="HUD" type="Node2D" parent="UI"]
+editor_description = "Used for things like Screen Shake or other effects to easily manipulate the HUD without messing with the centering and scale of the UI CanvasLayer itself."
+
+[node name="Enemy Notes" type="Node2D" parent="UI/HUD"]
 z_index = 1
 position = Vector2(84, 0)
 
-[node name="Player Notes" type="Node2D" parent="UI"]
+[node name="Player Notes" type="Node2D" parent="UI/HUD"]
 z_index = 1
 position = Vector2(857, 0)
 
-[node name="Progress Bar" type="Node2D" parent="UI"]
+[node name="Progress Bar" type="Node2D" parent="UI/HUD"]
 z_index = 2
 position = Vector2(640, 700)
 script = ExtResource("12")
 
-[node name="BG" type="Sprite2D" parent="UI/Progress Bar"]
+[node name="BG" type="Sprite2D" parent="UI/HUD/Progress Bar"]
 scale = Vector2(0.75, 1)
 texture = ExtResource("5")
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/Progress Bar"]
+[node name="ProgressBar" type="ProgressBar" parent="UI/HUD/Progress Bar"]
 offset_left = -221.0
 offset_top = -6.0
 offset_right = 370.0
@@ -157,7 +160,7 @@ max_value = 1.0
 step = 0.001
 show_percentage = false
 
-[node name="Text" type="Label" parent="UI/Progress Bar"]
+[node name="Text" type="Label" parent="UI/HUD/Progress Bar"]
 offset_left = -640.0
 offset_top = -10.0
 offset_right = 640.0
@@ -169,18 +172,18 @@ text = "Loading"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Health Bar" type="Node2D" parent="UI"]
+[node name="Health Bar" type="Node2D" parent="UI/HUD"]
 z_index = 2
 position = Vector2(329, 56)
 script = ExtResource("6")
 
-[node name="Bar" type="Node2D" parent="UI/Health Bar"]
+[node name="Bar" type="Node2D" parent="UI/HUD/Health Bar"]
 
-[node name="BG" type="Sprite2D" parent="UI/Health Bar/Bar"]
+[node name="BG" type="Sprite2D" parent="UI/HUD/Health Bar/Bar"]
 texture = ExtResource("5")
 centered = false
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/Health Bar/Bar"]
+[node name="ProgressBar" type="ProgressBar" parent="UI/HUD/Health Bar/Bar"]
 offset_left = 596.0
 offset_top = 4.0
 offset_right = 1188.0
@@ -192,21 +195,21 @@ max_value = 2.0
 value = 1.0
 show_percentage = false
 
-[node name="Player" type="Sprite2D" parent="UI/Health Bar"]
+[node name="Player" type="Sprite2D" parent="UI/HUD/Health Bar"]
 position = Vector2(375, 8)
 texture = ExtResource("2")
 flip_h = true
 hframes = 3
 
-[node name="Opponent" type="Sprite2D" parent="UI/Health Bar"]
+[node name="Opponent" type="Sprite2D" parent="UI/HUD/Health Bar"]
 position = Vector2(250, 8)
 texture = ExtResource("3")
 hframes = 3
 
-[node name="Gameplay Text" type="Node2D" parent="UI"]
+[node name="Gameplay Text" type="Node2D" parent="UI/HUD"]
 z_index = 2
 
-[node name="Gameplay Text" type="Label" parent="UI/Gameplay Text"]
+[node name="Gameplay Text" type="Label" parent="UI/HUD/Gameplay Text"]
 offset_top = 105.0
 offset_right = 1280.0
 offset_bottom = 150.0
@@ -217,7 +220,7 @@ theme_override_font_sizes/font_size = 18
 text = "<  Score:0 ~ Misses:0 ~ Accuracy:0% ~ Rating:N/A  >"
 horizontal_alignment = 1
 
-[node name="Ratings" type="Label" parent="UI/Gameplay Text"]
+[node name="Ratings" type="Label" parent="UI/HUD/Gameplay Text"]
 offset_left = -6.0
 offset_right = 137.0
 offset_bottom = 720.0
@@ -234,65 +237,65 @@ text = " Marvelous: 0
  PA: 0"
 vertical_alignment = 1
 
-[node name="Countdown" type="Node2D" parent="UI"]
+[node name="Countdown" type="Node2D" parent="UI/HUD"]
 
-[node name="Ready" type="Sprite2D" parent="UI/Countdown"]
+[node name="Ready" type="Sprite2D" parent="UI/HUD/Countdown"]
 visible = false
 position = Vector2(638, 356)
 texture = ExtResource("7")
 
-[node name="Set" type="Sprite2D" parent="UI/Countdown"]
+[node name="Set" type="Sprite2D" parent="UI/HUD/Countdown"]
 visible = false
 position = Vector2(638, 356)
 texture = ExtResource("8")
 
-[node name="Go" type="Sprite2D" parent="UI/Countdown"]
+[node name="Go" type="Sprite2D" parent="UI/HUD/Countdown"]
 visible = false
 position = Vector2(638, 356)
 texture = ExtResource("9")
 
-[node name="Ratings" type="Node2D" parent="UI"]
+[node name="Ratings" type="Node2D" parent="UI/HUD"]
 visible = false
 position = Vector2(640, 360)
 
-[node name="Rating" type="Sprite2D" parent="UI/Ratings"]
+[node name="Rating" type="Sprite2D" parent="UI/HUD/Ratings"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10")
 
-[node name="Numbers" type="Node2D" parent="UI/Ratings"]
+[node name="Numbers" type="Node2D" parent="UI/HUD/Ratings"]
 position = Vector2(-137, 48)
 
-[node name="0" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="0" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(23.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="1" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="1" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(70.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="2" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="2" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(117.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="3" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="3" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(164.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="4" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="4" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(211.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="5" type="Sprite2D" parent="UI/Ratings/Numbers"]
+[node name="5" type="Sprite2D" parent="UI/HUD/Ratings/Numbers"]
 position = Vector2(258.5, 29.75)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11")
 
-[node name="Accuracy Text" type="Label" parent="UI/Ratings"]
+[node name="Accuracy Text" type="Label" parent="UI/HUD/Ratings"]
 offset_left = -641.0
 offset_top = 108.0
 offset_right = 639.0

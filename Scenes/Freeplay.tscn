@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Freeplay Song.gd" id="6"]
 
 [node name="Freeplay" type="Node2D"]
+script = ExtResource("3")
 
 [node name="BG" type="Sprite2D" parent="."]
 z_index = -1
@@ -17,7 +18,6 @@ texture = ExtResource("1")
 centered = false
 
 [node name="Songs" type="Node2D" parent="."]
-script = ExtResource("3")
 
 [node name="Template" type="Label" parent="Songs"]
 offset_left = 37.0
@@ -35,7 +35,7 @@ position = Vector2(500, 49)
 texture = ExtResource("5")
 hframes = 3
 
-[node name="Dif BG" type="ColorRect" parent="."]
+[node name="Difficulty Background" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 64.0
 color = Color(0, 0, 0, 0.6)

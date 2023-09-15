@@ -1,4 +1,6 @@
+@icon('res://Assets/Images/Godot/Icons/gameplay.svg')
 class_name Gameplay extends Node2D
+
 
 var template_note: Node2D
 
@@ -40,8 +42,24 @@ var accuracy: float = 0.0
 
 var key_count: int = 4
 
+@onready var camera = $Camera
+@onready var ui_layer: CanvasLayer = $UI
+@onready var ui: Node2D = ui_layer.get_node('HUD')
+
+@onready var progress_bar: Node2D = ui.get_node('Progress Bar')
+@onready var progress_bar_bar: ProgressBar = progress_bar.get_node("ProgressBar")
+
+@onready var accuracy_text: Label = ui.get_node("Ratings/Accuracy Text")
+
+@onready var countdown_node: Node = ui.get_node('Countdown')
+
+@onready var ready_sprite: Sprite2D = countdown_node.get_node("Ready")
+@onready var set: Sprite2D = countdown_node.get_node("Set")
+@onready var go: Sprite2D = countdown_node.get_node("Go")
+
 var health: float = 1.0
-@onready var health_bar: Node2D = $"UI/Health Bar"
+@onready var health_bar: Node2D = ui.get_node('Health Bar')
+@onready var health_bar_bg: Sprite2D = health_bar.get_node("Bar/BG")
 
 var player_icon: Sprite2D
 var enemy_icon: Sprite2D
@@ -49,8 +67,6 @@ var enemy_icon: Sprite2D
 var counter: int = -1
 var counting: bool = false
 var in_cutscene: bool = false
-
-@onready var countdown_node: Node = $"UI/Countdown"
 
 var bpm_changes: Array = []
 
@@ -68,20 +84,6 @@ var ms_offsync_allowed: float = 50
 
 var player_strums: Node2D
 var enemy_strums: Node2D
-
-@onready var progress_bar: Node2D = $"UI/Progress Bar"
-@onready var progress_bar_bar: ProgressBar = progress_bar.get_node("ProgressBar")
-
-@onready var camera = $Camera
-@onready var ui: CanvasLayer = $UI
-
-@onready var accuracy_text: Label = ui.get_node("Ratings/Accuracy Text")
-
-@onready var ready_sprite: Sprite2D = countdown_node.get_node("Ready")
-@onready var set: Sprite2D = countdown_node.get_node("Set")
-@onready var go: Sprite2D = countdown_node.get_node("Go")
-
-@onready var health_bar_bg: Sprite2D = health_bar.get_node("Bar/BG")
 
 var events: Array = []
 var event_nodes: Dictionary = {}
@@ -568,9 +570,9 @@ var lerp_hud_offset: bool = false
 
 func position_hud(delta: float = 0.0) -> void:
 	if lerp_hud_offset:
-		ui.offset = lerp(ui.offset, Vector2(-640.0 * (ui.scale.x - 1), -360.0 * (ui.scale.y - 1)), delta * 4.0)
+		ui_layer.offset = lerp(ui_layer.offset, Vector2(-640.0 * (ui_layer.scale.x - 1), -360.0 * (ui_layer.scale.y - 1)), delta * 4.0)
 	else:
-		ui.offset = Vector2(-640.0 * (ui.scale.x - 1), -360.0 * (ui.scale.y - 1))
+		ui_layer.offset = Vector2(-640.0 * (ui_layer.scale.x - 1), -360.0 * (ui_layer.scale.y - 1))
 
 func _process(delta: float) -> void:
 	if camera_zooming:
@@ -582,12 +584,14 @@ func _process(delta: float) -> void:
 		if camera.zoom.x > 1.35:
 			camera.zoom = Vector2(1.35, 1.35)
 		
-		ui.scale = Vector2(Globals.glerp(ui.scale.x, default_hud_zoom, 0.05, delta),
-				Globals.glerp(ui.scale.y, default_hud_zoom, 0.05, delta))
+		ui_layer.scale = Vector2(Globals.glerp(ui_layer.scale.x, default_hud_zoom, 0.05, delta),
+				Globals.glerp(ui_layer.scale.y, default_hud_zoom, 0.05, delta))
 		position_hud(delta)
 	
-	if !in_cutscene: Conductor.songPosition += (delta * 1000.0) * Globals.song_multiplier
-	if Input.is_action_just_pressed("restart_song"): Scenes.switch_scene("Gameplay")
+	if not in_cutscene:
+		Conductor.songPosition += (delta * 1000.0) * Globals.song_multiplier
+	if Input.is_action_just_pressed("restart_song"):
+		Scenes.switch_scene("Gameplay")
 	
 	if counting:
 		var prev_counter: int = counter
@@ -789,8 +793,8 @@ func beat_hit(dumb = false):
 		if not counting:
 			if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
 				camera.zoom += Vector2(0.015, 0.015)
-				ui.scale += Vector2(0.02, 0.02)
-				ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
+				ui_layer.scale += Vector2(0.02, 0.02)
+				position_hud()
 	
 	var prevSection = curSection
 	
@@ -954,10 +958,11 @@ var numbers: Array = [
 var total_notes: int = 0
 var total_hit: float = 0.0
 
-@onready var numbers_obj: Node2D = get_node("UI/Ratings/Numbers")
-@onready var ratings_thing: Node2D = get_node("UI/Ratings")
+@onready var ratings_thing: Node2D = ui.get_node("Ratings")
+@onready var numbers_obj: Node2D = ratings_thing.get_node("Numbers")
 @onready var cool_rating: Sprite2D = ratings_thing.get_node("Rating")
-var tween: Tween
+
+var rating_tween: Tween
 
 # etterna judge 4 (old was LE haxe timings)
 const timings: Array = [22.5, 45.0, 90.0, 135.0] # [25.0, 50.0, 70.0, 100.0]
@@ -992,15 +997,15 @@ func popup_rating(strum_time: float) -> void:
 	numbers_obj.position.x = -42 + (-19 * (len(combo_str) - 1))
 	cool_rating.texture = rating_textures[rating]
 	
-	if tween != null:
-		tween.stop()
+	if is_instance_valid(rating_tween) and rating_tween.is_valid():
+		rating_tween.kill()
 	
 	ratings_thing.modulate = Color.WHITE
 	ratings_thing.scale = Vector2(1.1, 1.1)
 	
-	tween = create_tween().set_trans(Tween.TRANS_QUAD).set_parallel()
-	tween.tween_property(ratings_thing, 'modulate', Color.TRANSPARENT, 0.2).set_delay(Conductor.timeBetweenBeats * 0.001)
-	tween.tween_property(ratings_thing, 'scale', Vector2(1.0, 1.0), 0.1)
+	rating_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_parallel()
+	rating_tween.tween_property(ratings_thing, 'modulate', Color.TRANSPARENT, 0.2).set_delay(Conductor.timeBetweenBeats * 0.001)
+	rating_tween.tween_property(ratings_thing, 'scale', Vector2(1.0, 1.0), 0.1)
 	
 	score += scores[rating]
 	accuracy_text.text = '%s ms%s' % [Globals.format_float(ms_dif, 2), ' (BOT)' if bot else '']
@@ -1042,7 +1047,7 @@ func popup_rating(strum_time: float) -> void:
 	update_gameplay_text()
 	update_rating_text()
 
-@onready var rating_text: Label = $"UI/Gameplay Text/Ratings"
+@onready var rating_text: Label = ui.get_node('Gameplay Text/Ratings')
 
 func update_rating_text() -> void:
 	if not side_ratings_enabled:

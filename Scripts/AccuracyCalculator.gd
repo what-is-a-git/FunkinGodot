@@ -1,3 +1,4 @@
+@icon('res://Assets/Images/Godot/Icons/accuracy_calculator.png')
 class_name AccuracyCalculator extends Node
 
 

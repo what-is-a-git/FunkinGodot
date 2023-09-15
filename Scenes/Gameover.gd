@@ -1,4 +1,5 @@
-extends Node2D
+@icon('res://Assets/Images/Godot/Icons/gameover.svg')
+class_name Gameover extends Node2D
 
 var death_character: Node2D
 var pressed_enter: bool = false

@@ -1,4 +1,5 @@
-extends Node2D
+@icon('res://Assets/Images/Godot/Icons/funkin_progress_bar.png')
+class_name FunkinProgressBar extends Node2D
 
 @onready var bar: ProgressBar = $ProgressBar
 @onready var text: Label = $Text

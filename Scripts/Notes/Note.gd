@@ -16,7 +16,7 @@ var og_sustain_length: float = 0.0
 
 var time_held: float = 0.0
 
-@onready var game: Node2D = $"../../../"
+@onready var game: Gameplay = get_tree().current_scene
 
 @onready var line: Line2D = $Line2D
 
@@ -59,8 +59,8 @@ var is_alt: bool = false
 
 # other shit
 
-@onready var player_strums: Node2D = $'../../Player Strums'
-@onready var enemy_strums: Node2D = $'../../Enemy Strums'
+@onready var player_strums := game.player_strums
+@onready var enemy_strums := game.enemy_strums
 
 @onready var voices: AudioStreamPlayer = AudioHandler.get_node('Voices')
 
