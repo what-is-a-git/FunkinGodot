@@ -12,11 +12,11 @@ func open_option():
 	AudioHandler.stop_audio("Title Music")
 	
 	if scene == "Charter":
-		Globals.songName = "test"
-		Globals.songDifficulty = "normal"
+		Globals.song_name = "test"
+		Globals.song_difficulty = "normal"
 		Globals.freeplay = true
 		
-		var file := FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+		var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 		
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())
@@ -35,10 +35,10 @@ func open_option():
 		
 		inst.stream = null
 	
-		var song_path = "res://Assets/Songs/" + Globals.songName.to_lower() + "/"
+		var song_path = "res://Assets/Songs/" + Globals.song_name.to_lower() + "/"
 		
-		if ResourceLoader.exists(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg"):
-			inst.stream = load(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg")
+		if ResourceLoader.exists(song_path + "Inst-" + Globals.song_difficulty.to_lower() + ".ogg"):
+			inst.stream = load(song_path + "Inst-" + Globals.song_difficulty.to_lower() + ".ogg")
 		else:
 			inst.stream = load(song_path + "Inst.ogg")
 		
@@ -50,8 +50,8 @@ func open_option():
 			
 			voices.stream = null
 			
-			if ResourceLoader.exists(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg"):
-				voices.stream = load(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg")
+			if ResourceLoader.exists(song_path + "Voices-" + Globals.song_difficulty.to_lower() + ".ogg"):
+				voices.stream = load(song_path + "Voices-" + Globals.song_difficulty.to_lower() + ".ogg")
 			else:
 				voices.stream = load(song_path + "Voices.ogg")
 			

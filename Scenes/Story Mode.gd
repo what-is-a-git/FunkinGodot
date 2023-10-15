@@ -141,18 +141,18 @@ func _process(_delta):
 		right_arrow.play("arrow")
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		Globals.songName = weeks_node.get_children()[selected].songs[0][0]
-		Globals.songDifficulty = difficulties[selected_difficulty].to_lower()
+		Globals.song_name = weeks_node.get_children()[selected].songs[0][0]
+		Globals.song_difficulty = difficulties[selected_difficulty].to_lower()
 		Globals.freeplay = false
 		
-		Globals.weekSongs = []
+		Globals.week_songs = []
 		
 		for song in weeks_node.get_children()[selected].songs:
-			Globals.weekSongs.append(song[0])
+			Globals.week_songs.append(song[0])
 		
-		Globals.weekSongs.erase(Globals.songName)
+		Globals.week_songs.erase(Globals.song_name)
 		
-		var file: FileAccess = FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+		var file: FileAccess = FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 
 		if file.get_as_text() != null:
 			var test_json_conv = JSON.new()

@@ -7,7 +7,7 @@ class_name FunkinProgressBar extends Node2D
 @onready var inst: AudioStreamPlayer = AudioHandler.get_node('Inst')
 
 @onready var song: String = Globals.song.song
-@onready var difficulty: String = Globals.songDifficulty.to_upper()
+@onready var difficulty: String = Globals.song_difficulty.to_upper()
 
 @onready var bot: bool = Settings.get_data('bot')
 

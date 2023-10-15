@@ -11,11 +11,14 @@ class_name Strum extends Node2D
 @onready var opponent_note_glow: bool = Settings.get_data("opponent_note_glow")
 @onready var bot: bool = Settings.get_data("bot")
 
+var animation: String
+
 func _ready() -> void:
 	play_animation("static")
 
 func play_animation(anim, force = true):
 	if force or animated_sprite.frame == animated_sprite.frames.get_frame_count(animated_sprite.animation):
+		animation = anim
 		animated_sprite.stop()
 		
 		var funny = direction

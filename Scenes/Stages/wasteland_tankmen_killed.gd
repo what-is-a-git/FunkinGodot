@@ -5,7 +5,7 @@ extends Node2D
 var animation_notes: Array = []
 
 func _ready() -> void:
-	if Globals.songName.to_lower() != "stress":
+	if Globals.song_name.to_lower() != "stress":
 		queue_free()
 	else:
 		randomize()

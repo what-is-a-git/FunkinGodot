@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://br7iuxb1x01fb"
-path="res://.godot/imported/bottomBop.png-08cde7d822eb4592025e02b01f7c6d9a.ctex"
+path.bptc="res://.godot/imported/bottomBop.png-08cde7d822eb4592025e02b01f7c6d9a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/mall/bottomBop.png"
-dest_files=["res://.godot/imported/bottomBop.png-08cde7d822eb4592025e02b01f7c6d9a.ctex"]
+dest_files=["res://.godot/imported/bottomBop.png-08cde7d822eb4592025e02b01f7c6d9a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

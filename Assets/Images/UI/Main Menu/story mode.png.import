@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8t7jyiirh3gn"
-path="res://.godot/imported/story mode.png-a7fd01d6fa909680ece417e89c15498e.ctex"
+path.bptc="res://.godot/imported/story mode.png-a7fd01d6fa909680ece417e89c15498e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Main Menu/story mode.png"
-dest_files=["res://.godot/imported/story mode.png-a7fd01d6fa909680ece417e89c15498e.ctex"]
+dest_files=["res://.godot/imported/story mode.png-a7fd01d6fa909680ece417e89c15498e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

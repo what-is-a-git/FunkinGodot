@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dw3hu21ys8tna"
-path="res://.godot/imported/Stress Cutscene Part 6.png-66e9d5a156519c8e5f51ac1cfb3d1adb.ctex"
+path.bptc="res://.godot/imported/Stress Cutscene Part 6.png-66e9d5a156519c8e5f51ac1cfb3d1adb.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Cutscenes/Stress/Stress Cutscene Part 6.png"
-dest_files=["res://.godot/imported/Stress Cutscene Part 6.png-66e9d5a156519c8e5f51ac1cfb3d1adb.ctex"]
+dest_files=["res://.godot/imported/Stress Cutscene Part 6.png-66e9d5a156519c8e5f51ac1cfb3d1adb.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

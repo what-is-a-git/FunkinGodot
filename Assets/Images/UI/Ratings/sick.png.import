@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yunin8widpsj"
-path="res://.godot/imported/sick.png-7127b4c7f064eef065d772aafcff87be.ctex"
+path.bptc="res://.godot/imported/sick.png-7127b4c7f064eef065d772aafcff87be.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Ratings/sick.png"
-dest_files=["res://.godot/imported/sick.png-7127b4c7f064eef065d772aafcff87be.ctex"]
+dest_files=["res://.godot/imported/sick.png-7127b4c7f064eef065d772aafcff87be.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jkeafk24c81u"
-path="res://.godot/imported/upperBop.png-9c84a515beb6826b396c704951ef848c.ctex"
+path.bptc="res://.godot/imported/upperBop.png-9c84a515beb6826b396c704951ef848c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/mall/upperBop.png"
-dest_files=["res://.godot/imported/upperBop.png-9c84a515beb6826b396c704951ef848c.ctex"]
+dest_files=["res://.godot/imported/upperBop.png-9c84a515beb6826b396c704951ef848c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

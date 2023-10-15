@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cs7f6ate358p8"
-path="res://.godot/imported/combo.png-f78ce6bccb776b9b1a2bc93a01b550a4.ctex"
+path.bptc="res://.godot/imported/combo.png-f78ce6bccb776b9b1a2bc93a01b550a4.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Ratings/combo.png"
-dest_files=["res://.godot/imported/combo.png-f78ce6bccb776b9b1a2bc93a01b550a4.ctex"]
+dest_files=["res://.godot/imported/combo.png-f78ce6bccb776b9b1a2bc93a01b550a4.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

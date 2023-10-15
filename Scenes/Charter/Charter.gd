@@ -32,7 +32,7 @@ func _init():
 	voices.pitch_scale = 1
 	
 	if Globals.song == null:
-		var file := FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+		var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c03idr3lgynhx"
-path="res://.godot/imported/christmasWall.png-8fe756a036a3352596a962f6500c6d6c.ctex"
+path.bptc="res://.godot/imported/christmasWall.png-8fe756a036a3352596a962f6500c6d6c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/mall/christmasWall.png"
-dest_files=["res://.godot/imported/christmasWall.png-8fe756a036a3352596a962f6500c6d6c.ctex"]
+dest_files=["res://.godot/imported/christmasWall.png-8fe756a036a3352596a962f6500c6d6c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

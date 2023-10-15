@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc18xk6y2msk0"
-path="res://.godot/imported/christmasTree.png-f77710b38d8e68c57d9da60a597d0ea9.ctex"
+path.bptc="res://.godot/imported/christmasTree.png-f77710b38d8e68c57d9da60a597d0ea9.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/mall/christmasTree.png"
-dest_files=["res://.godot/imported/christmasTree.png-f77710b38d8e68c57d9da60a597d0ea9.ctex"]
+dest_files=["res://.godot/imported/christmasTree.png-f77710b38d8e68c57d9da60a597d0ea9.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

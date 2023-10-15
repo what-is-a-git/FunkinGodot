@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg4lneseywndl"
-path="res://.godot/imported/week5.png-36fef7e8526a2eae1458efe7a8c0df13.ctex"
+path.bptc="res://.godot/imported/week5.png-36fef7e8526a2eae1458efe7a8c0df13.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Story Mode/Weeks/week5.png"
-dest_files=["res://.godot/imported/week5.png-36fef7e8526a2eae1458efe7a8c0df13.ctex"]
+dest_files=["res://.godot/imported/week5.png-36fef7e8526a2eae1458efe7a8c0df13.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

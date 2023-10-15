@@ -23,10 +23,7 @@ func _ready() -> void:
 	
 	mod.color.a = 0
 	
-	music.play()
-	
 	camera.position = dad.position + dad.camOffset
-	ugh_1.play()
 	
 	dad.visible = false
 	
@@ -34,6 +31,9 @@ func _ready() -> void:
 	tank_1.frame = 0
 	tank_1.position = dad.position
 	tank_1.play("cutscene")
+	
+	ugh_1.play()
+	music.play()
 	
 	await get_tree().create_timer(ugh_1.stream.get_length()).timeout
 	

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://85xa4ut6syka"
-path="res://.godot/imported/street.png-a733f872fc30d63dc9af81ccfb80178d.ctex"
+path.bptc="res://.godot/imported/street.png-a733f872fc30d63dc9af81ccfb80178d.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/philly/street.png"
-dest_files=["res://.godot/imported/street.png-a733f872fc30d63dc9af81ccfb80178d.ctex"]
+dest_files=["res://.godot/imported/street.png-a733f872fc30d63dc9af81ccfb80178d.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

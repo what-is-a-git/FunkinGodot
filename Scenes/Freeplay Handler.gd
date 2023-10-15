@@ -137,13 +137,13 @@ func _process(delta: float) -> void:
 		selected_song = true
 		AudioHandler.play_audio('Confirm Sound')
 		
-		Globals.songName = songs[selected]
-		Globals.songDifficulty = 'hard' if difficulties.is_empty() else \
+		Globals.song_name = songs[selected]
+		Globals.song_difficulty = 'hard' if difficulties.is_empty() else \
 				difficulties[selected_difficulty].to_lower()
 		
 		Globals.freeplay = true
 		
-		var file := FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+		var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 		
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())
@@ -262,12 +262,12 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 		AudioHandler.stop_audio('Title Music')
 		AudioHandler.play_audio('Inst')
 		
-		Globals.songName = songs[selected]
+		Globals.song_name = songs[selected]
 		
-		Globals.songDifficulty = 'hard' if difficulties.is_empty() else \
+		Globals.song_difficulty = 'hard' if difficulties.is_empty() else \
 				difficulties[selected_difficulty].to_lower()
 		
-		var file := FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+		var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 		
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(file.get_as_text())

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bujntr4aux3f6"
-path="res://.godot/imported/halloween_bg.png-0f95914f8355c4ed9562525d2d4bff69.ctex"
+path.bptc="res://.godot/imported/halloween_bg.png-0f95914f8355c4ed9562525d2d4bff69.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/spooky/halloween_bg.png"
-dest_files=["res://.godot/imported/halloween_bg.png-0f95914f8355c4ed9562525d2d4bff69.ctex"]
+dest_files=["res://.godot/imported/halloween_bg.png-0f95914f8355c4ed9562525d2d4bff69.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -174,7 +174,7 @@ vertical_alignment = 1
 
 [node name="Health Bar" type="Node2D" parent="UI/HUD"]
 z_index = 2
-position = Vector2(329, 56)
+position = Vector2(329, 64)
 script = ExtResource("6")
 
 [node name="Bar" type="Node2D" parent="UI/HUD/Health Bar"]
@@ -196,13 +196,11 @@ value = 1.0
 show_percentage = false
 
 [node name="Player" type="Sprite2D" parent="UI/HUD/Health Bar"]
-position = Vector2(375, 8)
 texture = ExtResource("2")
 flip_h = true
 hframes = 3
 
 [node name="Opponent" type="Sprite2D" parent="UI/HUD/Health Bar"]
-position = Vector2(250, 8)
 texture = ExtResource("3")
 hframes = 3
 

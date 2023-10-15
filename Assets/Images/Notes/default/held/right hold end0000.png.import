@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2wn46joinuii"
-path="res://.godot/imported/right hold end0000.png-91a1c517fbb8b8a0f659f4821df2b97e.ctex"
+path.bptc="res://.godot/imported/right hold end0000.png-91a1c517fbb8b8a0f659f4821df2b97e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Notes/default/held/right hold end0000.png"
-dest_files=["res://.godot/imported/right hold end0000.png-91a1c517fbb8b8a0f659f4821df2b97e.ctex"]
+dest_files=["res://.godot/imported/right hold end0000.png-91a1c517fbb8b8a0f659f4821df2b97e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

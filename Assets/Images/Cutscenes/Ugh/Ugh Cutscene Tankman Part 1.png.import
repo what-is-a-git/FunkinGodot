@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dppo7v6gag4vb"
-path="res://.godot/imported/Ugh Cutscene Tankman Part 1.png-25614af8dcfe97cbd2555eac925512ab.ctex"
+path.bptc="res://.godot/imported/Ugh Cutscene Tankman Part 1.png-25614af8dcfe97cbd2555eac925512ab.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Cutscenes/Ugh/Ugh Cutscene Tankman Part 1.png"
-dest_files=["res://.godot/imported/Ugh Cutscene Tankman Part 1.png-25614af8dcfe97cbd2555eac925512ab.ctex"]
+dest_files=["res://.godot/imported/Ugh Cutscene Tankman Part 1.png-25614af8dcfe97cbd2555eac925512ab.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

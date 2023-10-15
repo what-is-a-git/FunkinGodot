@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kfaf4oc3vtes"
-path="res://.godot/imported/up hold end0000.png-eca114a3f87e69758c54fe95593feaf2.ctex"
+path.bptc="res://.godot/imported/up hold end0000.png-eca114a3f87e69758c54fe95593feaf2.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Notes/default/held/up hold end0000.png"
-dest_files=["res://.godot/imported/up hold end0000.png-eca114a3f87e69758c54fe95593feaf2.ctex"]
+dest_files=["res://.godot/imported/up hold end0000.png-eca114a3f87e69758c54fe95593feaf2.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

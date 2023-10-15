@@ -16,14 +16,14 @@ extends Node2D
 
 @onready var blammed_shader = load("res://Assets/Shaders/Blammed Character Shader.tres")
 
-@onready var player_icon = game.get_node("UI/Health Bar/Player")
-@onready var enemy_icon = game.get_node("UI/Health Bar/Opponent")
+@onready var player_icon = game.ui.get_node("Health Bar/Player")
+@onready var enemy_icon = game.ui.get_node("Health Bar/Opponent")
 
-@onready var bar = game.get_node("UI/Health Bar/Bar/ProgressBar")
-@onready var bar_outline = game.get_node("UI/Health Bar/Bar/BG")
+@onready var bar = game.ui.get_node("Health Bar/Bar/ProgressBar")
+@onready var bar_outline = game.ui.get_node("Health Bar/Bar/BG")
 
-@onready var progress_bar = game.get_node("UI/Progress Bar/ProgressBar")
-@onready var progress_bar_outline = game.get_node("UI/Progress Bar/BG")
+@onready var progress_bar = game.ui.get_node("Progress Bar/ProgressBar")
+@onready var progress_bar_outline = game.ui.get_node("Progress Bar/BG")
 
 @onready var world_environment: WorldEnvironment = $'../../../WorldEnvironment'
 
@@ -33,7 +33,7 @@ var tween: Tween
 func _ready() -> void:
 	world_environment.environment.glow_enabled = false
 	
-	if Globals.songName.to_lower() != "blammed":
+	if Globals.song_name.to_lower() != "blammed":
 		queue_free()
 	else:
 		set_particles_emitting(false)
@@ -134,7 +134,7 @@ func beat_hit() -> void:
 			game.default_camera_zoom = 1.15
 			game.camera.zoom += Vector2(0.1, 0.1)
 			
-			game.ui.scale += Vector2(0.05, 0.05)
+			game.ui_layer.scale += Vector2(0.05, 0.05)
 			game.position_hud()
 			
 			set_particle_color(get_light_color())

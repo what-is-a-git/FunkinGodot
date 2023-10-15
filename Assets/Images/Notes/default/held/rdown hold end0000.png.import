@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ch4bc05sxnsx7"
-path="res://.godot/imported/rdown hold end0000.png-22f676635263b5615425e355ed6bdd95.ctex"
+path.bptc="res://.godot/imported/rdown hold end0000.png-22f676635263b5615425e355ed6bdd95.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Notes/default/held/rdown hold end0000.png"
-dest_files=["res://.godot/imported/rdown hold end0000.png-22f676635263b5615425e355ed6bdd95.ctex"]
+dest_files=["res://.godot/imported/rdown hold end0000.png-22f676635263b5615425e355ed6bdd95.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

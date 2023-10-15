@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cagmirudlfjtd"
-path="res://.godot/imported/menuDesat.png-7266783c874bd0d8e74d326b1bac80aa.ctex"
+path.bptc="res://.godot/imported/menuDesat.png-7266783c874bd0d8e74d326b1bac80aa.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/menuDesat.png"
-dest_files=["res://.godot/imported/menuDesat.png-7266783c874bd0d8e74d326b1bac80aa.ctex"]
+dest_files=["res://.godot/imported/menuDesat.png-7266783c874bd0d8e74d326b1bac80aa.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

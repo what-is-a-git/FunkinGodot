@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn5r2fv7e1uwl"
-path="res://.godot/imported/santa.png-3e71b649b6186de8712089287a9f00d2.ctex"
+path.bptc="res://.godot/imported/santa.png-3e71b649b6186de8712089287a9f00d2.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/mall/santa.png"
-dest_files=["res://.godot/imported/santa.png-3e71b649b6186de8712089287a9f00d2.ctex"]
+dest_files=["res://.godot/imported/santa.png-3e71b649b6186de8712089287a9f00d2.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

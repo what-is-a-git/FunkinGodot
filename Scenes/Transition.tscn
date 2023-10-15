@@ -1,67 +1,82 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://u1l3rvk7l5re"]
 
-[ext_resource path="res://Assets/Images/transition.png" type="Texture2D" id=1]
-[ext_resource path="res://Scenes/Transition.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://Scenes/Transition.gd" id="2"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Gradient" id="Gradient_if64h"]
+offsets = PackedFloat32Array(0, 0.3, 0.5, 0.7, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mmipm"]
+gradient = SubResource("Gradient_if64h")
+width = 1080
+
+[sub_resource type="Animation" id="1"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 640, -800 ) ]
+"values": [Vector2(640, -800)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "in"
 length = 0.5
 step = 0.01
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.5 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 640, -800 ), Vector2( 640, 360 ) ]
+"values": [Vector2(640, -800), Vector2(640, 360)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "out"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.5 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 640, 360 ), Vector2( 640, 1530 ) ]
+"values": [Vector2(640, 360), Vector2(640, 1530)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6wdqe"]
+_data = {
+"RESET": SubResource("1"),
+"in": SubResource("2"),
+"out": SubResource("3")
 }
 
 [node name="Transition" type="CanvasLayer"]
 process_mode = 3
 layer = 90
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2( 640, -800 )
-scale = Vector2( 1.499, 1.5 )
-texture = ExtResource( 1 )
+position = Vector2(640, -800)
+rotation = 1.5708
+scale = Vector2(1.5, 1280)
+texture = SubResource("GradientTexture1D_mmipm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 1 )
-anims/in = SubResource( 2 )
-anims/out = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_6wdqe")
+}

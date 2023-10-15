@@ -1,5 +1,6 @@
 class_name Strumline extends Node2D
 
+
 @export var is_player: bool = true
 
 var key_count: int = Globals.key_count
@@ -10,9 +11,15 @@ var key_count: int = Globals.key_count
 
 @onready var player_notes = $"../Player Notes"
 @onready var bot: bool = Settings.get_data("bot")
-@onready var voices: AudioStreamPlayer = AudioHandler.get_node("Voices")
 
 var is_singing_player: bool = true
+
+var strums: Array[Node]
+
+
+func _ready() -> void:
+	strums = get_children()
+
 
 func _process(delta: float) -> void:
 	if bot and is_player and not disabled:
@@ -21,7 +28,7 @@ func _process(delta: float) -> void:
 				continue
 			
 			if note.should_hit:
-				var strum = note.strum
+				var strum: Strum = note.strum
 				
 				if game.bf and game.bf.play_singing_animations and note.play_hit_animations:
 					game.bf.timer = 0.0
@@ -55,30 +62,29 @@ func _process(delta: float) -> void:
 				is_singing_player = note.is_singing_player
 				strum.play_animation("static")
 				strum.play_animation("confirm")
-				
-				voices.volume_db = 0
 			else:
 				note.queue_free()
 	elif is_player and not disabled:
 		for index in key_count:
-			var input_string: String = "gameplay_" + str(index)
-			var strum: Node2D = get_child(index)
+			var input_string: String = 'gameplay_%s' % index
 			
 			if game.bf and is_singing_player and Input.is_action_pressed(input_string):
 				game.bf.timer = 0.0
-			if not Input.is_action_pressed(input_string):
-				strum.play_animation("static")
+			if not (Input.is_action_pressed(input_string) or strums[index].animation == 'static'):
+				strums[index].play_animation('static')
 				
 				for note in player_notes.get_children():
-					if note.note_data == index:
-						if note.is_sustain and note.sustain_length > Conductor.timeBetweenSteps / 3:
-							note.being_pressed = false
+					if note.note_data != index:
+						break
+					if note.is_sustain and note.sustain_length > Conductor.timeBetweenSteps * 0.333:
+						note.being_pressed = false
+
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if bot or disabled or (not is_player):
 		return
 
-	var can_hit:Array = []
+	var can_hit: Array = []
 
 	for note in player_notes.get_children():
 		if Conductor.songPosition < -Conductor.safeZoneOffset:
@@ -88,8 +94,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				can_hit.append(note)
 
 	for index in key_count:
-		var input_string:String = "gameplay_" + str(index)
-		var strum = get_child(index)
+		var input_string: String = "gameplay_%s" % index
+		var strum: Strum = strums[index]
 		
 		if Input.is_action_just_pressed(input_string):
 			strum.play_animation("press")
@@ -107,15 +113,15 @@ func _unhandled_key_input(event: InputEvent) -> void:
 					hit = note
 			
 			if hit != null:
-				if not 'should_hit' in hit:
-					hit.should_hit = true
+				hit.should_hit = true
 				
-				if hit.character != 0:
-					if game.bf and game.bf.play_singing_animations and hit.play_hit_animations:
-						game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
-				else:
-					if game.bf and game.bf.play_singing_animations and hit.play_hit_animations:
-						game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true)
+				if game.bf:
+					if hit.character != 0:
+						if game.bf.play_singing_animations and hit.play_hit_animations:
+							game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+					else:
+						if game.bf.play_singing_animations and hit.play_hit_animations:
+							game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true)
 				
 				if hit.should_hit:
 					game.combo += 1
@@ -152,7 +158,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 					game.update_rating_text()
 				
 				is_singing_player = hit.is_singing_player
-				voices.volume_db = 0
 			
 			for note in can_hit:
 				if note.note_data == index:

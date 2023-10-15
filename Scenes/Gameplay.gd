@@ -28,7 +28,7 @@ var enemy_notes: Node2D
 var player_notes: Node2D
 
 var note_data_array: Array = []
-var preloaded_notes: Array = []
+var preloaded_notes: Array[Note] = []
 
 @onready var preload_notes: bool = Settings.get_data('preload_notes')
 @onready var side_ratings_enabled: bool = Settings.get_data('side_ratings_enabled')
@@ -203,8 +203,8 @@ func _ready() -> void:
 	template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
 	template_notes["default"].get_node("Line2D").texture_filter = skin_data.texture_filter
 	
-	for texture in Globals.held_sprites:
-		Globals.held_sprites[texture] = [
+	for texture in Note.held_sprites:
+		Note.held_sprites[texture] = [
 			load(skin_data.held_note_path + "%s hold0000.png" % texture),
 			load(skin_data.held_note_path + "%s hold end0000.png" % texture)
 		]
@@ -410,7 +410,7 @@ func _ready() -> void:
 		if song_data.has("cutscene") and ResourceLoader.exists("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn"):
 			camera.position_smoothing_enabled = true
 			
-			var cutscene = load("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn").instantiate()
+			var cutscene: Cutscene = load("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn").instantiate()
 			add_child(cutscene)
 			
 			cutscene.connect("finished", Callable(self, "start_countdown"))
@@ -428,9 +428,9 @@ func _ready() -> void:
 	var event_file: FileAccess
 	
 	if not Settings.get_data("ultra_performance"):
-		event_file = FileAccess.open(Paths.base_song_path(Globals.songName) + "events.json", FileAccess.READ)
+		event_file = FileAccess.open(Paths.base_song_path(Globals.song_name) + "events.json", FileAccess.READ)
 		
-		if FileAccess.file_exists(Paths.base_song_path(Globals.songName) + "events.json"):
+		if FileAccess.file_exists(Paths.base_song_path(Globals.song_name) + "events.json"):
 			var test_json_conv = JSON.new()
 			test_json_conv.parse(event_file.get_as_text())
 			var event_data = test_json_conv.get_data().song
@@ -463,7 +463,7 @@ func _ready() -> void:
 			Globals.emit_signal("event_setup", event)
 			event_nodes[event[0]].setup_event(event[2], event[3])
 	
-	var modcharts: DirAccess = DirAccess.open(Paths.base_song_path(Globals.songName))
+	var modcharts: DirAccess = DirAccess.open(Paths.base_song_path(Globals.song_name))
 	modcharts.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	
 	while true:
@@ -472,7 +472,7 @@ func _ready() -> void:
 		if file == "":
 			break
 		elif !file.begins_with(".") and file.ends_with(".tscn"):
-			var scene = load(Paths.base_song_path(Globals.songName) + file)
+			var scene = load(Paths.base_song_path(Globals.song_name) + file)
 			
 			if is_instance_valid(scene):
 				var modchart = scene.instantiate()
@@ -482,11 +482,13 @@ func _ready() -> void:
 		for note in note_data_array:
 			var is_player_note: bool = true
 			
-			if note[3] and int(note[1]) % (key_count * 2) >= key_count: is_player_note = false
-			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1: is_player_note = false
+			if note[3] and int(note[1]) % (key_count * 2) >= key_count:
+				is_player_note = false
+			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
+				is_player_note = false
 			
-			var new_note = template_notes[note[5]].duplicate()
-			new_note.strum_time = float(note[0])
+			var new_note: Note = template_notes[note[5]].duplicate()
+			new_note.strum_time = note[0]
 			new_note.note_data = int(note[1]) % key_count
 			new_note.direction = player_strums.get_child(new_note.note_data).direction
 			new_note.visible = true
@@ -494,21 +496,20 @@ func _ready() -> void:
 			new_note.strum_y = player_strums.get_child(new_note.note_data).global_position.y
 			
 			new_note.is_alt = note[6]
-			if note.size() >= 5: new_note.character = note[4]
+			
+			if note.size() >= 5:
+				new_note.character = note[4]
 			
 			if float(note[2]) >= Conductor.timeBetweenSteps:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
 				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_animstr(new_note.direction)][0]
-				
-			if is_player_note: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
-			else: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
 			
 			new_note.is_player = is_player_note
 			new_note.position.y = -5000.0
 			
-			note_data_array.remove_at(note_data_array.find(note))
+			# note_data_array.remove_at(note_data_array.find(note))
 			preloaded_notes.push_back(new_note)
 		
 		preloaded_notes.sort_custom(preloaded_sort)
@@ -545,7 +546,7 @@ func _physics_process(_delta: float) -> void:
 		voices.seek(Conductor.songPosition / 1000.0)
 	
 	if voices.stream and inst.get_playback_position() * 1000.0 > voices.stream.get_length() * 1000.0:
-		voices.volume_db = -80
+		voices.volume_db = -80.0
 	
 	if not threaded_note_loading:
 		load_potential_notes()
@@ -651,31 +652,31 @@ func _process(delta: float) -> void:
 	if Conductor.songPosition > inst.stream.get_length() * 1000.0 and can_leave_game:
 		can_leave_game = false
 		
-		voices.volume_db = -80
-		inst.volume_db = -80
+		voices.volume_db = -80.0
+		inst.volume_db = -80.0
 		
 		# prevents some bs progess bar issues lol
 		progress_bar.visible = false
 		
 		if Globals.song_multiplier >= 1.0 and not Settings.get_data("bot"):
-			if Scores.get_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower()) < score:
-				Scores.set_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower(), score)
+			if Scores.get_song_score(Globals.song_name.to_lower(), Globals.song_difficulty.to_lower()) < score:
+				Scores.set_song_score(Globals.song_name.to_lower(), Globals.song_difficulty.to_lower(), score)
 		
 		if Globals.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
-			if len(Globals.weekSongs) < 1:
+			if len(Globals.week_songs) < 1:
 				Scenes.switch_scene("Story Mode")
 			else:
-				Globals.songName = Globals.weekSongs[0]
+				Globals.song_name = Globals.week_songs[0]
 				
-				var file := FileAccess.open(Paths.song_path(Globals.songName, Globals.songDifficulty), FileAccess.READ)
+				var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 				
 				var test_json_conv = JSON.new()
 				test_json_conv.parse(file.get_as_text())
 				Globals.song = test_json_conv.get_data()["song"]
 				
-				Globals.weekSongs.erase(Globals.weekSongs[0])
+				Globals.week_songs.erase(Globals.week_songs[0])
 				
 				Scenes.switch_scene("Gameplay", true)
 	
@@ -715,8 +716,6 @@ func _process(delta: float) -> void:
 			if note.opponent_note_glow:
 				strum.play_animation("static")
 				strum.play_animation("confirm")
-			
-			voices.volume_db = 0
 			
 			Globals.emit_signal("enemy_note_hit", note, note.note_data, note.name, note.character)
 			Globals.emit_signal("note_hit", note, note.note_data, note.name, note.character, false)
@@ -761,7 +760,6 @@ func _process(delta: float) -> void:
 					combo = 0
 					
 					accuracy_calculator.record_hit(Conductor.safeZoneOffset)
-					voices.volume_db = -500
 					update_gameplay_text()
 					
 					if miss_sounds: AudioHandler.play_audio("Misses/" + str(round(randf_range(1,3))))
@@ -1087,7 +1085,24 @@ func event_sort(a: Array, b: Array) -> bool:
 func preloaded_sort(a: Note, b: Note) -> bool:
 	return a.strum_time < b.strum_time
 
+var stupid_preload_index_thing: int = 0
+
 func load_potential_notes() -> void:
+	if preloaded_notes.size() > 0:
+		while preloaded_notes.size() >= stupid_preload_index_thing + 1 and preloaded_notes[stupid_preload_index_thing].strum_time < Conductor.songPosition + (2500.0 * Globals.song_multiplier):
+			var note: Note = preloaded_notes[stupid_preload_index_thing]
+			
+			if note.is_player:
+				player_notes.add_child(note)
+			else:
+				enemy_notes.add_child(note)
+			
+			# preloaded_notes.remove_at(preloaded_notes.find(note))
+			spawn_note.emit(note)
+			stupid_preload_index_thing += 1
+		
+		return
+	
 	for note in note_data_array:
 		if float(note[0]) > Conductor.songPosition + (2500.0 * Globals.song_multiplier):
 			break
@@ -1138,23 +1153,23 @@ func load_potential_notes() -> void:
 			spawn_note.emit(new_note)
 		else:
 			break
-	
-	for note in preloaded_notes:
-		if float(note.strum_time) < Conductor.songPosition + (2500.0 * Globals.song_multiplier):
-			if note.is_player:
-				player_notes.add_child(note)
-			else:
-				enemy_notes.add_child(note)
-			
-			preloaded_notes.remove_at(preloaded_notes.find(note))
-			spawn_note.emit(note)
-		else:
-			break
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
 	
-	if Input.is_action_just_pressed('ui_confirm'):
+	if Input.is_action_just_pressed('ui_confirm') and not in_cutscene:
 		PauseMenu.open()
+
+
+# fix memory leak cuz i guess this doesn't happen automatically
+# /shrug
+func _exit_tree() -> void:
+	for note in preloaded_notes:
+		if not is_instance_valid(note):
+			continue
+		
+		note.free()
+	
+	preloaded_notes.clear()

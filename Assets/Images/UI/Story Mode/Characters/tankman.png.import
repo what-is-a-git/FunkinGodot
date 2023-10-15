@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccgvy2n4e5jg5"
-path="res://.godot/imported/tankman.png-b20d9ea29273b1b7e0c31fd01204d8c9.ctex"
+path.bptc="res://.godot/imported/tankman.png-b20d9ea29273b1b7e0c31fd01204d8c9.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Story Mode/Characters/tankman.png"
-dest_files=["res://.godot/imported/tankman.png-b20d9ea29273b1b7e0c31fd01204d8c9.ctex"]
+dest_files=["res://.godot/imported/tankman.png-b20d9ea29273b1b7e0c31fd01204d8c9.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

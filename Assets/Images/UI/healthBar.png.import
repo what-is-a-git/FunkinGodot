@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5odsoj0320qe"
-path="res://.godot/imported/healthBar.png-193770fed07500aa243126e6373329bc.ctex"
+path.bptc="res://.godot/imported/healthBar.png-193770fed07500aa243126e6373329bc.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/healthBar.png"
-dest_files=["res://.godot/imported/healthBar.png-193770fed07500aa243126e6373329bc.ctex"]
+dest_files=["res://.godot/imported/healthBar.png-193770fed07500aa243126e6373329bc.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

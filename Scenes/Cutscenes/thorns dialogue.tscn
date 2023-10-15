@@ -1,23 +1,36 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://bdhrl2m2cqrro"]
 
-[ext_resource path="res://Scenes/Cutscenes/senpai dialogue.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Cutscenes/Week 6/dialogueBox-evil.res" type="SpriteFrames" id=2]
-[ext_resource path="res://Assets/Images/Cutscenes/Week 6/bf_Port.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Images/Cutscenes/Week 6/spirit_Port.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/Cutscenes/Week 6/hand_textbox.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Fonts/pixel.otf" type="FontFile" id=6]
-[ext_resource path="res://Assets/Sounds/Cutscenes/Week 6/clickText.ogg" type="AudioStream" id=7]
-[ext_resource path="res://Assets/Sounds/Cutscenes/Week 6/pixelText.ogg" type="AudioStream" id=8]
-[ext_resource path="res://Assets/Sounds/Cutscenes/Week 6/LunchboxScary.ogg" type="AudioStream" id=9]
+[ext_resource type="Script" path="res://Scenes/Cutscenes/senpai dialogue.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Cutscenes/Week 6/dialogueBox-evil.res" id="2"]
+[ext_resource type="Texture2D" uid="uid://d2yjl2b8i3j0c" path="res://Assets/Images/Cutscenes/Week 6/bf_Port.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://vsrsukk2mgx" path="res://Assets/Images/Cutscenes/Week 6/spirit_Port.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bql1dcy5lkldd" path="res://Assets/Images/Cutscenes/Week 6/hand_textbox.png" id="5"]
+[ext_resource type="FontFile" uid="uid://cj6jayvuf3d8s" path="res://Assets/Fonts/pixel.otf" id="6"]
+[ext_resource type="AudioStream" uid="uid://cig0qhpnemwee" path="res://Assets/Sounds/Cutscenes/Week 6/clickText.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://cq0li4nivfi1n" path="res://Assets/Sounds/Cutscenes/Week 6/pixelText.ogg" id="8"]
+[ext_resource type="AudioStream" uid="uid://hpfvb70j78py" path="res://Assets/Sounds/Cutscenes/Week 6/LunchboxScary.ogg" id="9"]
 
-[sub_resource type="FontFile" id=1]
-size = 32
-font_data = ExtResource( 6 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("6")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
 [node name="Thorns Dialogue" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource( 1 )
-sections = [ {
+script = ExtResource("1")
+sections = [{
 "side": "dad",
 "text": "Direct contact with real humans, after being trapped in here for so long..."
 }, {
@@ -32,42 +45,45 @@ sections = [ {
 }, {
 "side": "dad",
 "text": "You don't mind your bodies being borrowed right? It's only fair..."
-} ]
+}]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="BG" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color( 0.701961, 0.870588, 0.85098, 0 )
+color = Color(0.701961, 0.870588, 0.85098, 0)
 
 [node name="BF" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 752.2, 196.2 )
-scale = Vector2( 5.4, 5.4 )
-texture = ExtResource( 3 )
+texture_filter = 1
+position = Vector2(752.2, 196.2)
+scale = Vector2(5.4, 5.4)
+texture = ExtResource("3")
 centered = false
 
 [node name="Senpai" type="Sprite2D" parent="."]
-position = Vector2( 121, -82 )
-scale = Vector2( 6, 6 )
-texture = ExtResource( 4 )
+texture_filter = 1
+position = Vector2(121, -82)
+scale = Vector2(6, 6)
+texture = ExtResource("4")
 centered = false
 
 [node name="DialogueBox" type="AnimatedSprite2D" parent="."]
-position = Vector2( -20, 45 )
-scale = Vector2( 5.4, 5.4 )
-frames = ExtResource( 2 )
-animation = "appear"
+texture_filter = 1
+position = Vector2(-20, 45)
+scale = Vector2(5.4, 5.4)
+sprite_frames = ExtResource("2")
+animation = &"appear"
 frame = 11
-playing = true
 centered = false
 
 [node name="Hand" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 1055, 592 )
-scale = Vector2( 5.4, 5.4 )
-texture = ExtResource( 5 )
+texture_filter = 1
+position = Vector2(1055, 592)
+scale = Vector2(5.4, 5.4)
+texture = ExtResource("5")
 centered = false
 
 [node name="Text" type="RichTextLabel" parent="."]
@@ -75,19 +91,20 @@ offset_left = 240.0
 offset_top = 500.0
 offset_right = 1008.0
 offset_bottom = 2042.0
-theme_override_colors/default_color = Color( 1, 1, 1, 1 )
-theme_override_colors/font_shadow_color = Color( 0, 0, 0, 1 )
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/normal_font = SubResource( 1 )
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 32
 visible_characters = 0
 
 [node name="Click Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource("7")
 
 [node name="Character Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource("9")
 autoplay = true

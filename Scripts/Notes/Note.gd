@@ -20,8 +20,6 @@ var time_held: float = 0.0
 
 @onready var line: Line2D = $Line2D
 
-var held_sprites: Dictionary = Globals.held_sprites
-
 var character: int = 0
 
 var strum: Node2D
@@ -62,8 +60,6 @@ var is_alt: bool = false
 @onready var player_strums := game.player_strums
 @onready var enemy_strums := game.enemy_strums
 
-@onready var voices: AudioStreamPlayer = AudioHandler.get_node('Voices')
-
 var dad_anim_player: AnimationPlayer
 var bf_anim_player: AnimationPlayer
 
@@ -84,7 +80,7 @@ func set_held_note_sprites() -> void:
 	if custom_sus_path:
 		held_sprites = {}
 		
-		for texture in Globals.held_sprites:
+		for texture in held_sprites:
 			if not texture in held_sprites:
 				held_sprites[texture] = []
 			
@@ -93,7 +89,7 @@ func set_held_note_sprites() -> void:
 	elif single_held_texture and single_end_held_texture:
 		held_sprites = {}
 		
-		for texture in Globals.held_sprites:
+		for texture in held_sprites:
 			if not texture in held_sprites:
 				held_sprites[texture] = []
 			
@@ -173,8 +169,6 @@ func _process(delta: float) -> void:
 						game.dad.timer = 0
 					elif game.dad and not play_hit_animations:
 						note_hit()
-					
-					voices.volume_db = 0
 			else:
 				var good: bool = false
 				
@@ -202,7 +196,6 @@ func _process(delta: float) -> void:
 				
 				if good:
 					strum.play_animation('confirm' if should_hit else 'press', true)
-					voices.volume_db = 0
 					game.health += 0.02 if should_hit else -hit_sustain_damage
 		
 		var y_pos: float = ((sustain_length / 1.5) * Globals.scroll_speed) / scale.y
@@ -266,3 +259,78 @@ func note_hit() -> void:
 
 func note_miss() -> void:
 	pass
+
+static var held_sprites: Dictionary = {
+	'left': [
+		preload('res://Assets/Images/Notes/default/held/left hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/left hold end0000.png')
+	],
+	'down': [
+		preload('res://Assets/Images/Notes/default/held/down hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/down hold end0000.png')
+	],
+	'up': [
+		preload('res://Assets/Images/Notes/default/held/up hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/up hold end0000.png')
+	],
+	'right': [
+		preload('res://Assets/Images/Notes/default/held/right hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/right hold end0000.png')
+	],
+	'square': [
+		preload('res://Assets/Images/Notes/default/held/square hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/square hold end0000.png')
+	],
+	'left2': [
+		preload('res://Assets/Images/Notes/default/held/left2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/left2 hold end0000.png')
+	],
+	'down2': [
+		preload('res://Assets/Images/Notes/default/held/down2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/down2 hold end0000.png')
+	],
+	'up2': [
+		preload('res://Assets/Images/Notes/default/held/up2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/up2 hold end0000.png')
+	],
+	'right2': [
+		preload('res://Assets/Images/Notes/default/held/right2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/right2 hold end0000.png')
+	],
+	'rleft': [
+		preload('res://Assets/Images/Notes/default/held/rleft hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rleft hold end0000.png')
+	],
+	'rdown': [
+		preload('res://Assets/Images/Notes/default/held/rdown hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rdown hold end0000.png')
+	],
+	'rup': [
+		preload('res://Assets/Images/Notes/default/held/rup hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rup hold end0000.png')
+	],
+	'rright': [
+		preload('res://Assets/Images/Notes/default/held/rright hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rright hold end0000.png')
+	],
+	'plus': [
+		preload('res://Assets/Images/Notes/default/held/plus hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/plus hold end0000.png')
+	],
+	'rleft2': [
+		preload('res://Assets/Images/Notes/default/held/rleft2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rleft2 hold end0000.png')
+	],
+	'rdown2': [
+		preload('res://Assets/Images/Notes/default/held/rdown2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rdown2 hold end0000.png')
+	],
+	'rup2': [
+		preload('res://Assets/Images/Notes/default/held/rup2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rup2 hold end0000.png')
+	],
+	'rright2': [
+		preload('res://Assets/Images/Notes/default/held/rright2 hold0000.png'),
+		preload('res://Assets/Images/Notes/default/held/rright2 hold end0000.png')
+	],
+}

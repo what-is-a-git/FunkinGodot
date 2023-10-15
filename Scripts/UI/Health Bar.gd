@@ -1,10 +1,10 @@
 @icon('res://Assets/Images/Godot/Icons/funkin_health_bar.svg')
 class_name FunkinHealthBar extends Node2D
 
-@onready var iconP1 = $Player
-@onready var iconP2 = $Opponent
+@onready var iconP1: Sprite2D = $Player
+@onready var iconP2: Sprite2D = $Opponent
 
-@onready var bar = $Bar/ProgressBar
+@onready var bar: ProgressBar = $Bar/ProgressBar
 
 @onready var game: Gameplay = get_tree().current_scene
 
@@ -34,8 +34,8 @@ func _process(delta: float) -> void:
 	
 	var redone_percent: float = remap(game.health, 0.0, 2.0, 100.0, 0) / 100.0
 	
-	iconP1.global_position.x = bar.position.x + ((592 * redone_percent) - 150) - (150 / 3)
-	iconP2.global_position.x = bar.position.x + ((592 * redone_percent) - 150) - (150 * 1.1)
+	iconP1.global_position.x = bar.position.x + ((bar.size.x * redone_percent) - 150.0) - (150.0 / 3.0)
+	iconP2.global_position.x = bar.position.x + ((bar.size.x * redone_percent) - 150.0) - (150.0 * 1.1)
 	
 	iconP1.frame = 0
 	iconP2.frame = 0

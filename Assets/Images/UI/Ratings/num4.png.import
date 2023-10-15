@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d342df2rdhmlv"
-path="res://.godot/imported/num4.png-35d0ae260b2620f549e16a17314d0e0e.ctex"
+path.bptc="res://.godot/imported/num4.png-35d0ae260b2620f549e16a17314d0e0e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/UI/Ratings/num4.png"
-dest_files=["res://.godot/imported/num4.png-35d0ae260b2620f549e16a17314d0e0e.ctex"]
+dest_files=["res://.godot/imported/num4.png-35d0ae260b2620f549e16a17314d0e0e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgmfe61wyl8b1"
-path="res://.godot/imported/win4.png-3145c549f5171a958b07c20eea16dbbd.ctex"
+path.bptc="res://.godot/imported/win4.png-3145c549f5171a958b07c20eea16dbbd.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/philly/win4.png"
-dest_files=["res://.godot/imported/win4.png-3145c549f5171a958b07c20eea16dbbd.ctex"]
+dest_files=["res://.godot/imported/win4.png-3145c549f5171a958b07c20eea16dbbd.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

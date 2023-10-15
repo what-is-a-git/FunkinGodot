@@ -92,7 +92,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				OptionsSideBar.returning_scene = 'Gameplay'
 				Scenes.switch_scene('Options Menu')
 			'exit menu':
-				close()
+				visible = false
+				scene_tree.paused = false
 				Scenes.switch_scene('Freeplay' if Globals.freeplay else 'Story Mode')
 			_:
 				printerr('No supported action for selection %s.' % selection_name)
@@ -194,7 +195,7 @@ func _process(delta: float) -> void:
 
 func on_show():
 	song_name.text = Globals.song.song
-	song_difficulty.text = Globals.songDifficulty.to_upper()
+	song_difficulty.text = Globals.song_difficulty.to_upper()
 
 func refresh_bullshit():
 	resume.modulate.a = 0.5
