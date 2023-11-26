@@ -40,7 +40,7 @@ var og_save: Dictionary = {
 	'song_scores': {},
 	'week_scores': {},
 	'freeplay_music': true,
-	'preload_notes': false,
+	'preload_notes': true,
 	'fps_cap': 0,
 	'side_ratings_enabled': true,
 	'progress_bar_enabled': true,
