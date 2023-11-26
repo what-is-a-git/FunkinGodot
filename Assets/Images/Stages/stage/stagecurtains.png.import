@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brli6rvd6c76r"
-path="res://.godot/imported/stagecurtains.png-51241d7d5d7131f5bc6d10019745f7eb.ctex"
+path.bptc="res://.godot/imported/stagecurtains.png-51241d7d5d7131f5bc6d10019745f7eb.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/stage/stagecurtains.png"
-dest_files=["res://.godot/imported/stagecurtains.png-51241d7d5d7131f5bc6d10019745f7eb.ctex"]
+dest_files=["res://.godot/imported/stagecurtains.png-51241d7d5d7131f5bc6d10019745f7eb.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
