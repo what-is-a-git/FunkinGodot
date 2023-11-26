@@ -16,6 +16,9 @@ var selected: int = 0
 @onready var inst: AudioStreamPlayer = AudioHandler.get_node('Inst')
 @onready var voices: AudioStreamPlayer = AudioHandler.get_node('Voices')
 
+@onready var song_name: Label = $'Song Info/Name'
+@onready var song_difficulty: Label = $'Song Info/Difficulty'
+
 
 func _ready() -> void:
 	hide()
@@ -42,6 +45,9 @@ func open() -> void:
 	voices.stream_paused = true
 	selected = 0
 	_update_selection()
+	
+	song_name.text = Globals.song.get('song', Globals.song_name)
+	song_difficulty.text = Globals.song_difficulty.to_upper()
 
 
 func close() -> void:
