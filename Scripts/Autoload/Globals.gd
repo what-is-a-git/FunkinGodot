@@ -15,6 +15,7 @@ var key_count: int = 4
 var death_character_name: String = 'bf-dead'
 var death_character_pos: Vector2 = Vector2()
 var death_character_cam: Vector2 = Vector2()
+var death_cam_zoom: float = 1.0
 
 var song_multiplier: float = 1.0
 
