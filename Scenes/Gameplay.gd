@@ -374,7 +374,7 @@ func _ready() -> void:
 		player_strums.position.y = 620
 		enemy_strums.position.y = 620
 		gameplay_text.position.y = 115
-		health_bar.position.y = 56
+		health_bar.position.y = 64
 		progress_bar.position.y = 698
 	else:
 		player_strums.position.y = 100
