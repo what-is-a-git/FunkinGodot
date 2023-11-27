@@ -15,25 +15,22 @@ func _ready() -> void:
 	AudioHandler.play_audio('Gameover Death')
 	
 	var death_loaded: PackedScene = Globals.load_character(Globals.death_character_name, 'bf-dead')
-	
 	death_character = death_loaded.instantiate()
-	death_character.position = Globals.death_character_pos
 	death_character.play_animation('firstDeath')
 	add_child(death_character)
+	death_character.global_position = Globals.death_character_pos
 	
 	camera.position = Globals.death_character_cam
+	camera.zoom = Vector2(Globals.death_cam_zoom, Globals.death_cam_zoom)
 	
 	get_tree().create_timer(2.375).connect('timeout', Callable(self, '_start_death_stuff'))
 
 func _start_death_stuff() -> void:
-	if !pressed_enter:
+	if not pressed_enter:
 		death_character.play_animation('deathLoop')
 		AudioHandler.play_audio('Gameover Music')
 
 func _process(delta: float) -> void:
-	if not camera.position_smoothing_enabled:
-		camera.position_smoothing_enabled = true
-	
 	if Input.is_action_just_pressed('ui_back'):
 		Scenes.switch_scene('Freeplay' if Globals.freeplay else 'Story Mode')
 	
@@ -57,5 +54,8 @@ func _process(delta: float) -> void:
 	
 	if death_sprite.frame >= death_sprite.sprite_frames.get_frame_count(death_sprite.animation) - 1 or \
 			(death_character.anim_sprite.frame >= 12 and death_sprite.animation == 'firstDeath'):
+		if not camera.position_smoothing_enabled:
+			camera.position_smoothing_enabled = true
+		
 		camera.position = death_character.position + death_character.camOffset
 		AudioHandler.get_node('Gameover Music').volume_db = -8
