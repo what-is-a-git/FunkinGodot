@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8uy007ux0gof"
-path="res://.godot/imported/tankmanCaptain.png-338b229bbed0e12672fb047f448aaf4a.ctex"
+path.bptc="res://.godot/imported/tankmanCaptain.png-338b229bbed0e12672fb047f448aaf4a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Characters/tankman/tankmanCaptain.png"
-dest_files=["res://.godot/imported/tankmanCaptain.png-338b229bbed0e12672fb047f448aaf4a.ctex"]
+dest_files=["res://.godot/imported/tankmanCaptain.png-338b229bbed0e12672fb047f448aaf4a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

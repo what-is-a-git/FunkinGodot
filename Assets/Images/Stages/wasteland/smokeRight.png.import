@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhc4b1klh1pno"
-path="res://.godot/imported/smokeRight.png-89a49fb54e18ad529f5039fd51ff33be.ctex"
+path.bptc="res://.godot/imported/smokeRight.png-89a49fb54e18ad529f5039fd51ff33be.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/wasteland/smokeRight.png"
-dest_files=["res://.godot/imported/smokeRight.png-89a49fb54e18ad529f5039fd51ff33be.ctex"]
+dest_files=["res://.godot/imported/smokeRight.png-89a49fb54e18ad529f5039fd51ff33be.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -611,11 +611,10 @@ health_bar_color = Color(0.317647, 0.788235, 0.858824, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-213, -392)
 sprite_frames = ExtResource("1")
-animation = &"singRIGHT"
-frame = 61
+animation = &"idle"
+frame = 13
 frame_progress = 1.0
 centered = false
-offset = Vector2(38, 7)
 script = ExtResource("3_v5ouc")
 playing = true
 

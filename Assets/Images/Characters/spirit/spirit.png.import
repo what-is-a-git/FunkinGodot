@@ -16,7 +16,7 @@ dest_files=["res://.godot/imported/spirit.png-dc02c3fa60aa0a9c1ade68130334bf4d.c
 [params]
 
 compress/mode=0
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

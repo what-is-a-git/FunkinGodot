@@ -26,7 +26,7 @@ func _update() -> void:
 	if vram > vram_peak:
 		vram_peak = vram
 	
-	fps_text.text = "%sfps\nvram: %s / %s" % [Engine.get_frames_per_second(), \
+	fps_text.text = "%sfps\n%s / %s (gpu)" % [Engine.get_frames_per_second(), \
 			Globals.format_bytes(vram), Globals.format_bytes(vram_peak)]
 	
 	if debug:
@@ -35,7 +35,7 @@ func _update() -> void:
 		if mem > mem_peak:
 			mem_peak = mem
 		
-		fps_text.text += '\nstatic: %s / %s' % [
+		fps_text.text += '\n%s / %s (cpu)' % [
 			Globals.format_bytes(mem), Globals.format_bytes(mem_peak)]
 
 

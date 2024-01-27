@@ -16,7 +16,7 @@ var og_sustain_length: float = 0.0
 
 var time_held: float = 0.0
 
-@onready var game: Gameplay = get_tree().current_scene
+@onready var game: Gameplay = Gameplay.instance
 
 @onready var line: Line2D = $Line2D
 
@@ -102,8 +102,8 @@ func play_animation(anim: String, force: bool = true):
 			animated_sprite.play(direction + anim)
 
 func _process(delta: float) -> void:
-	if og_sustain_length == 0:
-		og_sustain_length = sustain_length if is_sustain else -1
+	if og_sustain_length == 0.0:
+		og_sustain_length = sustain_length if is_sustain else -1.0
 		line.visible = is_sustain
 	
 	if strum == null:

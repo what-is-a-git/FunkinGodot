@@ -16,7 +16,7 @@ dest_files=["res://.godot/imported/gfPixel.png-f869e713dbc42476be6c9be63b772386.
 [params]
 
 compress/mode=0
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

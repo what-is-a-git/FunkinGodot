@@ -1,91 +1,112 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://b5dac1horq8yx"]
 
-[ext_resource path="res://Assets/Fonts/vcr.ttf" type="FontFile" id=1]
-[ext_resource path="res://Tools/XML Converter.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/UI/menuDesat.png" type="Texture2D" id=3]
-[ext_resource path="res://Tools/Choose Sprites.gd" type="Script" id=4]
+[ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="1"]
+[ext_resource type="Script" path="res://Tools/XML Converter.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cagmirudlfjtd" path="res://Assets/Images/UI/menuDesat.png" id="3"]
+[ext_resource type="Script" path="res://Tools/Choose Sprites.gd" id="4"]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+[sub_resource type="StyleBoxFlat" id="3"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 
-[sub_resource type="FontFile" id=4]
-size = 32
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="4"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="FontFile" id=2]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="FontFile" id=9]
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="9"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.247059, 0.247059, 0.247059, 1 )
+[sub_resource type="StyleBoxFlat" id="7"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
+[sub_resource type="StyleBoxFlat" id="6"]
+bg_color = Color(0.247059, 0.247059, 0.247059, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+[sub_resource type="StyleBoxFlat" id="8"]
+bg_color = Color(0.105882, 0.105882, 0.105882, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="FontFile" id=10]
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="10"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id="11"]
 content_margin_left = 5.0
-bg_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="FontFile" id=12]
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="12"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="FontFile" id=5]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="5"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="XML Converter" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
-modulate = Color( 0.364706, 0.360784, 0.411765, 1 )
-position = Vector2( -116, -58 )
-scale = Vector2( 1.095, 1.095 )
-texture = ExtResource( 3 )
+modulate = Color(0.364706, 0.360784, 0.411765, 1)
+position = Vector2(-116, -58)
+scale = Vector2(1.095, 1.095)
+texture = ExtResource("3")
 centered = false
 
 [node name="Converted Panel" type="Panel" parent="."]
@@ -93,120 +114,113 @@ offset_left = 706.0
 offset_top = 108.0
 offset_right = 1205.0
 offset_bottom = 720.0
-theme_override_styles/panel = SubResource( 3 )
+theme_override_styles/panel = SubResource("3")
 
 [node name="ConvertedSprites" type="Label" parent="Converted Panel"]
+layout_mode = 0
 offset_left = 7.0
 offset_top = 3.0
 offset_right = 498.0
 offset_bottom = 32.0
-theme_override_fonts/font = SubResource( 4 )
+theme_override_fonts/font = SubResource("4")
 text = "Converted Sprites:"
-align = 1
-valign = 1
 
 [node name="SpriteData" type="AnimatedSprite2D" parent="."]
-position = Vector2( 954, 403 )
+position = Vector2(954, 403)
 
 [node name="Main Panel" type="Panel" parent="."]
 offset_left = 20.0
 offset_top = 136.0
 offset_right = 326.0
 offset_bottom = 586.0
-theme_override_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
+theme_override_styles/panel = SubResource("1")
+script = ExtResource("2")
 
 [node name="Title" type="Label" parent="Main Panel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 18.0
 offset_right = 286.0
 offset_bottom = 40.0
-theme_override_fonts/font = SubResource( 2 )
+theme_override_fonts/font = SubResource("2")
 text = "XML -> SpriteFrames"
-align = 1
-valign = 1
 
 [node name="Choose Sprites" type="Button" parent="Main Panel"]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 57.0
 offset_right = 170.0
 offset_bottom = 93.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_colors/font_hover_color = Color( 0.894118, 0.894118, 0.894118, 1 )
-theme_override_fonts/font = SubResource( 9 )
-theme_override_styles/hover = SubResource( 6 )
-theme_override_styles/pressed = SubResource( 8 )
-theme_override_styles/normal = SubResource( 7 )
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.894118, 0.894118, 0.894118, 1)
+theme_override_fonts/font = SubResource("9")
+theme_override_styles/normal = SubResource("7")
+theme_override_styles/hover = SubResource("6")
+theme_override_styles/pressed = SubResource("8")
 text = "Choose Sprites"
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="FPS" type="LineEdit" parent="Main Panel"]
+layout_mode = 0
 offset_left = 182.0
 offset_top = 58.0
 offset_right = 295.0
 offset_bottom = 91.0
-theme_override_colors/font_color_selected = Color( 1, 1, 1, 1 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
-theme_override_fonts/font = SubResource( 10 )
-theme_override_styles/focus = SubResource( 11 )
-theme_override_styles/normal = SubResource( 11 )
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("10")
+theme_override_styles/normal = SubResource("11")
+theme_override_styles/focus = SubResource("11")
 text = "24"
 placeholder_text = "24"
 
 [node name="FPS Text" type="Label" parent="Main Panel"]
+layout_mode = 0
 offset_left = 182.0
 offset_top = 92.0
 offset_right = 294.0
 offset_bottom = 114.0
-theme_override_fonts/font = SubResource( 12 )
+theme_override_fonts/font = SubResource("12")
 text = "Anim FPS"
-align = 1
-valign = 1
 
 [node name="Looped Checkbox" type="CheckBox" parent="Main Panel"]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 101.0
 offset_right = 106.0
 offset_bottom = 125.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_fonts/font = SubResource( 12 )
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("12")
 text = "Looped?"
 
 [node name="Optimized Checkbox" type="CheckBox" parent="Main Panel"]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 127.0
 offset_right = 133.0
 offset_bottom = 151.0
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_fonts/font = SubResource( 12 )
-pressed = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("12")
 text = "Optimized?"
 
 [node name="Convert Button" type="Button" parent="Main Panel"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 404.0
 offset_right = 239.0
 offset_bottom = 442.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_colors/font_hover_color = Color( 0.894118, 0.894118, 0.894118, 1 )
-theme_override_fonts/font = SubResource( 5 )
-theme_override_styles/hover = SubResource( 6 )
-theme_override_styles/pressed = SubResource( 8 )
-theme_override_styles/normal = SubResource( 7 )
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.894118, 0.894118, 0.894118, 1)
+theme_override_fonts/font = SubResource("5")
+theme_override_styles/normal = SubResource("7")
+theme_override_styles/hover = SubResource("6")
+theme_override_styles/pressed = SubResource("8")
 text = "Convert"
 
 [node name="FileDialog" type="FileDialog" parent="."]
-offset_left = 245.0
-offset_top = 198.0
-offset_right = 954.0
-offset_bottom = 534.0
-window_title = "Open a File"
-mode = 0
-filters = PackedStringArray( "*.png ; Spritesheets", "*.jpg ; Spritesheets", "*.jpeg ; Spritesheets", "*.xml ; XML Spritesheet Data" )
+filters = PackedStringArray("*.png ; Spritesheets", "*.jpg ; Spritesheets", "*.jpeg ; Spritesheets", "*.xml ; XML Spritesheet Data")
 
 [connection signal="pressed" from="Main Panel/Choose Sprites" to="Main Panel/Choose Sprites" method="popup_shit"]
 [connection signal="text_changed" from="Main Panel/FPS" to="Main Panel" method="set_fps"]

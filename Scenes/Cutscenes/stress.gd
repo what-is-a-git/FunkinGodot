@@ -31,8 +31,6 @@ func _ready():
 		parts.push_back(get_node("Part " + str(i + 1)))
 		parts[i].position = gf.position
 	
-	cutscene.play()
-	
 	camera.position = dad.position + dad.camOffset + Vector2(50.0, 0.0)
 	
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_CUBIC)
@@ -47,8 +45,12 @@ func _ready():
 	
 	tank_1.position = dad.position
 	tank_1.visible = true
-	tank_1.frame = 0
 	tank_1.play("cutscene")
+	tank_1.frame = 0
+	
+	await RenderingServer.frame_post_draw
+	
+	cutscene.play()
 	
 	await get_tree().create_timer(15.5).timeout
 	

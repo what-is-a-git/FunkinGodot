@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kjkx8rgsd0wu"
-path="res://.godot/imported/picoSpeaker.png-ccdc05562a1272db4cf975a8acaffcda.ctex"
+path.bptc="res://.godot/imported/picoSpeaker.png-ccdc05562a1272db4cf975a8acaffcda.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Characters/pico-speaker/picoSpeaker.png"
-dest_files=["res://.godot/imported/picoSpeaker.png-ccdc05562a1272db4cf975a8acaffcda.ctex"]
+dest_files=["res://.godot/imported/picoSpeaker.png-ccdc05562a1272db4cf975a8acaffcda.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

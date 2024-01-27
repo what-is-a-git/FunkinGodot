@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2m8jdxggebhb"
-path="res://.godot/imported/tankmanKilled1.png-ea3d01f026b0b32e8149243ea6e63fd0.ctex"
+path.bptc="res://.godot/imported/tankmanKilled1.png-ea3d01f026b0b32e8149243ea6e63fd0.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/wasteland/tankmanKilled1.png"
-dest_files=["res://.godot/imported/tankmanKilled1.png-ea3d01f026b0b32e8149243ea6e63fd0.ctex"]
+dest_files=["res://.godot/imported/tankmanKilled1.png-ea3d01f026b0b32e8149243ea6e63fd0.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

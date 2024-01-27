@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dji0jkg2f74k1"
-path="res://.godot/imported/Monster_Assets.png-f726a9e5ad6ccde6e5f148e6bd6eb2ad.ctex"
+path.bptc="res://.godot/imported/Monster_Assets.png-f726a9e5ad6ccde6e5f148e6bd6eb2ad.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Characters/monster/Monster_Assets.png"
-dest_files=["res://.godot/imported/Monster_Assets.png-f726a9e5ad6ccde6e5f148e6bd6eb2ad.ctex"]
+dest_files=["res://.godot/imported/Monster_Assets.png-f726a9e5ad6ccde6e5f148e6bd6eb2ad.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

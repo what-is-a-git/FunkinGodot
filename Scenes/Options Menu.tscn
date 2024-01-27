@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/Options.gd" id="1"]
 [ext_resource type="Script" path="res://Scripts/Bool Option.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://bmuwwqpd6fuam" path="res://Assets/Images/UI/menuDesat.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cagmirudlfjtd" path="res://Assets/Images/UI/menuDesat.png" id="3"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/UI/Options/checkbox.res" id="5"]
 [ext_resource type="Script" path="res://Scripts/Scene Option.gd" id="6"]
-[ext_resource type="FontFile" uid="uid://x8w40nqw77s2" path="res://Assets/Fonts/alphabet.png" id="6_opgdj"]
+[ext_resource type="FontFile" uid="uid://c7euvp5baixmv" path="res://Assets/Fonts/alphabet.png" id="6_opgdj"]
 [ext_resource type="Script" path="res://Scripts/Offset Option.gd" id="7"]
 [ext_resource type="Script" path="res://Scripts/Hitsound Option.gd" id="8"]
 [ext_resource type="Script" path="res://Scripts/Tool Option.gd" id="9"]
-[ext_resource type="FontFile" uid="uid://c6bqqih6h6p3m" path="res://Assets/Fonts/vcr.ttf" id="10"]
+[ext_resource type="FontFile" uid="uid://b3as2ewolxg2n" path="res://Assets/Fonts/vcr.ttf" id="10"]
 [ext_resource type="Script" path="res://Scenes/Options Side Bar.gd" id="11"]
 [ext_resource type="Script" path="res://Scripts/Array Option.gd" id="12"]
 [ext_resource type="Script" path="res://Scripts/Scroll Speed Option.gd" id="13"]
@@ -672,7 +672,29 @@ text = "MEMORY LEAKS"
 uppercase = true
 
 [node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Memory Leaks"]
-position = Vector2(698, 58)
+position = Vector2(706, 50)
+sprite_frames = ExtResource("5")
+animation = &"Unchecked"
+frame = 2
+
+[node name="Threaded Note Loading" type="Node2D" parent="Side Bar/TabBar/Misc"]
+visible = false
+position = Vector2(285, 768)
+script = ExtResource("2")
+save_name = "threaded_note_spawning"
+description = "Load notes on a thread."
+
+[node name="Text" type="Label" parent="Side Bar/TabBar/Misc/Threaded Note Loading"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 1152.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("6_opgdj")
+text = "THREADED NOTES"
+uppercase = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="Side Bar/TabBar/Misc/Threaded Note Loading"]
+position = Vector2(809, 50)
 sprite_frames = ExtResource("5")
 animation = &"Unchecked"
 frame = 2

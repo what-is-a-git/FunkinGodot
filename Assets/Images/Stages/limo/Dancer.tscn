@@ -10,48 +10,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": ["bg dancer sketch PINK"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="2"]
-resource_name = "danceLeft"
-length = 0.583333
-step = 0.0416667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -63,7 +22,36 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "danceLeft"
+length = 0.583333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["bg dancer sketch PINK"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -75,7 +63,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("AnimatedSprite2D:playing")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -92,7 +80,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -104,7 +92,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -116,7 +104,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("AnimatedSprite2D:playing")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -132,7 +120,7 @@ _data = {
 "danceRight": SubResource("3")
 }
 
-[node name="Dancer1" type="AnimatedSprite2D"]
+[node name="Dancer1" type="Node2D"]
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -44,6 +44,7 @@ var og_save: Dictionary = {
 	'fps_cap': 0,
 	'side_ratings_enabled': true,
 	'progress_bar_enabled': true,
+	'threaded_note_spawning': true,
 	'status_text_mode': 'default', # default, classic, and score
 }
 

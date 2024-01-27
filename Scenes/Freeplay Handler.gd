@@ -257,15 +257,15 @@ func _change_item(amount: int = 0, delta: float = 0.0) -> void:
 				difficulties[selected_difficulty])
 	
 	if Settings.get_data('freeplay_music'):
-		inst.stream = load('res://Assets/Songs/' + songs[selected].to_lower() + '/Inst.ogg')
-		inst.volume_db = 0
-		AudioHandler.stop_audio('Title Music')
-		AudioHandler.play_audio('Inst')
-		
 		Globals.song_name = songs[selected]
 		
 		Globals.song_difficulty = 'hard' if difficulties.is_empty() else \
 				difficulties[selected_difficulty].to_lower()
+		
+		inst.stream = Globals.load_song_audio('Inst')
+		inst.volume_db = 0
+		AudioHandler.stop_audio('Title Music')
+		AudioHandler.play_audio('Inst')
 		
 		var file := FileAccess.open(Paths.song_path(Globals.song_name, Globals.song_difficulty), FileAccess.READ)
 		

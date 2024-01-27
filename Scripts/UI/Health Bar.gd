@@ -6,7 +6,7 @@ class_name FunkinHealthBar extends Node2D
 
 @onready var bar: ProgressBar = $Bar/ProgressBar
 
-@onready var game: Gameplay = get_tree().current_scene
+@onready var game: Gameplay = Gameplay.instance
 
 @onready var bounce_type: String = Settings.get_data('health_icon_bounce')
 

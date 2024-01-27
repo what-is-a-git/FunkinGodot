@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c78bx88cpybta"
-path="res://.godot/imported/monsterChristmas.png-ff29387a4aa87178a2666a784db3f128.ctex"
+path.bptc="res://.godot/imported/monsterChristmas.png-ff29387a4aa87178a2666a784db3f128.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Characters/monster-christmas/monsterChristmas.png"
-dest_files=["res://.godot/imported/monsterChristmas.png-ff29387a4aa87178a2666a784db3f128.ctex"]
+dest_files=["res://.godot/imported/monsterChristmas.png-ff29387a4aa87178a2666a784db3f128.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -2,7 +2,7 @@
 class_name AnimatedSprite extends AnimatedSprite2D
 
 
-@export var playing:bool = false:
+@export var playing: bool = false:
 	set(value):
 		playing = value
 		
@@ -10,5 +10,3 @@ class_name AnimatedSprite extends AnimatedSprite2D
 			play(animation)
 		else:
 			pause()
-	get:
-		return playing

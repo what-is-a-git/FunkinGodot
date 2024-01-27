@@ -89,6 +89,8 @@ var events: Array = []
 var event_nodes: Dictionary = {}
 var events_to_do: Array = []
 
+static var instance: Gameplay
+
 signal spawn_note(note)
 signal beat_hit_post
 
@@ -101,6 +103,9 @@ func section_start_time(section: int = 0) -> float:
 		section_position += 4.0 * (1000.0 * (60.0 / current_bpm))
 	
 	return section_position
+
+func _init() -> void:
+	instance = self
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -515,28 +520,13 @@ func _ready() -> void:
 		preloaded_notes.sort_custom(preloaded_sort)
 	
 	rating_text.visible = side_ratings_enabled
-	# threaded_note_loading = true
 	Globals.emit_signal('_ready_post')
 
 @onready var inst = AudioHandler.get_node("Inst")
 @onready var voices = AudioHandler.get_node("Voices")
 
-var threaded_note_loading: bool = false: set = set_threaded_note_loading
+@onready var threaded_note_loading: bool = Settings.get_data('threaded_note_spawning')
 var threaded_note_timer: Timer
-
-func set_threaded_note_loading(value: bool) -> void:
-	threaded_note_loading = value
-	
-	if is_instance_valid(threaded_note_timer):
-		threaded_note_timer.queue_free()
-	
-	if value:
-		threaded_note_timer = Timer.new()
-		threaded_note_timer.wait_time = 1.0 * Globals.song_multiplier
-		add_child(threaded_note_timer)
-		threaded_note_timer.connect('timeout', Callable(self, 'load_notes_threaded'))
-		threaded_note_timer.start()
-		load_notes_threaded()
 
 func _physics_process(_delta: float) -> void:
 	var inst_pos: float = (inst.get_playback_position() + AudioServer.get_time_since_last_mix()) * 1000.0
@@ -550,6 +540,8 @@ func _physics_process(_delta: float) -> void:
 	
 	if not threaded_note_loading:
 		load_potential_notes()
+	else:
+		call_deferred_thread_group('load_potential_notes')
 	
 	for event in events:
 		if Conductor.songPosition >= event[1]:
@@ -558,7 +550,8 @@ func _physics_process(_delta: float) -> void:
 				event_nodes[event[0]].process_event(event[2], event[3])
 			
 			events.erase(event)
-		else: break
+		else:
+			break
 
 var can_leave_game:bool = true
 
@@ -779,12 +772,6 @@ var cam_offset: Vector2 = Vector2()
 @onready var player_point: Node2D
 @onready var dad_point: Node2D
 @onready var gf_point: Node2D
-
-func load_notes_threaded() -> void:
-	if not threaded_note_loading:
-		return
-	
-	call_deferred_thread_group('load_potential_notes')
 
 func beat_hit(dumb = false):
 	if camera_zooming:

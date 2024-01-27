@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgsh2fra2gvvy"]
+[gd_scene load_steps=12 format=3 uid="uid://cgsh2fra2gvvy"]
 
 [ext_resource type="Texture2D" uid="uid://0732v4hbfk" path="res://Assets/Images/UI/menuBG.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/ParallaxNode.gd" id="1_5jryt"]
@@ -75,15 +75,6 @@ _data = {
 "idle": SubResource("2")
 }
 
-[sub_resource type="FontFile" id="3"]
-fallbacks = Array[Font]([ExtResource("9")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
 [node name="Main Menu" type="Node2D"]
 
 [node name="1-0-2" type="Node2D" parent="."]
@@ -148,7 +139,8 @@ offset_right = 1281.0
 offset_bottom = 715.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = SubResource("3")
+theme_override_fonts/font = ExtResource("9")
+theme_override_font_sizes/font_size = 16
 text = "Funkin' Godot v1.0.0"
 vertical_alignment = 2
 

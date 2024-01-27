@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bm823dqterxab"
-path="res://.godot/imported/bfAndGF.png-bb23c26ac4cc8c1911b73e4d372b7e3b.ctex"
+path.bptc="res://.godot/imported/bfAndGF.png-bb23c26ac4cc8c1911b73e4d372b7e3b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Characters/bf-holding-gf/bfAndGF.png"
-dest_files=["res://.godot/imported/bfAndGF.png-bb23c26ac4cc8c1911b73e4d372b7e3b.ctex"]
+dest_files=["res://.godot/imported/bfAndGF.png-bb23c26ac4cc8c1911b73e4d372b7e3b.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -176,6 +176,11 @@ static func load_song_audio(audio: String):
 	var target_path: String = '%s%s-%s.ogg' % [song_path, audio, Globals.song_difficulty.to_lower()]
 	var fallback_path: String = '%s%s.ogg' % [song_path, audio]
 	
+	# very hacky :3
+	if not (ResourceLoader.exists(target_path) or ResourceLoader.exists(fallback_path)):
+		target_path = '%s%s-%s.flac' % [song_path, audio, Globals.song_difficulty.to_lower()]
+		fallback_path = '%s%s.flac' % [song_path, audio]
+	
 	if ResourceLoader.exists(target_path):
 		return load(target_path)
 	else:
@@ -207,15 +212,20 @@ static func position_menu_alphabet(text, target_y: int, delta: float):
 # other functions #
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
+	Engine.max_fps = Settings.get_data('fps_cap')
+	
+	PhysicsServer2D.set_active(false)
+	PhysicsServer3D.set_active(false)
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	if Settings.get_data('memory_leaks'):
 		leak_memory()
-	Engine.max_fps = Settings.get_data('fps_cap')
 
-func _process(_delta: float) -> void:
+func _unhandled_key_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed('ui_fullscreen'):
+		get_viewport().set_input_as_handled()
 		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (!((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 	if Input.is_action_just_pressed('restart_scene'):
+		get_viewport().set_input_as_handled()
 		get_tree().reload_current_scene()

@@ -20,10 +20,7 @@ func _ready() -> void:
 	
 	mod.color.a = 0
 	
-	music.play()
-	
 	camera.position = dad.position + dad.camOffset + Vector2(-175, -25)
-	guns.play()
 	
 	dad.visible = false
 	
@@ -31,6 +28,12 @@ func _ready() -> void:
 	tank_1.frame = 0
 	tank_1.position = dad.position
 	tank_1.play("cutscene")
+	tank_1.frame = 0
+	
+	await RenderingServer.frame_post_draw
+	
+	music.play()
+	guns.play()
 	
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "good_cam_zoom", Vector2(1.1, 1.1), 1.5).set_delay(0.2)

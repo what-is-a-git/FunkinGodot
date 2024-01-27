@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rc0j3g13ei3k"
-path="res://.godot/imported/tankWatchtower.png-8c7441dd5f7d4d4185e882bab9df4585.ctex"
+path.bptc="res://.godot/imported/tankWatchtower.png-8c7441dd5f7d4d4185e882bab9df4585.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/wasteland/tankWatchtower.png"
-dest_files=["res://.godot/imported/tankWatchtower.png-8c7441dd5f7d4d4185e882bab9df4585.ctex"]
+dest_files=["res://.godot/imported/tankWatchtower.png-8c7441dd5f7d4d4185e882bab9df4585.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

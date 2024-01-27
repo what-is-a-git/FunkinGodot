@@ -17,10 +17,10 @@ extends Node2D
 
 @onready var bg = $"Main UI/Yellow Thingy"
 
-var selected: int = 0
+static var selected: int = 0
 
-var selected_difficulty: int = 1
-var difficulties: Array = ["easy", "normal", "hard"]
+static var selected_difficulty: int = 1
+static var difficulties: Array = ["easy", "normal", "hard"]
 
 var weeks = [
 	"week0",

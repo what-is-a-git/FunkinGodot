@@ -46,12 +46,12 @@ func convert_xml():
 						
 						var frame_rect = Rect2(
 							Vector2(
-								xml.get_named_attribute_value("x"),
-								xml.get_named_attribute_value("y")
+								xml.get_named_attribute_value("x").to_int(),
+								xml.get_named_attribute_value("y").to_int()
 							),
 							Vector2(
-								xml.get_named_attribute_value("width"),
-								xml.get_named_attribute_value("height")
+								xml.get_named_attribute_value("width").to_int(),
+								xml.get_named_attribute_value("height").to_int()
 							)
 						)
 						
@@ -62,8 +62,8 @@ func convert_xml():
 							
 							if xml.has_attribute("frameX"):
 								var frame_size_data = Vector2(
-									xml.get_named_attribute_value("frameWidth"),
-									xml.get_named_attribute_value("frameHeight")
+									xml.get_named_attribute_value("frameWidth").to_int(),
+									xml.get_named_attribute_value("frameHeight").to_int()
 								)
 								
 								if frame_size_data == Vector2(0,0):
@@ -92,7 +92,6 @@ func convert_xml():
 							if xml.has_attribute("frameX"):
 								frame_data.margin = margin
 							
-							frame_data.flags = Texture2D.FLAG_MIPMAPS
 							frame_data.filter_clip = true
 						
 						if optimized:
@@ -106,7 +105,7 @@ func convert_xml():
 						
 						frames.add_frame(animation_name, frame_data)
 			
-			ResourceSaver.save(path_string + ".res", frames, ResourceSaver.FLAG_COMPRESS)
+			ResourceSaver.save(frames, path_string + ".res", ResourceSaver.FLAG_COMPRESS)
 			
 			for anim in frames.animations:
 				sprite_data.play(anim.name)

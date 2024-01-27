@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0316m4gf57a3"
-path="res://.godot/imported/tankGround.png-f522f9f8a9d22eea09d9fb529238395e.ctex"
+path.bptc="res://.godot/imported/tankGround.png-f522f9f8a9d22eea09d9fb529238395e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Images/Stages/wasteland/tankGround.png"
-dest_files=["res://.godot/imported/tankGround.png-f522f9f8a9d22eea09d9fb529238395e.ctex"]
+dest_files=["res://.godot/imported/tankGround.png-f522f9f8a9d22eea09d9fb529238395e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

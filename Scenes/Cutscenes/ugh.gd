@@ -32,6 +32,8 @@ func _ready() -> void:
 	tank_1.position = dad.position
 	tank_1.play("cutscene")
 	
+	await RenderingServer.frame_post_draw
+	
 	ugh_1.play()
 	music.play()
 	

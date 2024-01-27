@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dd6caoo1gikjc"]
+[gd_scene load_steps=16 format=3 uid="uid://dd6caoo1gikjc"]
 
 [ext_resource type="Texture2D" uid="uid://c7rowaxqg6tyb" path="res://Assets/Images/Stages/school/weebSky.png" id="1"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school/petals.res" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b4n6jfg5wuvd1" path="res://Assets/Images/Stages/school/weebSchool.png" id="7"]
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Stages/school/bgFreaks.res" id="8"]
 [ext_resource type="Script" path="res://Assets/Images/Stages/limo/Dancer.gd" id="9"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite.gd" id="11_h52l7"]
 
 [sub_resource type="Animation" id="1"]
 length = 0.001
@@ -58,7 +59,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -70,7 +71,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -82,10 +83,10 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath(".:playing")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.583333),
+"times": PackedFloat32Array(0, 0.5838),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -99,7 +100,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -111,7 +112,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -123,7 +124,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath(".:playing")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.583333),
@@ -214,16 +215,20 @@ centered = false
 script = ExtResource("2_qohvj")
 parallax_factor = Vector2(0.9, 0.9)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+[node name="AnimatedSprite2D" type="Node2D" parent="ParallaxBackground/ParallaxLayer6"]
+script = ExtResource("9")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer6/AnimatedSprite2D"]
 texture_filter = 1
 position = Vector2(-100, 190)
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("8")
 animation = &"BG girls group"
 centered = false
-script = ExtResource("9")
+script = ExtResource("11_h52l7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer6/AnimatedSprite2D"]
+root_node = NodePath("../AnimatedSprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_n7glc")
 }
