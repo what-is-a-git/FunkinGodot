@@ -1108,7 +1108,7 @@ func load_potential_notes() -> void:
 			note_data_array.remove_at(note_data_array.find(note))
 		
 		if should_spawn:
-			var new_note = template_notes[note[5]].duplicate()
+			var new_note = template_notes.get(note[5]).duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
 			new_note.direction = player_strums.get_child(new_note.note_data).direction

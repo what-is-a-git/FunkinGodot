@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://cq0ly6llodru8"]
 
-[ext_resource path="res://Assets/Images/Notes/Types/death/death.res" type="SpriteFrames" id=1]
-[ext_resource path="res://Scripts/Notes/Note.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Images/Notes/Types/death/end held.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/Notes/Types/death/held.png" type="Texture2D" id=5]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Notes/Types/death/death.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/Notes/Note.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b67k3liwa62ql" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dxm8hctfatf2h" path="res://Assets/Images/Notes/Types/death/end held.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dp6vybdcmr0by" path="res://Assets/Images/Notes/Types/death/held.png" id="5"]
 
 [node name="Note" type="Node2D"]
-script = ExtResource( 2 )
-single_held_texture = ExtResource( 5 )
-single_end_held_texture = ExtResource( 4 )
+z_index = -4
+script = ExtResource("2")
+single_held_texture = ExtResource("5")
+single_end_held_texture = ExtResource("4")
 hit_damage = 50000.0
 hit_sustain_damage = 50000.0
 miss_damage = 0.0
@@ -17,15 +18,15 @@ should_hit = false
 hitbox_multiplier = 0.3
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array( 0, 0, 0, 0 )
+points = PackedVector2Array(0, 0, 0, 0)
 width = 50.0
-default_color = Color( 1, 1, 1, 0.498039 )
-texture = ExtResource( 3 )
+default_color = Color(1, 1, 1, 0.498039)
+texture = ExtResource("3")
 texture_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( 1, -51 )
-frames = ExtResource( 1 )
-animation = "square"
+z_index = 4
+position = Vector2(1, -51)
+sprite_frames = ExtResource("1")
+animation = &"square"
 frame = 5
-playing = true

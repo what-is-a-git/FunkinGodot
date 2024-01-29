@@ -2,15 +2,13 @@
 
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Notes/default/default.res" id="1"]
 [ext_resource type="Script" path="res://Scenes/Gameplay/Note Types/Alt Animation.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://qmwshnrnutah" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b67k3liwa62ql" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
 
 [node name="Alt Animation" type="Node2D"]
-z_index = 1
+z_index = -4
 script = ExtResource("2")
 
 [node name="Line2D" type="Line2D" parent="."]
-z_index = 1
-z_as_relative = false
 points = PackedVector2Array(0, 0, 0, 0)
 width = 50.0
 default_color = Color(1, 1, 1, 0.498039)
@@ -18,5 +16,6 @@ texture = ExtResource("3")
 texture_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
 sprite_frames = ExtResource("1")
 animation = &"left"

@@ -1,23 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b3gfryyog32bm"]
 
-[ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=1]
-[ext_resource path="res://Scripts/Notes/Note.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture2D" id=3]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Notes/default/default.res" id="1"]
+[ext_resource type="Script" path="res://Scripts/Notes/Note.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b67k3liwa62ql" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
 
 [node name="No Animation" type="Node2D"]
-z_index = 1
-script = ExtResource( 2 )
+z_index = -4
+script = ExtResource("2")
 play_hit_animations = false
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 1
 z_as_relative = false
-points = PackedVector2Array( 0, 0, 0, 0 )
+points = PackedVector2Array(0, 0, 0, 0)
 width = 50.0
-default_color = Color( 1, 1, 1, 0.498039 )
-texture = ExtResource( 3 )
+default_color = Color(1, 1, 1, 0.498039)
+texture = ExtResource("3")
 texture_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-frames = ExtResource( 1 )
-animation = "left"
+z_index = 4
+sprite_frames = ExtResource("1")
+animation = &"left"

@@ -6,7 +6,7 @@ code = "shader_type canvas_item;
 uniform float alpha_shit;
 
 void fragment() {
-	vec4 color = texture(TEXTURE, UV);
+	vec4 color = COLOR;
 	
 	if (color.a > 0.0) {
 		color -= alpha_shit;

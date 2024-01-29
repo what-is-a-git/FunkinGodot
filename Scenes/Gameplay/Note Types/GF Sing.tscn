@@ -2,10 +2,10 @@
 
 [ext_resource type="SpriteFrames" path="res://Assets/Images/Notes/default/default.res" id="1"]
 [ext_resource type="Script" path="res://Scenes/Gameplay/Note Types/GF Sing.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://qmwshnrnutah" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b67k3liwa62ql" path="res://Assets/Images/Notes/default/held/left hold0000.png" id="3"]
 
 [node name="Note" type="Node2D"]
-z_index = 1
+z_index = -4
 script = ExtResource("2")
 play_hit_animations = false
 is_singing_player = false
@@ -20,5 +20,6 @@ texture = ExtResource("3")
 texture_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
 sprite_frames = ExtResource("1")
 animation = &"left"

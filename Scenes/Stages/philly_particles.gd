@@ -34,6 +34,7 @@ func _ready() -> void:
 	world_environment.environment.glow_enabled = false
 	
 	if Globals.song_name.to_lower() != "blammed":
+		world_environment.queue_free()
 		queue_free()
 	else:
 		set_particles_emitting(false)
