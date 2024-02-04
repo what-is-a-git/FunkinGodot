@@ -3,3 +3,7 @@
 
 # Godot export ignores
 bin/
+
+# Custom songs
+songs/ghoul
+songs/hijinx

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt7vny7nmtw41"]
+
+[ext_resource type="Script" path="res://scenes/autoload/global_audio.gd" id="1_ete5d"]
+[ext_resource type="AudioStream" uid="uid://dergcpn8f5cju" path="res://resources/music/menus/main_theme.ogg" id="2_ew3pn"]
+[ext_resource type="Script" path="res://scripts/audio_stream_player_ex.gd" id="3_5fsok"]
+
+[node name="global_audio" type="Node"]
+script = ExtResource("1_ete5d")
+
+[node name="MUSIC" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ew3pn")
+bus = &"Music"
+script = ExtResource("3_5fsok")
+looping = 2

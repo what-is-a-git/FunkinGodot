@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4lyul6n3wfmw"]
+
+[ext_resource type="Script" path="res://scenes/autoload/runtime_info.gd" id="1_now7c"]
+[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="1_pbsgd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rqscu"]
+line_spacing = 2.0
+font = ExtResource("1_pbsgd")
+font_size = 12
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="runtime_info" type="CanvasLayer"]
+layer = 64
+script = ExtResource("1_now7c")
+
+[node name="label" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 68.0
+offset_bottom = 31.0
+text = "0 FPS (0.00ms)
+0 MiB / 0 MiB (GPU)
+0 MiB / 0 MiB (CPU)
+Funkin' Godot v0.0.1"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="ready" from="." to="." method="display"]
+[connection signal="timeout" from="timer" to="." method="display"]
