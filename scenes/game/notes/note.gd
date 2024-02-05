@@ -14,6 +14,7 @@ const directions: PackedStringArray = ['left', 'down', 'up', 'right']
 var _hit: bool = false
 var _clip_target: float = NAN
 var _field: NoteField = null
+var _character: Character = null
 
 
 func _ready() -> void:
@@ -42,11 +43,12 @@ func _ready() -> void:
 		sustain.size.y = data.length * 1000.0 * 0.45 * Game.scroll_speed / scale.y \
 				- tail.texture.get_height()
 		sustain.position.y = clip_rect.size.y - sustain.size.y
+		sustain.z_index -= 1
 	else:
 		sustain.queue_free()
 
 
-var _previous_step: int = -128
+var _previous_sixteenth: int = -128
 
 
 func _process(delta: float) -> void:
@@ -54,6 +56,9 @@ func _process(delta: float) -> void:
 		return
 	
 	if length <= 0.0:
+		if is_instance_valid(_character):
+			_character.sing(self, true)
+		
 		queue_free()
 		return
 	
@@ -63,18 +68,21 @@ func _process(delta: float) -> void:
 	sprite.visible = false
 	length -= delta
 	
-	var step: int = floor(Conductor.beat * 4.0)
+	var sixteenth: int = floor(Conductor.sixteenth)
 	
-	if step > _previous_step:
+	if sixteenth > _previous_sixteenth:
+		if is_instance_valid(_character):
+			_character.sing(self, true)
+		
 		# Because of how this is coded this will simply play
 		# the press animation over and over rather than
 		# actually trying to hit the same note multiple times.
 		_field.hit_note(self)
-		_previous_step = step
+		_previous_sixteenth = sixteenth
 	
 	# I forgot the scale.y so many times but this works
 	# as longg as the clip rect is big enough to fill the
 	# whole screen (which it is rn because -1280 is more
 	# than enough at 0.7 scale, which is the default)
-	clip_rect.global_position.y = _clip_target - clip_rect.size.y * scale.y
-	sustain.global_position.y = global_position.y - sustain.size.y * scale.y
+	clip_rect.global_position.y = _clip_target - clip_rect.size.y * global_scale.y
+	sustain.global_position.y = global_position.y - sustain.size.y * global_scale.y

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhgxccn0eo4sy"]
+
+[ext_resource type="Script" path="res://scenes/game/assets/stages/stage.gd" id="1_3aodj"]
+
+[node name="null" type="Node2D"]
+script = ExtResource("1_3aodj")
+
+[node name="player" type="Node2D" parent="."]
+
+[node name="opponent" type="Node2D" parent="."]
+
+[node name="spectator" type="Node2D" parent="."]

@@ -19,7 +19,7 @@ func display() -> void:
 	if static_memory_current > static_memory_peak:
 		static_memory_peak = static_memory_current
 	
-	label.text = '%s FPS (%.2fms)\n%s / %s (GPU)\n%s / %s (CPU)\nFunkin\' Godot v%s' % [
+	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <CPU>\nFunkin\' Godot v%s' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),

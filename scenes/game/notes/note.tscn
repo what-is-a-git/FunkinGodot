@@ -215,6 +215,7 @@ offset_top = -44.0
 offset_right = 50.0
 texture = SubResource("AtlasTexture_qgo8q")
 expand_mode = 1
+flip_h = true
 flip_v = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]

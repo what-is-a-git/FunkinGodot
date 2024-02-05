@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://0ih6j18ov417"]
+
+[ext_resource type="Script" path="res://scenes/game/assets/stages/stage.gd" id="1_j6jli"]
+[ext_resource type="Script" path="res://addons/parallax_node/parallax_node.gd" id="2_4cy2j"]
+[ext_resource type="Texture2D" uid="uid://c57ymqk8sdl5u" path="res://resources/images/game/assets/stages/stage/backdrop.png" id="3_xw3u5"]
+[ext_resource type="Texture2D" uid="uid://86bapobu21kd" path="res://resources/images/game/assets/stages/stage/front.png" id="4_l4wy2"]
+[ext_resource type="Texture2D" uid="uid://d3kftbmmrheuw" path="res://resources/images/game/assets/stages/stage/curtains.png" id="5_lk1og"]
+
+[node name="stage" type="Node2D"]
+script = ExtResource("1_j6jli")
+default_zoom = 0.9
+
+[node name="backdrop" type="Node2D" parent="."]
+script = ExtResource("2_4cy2j")
+parallax_factor = Vector2(0.9, 0.9)
+
+[node name="sprite" type="Sprite2D" parent="backdrop"]
+position = Vector2(-600, -200)
+texture = ExtResource("3_xw3u5")
+centered = false
+
+[node name="front" type="Node2D" parent="."]
+script = ExtResource("2_4cy2j")
+parallax_factor = Vector2(0.9, 0.9)
+
+[node name="sprite" type="Sprite2D" parent="front"]
+position = Vector2(-650, 600)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_l4wy2")
+centered = false
+
+[node name="curtains" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("2_4cy2j")
+parallax_factor = Vector2(1.3, 1.3)
+
+[node name="sprite" type="Sprite2D" parent="curtains"]
+position = Vector2(-500, -300)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("5_lk1og")
+centered = false
+
+[node name="player" type="Node2D" parent="."]
+position = Vector2(1284, 796)
+
+[node name="opponent" type="Node2D" parent="."]
+position = Vector2(341, 820)
+
+[node name="spectator" type="Node2D" parent="."]
+position = Vector2(827, 757)

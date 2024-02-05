@@ -9,7 +9,6 @@ script = ExtResource("1_amido")
 
 [node name="receptors" type="Node2D" parent="."]
 position = Vector2(-1.52588e-05, 0)
-scale = Vector2(1, 1)
 
 [node name="left" type="AnimatedSprite2D" parent="receptors"]
 position = Vector2(-167.75, 0)

@@ -37,6 +37,7 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 		stream_player.stream = track.stream
 		stream_player.bus = track.bus
 		stream_player.name = 'track_%s' % index
+		stream_player.volume_db = linear_to_db(track.volume)
 		add_child(stream_player)
 		
 		_tracks.push_back(stream_player)
@@ -57,22 +58,16 @@ func check_sync() -> void:
 	
 	var any_desynced: bool = false
 	var first_track := _tracks[0]
-	var target_time := first_track.get_playback_position() + Conductor.offset
+	var target_time := first_track.get_playback_position()
 	
 	for track in _tracks:
 		if track == first_track:
 			continue
 		
-		var desync: float = absf(target_time - track.get_playback_position() - Conductor.offset)
+		var desync: float = absf(target_time - track.get_playback_position())
 		if desync > MINIMUM_DESYNC_ALLOWED:
 			any_desynced = true
 			break
-	
-	# Conductor is desynced but would not be resynced otherwise,
-	# so resync it.
-	if (not any_desynced) and \
-			absf(target_time - Conductor.time) > MINIMUM_DESYNC_ALLOWED:
-		Conductor.time = target_time
 	
 	if not any_desynced:
 		return
@@ -81,9 +76,9 @@ func check_sync() -> void:
 		if track == first_track:
 			continue
 		
-		track.seek(target_time - Conductor.offset)
+		track.seek(target_time)
 	
-	Conductor.time = target_time
+	Conductor.time = target_time + Conductor.offset
 
 
 func _physics_process(delta: float) -> void:

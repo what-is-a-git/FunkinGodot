@@ -12,6 +12,8 @@ func parse() -> Chart:
 	var bpm: float = data.bpm
 	var beat: float = 0.0
 	var time: float = 0.0
+	# If your chart is completely empty, you have issues.
+	var must_hit: bool = data.notes[0].mustHitSection
 	
 	chart.events.push_back(BPMChange.new(time, bpm))
 	
@@ -19,6 +21,9 @@ func parse() -> Chart:
 		var beat_delta: float = bpm / 60.0
 		
 		for note in section.sectionNotes:
+			if int(note[1]) < 0:
+				continue
+			
 			var note_data := NoteData.new()
 			
 			note_data.time = float(note[0]) / 1000.0
@@ -35,9 +40,12 @@ func parse() -> Chart:
 		
 		if section.get('changeBPM', false) and section.get('bpm', -1.0) != bpm:
 			bpm = section.get('bpm', -1.0)
-			chart.events.push_back(BPMChange.new(time + beat_delta, bpm))
+			chart.events.push_back(BPMChange.new(time, bpm))
+		if section.mustHitSection != must_hit:
+			must_hit = section.mustHitSection
+			chart.events.push_back(CameraPan.new(time, must_hit))
 		
 		beat += 4.0
-		time += beat_delta
+		time += 4.0 / beat_delta
 	
 	return chart

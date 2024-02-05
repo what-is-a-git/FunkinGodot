@@ -15,6 +15,7 @@ layer = 64
 script = ExtResource("1_now7c")
 
 [node name="label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.95)
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 68.0

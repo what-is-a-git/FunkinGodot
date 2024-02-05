@@ -14,9 +14,11 @@ var _chart: Chart = null
 var _scroll_speed: float = -1.0
 var _lanes: int
 var _input_zone: float = 0.18
+var _default_character: Character = null
 
 
 signal note_hit(note: Note)
+signal note_miss(note: Note)
 
 
 func _ready() -> void:
@@ -60,11 +62,17 @@ func _process(delta: float) -> void:
 		if dynamic_positioning and not note._clip_target == NAN:
 			note._clip_target = receptor.global_position.y
 		
-		if note.data.time + note.data.length - Conductor.time < -_input_zone:
+		if (not note._hit) and (note.data.time + note.data.length
+				- Conductor.time < -_input_zone):
 			miss_note(note)
 	
 	if not takes_input:
 		_input_bot()
+	elif is_instance_valid(_default_character):
+		for i in _lanes:
+			if Input.is_action_pressed('input_%s' % i):
+				_default_character._sing_timer = 0.0
+				return
 
 
 func hit_note(note: Note):
@@ -76,6 +84,10 @@ func hit_note(note: Note):
 	var receptor: Receptor = _receptors[note.data.direction % _lanes]
 	receptor.play_anim('confirm', true)
 	
+	if (not is_instance_valid(note._character)) and \
+			is_instance_valid(_default_character):
+		_default_character.sing(note, true)
+	
 	if note._hit:
 		return
 	
@@ -83,12 +95,16 @@ func hit_note(note: Note):
 	note._hit = true
 	note._clip_target = _receptors[0].global_position.y
 	note._field = self
+	
+	if note.length > 0.0 and Conductor.time > note.data.time:
+		note.length -= Conductor.time - note.data.time
+		note.sustain.size.y = note.length * 1000.0 * 0.45 * Game.scroll_speed / note.scale.y \
+				- note.tail.texture.get_height()
+		note.sustain.position.y = note.clip_rect.size.y - note.sustain.size.y
 
 
 func miss_note(note: Note) -> void:
-	if takes_input:
-		print('missed note %s' % note)
-	
+	note_miss.emit(note)
 	note.queue_free()
 
 

@@ -3,7 +3,7 @@ class_name SongAuthor extends Resource
 
 @export var name: StringName = &'Kawai Sprite'
 @export var role: StringName = &'Composer'
-@export var icon: Texture2D = null
+@export var icon: Icon = null
 
 
 func _to_string() -> String:

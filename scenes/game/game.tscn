@@ -1,8 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://da8mu3oqto3qq"]
+[gd_scene load_steps=11 format=3 uid="uid://da8mu3oqto3qq"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_tneyb"]
 [ext_resource type="Script" path="res://scenes/game/tracks.gd" id="2_j74rm"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="3_046jb"]
+[ext_resource type="Script" path="res://scenes/game/health_bar.gd" id="4_qcdwk"]
+[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="5_kd5im"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vjxi"]
+bg_color = Color(0.529412, 0.545098, 0.545098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sakno"]
+bg_color = Color(0.905882, 0.92549, 0.933333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wblnk"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku58i"]
+font = ExtResource("5_kd5im")
+font_size = 14
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_odcbh"]
+font = ExtResource("5_kd5im")
+font_size = 14
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_tneyb")
@@ -11,10 +47,90 @@ script = ExtResource("1_tneyb")
 editor_description = "Node to contain all audio tracks for the given song that is playing."
 script = ExtResource("2_j74rm")
 
-[node name="player" parent="." instance=ExtResource("3_046jb")]
-position = Vector2(980, 608)
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_speed = 4.0
+
+[node name="hud_layer" type="CanvasLayer" parent="."]
+
+[node name="hud" type="Node2D" parent="hud_layer"]
+position = Vector2(640, 360)
+
+[node name="note_fields" type="Node2D" parent="hud_layer/hud"]
+position = Vector2(0, 248)
+
+[node name="player" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
+position = Vector2(300, 0)
 takes_input = true
 side = 1
 
-[node name="opponent" parent="." instance=ExtResource("3_046jb")]
-position = Vector2(300, 608)
+[node name="opponent" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
+position = Vector2(-300, 0)
+
+[node name="health_bar" type="Node2D" parent="hud_layer/hud"]
+unique_name_in_owner = true
+position = Vector2(0, -285)
+script = ExtResource("4_qcdwk")
+
+[node name="bar" type="ProgressBar" parent="hud_layer/hud/health_bar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -12.0
+offset_right = 320.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7vjxi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sakno")
+value = 50.0
+fill_mode = 1
+show_percentage = false
+
+[node name="outline" type="Panel" parent="hud_layer/hud/health_bar/bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wblnk")
+
+[node name="icons" type="Node2D" parent="hud_layer/hud/health_bar"]
+
+[node name="score_label" type="Label" parent="hud_layer/hud/health_bar"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -640.0
+offset_top = 32.0
+offset_right = 640.0
+offset_bottom = 96.0
+grow_horizontal = 2
+text = "Score:0 • Misses:0 • Accuracy:N/A (N/A)"
+label_settings = SubResource("LabelSettings_ku58i")
+horizontal_alignment = 1
+
+[node name="song_label" type="Label" parent="hud_layer/hud"]
+modulate = Color(1, 1, 1, 0.75)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = 288.0
+offset_right = 640.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Test • [NORMAL]"
+label_settings = SubResource("LabelSettings_odcbh")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="stage" type="Node2D" parent="."]
+
+[node name="characters" type="Node2D" parent="."]
