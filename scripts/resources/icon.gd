@@ -16,6 +16,6 @@ static func create_sprite(icon: Icon) -> Sprite2D:
 	sprite.texture = icon.texture
 	sprite.hframes = icon.frames.x
 	sprite.vframes = icon.frames.y
-	sprite.texture_filter = icon.filter
+	sprite.texture_filter = icon.filter as CanvasItem.TextureFilter
 	
 	return sprite

@@ -5,6 +5,7 @@ class_name Character extends Node2D
 @export var starts_as_player: bool = false
 
 @export var dance_steps: Array[StringName] = [&'idle']
+@export_range(0.0, 1024.0, 0.01) var sing_steps: float = 4.0
 var _dance_step: int = 0
 
 @onready var _camera_offset: Node2D = $camera_offset
@@ -21,6 +22,9 @@ func _ready() -> void:
 
 
 func play_anim(anim: StringName, force: bool = false) -> void:
+	if not _animation_player.has_animation(anim):
+		return
+	
 	_animation = anim
 	_singing = _animation.begins_with('sing_')
 	
@@ -44,6 +48,19 @@ func sing(note: Note, force: bool = false) -> void:
 	play_anim('sing_%s' % direction.to_lower(), force)
 
 
+func sing_miss(note: Note, force: bool = false) -> void:
+	_sing_timer = 0.0
+	
+	const swapped: PackedStringArray = [&'left', &'right']
+	var direction: StringName = Note.directions[absi(note.data.direction) % 
+			Note.directions.size()]
+	
+	if _is_player != starts_as_player and swapped.has(direction):
+		direction = swapped[wrapi(swapped.find(direction) + 1, 0, swapped.size())]
+	
+	play_anim('sing_%s_miss' % direction.to_lower(), force)
+
+
 func dance(force: bool = false) -> void:
 	if _singing and not force:
 		return
@@ -59,7 +76,7 @@ func dance(force: bool = false) -> void:
 
 func _process(delta: float) -> void:
 	if _singing:
-		_sing_timer += delta
+		_sing_timer += delta * Conductor.beat_delta
 		
-		if _sing_timer >= 1.0 / Conductor.beat_delta:
+		if _sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
 			dance(true)

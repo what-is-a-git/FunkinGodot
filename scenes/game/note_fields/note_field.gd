@@ -96,14 +96,20 @@ func hit_note(note: Note):
 	note._clip_target = _receptors[0].global_position.y
 	note._field = self
 	
-	if note.length > 0.0 and Conductor.time > note.data.time:
+	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time
-		note.sustain.size.y = note.length * 1000.0 * 0.45 * Game.scroll_speed / note.scale.y \
-				- note.tail.texture.get_height()
-		note.sustain.position.y = note.clip_rect.size.y - note.sustain.size.y
+	
+		if Conductor.time > note.data.time:
+			note.sustain.size.y = note.length * 1000.0 * 0.45 * Game.scroll_speed / note.scale.y \
+					- note.tail.texture.get_height()
+			note.sustain.position.y = note.clip_rect.size.y - note.sustain.size.y
 
 
 func miss_note(note: Note) -> void:
+	if (not is_instance_valid(note._character)) and \
+			is_instance_valid(_default_character):
+		_default_character.sing_miss(note, true)
+	
 	note_miss.emit(note)
 	note.queue_free()
 

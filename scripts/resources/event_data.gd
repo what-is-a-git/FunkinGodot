@@ -7,4 +7,4 @@ class_name EventData extends Resource
 
 
 func _to_string() -> String:
-	return 'EventData(name: %s, data: %s)' % [name, data]
+	return 'EventData(name: %s, data: %s, time: %s)' % [name, data, time]

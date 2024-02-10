@@ -15,6 +15,7 @@ var _hit: bool = false
 var _clip_target: float = NAN
 var _field: NoteField = null
 var _character: Character = null
+var _previous_step: int = -128
 
 
 func _ready() -> void:
@@ -48,9 +49,6 @@ func _ready() -> void:
 		sustain.queue_free()
 
 
-var _previous_sixteenth: int = -128
-
-
 func _process(delta: float) -> void:
 	if not _hit:
 		return
@@ -68,9 +66,9 @@ func _process(delta: float) -> void:
 	sprite.visible = false
 	length -= delta
 	
-	var sixteenth: int = floor(Conductor.sixteenth)
+	var step: int = floor(Conductor.step)
 	
-	if sixteenth > _previous_sixteenth:
+	if step > _previous_step:
 		if is_instance_valid(_character):
 			_character.sing(self, true)
 		
@@ -78,7 +76,7 @@ func _process(delta: float) -> void:
 		# the press animation over and over rather than
 		# actually trying to hit the same note multiple times.
 		_field.hit_note(self)
-		_previous_sixteenth = sixteenth
+		_previous_step = step
 	
 	# I forgot the scale.y so many times but this works
 	# as longg as the clip rect is big enough to fill the

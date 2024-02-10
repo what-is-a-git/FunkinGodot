@@ -15,7 +15,29 @@ func parse() -> Chart:
 	# If your chart is completely empty, you have issues.
 	var must_hit: bool = data.notes[0].mustHitSection
 	
-	chart.events.push_back(BPMChange.new(time, bpm))
+	var event_objects = data.get('eventObjects', null)
+	
+	if event_objects != null:
+		# disclaimer: this does NOT help the camera pans, but at least
+		# everything else is accurate for now :]
+		for object in event_objects:
+			if object.get('type', '').to_lower() != 'bpm change':
+				continue
+			
+			var beat_delta: float = bpm / 60.0
+			var last_beat: float = beat
+			beat = object.get('position', -1.0)
+			time += (beat - last_beat) / beat_delta
+			bpm = object.get('value', -1.0)
+			chart.events.push_back(BPMChange.new(time, bpm))
+		
+		beat = 0.0
+		time = 0.0
+		bpm = data.bpm
+	else:
+		chart.events.push_back(BPMChange.new(time, bpm))
+	
+	chart.events.push_back(CameraPan.new(time, must_hit))
 	
 	for section in data.notes:
 		var beat_delta: float = bpm / 60.0
@@ -47,5 +69,24 @@ func parse() -> Chart:
 		
 		beat += 4.0
 		time += 4.0 / beat_delta
+	
+	var index: int = 0
+	var last_note: NoteData = null
+	
+	while (not chart.notes.is_empty()) and index < chart.notes.size():
+		var note: NoteData = chart.notes[index]
+		
+		if not is_instance_valid(last_note):
+			index += 1
+			last_note = note
+			continue
+		
+		if last_note.direction == note.direction and \
+				absf(last_note.time - note.time) <= 0.0001:
+			chart.notes.remove_at(index)
+			continue
+		
+		last_note = note
+		index += 1
 	
 	return chart

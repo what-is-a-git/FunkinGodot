@@ -8,7 +8,7 @@ var beat_delta: float = 0.0:
 	get:
 		return bpm / 60.0
 
-var sixteenth: float = 0.0:
+var step: float = 0.0:
 	get:
 		return beat * 4.0
 
@@ -24,7 +24,9 @@ var rate: float = 1.0
 var active: bool = true
 var offset: float = -AudioServer.get_output_latency()
 
-signal on_sixteenth_hit(sixteenth: int)
+var default_input_zone: float = 0.18
+
+signal on_step_hit(step: int)
 signal on_beat_hit(beat: int)
 signal on_measure_hit(measure: int)
 
@@ -33,7 +35,7 @@ func _process(delta: float) -> void:
 	if not active:
 		return
 	
-	var last_sixteenth: int =  floor(sixteenth)
+	var last_step: int =  floor(step)
 	var last_beat: int =  floor(beat)
 	var last_measure: int =  floor(measure)
 	
@@ -50,8 +52,8 @@ func _process(delta: float) -> void:
 		time += delta
 		beat += delta * beat_delta
 	
-	if floor(sixteenth) > last_sixteenth:
-		on_sixteenth_hit.emit(floor(sixteenth))
+	if floor(step) > last_step:
+		on_step_hit.emit(floor(step))
 	if floor(beat) > last_beat:
 		on_beat_hit.emit(floor(beat))
 	if floor(measure) > last_measure:

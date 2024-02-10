@@ -9,10 +9,16 @@ static var scroll_speed: float = 3.3
 static var note_types: Dictionary = {}
 static var instance: Game = null
 
+@onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
+@onready var ratings_calculator: RatingsCalculator = %ratings_calculator
 @onready var tracks: Tracks = $tracks
 @onready var camera: Camera2D = $camera
 @onready var hud: Node2D = $hud_layer/hud
 @onready var health_bar: HealthBar = %health_bar
+@onready var rating_container: Node2D = %rating_container
+@onready var rating_sprite: Sprite2D = rating_container.get_node('rating')
+var rating_tween: Tween
+@onready var combo_node: Node2D = rating_container.get_node('combo')
 @onready var song_label: Label = hud.get_node('song_label')
 
 var target_camera_position: Vector2 = Vector2.ZERO
@@ -35,9 +41,15 @@ var stage: Stage
 var health: float = 50.0
 var score: int = 0
 var misses: int = 0
+var combo: int = 0
 var accuracy: float = 0.0:
 	get:
-		return 100.0
+		if is_instance_valid(accuracy_calculator):
+			return accuracy_calculator.get_accuracy()
+		
+		return 0.0
+
+@onready var skin: HUDSkin = load('res://resources/hud_skins/default.tres')
 
 @onready var _default_note := load('res://scenes/game/notes/note.tscn')
 var _event: int = 0
@@ -58,6 +70,8 @@ func _ready() -> void:
 		chart = funkin_chart.parse()
 	
 	chart.notes.sort_custom(func(a, b):
+		return a.time < b.time)
+	chart.events.sort_custom(func(a, b):
 		return a.time < b.time)
 	
 	note_types.clear()
@@ -81,6 +95,7 @@ func _ready() -> void:
 		stage = assets.stage.instantiate()
 		_stage.add_child(stage)
 		target_camera_zoom = Vector2(stage.default_zoom, stage.default_zoom)
+		camera.zoom = target_camera_zoom
 		
 		# Position and scale the characters.
 		var player_point: Node2D = stage.get_node('player')
@@ -110,17 +125,13 @@ func _ready() -> void:
 	Conductor.on_beat_hit.connect(_on_beat_hit)
 	Conductor.on_measure_hit.connect(_on_measure_hit)
 	
-	# Sets the initial bpm. :)
-	if not chart.events.is_empty() and \
-			chart.events[0].name.to_lower() == 'bpm change':
-		_on_event_hit(chart.events[0])
+	if chart.events.is_empty():
+		return
+	
+	while (not chart.events.is_empty()) and _event < chart.events.size() \
+			and chart.events[_event].time <= 0.0:
+		_on_event_hit(chart.events[_event])
 		_event += 1
-	# Initial camera pan :3
-	if not chart.events.is_empty() and \
-			chart.events[1].name.to_lower() == 'camera pan':
-		_on_event_hit(chart.events[1])
-		_event += 1
-		camera.position = target_camera_position
 
 
 func _process(delta: float) -> void:
@@ -158,18 +169,65 @@ func _on_event_hit(event: EventData) -> void:
 		&'camera pan':
 			var character: Character = player if event.data[0] == 1 else opponent
 			target_camera_position = character._camera_offset.global_position
+			
+			if event.time <= 0.0:
+				camera.position = target_camera_position
 		_:
 			pass
 
 
 func _on_note_miss(note: Note) -> void:
+	rating_container.visible = false
+	
+	accuracy_calculator.record_hit(Conductor.default_input_zone)
 	health = clampf(health - 2.0, 0.0, 100.0)
 	misses += 1
 	score -= 10
+	combo = 0
 	health_bar.update_score_label()
 
 
 func _on_note_hit(note: Note) -> void:
-	health = clampf(health + 1.15, 0.0, 100.0)
-	score += 150
+	var difference: float = Conductor.time - note.data.time
+	accuracy_calculator.record_hit(absf(difference))
+	
+	if is_instance_valid(rating_tween) and rating_tween.is_running():
+		rating_tween.kill()
+	
+	var rating := ratings_calculator.get_rating(absf(difference * 1000.0))
+	match rating.name:
+		&'marvelous':
+			rating_sprite.texture = skin.marvelous
+		&'sick':
+			rating_sprite.texture = skin.sick
+		&'good':
+			rating_sprite.texture = skin.good
+		&'bad':
+			rating_sprite.texture = skin.bad
+		&'shit':
+			rating_sprite.texture = skin.shit
+	
+	rating_container.visible = true
+	rating_container.modulate.a = 1.0
+	rating_container.scale = Vector2(1.1, 1.1)
+	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)
+	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.15).set_delay(0.2)
+	
+	health = clampf(health + rating.health, 0.0, 100.0)
+	score += rating.score
+	combo += 1
+	
+	var combo_str := str(combo).pad_zeros(4)
+	
+	for i in combo_node.get_child_count():
+		var number: Sprite2D = combo_node.get_child(i)
+		
+		if i <= combo_str.length() - 1:
+			number.frame = int(combo_str[i])
+			number.visible = true
+		else:
+			number.frame = 0
+			number.visible = false
+	
 	health_bar.update_score_label()

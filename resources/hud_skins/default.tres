@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HUDSkin" load_steps=7 format=3 uid="uid://oxo327xfxemo"]
+
+[ext_resource type="Texture2D" uid="uid://bfte1efl00hqd" path="res://resources/images/game/skins/default/ratings/bad.png" id="1_xxv5p"]
+[ext_resource type="Texture2D" uid="uid://c48jhvhvs2fdc" path="res://resources/images/game/skins/default/ratings/good.png" id="2_w1wbh"]
+[ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://resources/images/game/skins/default/ratings/marvelous.png" id="3_ae40e"]
+[ext_resource type="Script" path="res://scripts/resources/hud_skin.gd" id="4_vkktj"]
+[ext_resource type="Texture2D" uid="uid://ccnsbyha7asga" path="res://resources/images/game/skins/default/ratings/shit.png" id="5_slrmr"]
+[ext_resource type="Texture2D" uid="uid://gn12nu6v7fgf" path="res://resources/images/game/skins/default/ratings/sick.png" id="6_xmh8p"]
+
+[resource]
+script = ExtResource("4_vkktj")
+marvelous = ExtResource("3_ae40e")
+sick = ExtResource("6_xmh8p")
+good = ExtResource("2_w1wbh")
+bad = ExtResource("1_xxv5p")
+shit = ExtResource("5_slrmr")
+rating_scale = 0.7
+combo_folder = "res://resources/images/game/skins/default/combo"
+combo_scale = 0.7

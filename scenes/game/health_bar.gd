@@ -53,14 +53,35 @@ func _process(delta: float) -> void:
 	elif bar.value <= 20.0:
 		player_icon.frame = 1 if player_frames >= 2 else 0
 		opponent_icon.frame = 2 if opponent_frames >= 3 else 0
+	else:
+		player_icon.frame = 0
+		opponent_icon.frame = 0
 
 
 func update_score_label() -> void:
+	const ranks: Array = [
+		[0.0, &'F'],
+		[50.0, &'F+'],
+		[60.0, &'D'],
+		[70.0, &'C'],
+		[80.0, &'B'],
+		[90.0, &'A'],
+		[95.0, &'S'],
+		[100.0, &'S+'],
+	]
+	var rank: StringName = &'N/A'
+	
+	for rank_data in ranks:
+		if snappedf(Game.instance.accuracy, 0.01) >= rank_data[0]:
+			rank = rank_data[1]
+		else:
+			break
+	
 	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.2f%% (%s)' % [
 		Game.instance.score,
 		Game.instance.misses,
 		Game.instance.accuracy,
-		'N/A'
+		rank,
 	]
 
 

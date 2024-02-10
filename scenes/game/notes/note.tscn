@@ -211,7 +211,7 @@ expand_mode = 1
 
 [node name="tail" type="TextureRect" parent="clip_rect/sustain"]
 layout_mode = 0
-offset_top = -44.0
+offset_top = -63.0
 offset_right = 50.0
 texture = SubResource("AtlasTexture_qgo8q")
 expand_mode = 1
