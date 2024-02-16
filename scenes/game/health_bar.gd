@@ -33,7 +33,7 @@ func _ready() -> void:
 	icons.add_child(opponent_icon)
 	opponent_color = Game.instance.opponent.icon.color
 	
-	Conductor.on_beat_hit.connect(_on_beat_hit)
+	Conductor.beat_hit.connect(_on_beat_hit)
 
 
 func _process(delta: float) -> void:

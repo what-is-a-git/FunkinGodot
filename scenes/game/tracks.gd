@@ -7,6 +7,8 @@ class_name Tracks extends Node
 ## Name is self explanatory but its measured in seconds.
 const MINIMUM_DESYNC_ALLOWED: float = 0.010
 
+var playing: bool = false
+
 var _tracks: Array[AudioStreamPlayerEX] = []
 var _last_mix_time: float = 0.0
 
@@ -46,6 +48,8 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 
 ## Plays all tracks from position [param from_position].
 func play(from_position: float = 0.0) -> void:
+	playing = true
+	
 	for track in _tracks:
 		track.play(from_position)
 
@@ -56,6 +60,7 @@ func check_sync() -> void:
 	if _tracks.is_empty():
 		return
 	
+	var last_time: float = Conductor.time
 	var any_desynced: bool = false
 	var first_track := _tracks[0]
 	var target_time := first_track.get_playback_position()
@@ -70,6 +75,10 @@ func check_sync() -> void:
 			break
 	
 	if not any_desynced:
+		if absf(target_time - Conductor.time) >= 0.1:
+			Conductor.time = target_time + Conductor.offset
+			Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
+		
 		return
 	
 	for track in _tracks:
@@ -79,10 +88,11 @@ func check_sync() -> void:
 		track.seek(target_time)
 	
 	Conductor.time = target_time + Conductor.offset
+	Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 
 
 func _physics_process(delta: float) -> void:
-	if AudioServer.get_time_to_next_mix() < _last_mix_time:
+	if playing and AudioServer.get_time_to_next_mix() < _last_mix_time:
 		check_sync()
 	
 	_last_mix_time = AudioServer.get_time_to_next_mix()
@@ -94,6 +104,6 @@ func _physics_process(delta: float) -> void:
 			any_playing = true
 			break
 	
-	if not any_playing:
+	if playing and not any_playing:
 		ended.emit()
 		queue_free()

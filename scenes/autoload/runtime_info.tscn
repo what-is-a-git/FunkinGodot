@@ -12,6 +12,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="runtime_info" type="CanvasLayer"]
 layer = 64
+visible = false
 script = ExtResource("1_now7c")
 
 [node name="label" type="Label" parent="."]

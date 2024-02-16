@@ -5,8 +5,7 @@
 bin/
 
 # Custom songs
-songs/ghoul
-songs/hijinx
-songs/amusia
-songs/bushwhack
-songs/unbeatable
+songs/mods/
+
+# Backup files
+**~

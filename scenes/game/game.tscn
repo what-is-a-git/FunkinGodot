@@ -18,7 +18,7 @@ bg_color = Color(0.529412, 0.545098, 0.545098, 1)
 bg_color = Color(0.905882, 0.92549, 0.933333, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wblnk"]
-bg_color = Color(1, 1, 1, 0)
+bg_color = Color(0, 0, 0, 0)
 border_width_left = 6
 border_width_top = 6
 border_width_right = 6
@@ -167,44 +167,36 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_h7vl1")
 
 [node name="combo" type="Node2D" parent="hud_layer/hud/rating_container"]
-
-[node name="0" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
-position = Vector2(-91.15, 85)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("7_u2hsg")
-hframes = 10
+position = Vector2(-90, 75)
+scale = Vector2(0.5, 0.5)
 
 [node name="1" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
-position = Vector2(-31.15, 85)
-scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_u2hsg")
 hframes = 10
 
 [node name="2" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
-position = Vector2(28.85, 85)
-scale = Vector2(0.7, 0.7)
+position = Vector2(85, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
 
 [node name="3" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
-position = Vector2(88.85, 85)
-scale = Vector2(0.7, 0.7)
+position = Vector2(170, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
 
 [node name="4" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
 visible = false
-position = Vector2(148.85, 85)
-scale = Vector2(0.7, 0.7)
+position = Vector2(255, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
 
 [node name="5" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
 visible = false
-position = Vector2(208.85, 85)
-scale = Vector2(0.7, 0.7)
+position = Vector2(340, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
+
+[node name="countdown_container" type="Node2D" parent="hud_layer/hud"]
 
 [node name="song_label" type="Label" parent="hud_layer/hud"]
 modulate = Color(1, 1, 1, 0.75)

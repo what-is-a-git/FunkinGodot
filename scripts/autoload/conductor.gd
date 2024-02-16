@@ -18,6 +18,7 @@ var measure: float = 0.0:
 
 var time: float = 0.0
 var target_audio: AudioStreamPlayer = null
+var _target_audio_last_time: float = INF
 
 var rate: float = 1.0
 
@@ -26,9 +27,9 @@ var offset: float = -AudioServer.get_output_latency()
 
 var default_input_zone: float = 0.18
 
-signal on_step_hit(step: int)
-signal on_beat_hit(beat: int)
-signal on_measure_hit(measure: int)
+signal step_hit(step: int)
+signal beat_hit(beat: int)
+signal measure_hit(measure: int)
 
 
 func _process(delta: float) -> void:
@@ -41,26 +42,34 @@ func _process(delta: float) -> void:
 	
 	if target_audio:
 		var last_time: float = time
-		var new_time: float = target_audio.get_playback_position() + \
+		var audio_position: float = target_audio.get_playback_position()
+		var new_time: float = audio_position + \
 				AudioServer.get_time_since_last_mix() + offset
+		
+		if audio_position < _target_audio_last_time:
+			_target_audio_last_time = audio_position
+			last_time = offset
+			time = offset
 		
 		# bit hacky but it works! :3
 		if new_time > last_time:
 			time = new_time
 			beat += (time - last_time) * beat_delta
+			_target_audio_last_time = audio_position
 	else:
 		time += delta
 		beat += delta * beat_delta
 	
 	if floor(step) > last_step:
-		on_step_hit.emit(floor(step))
+		step_hit.emit(floor(step))
 	if floor(beat) > last_beat:
-		on_beat_hit.emit(floor(beat))
+		beat_hit.emit(floor(beat))
 	if floor(measure) > last_measure:
-		on_measure_hit.emit(floor(measure))
+		measure_hit.emit(floor(measure))
 
 
 func reset() -> void:
 	beat = 0.0
 	time = offset
 	target_audio = null
+	_target_audio_last_time = INF

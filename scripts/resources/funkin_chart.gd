@@ -72,6 +72,7 @@ func parse() -> Chart:
 	
 	var index: int = 0
 	var last_note: NoteData = null
+	var stacked_notes: int = 0
 	
 	while (not chart.notes.is_empty()) and index < chart.notes.size():
 		var note: NoteData = chart.notes[index]
@@ -84,9 +85,14 @@ func parse() -> Chart:
 		if last_note.direction == note.direction and \
 				absf(last_note.time - note.time) <= 0.0001:
 			chart.notes.remove_at(index)
+			stacked_notes += 1
 			continue
 		
 		last_note = note
 		index += 1
+	
+	print('Loaded FunkinChart(%s) with %s stacked notes detected.' % [
+		data.song, stacked_notes
+	])
 	
 	return chart

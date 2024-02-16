@@ -180,6 +180,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		for note in _notes.get_children():
 			if not pressed[absi(note.data.direction) % _lanes]:
 				continue
+			if note._hit:
+				continue
 			if Conductor.time >= note.data.time - _input_zone:
 				hit_note(note)
 				pressed[absi(note.data.direction) % _lanes] = false

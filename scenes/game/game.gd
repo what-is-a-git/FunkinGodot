@@ -1,7 +1,7 @@
 class_name Game extends Node2D
 
 
-static var song: StringName = &'philly_nice'
+static var song: StringName = &'bopeebo'
 static var chart: Chart = null
 static var scroll_speed: float = 3.3
 
@@ -20,6 +20,7 @@ static var instance: Game = null
 var rating_tween: Tween
 @onready var combo_node: Node2D = rating_container.get_node('combo')
 @onready var song_label: Label = hud.get_node('song_label')
+@onready var countdown_container: Node2D = $hud_layer/hud/countdown_container
 
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
@@ -102,7 +103,10 @@ func _ready() -> void:
 		var opponent_point: Node2D = stage.get_node('opponent')
 		var spectator_point: Node2D = stage.get_node('spectator')
 		player.global_position = player_point.global_position
-		player.scale *= Vector2(-1.0, 1.0) * player_point.scale
+		
+		if not player.starts_as_player:
+			player.scale *= Vector2(-1.0, 1.0) * player_point.scale
+		
 		player._is_player = true
 		opponent.global_position = opponent_point.global_position
 		opponent.scale *= opponent_point.scale
@@ -115,15 +119,18 @@ func _ready() -> void:
 	
 	health_bar._ready()
 	
+	combo_node.scale = skin.combo_scale
+	rating_sprite.scale = skin.rating_scale
+	countdown_container.scale = skin.countdown_scale
+	
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
 	
 	song_label.text = '%s • [%s]' % [metadata.display_name, 'HARD'.to_upper()]
 	
-	tracks.play()
 	Conductor.reset()
-	Conductor.on_beat_hit.connect(_on_beat_hit)
-	Conductor.on_measure_hit.connect(_on_measure_hit)
+	Conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.measure_hit.connect(_on_measure_hit)
 	
 	if chart.events.is_empty():
 		return
@@ -132,12 +139,21 @@ func _ready() -> void:
 			and chart.events[_event].time <= 0.0:
 		_on_event_hit(chart.events[_event])
 		_event += 1
+	
+	Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
+	Conductor.beat = -4.0
+	_on_beat_hit(Conductor.beat)
 
 
 func _process(delta: float) -> void:
 	camera.position = lerp(camera.position, target_camera_position, delta * 3.0)
 	camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
 	hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
+	
+	if is_instance_valid(tracks):
+		if Conductor.time >= 0.0 and not tracks.playing:
+			tracks.play()
+			Conductor.time = Conductor.offset
 	
 	if not is_instance_valid(chart):
 		return
@@ -155,6 +171,42 @@ func _on_beat_hit(beat: int) -> void:
 	player.dance()
 	opponent.dance()
 	spectator.dance()
+	
+	# Countdown lol
+	if Conductor.time < 0.0 and beat < 0:
+		var index: int = clampi(4 - absi(beat), 0, 4)
+		_display_countdown_sprite(index)
+		_play_countdown_sound(index)
+
+
+func _play_countdown_sound(index: int) -> void:
+	# Don't play things that don't exist.
+	if not is_instance_valid(skin.countdown_sounds[index]):
+		return
+	
+	var player := AudioStreamPlayerEX.new()
+	player.stream = skin.countdown_sounds[index]
+	player.bus = &'SFX'
+	player.finished.connect(player.queue_free)
+	countdown_container.add_child(player)
+	player.play()
+
+
+func _display_countdown_sprite(index: int) -> void:
+	# Don't display things that don't exist.
+	if not is_instance_valid(skin.countdown_textures[index]):
+		return
+	
+	var sprite := Sprite2D.new()
+	sprite.scale = Vector2(1.05, 1.05)
+	sprite.texture = skin.countdown_textures[index]
+	countdown_container.add_child(sprite)
+	
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
+			.set_ease(Tween.EASE_OUT).set_parallel()
+	tween.tween_property(sprite, 'modulate:a', 0.0, 1.0 / Conductor.beat_delta)
+	tween.tween_property(sprite, 'scale', Vector2.ONE, 1.0 / Conductor.beat_delta)
+	tween.tween_callback(sprite.queue_free).set_delay(1.0 / Conductor.beat_delta)
 
 
 func _on_measure_hit(measure: int) -> void:
@@ -218,7 +270,7 @@ func _on_note_hit(note: Note) -> void:
 	score += rating.score
 	combo += 1
 	
-	var combo_str := str(combo).pad_zeros(4)
+	var combo_str := str(combo).pad_zeros(3)
 	
 	for i in combo_node.get_child_count():
 		var number: Sprite2D = combo_node.get_child(i)

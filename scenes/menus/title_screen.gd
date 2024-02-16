@@ -12,8 +12,8 @@ func _ready() -> void:
 		Conductor.bpm = 102.0
 		Conductor.target_audio = GlobalAudio.get_player('MUSIC')
 	
-	Conductor.on_beat_hit.connect(on_beat_hit)
-	on_beat_hit(0)
+	Conductor.beat_hit.connect(_on_beat_hit)
+	_on_beat_hit(0)
 
 
 func _process(delta: float) -> void:
@@ -21,6 +21,6 @@ func _process(delta: float) -> void:
 		SceneManager.switch_to('scenes/game/game.tscn')
 
 
-func on_beat_hit(_beat: int) -> void:
+func _on_beat_hit(_beat: int) -> void:
 	dance_left = not dance_left
 	girlfriend_animation.play('dance_left' if dance_left else 'dance_right')

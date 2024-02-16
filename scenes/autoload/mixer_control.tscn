@@ -1,0 +1,156 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhbryleu1jjq0"]
+
+[ext_resource type="Script" path="res://scenes/autoload/mixer_control.gd" id="1_fobyb"]
+[ext_resource type="Theme" uid="uid://o8lle0eu7wkh" path="res://resources/themes/general_theme.tres" id="2_baism"]
+[ext_resource type="Texture2D" uid="uid://bdyx2m586qlte" path="res://resources/images/icons/music_note.svg" id="3_d0bi8"]
+[ext_resource type="Texture2D" uid="uid://04chxwlihb7f" path="res://resources/images/icons/headphones.svg" id="3_f6m6h"]
+[ext_resource type="Texture2D" uid="uid://4qant1okv1gk" path="res://resources/images/icons/piano.svg" id="4_rgfc6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upr3n"]
+bg_color = Color(0, 0, 0, 0.5)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.5)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_4lv5x"]
+font_size = 12
+font_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vo63s"]
+font_size = 10
+font_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="mixer_control" type="CanvasLayer"]
+layer = 16
+script = ExtResource("1_fobyb")
+icons = Array[Texture2D]([ExtResource("3_f6m6h"), ExtResource("3_d0bi8"), ExtResource("4_rgfc6")])
+
+[node name="root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_baism")
+
+[node name="panel" type="Panel" parent="root"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_upr3n")
+
+[node name="bar" type="ProgressBar" parent="root/panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -84.0
+offset_right = 40.0
+offset_bottom = -8.0
+grow_vertical = 0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="volume_label" type="Label" parent="root/panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -24.0
+offset_right = -80.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "50% Volume"
+label_settings = SubResource("LabelSettings_4lv5x")
+vertical_alignment = 2
+
+[node name="icon" type="TextureRect" parent="root/panel"]
+modulate = Color(0.478248, 0.478248, 0.478248, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -84.0
+offset_right = -8.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("3_f6m6h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="icon_label" type="Label" parent="root/panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -21.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Master"
+label_settings = SubResource("LabelSettings_vo63s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left" type="Label" parent="root/panel/icon_label"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -16.0
+offset_right = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "<"
+label_settings = SubResource("LabelSettings_vo63s")
+vertical_alignment = 1
+
+[node name="right" type="Label" parent="root/panel/icon_label"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -16.0
+offset_right = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+text = ">"
+label_settings = SubResource("LabelSettings_vo63s")
+horizontal_alignment = 2
+vertical_alignment = 1

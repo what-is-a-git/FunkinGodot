@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var version: String = ProjectSettings.get_setting('application/config/version', 'Unknown')
 
 var video_memory_peak: float = 0.0
+var texture_memory_peak: float = 0.0
 var static_memory_peak: float = 0.0
 
 
@@ -14,17 +15,30 @@ func display() -> void:
 	if video_memory_current > video_memory_peak:
 		video_memory_peak = video_memory_current
 	
+	var texture_memory_current: float = Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)
+	
+	if texture_memory_current > texture_memory_peak:
+		texture_memory_peak = texture_memory_current
+	
 	var static_memory_current: float = Performance.get_monitor(Performance.MEMORY_STATIC)
 	
 	if static_memory_current > static_memory_peak:
 		static_memory_peak = static_memory_current
 	
-	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <CPU>\nFunkin\' Godot v%s' % [
+	var scene_name: StringName = &'N/A'
+	var current_scene := get_tree().current_scene
+	
+	if is_instance_valid(current_scene):
+		scene_name = current_scene.name.to_pascal_case()
+	
+	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\n%s / %s <CPU>\nFunkin\' Godot v%s\n%s' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
+		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
 		String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 		version,
+		scene_name,
 	]
 	
 	if OS.is_debug_build():

@@ -2,13 +2,18 @@
 
 [ext_resource type="Script" path="res://scenes/game/assets/characters/character.gd" id="1_rjvuh"]
 
+[sub_resource type="Animation" id="Animation_bgpi6"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_ud1jc"]
 resource_name = "idle"
 length = 0.500004
 step = 0.0416667
 
-[sub_resource type="Animation" id="Animation_bgpi6"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wgt05"]
+resource_name = "sing_down"
+length = 0.500004
+step = 0.0416667
 
 [sub_resource type="Animation" id="Animation_0v5yh"]
 resource_name = "sing_left"
@@ -17,11 +22,6 @@ step = 0.0416667
 
 [sub_resource type="Animation" id="Animation_2i71f"]
 resource_name = "sing_right"
-length = 0.500004
-step = 0.0416667
-
-[sub_resource type="Animation" id="Animation_wgt05"]
-resource_name = "sing_down"
 length = 0.500004
 step = 0.0416667
 
@@ -47,3 +47,5 @@ script = ExtResource("1_rjvuh")
 libraries = {
 "": SubResource("AnimationLibrary_mki60")
 }
+
+[node name="camera_offset" type="Node2D" parent="."]

@@ -1,6 +1,8 @@
 class_name Note extends Node2D
 
 
+@export var sing_suffix: StringName = &''
+
 var data: NoteData
 var length: float = 0.0
 

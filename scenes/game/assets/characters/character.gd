@@ -35,6 +35,10 @@ func play_anim(anim: StringName, force: bool = false) -> void:
 	_animation_player.play(anim)
 
 
+func has_anim(anim: StringName) -> bool:
+	return _animation_player.has_animation(anim)
+
+
 func sing(note: Note, force: bool = false) -> void:
 	_sing_timer = 0.0
 	
@@ -45,7 +49,11 @@ func sing(note: Note, force: bool = false) -> void:
 	if _is_player != starts_as_player and swapped.has(direction):
 		direction = swapped[wrapi(swapped.find(direction) + 1, 0, swapped.size())]
 	
-	play_anim('sing_%s' % direction.to_lower(), force)
+	if (not note.sing_suffix.is_empty()) and \
+			has_anim('sing_%s%s' % [direction.to_lower(), note.sing_suffix]):
+		play_anim('sing_%s%s' % [direction.to_lower(), note.sing_suffix], force)
+	else:
+		play_anim('sing_%s' % direction.to_lower(), force)
 
 
 func sing_miss(note: Note, force: bool = false) -> void:
