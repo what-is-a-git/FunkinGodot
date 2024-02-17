@@ -32,7 +32,8 @@ var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
 @onready var _opponent_field: NoteField = $hud_layer/hud/note_fields/opponent
 
 ## Each note type is stored here for use in any note field.
-var note_types: Dictionary = {}
+var note_types := NoteTypes.new()
+
 var playing: bool = true
 
 var assets: SongAssets
@@ -81,8 +82,9 @@ func _ready() -> void:
 	chart.events.sort_custom(func(a, b):
 		return a.time < b.time)
 	
-	note_types.clear()
-	note_types['default'] = _default_note.instantiate()
+	note_types.types['default'] = _default_note
+	_player_field._note_types = note_types
+	_opponent_field._note_types = note_types
 	
 	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
 		metadata = load('res://songs/%s/meta.tres' % song)

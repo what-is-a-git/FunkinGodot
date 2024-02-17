@@ -15,6 +15,7 @@ var _scroll_speed: float = -1.0
 var _lanes: int
 var _input_zone: float = 0.18
 var _default_character: Character = null
+var _note_types: NoteTypes = null
 
 
 signal note_hit(note: Note)
@@ -22,6 +23,8 @@ signal note_miss(note: Note)
 
 
 func _ready() -> void:
+	if is_instance_valid(Game.instance) and not is_instance_valid(_note_types):
+		_note_types = Game.instance.note_types
 	if is_instance_valid(Game.chart):
 		_chart = Game.chart
 	if _scroll_speed <= 0.0:
@@ -131,7 +134,7 @@ func _try_spawning() -> void:
 			_note_index += 1
 			continue
 		
-		var note: Note = Game.instance.note_types['default'].duplicate()
+		var note: Note = _note_types.types['default'].instantiate()
 		note.data = data
 		note.position.x = _receptors[0].position.x + \
 				(112.0 * (absi(note.data.direction) % _lanes))
