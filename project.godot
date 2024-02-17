@@ -15,7 +15,6 @@ config/version="0.0.1"
 config/tags=PackedStringArray("2d", "modding", "rhythm")
 run/main_scene="res://scenes/menus/title_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-run/max_fps=30
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://resources/images/icon.png"
