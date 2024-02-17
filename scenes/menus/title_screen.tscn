@@ -152,5 +152,19 @@ libraries = {
 [node name="alphabet" type="Node2D" parent="."]
 position = Vector2(43, 548)
 script = ExtResource("4_d3eoe")
-text = "press enter to play for
-testing lol :3"
+text = "press enter to go to
+freeplay"
+
+[node name="alphabet_2" type="Node2D" parent="."]
+position = Vector2(4, 686)
+rotation = 1.5708
+scale = Vector2(0.5, -0.5)
+script = ExtResource("4_d3eoe")
+text = ":3"
+
+[node name="alphabet_3" type="Node2D" parent="."]
+position = Vector2(1275, 686)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+script = ExtResource("4_d3eoe")
+text = ":3"

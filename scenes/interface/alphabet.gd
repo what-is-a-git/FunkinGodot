@@ -14,6 +14,8 @@ class_name Alphabet extends Node2D
 const UNCHANGED_CHARACTERS: StringName = &'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const MAGIC_OFFSET: float = 20.0
 
+var bounding_box: Vector2i = Vector2i.ZERO
+
 
 func _ready() -> void:
 	_create_characters()
@@ -25,6 +27,7 @@ func _create_characters() -> void:
 	
 	var x_position: float = 0.0
 	var y_position: float = 0.0
+	bounding_box = Vector2i.ZERO
 	
 	for character in text:
 		if character == ' ':
@@ -38,6 +41,11 @@ func _create_characters() -> void:
 		var character_data := _create_character(x_position, y_position, character)
 		add_child(character_data[0])
 		x_position += character_data[1].x
+		
+		if x_position > bounding_box.x:
+			bounding_box.x = x_position
+		if y_position + character_data[1].y > bounding_box.y:
+			bounding_box.y = y_position + character_data[1].y
 
 
 func _create_character(x: float, y: float, character: String) -> Array:
@@ -72,7 +80,7 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 	
 	# all used by bold.xml, not sure about default.xml support rn :3
 	match character:
-		'\'':
+		'\'', '‘', '’':
 			data.name = 'apostrophe'
 			data.offset.y = -MAGIC_OFFSET
 		'\\':
@@ -110,8 +118,11 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 		':':
 			data.name = character
 		'_':
+			data.name = '-'
+			data.offset.y = MAGIC_OFFSET * 1.5
+		'ñ':
 			data.name = character
-			data.offset.y = MAGIC_OFFSET
+			data.offset.y = -MAGIC_OFFSET * 0.6
 		_:
 			data.name = character
 	

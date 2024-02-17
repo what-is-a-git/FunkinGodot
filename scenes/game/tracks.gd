@@ -12,7 +12,7 @@ var playing: bool = false
 var _tracks: Array[AudioStreamPlayerEX] = []
 var _last_mix_time: float = 0.0
 
-signal ended
+signal finished
 
 
 ## Loads the audio tracks from the song [param song]
@@ -25,16 +25,16 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 	if song_path.ends_with('/'):
 		song_path = song_path.left(song_path.length() - 1)
 	
-	var metadata: SongMetadata = load('%s/%s/meta.tres' % [song_path, song])
+	var tracks: SongTracks = load('%s/%s/tracks.tres' % [song_path, song])
 	
-	if not metadata:
+	if not tracks:
 		printerr('ERROR: Couldn\'t find a meta.tres for song "%s" at song_path "%s"' \
 				% [song, song_path])
 		return
 	
 	var index: int = 1
 	
-	for track in metadata.tracks:
+	for track in tracks.tracks:
 		var stream_player := AudioStreamPlayerEX.new()
 		stream_player.stream = track.stream
 		stream_player.bus = track.bus
@@ -105,5 +105,5 @@ func _physics_process(delta: float) -> void:
 			break
 	
 	if playing and not any_playing:
-		ended.emit()
+		finished.emit()
 		queue_free()

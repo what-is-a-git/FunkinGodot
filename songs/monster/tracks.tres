@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SongTracks" load_steps=7 format=3 uid="uid://bjhi8jwhy6db2"]
+
+[ext_resource type="Script" path="res://scripts/resources/song_tracks.gd" id="1_3wr56"]
+[ext_resource type="Script" path="res://scripts/resources/song_track.gd" id="2_owt2e"]
+[ext_resource type="AudioStream" uid="uid://0avy8yau7sa7" path="res://songs/monster/tracks/Inst.ogg" id="3_6b7rm"]
+[ext_resource type="AudioStream" uid="uid://d2m6gddoh0gpg" path="res://songs/monster/tracks/Voices.ogg" id="4_7q4u3"]
+
+[sub_resource type="Resource" id="Resource_he0km"]
+script = ExtResource("2_owt2e")
+stream = ExtResource("3_6b7rm")
+bus = &"Music"
+volume = 1.0
+
+[sub_resource type="Resource" id="Resource_55wss"]
+script = ExtResource("2_owt2e")
+stream = ExtResource("4_7q4u3")
+bus = &"Music"
+volume = 1.0
+
+[resource]
+script = ExtResource("1_3wr56")
+tracks = Array[ExtResource("2_owt2e")]([SubResource("Resource_he0km"), SubResource("Resource_55wss")])

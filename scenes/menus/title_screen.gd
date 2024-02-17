@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var girlfriend_animation: AnimationPlayer = $girlfriend/animation_player
 var dance_left: bool = false
+var active: bool = true
 
 
 func _ready() -> void:
@@ -16,11 +17,14 @@ func _ready() -> void:
 	_on_beat_hit(0)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed('menu_accept'):
-		SceneManager.switch_to('scenes/game/game.tscn')
-
-
 func _on_beat_hit(_beat: int) -> void:
 	dance_left = not dance_left
 	girlfriend_animation.play('dance_left' if dance_left else 'dance_right')
+
+
+func _input(event: InputEvent) -> void:
+	if not active:
+		return
+	if event.is_action('ui_accept') and event.is_action_pressed('ui_accept'):
+		active = false
+		SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')

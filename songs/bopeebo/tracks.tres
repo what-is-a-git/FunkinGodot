@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SongTracks" load_steps=7 format=3 uid="uid://45j30im0nw5i"]
+
+[ext_resource type="Script" path="res://scripts/resources/song_tracks.gd" id="1_46uum"]
+[ext_resource type="Script" path="res://scripts/resources/song_track.gd" id="2_n376v"]
+[ext_resource type="AudioStream" uid="uid://dg8sjatixhgew" path="res://songs/bopeebo/tracks/Inst.ogg" id="3_rdjok"]
+[ext_resource type="AudioStream" uid="uid://c2c75i5aodb0l" path="res://songs/bopeebo/tracks/Voices.ogg" id="4_5lxxx"]
+
+[sub_resource type="Resource" id="Resource_orpww"]
+script = ExtResource("2_n376v")
+stream = ExtResource("3_rdjok")
+bus = &"Music"
+volume = 1.0
+
+[sub_resource type="Resource" id="Resource_hvmgh"]
+script = ExtResource("2_n376v")
+stream = ExtResource("4_5lxxx")
+bus = &"Music"
+volume = 1.0
+
+[resource]
+script = ExtResource("1_46uum")
+tracks = Array[ExtResource("2_n376v")]([SubResource("Resource_orpww"), SubResource("Resource_hvmgh")])

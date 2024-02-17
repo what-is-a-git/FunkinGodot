@@ -2,11 +2,11 @@ class_name Game extends Node2D
 
 
 static var song: StringName = &'bopeebo'
+static var difficulty: StringName = &'hard'
 static var chart: Chart = null
 static var scroll_speed: float = 3.3
+static var mode: PlayMode = PlayMode.FREEPLAY
 
-## Each note type is stored here for use in any note field.
-static var note_types: Dictionary = {}
 static var instance: Game = null
 
 @onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
@@ -30,6 +30,10 @@ var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
 
 @onready var _player_field: NoteField = $hud_layer/hud/note_fields/player
 @onready var _opponent_field: NoteField = $hud_layer/hud/note_fields/opponent
+
+## Each note type is stored here for use in any note field.
+var note_types: Dictionary = {}
+var playing: bool = true
 
 var assets: SongAssets
 var metadata: SongMetadata
@@ -63,11 +67,13 @@ func _ready() -> void:
 	GlobalAudio.get_player('MUSIC').stop()
 	
 	tracks.load_tracks(song)
+	tracks.finished.connect(_song_finished)
 	
 	if not chart:
 		var funkin_chart := FunkinChart.new()
 		funkin_chart.json = JSON.parse_string(\
-				FileAccess.get_file_as_string('res://songs/%s/charts/hard.json' % song))
+				FileAccess.get_file_as_string('res://songs/%s/charts/%s.json' % [
+					song, difficulty]))
 		chart = funkin_chart.parse()
 	
 	chart.notes.sort_custom(func(a, b):
@@ -126,7 +132,7 @@ func _ready() -> void:
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
 	
-	song_label.text = '%s • [%s]' % [metadata.display_name, 'HARD'.to_upper()]
+	song_label.text = '%s • [%s]' % [metadata.display_name, difficulty.to_upper()]
 	
 	Conductor.reset()
 	Conductor.beat_hit.connect(_on_beat_hit)
@@ -146,6 +152,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not playing:
+		return
+	
 	camera.position = lerp(camera.position, target_camera_position, delta * 3.0)
 	camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
 	hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
@@ -165,6 +174,13 @@ func _process(delta: float) -> void:
 		_on_event_hit(event)
 		event_hit.emit(event)
 		_event += 1
+
+
+func _input(event: InputEvent) -> void:
+	if not playing:
+		return
+	if event.is_action('ui_cancel') and event.is_pressed():
+		_song_finished()
 
 
 func _on_beat_hit(beat: int) -> void:
@@ -283,3 +299,22 @@ func _on_note_hit(note: Note) -> void:
 			number.visible = false
 	
 	health_bar.update_score_label()
+
+
+func _song_finished() -> void:
+	if not playing:
+		return
+	playing = false
+	
+	match mode:
+		PlayMode.FREEPLAY:
+			SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')
+		_:
+			SceneManager.switch_to('scenes/menus/title_screen.tscn')
+
+
+enum PlayMode {
+	FREEPLAY = 0,
+	STORY = 1,
+	OTHER = 2,
+}

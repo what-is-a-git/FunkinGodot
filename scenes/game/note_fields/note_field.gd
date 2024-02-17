@@ -131,7 +131,7 @@ func _try_spawning() -> void:
 			_note_index += 1
 			continue
 		
-		var note: Note = Game.note_types['default'].duplicate()
+		var note: Note = Game.instance.note_types['default'].duplicate()
 		note.data = data
 		note.position.x = _receptors[0].position.x + \
 				(112.0 * (absi(note.data.direction) % _lanes))

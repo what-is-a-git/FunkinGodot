@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SongAssets" load_steps=6 format=3 uid="uid://cht6iq8f10ycv"]
+
+[ext_resource type="PackedScene" uid="uid://cu5jbgds82nl" path="res://scenes/game/assets/characters/face.tscn" id="1_82sss"]
+[ext_resource type="PackedScene" uid="uid://bu44d2he2dxm3" path="res://scenes/game/assets/characters/bf.tscn" id="2_cpgqc"]
+[ext_resource type="Script" path="res://scripts/resources/song_assets.gd" id="3_x8t8d"]
+[ext_resource type="PackedScene" uid="uid://bragoy3tisav2" path="res://scenes/game/assets/characters/gf.tscn" id="4_vfk8g"]
+[ext_resource type="PackedScene" uid="uid://0ih6j18ov417" path="res://scenes/game/assets/stages/stage.tscn" id="5_gxmo6"]
+
+[resource]
+script = ExtResource("3_x8t8d")
+player = ExtResource("2_cpgqc")
+opponent = ExtResource("1_82sss")
+spectator = ExtResource("4_vfk8g")
+stage = ExtResource("5_gxmo6")
