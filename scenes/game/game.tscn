@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://da8mu3oqto3qq"]
+[gd_scene load_steps=24 format=3 uid="uid://da8mu3oqto3qq"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_tneyb"]
 [ext_resource type="Script" path="res://scenes/game/tracks.gd" id="2_j74rm"]
+[ext_resource type="Script" path="res://scenes/game/script_container.gd" id="2_oquto"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="3_046jb"]
 [ext_resource type="Script" path="res://scenes/game/health_bar.gd" id="4_qcdwk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="5_kd5im"]
@@ -38,6 +39,12 @@ font = ExtResource("5_kd5im")
 font_size = 14
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6egcm"]
+font = ExtResource("5_kd5im")
+font_size = 24
+outline_size = 10
+outline_color = Color(0, 0, 0, 0.75)
 
 [sub_resource type="LabelSettings" id="LabelSettings_odcbh"]
 font = ExtResource("5_kd5im")
@@ -87,6 +94,9 @@ health = 1.15
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_tneyb")
+
+[node name="scripts" type="Node" parent="."]
+script = ExtResource("2_oquto")
 
 [node name="tracks" type="Node" parent="."]
 editor_description = "Node to contain all audio tracks for the given song that is playing."
@@ -167,7 +177,7 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_h7vl1")
 
 [node name="combo" type="Node2D" parent="hud_layer/hud/rating_container"]
-position = Vector2(-90, 75)
+position = Vector2(-45, 75)
 scale = Vector2(0.5, 0.5)
 
 [node name="1" type="Sprite2D" parent="hud_layer/hud/rating_container/combo"]
@@ -195,6 +205,16 @@ visible = false
 position = Vector2(340, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
+
+[node name="diff_label" type="Label" parent="hud_layer/hud/rating_container"]
+offset_left = -150.0
+offset_top = 110.0
+offset_right = 150.0
+offset_bottom = 134.0
+text = "0ms"
+label_settings = SubResource("LabelSettings_6egcm")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="countdown_container" type="Node2D" parent="hud_layer/hud"]
 

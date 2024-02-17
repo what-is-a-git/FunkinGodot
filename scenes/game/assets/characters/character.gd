@@ -15,13 +15,16 @@ var _is_player: bool = false
 var _animation: StringName = &''
 var _singing: bool = false
 var _sing_timer: float = 0.0
+var _in_special_anim: bool = false
 
 
 func _ready() -> void:
 	dance(true)
 
 
-func play_anim(anim: StringName, force: bool = false) -> void:
+func play_anim(anim: StringName, force: bool = false, special: bool = false) -> void:
+	if _in_special_anim and _animation_player.is_playing():
+		return
 	if not _animation_player.has_animation(anim):
 		return
 	
@@ -33,6 +36,7 @@ func play_anim(anim: StringName, force: bool = false) -> void:
 		return
 	
 	_animation_player.play(anim)
+	_in_special_anim = special
 
 
 func has_anim(anim: StringName) -> bool:

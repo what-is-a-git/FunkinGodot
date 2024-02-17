@@ -27,4 +27,5 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action('ui_accept') and event.is_action_pressed('ui_accept'):
 		active = false
+		GlobalAudio.get_player('MENU/CONFIRM').play()
 		SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')

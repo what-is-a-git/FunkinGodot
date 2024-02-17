@@ -56,27 +56,29 @@ func play(from_position: float = 0.0) -> void:
 
 ## Checks the sync of all tracks and resyncs them if they
 ## are out of sync with each other.
-func check_sync() -> void:
+func check_sync(force: bool = false) -> void:
 	if _tracks.is_empty():
 		return
 	
 	var last_time: float = Conductor.time
-	var any_desynced: bool = false
+	var any_desynced: bool = force
 	var first_track := _tracks[0]
 	var target_time := first_track.get_playback_position()
 	
-	for track in _tracks:
-		if track == first_track:
-			continue
-		
-		var desync: float = absf(target_time - track.get_playback_position())
-		if desync > MINIMUM_DESYNC_ALLOWED:
-			any_desynced = true
-			break
+	if not any_desynced:
+		for track in _tracks:
+			if track == first_track:
+				continue
+			
+			var desync: float = absf(target_time - track.get_playback_position())
+			if desync > MINIMUM_DESYNC_ALLOWED:
+				any_desynced = true
+				break
 	
 	if not any_desynced:
 		if absf(target_time - Conductor.time) >= 0.1:
-			Conductor.time = target_time + Conductor.offset
+			Conductor.time = target_time + \
+					AudioServer.get_time_since_last_mix() + Conductor.offset
 			Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 		
 		return
@@ -87,12 +89,29 @@ func check_sync() -> void:
 		
 		track.seek(target_time)
 	
-	Conductor.time = target_time + Conductor.offset
+	Conductor.time = target_time + AudioServer.get_time_since_last_mix() + Conductor.offset
 	Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 
 
+func get_playback_position(track: int = 0) -> float:
+	if _tracks.is_empty() or track < 0 or not playing:
+		return Conductor.time
+	
+	return _tracks[track].get_playback_position() + \
+			AudioServer.get_time_since_last_mix() + Conductor.offset
+
+
+func set_playback_position(position: float) -> void:
+	if _tracks.is_empty() or not playing:
+		return
+	
+	for track in _tracks:
+		track.seek(position)
+	Conductor.time = position + Conductor.offset
+
+
 func _physics_process(delta: float) -> void:
-	if playing and AudioServer.get_time_to_next_mix() < _last_mix_time:
+	if playing:
 		check_sync()
 	
 	_last_mix_time = AudioServer.get_time_to_next_mix()

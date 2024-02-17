@@ -23,7 +23,13 @@ var _target_audio_last_time: float = INF
 var rate: float = 1.0
 
 var active: bool = true
-var offset: float = -AudioServer.get_output_latency()
+
+var audio_offset: float:
+	get: return -AudioServer.get_output_latency()
+var manual_offset: float = 0.0
+var offset: float = audio_offset + manual_offset
+
+var _last_mix: float = 0.0
 
 var default_input_zone: float = 0.18
 
@@ -35,6 +41,13 @@ signal measure_hit(measure: int)
 func _process(delta: float) -> void:
 	if not active:
 		return
+	
+	var mix_time: float = AudioServer.get_time_since_last_mix()
+	
+	if mix_time < _last_mix:
+		offset = audio_offset + manual_offset
+	
+	_last_mix = mix_time
 	
 	var last_step: int =  floor(step)
 	var last_beat: int =  floor(beat)
@@ -69,6 +82,7 @@ func _process(delta: float) -> void:
 
 
 func reset() -> void:
+	offset = audio_offset + manual_offset
 	beat = 0.0
 	time = offset
 	target_audio = null

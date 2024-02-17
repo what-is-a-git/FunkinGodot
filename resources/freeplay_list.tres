@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=34 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=45 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://resources/images/game/assets/icons/dad.png" id="4_chb64"]
 [ext_resource type="Texture2D" uid="uid://c8kvk6pog1chb" path="res://resources/images/game/assets/icons/monster.png" id="5_al5qq"]
 [ext_resource type="Texture2D" uid="uid://bou6r3rwjwa38" path="res://resources/images/game/assets/icons/pico.png" id="5_wfyu2"]
+[ext_resource type="Script" path="res://scripts/resources/difficulty_map.gd" id="7_j2vpm"]
+[ext_resource type="Texture2D" uid="uid://bjhmy6raye734" path="res://resources/images/game/assets/icons/spooky.png" id="8_ace6p"]
 
 [sub_resource type="Resource" id="Resource_hyym4"]
 script = ExtResource("1_6tpon")
@@ -168,6 +170,65 @@ song_name = &"mods/toggle_downfall"
 song_difficulties = [&"mania"]
 icon = SubResource("Resource_1t6gu")
 
+[sub_resource type="Resource" id="Resource_dk6a4"]
+script = ExtResource("1_6tpon")
+texture = SubResource("PlaceholderTexture2D_7r0sq")
+color = Color(1, 1, 1, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_4jqkm"]
+script = ExtResource("1_vnt78")
+song_name = &"mods/crossed-my-road"
+song_difficulties = [&"hard"]
+icon = SubResource("Resource_dk6a4")
+
+[sub_resource type="Resource" id="Resource_0saeq"]
+script = ExtResource("1_6tpon")
+texture = SubResource("PlaceholderTexture2D_7r0sq")
+color = Color(1, 1, 1, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_u4uxh"]
+script = ExtResource("1_vnt78")
+song_name = &"mods/hello_bpm_2021"
+song_difficulties = [&"challenge"]
+icon = SubResource("Resource_0saeq")
+
+[sub_resource type="Resource" id="Resource_g6obw"]
+script = ExtResource("7_j2vpm")
+mapping = {
+"climax": &"mods/on-stage-climax"
+}
+
+[sub_resource type="Resource" id="Resource_7vtbj"]
+script = ExtResource("1_6tpon")
+texture = ExtResource("4_chb64")
+color = Color(0.686275, 0.4, 0.807843, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_rvfue"]
+script = ExtResource("1_vnt78")
+song_name = &"mods/on-stage"
+song_difficulties = [&"normal", &"climax"]
+icon = SubResource("Resource_7vtbj")
+difficulty_remap = SubResource("Resource_g6obw")
+
+[sub_resource type="Resource" id="Resource_7ycvi"]
+script = ExtResource("1_6tpon")
+texture = ExtResource("8_ace6p")
+color = Color(0.835294, 0.494118, 0, 1)
+frames = Vector2i(2, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_af6ba"]
+script = ExtResource("1_vnt78")
+song_name = &"mods/trick-or-treat"
+song_difficulties = [&"normal"]
+icon = SubResource("Resource_7ycvi")
+
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_22f7a"), SubResource("Resource_bvc40"), SubResource("Resource_eikm0"), SubResource("Resource_a0b7b"), SubResource("Resource_cyq2m"), SubResource("Resource_fidxu"), SubResource("Resource_cesok"), SubResource("Resource_mwuwn"), SubResource("Resource_f8tbs"), SubResource("Resource_gb4lp"), SubResource("Resource_cvv5r"), SubResource("Resource_b36am")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_22f7a"), SubResource("Resource_bvc40"), SubResource("Resource_eikm0"), SubResource("Resource_a0b7b"), SubResource("Resource_cyq2m"), SubResource("Resource_fidxu"), SubResource("Resource_cesok"), SubResource("Resource_mwuwn"), SubResource("Resource_f8tbs"), SubResource("Resource_gb4lp"), SubResource("Resource_cvv5r"), SubResource("Resource_b36am"), SubResource("Resource_4jqkm"), SubResource("Resource_u4uxh"), SubResource("Resource_rvfue"), SubResource("Resource_af6ba")])

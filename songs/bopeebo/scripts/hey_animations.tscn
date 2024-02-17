@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbs0g00ksk4hf"]
+
+[ext_resource type="Script" path="res://songs/bopeebo/scripts/hey_animations.gd" id="1_c6ovy"]
+
+[node name="hey_animations" type="Node"]
+script = ExtResource("1_c6ovy")

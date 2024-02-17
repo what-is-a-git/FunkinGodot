@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=6 format=3 uid="uid://qq0vmf8hpjwv"]
+[gd_resource type="Resource" script_class="SongAssets" load_steps=7 format=3 uid="uid://qq0vmf8hpjwv"]
 
 [ext_resource type="PackedScene" uid="uid://cdlt4jc7j8122" path="res://scenes/game/assets/characters/dad.tscn" id="1_ubio8"]
 [ext_resource type="Script" path="res://scripts/resources/song_assets.gd" id="2_7vyhy"]
 [ext_resource type="PackedScene" uid="uid://bu44d2he2dxm3" path="res://scenes/game/assets/characters/bf.tscn" id="2_ypkit"]
 [ext_resource type="PackedScene" uid="uid://0ih6j18ov417" path="res://scenes/game/assets/stages/stage.tscn" id="3_2quk8"]
+[ext_resource type="PackedScene" uid="uid://bbs0g00ksk4hf" path="res://songs/bopeebo/scripts/hey_animations.tscn" id="4_isrcb"]
 [ext_resource type="PackedScene" uid="uid://bragoy3tisav2" path="res://scenes/game/assets/characters/gf.tscn" id="4_iyl2g"]
 
 [resource]
@@ -12,3 +13,4 @@ player = ExtResource("2_ypkit")
 opponent = ExtResource("1_ubio8")
 spectator = ExtResource("4_iyl2g")
 stage = ExtResource("3_2quk8")
+scripts = Array[PackedScene]([ExtResource("4_isrcb")])

@@ -12,6 +12,7 @@ static var instance: Game = null
 @onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
 @onready var ratings_calculator: RatingsCalculator = %ratings_calculator
 @onready var tracks: Tracks = $tracks
+@onready var scripts: ScriptContainer = $scripts
 @onready var camera: Camera2D = $camera
 @onready var hud: Node2D = $hud_layer/hud
 @onready var health_bar: HealthBar = %health_bar
@@ -21,6 +22,7 @@ var rating_tween: Tween
 @onready var combo_node: Node2D = rating_container.get_node('combo')
 @onready var song_label: Label = hud.get_node('song_label')
 @onready var countdown_container: Node2D = $hud_layer/hud/countdown_container
+@onready var diff_label: Label = $hud_layer/hud/rating_container/diff_label
 
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
@@ -60,6 +62,9 @@ var accuracy: float = 0.0:
 @onready var _default_note := load('res://scenes/game/notes/note.tscn')
 var _event: int = 0
 
+var song_started: bool = false
+
+signal song_start
 signal event_hit(event: EventData)
 
 
@@ -92,6 +97,15 @@ func _ready() -> void:
 	if ResourceLoader.exists('res://songs/%s/assets.tres' % song):
 		# Load SongAssets tres.
 		assets = load('res://songs/%s/assets.tres' % song)
+		
+		if not is_instance_valid(assets.player):
+			assets.player = load('res://scenes/game/assets/characters/bf.tscn')
+		if not is_instance_valid(assets.opponent):
+			assets.opponent = load('res://scenes/game/assets/characters/dad.tscn')
+		if not is_instance_valid(assets.spectator):
+			assets.spectator = load('res://scenes/game/assets/characters/gf.tscn')
+		if not is_instance_valid(assets.stage):
+			assets.stage = load('res://scenes/game/assets/stages/stage.tscn')
 		
 		# Instantiate the PackedScene(s) and add them to the scene.
 		player = assets.player.instantiate()
@@ -140,6 +154,8 @@ func _ready() -> void:
 	Conductor.beat_hit.connect(_on_beat_hit)
 	Conductor.measure_hit.connect(_on_measure_hit)
 	
+	scripts.load_scripts(song)
+	
 	if chart.events.is_empty():
 		return
 	
@@ -151,6 +167,9 @@ func _ready() -> void:
 	Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
 	Conductor.beat = -4.0
 	_on_beat_hit(Conductor.beat)
+	
+	var window := get_tree().get_root()
+	window.size_changed.connect(tracks.check_sync.bind(true))
 
 
 func _process(delta: float) -> void:
@@ -165,6 +184,8 @@ func _process(delta: float) -> void:
 		if Conductor.time >= 0.0 and not tracks.playing:
 			tracks.play()
 			Conductor.time = Conductor.offset
+			song_start.emit()
+			song_started = true
 	
 	if not is_instance_valid(chart):
 		return
@@ -258,8 +279,14 @@ func _on_note_miss(note: Note) -> void:
 
 
 func _on_note_hit(note: Note) -> void:
-	var difference: float = Conductor.time - note.data.time
+	var difference: float = tracks.get_playback_position() - note.data.time
+	if not _player_field.takes_input:
+		difference = 0.0
+	
 	accuracy_calculator.record_hit(absf(difference))
+	
+	diff_label.text = '%.2fms' % [difference * 1000.0]
+	diff_label.modulate = Color.ORANGE if difference < 0.0 else Color.AQUA
 	
 	if is_instance_valid(rating_tween) and rating_tween.is_running():
 		rating_tween.kill()
@@ -289,6 +316,7 @@ func _on_note_hit(note: Note) -> void:
 	combo += 1
 	
 	var combo_str := str(combo).pad_zeros(3)
+	combo_node.position.x = -22.5 * (combo_str.length() - 1)
 	
 	for i in combo_node.get_child_count():
 		var number: Sprite2D = combo_node.get_child(i)
@@ -307,6 +335,7 @@ func _song_finished() -> void:
 	if not playing:
 		return
 	playing = false
+	GlobalAudio.get_player('MENU/CANCEL').play()
 	
 	match mode:
 		PlayMode.FREEPLAY:

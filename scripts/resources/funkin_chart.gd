@@ -74,6 +74,9 @@ func parse() -> Chart:
 	var last_note: NoteData = null
 	var stacked_notes: int = 0
 	
+	chart.notes.sort_custom(func(a: NoteData, b: NoteData):
+		return a.time < b.time)
+	
 	while (not chart.notes.is_empty()) and index < chart.notes.size():
 		var note: NoteData = chart.notes[index]
 		
@@ -83,7 +86,7 @@ func parse() -> Chart:
 			continue
 		
 		if last_note.direction == note.direction and \
-				absf(last_note.time - note.time) <= 0.0001:
+				absf(last_note.time - note.time) <= 0.001:
 			chart.notes.remove_at(index)
 			stacked_notes += 1
 			continue

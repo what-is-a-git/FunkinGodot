@@ -29,6 +29,8 @@ var active: bool = true
 
 
 func _ready():
+	randomize()
+	
 	for i in list.list.size():
 		_load_song(i)
 	
@@ -49,6 +51,10 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not active:
 		return
+	if not event.is_pressed():
+		return
+	if event.is_action('freeplay_random'):
+		change_selection(randi_range(-song_nodes.size() + 1, song_nodes.size() - 1))
 	if event.is_action('ui_up') or event.is_action('ui_down'):
 		change_selection(Input.get_axis('ui_up', 'ui_down'))
 	if event.is_action('ui_left') or event.is_action('ui_right'):
@@ -65,6 +71,9 @@ func change_selection(amount: int = 0) -> void:
 	song_label.text = song_nodes[index].text
 	track.stop()
 	track_timer.start(0.0)
+	
+	if amount != 0:
+		GlobalAudio.get_player('MENU/SCROLL').play()
 
 
 func change_difficulty(amount: int = 0) -> void:
@@ -85,8 +94,10 @@ func select_song() -> void:
 	var difficulty_remap := list_song.difficulty_remap
 	
 	if is_instance_valid(difficulty_remap) and not difficulty_remap.mapping.is_empty():
-		if difficulty_remap.mapping.has(difficulty):
-			song_name = difficulty_remap.mapping.get(difficulty, &'').to_lower()
+		for key in difficulty_remap.mapping.keys():
+			if key.to_lower() == difficulty.to_lower():
+				song_name = difficulty_remap.mapping.get(key, &'').to_lower()
+				break
 	
 	var json_path := 'res://songs/%s/charts/%s.json' % [song_name, difficulty.to_lower()]
 	if not FileAccess.file_exists(json_path):
@@ -141,6 +152,8 @@ func _load_tracks() -> void:
 	
 	if tracks.tracks.is_empty():
 		return
+	
+	GlobalAudio.get_player('MUSIC').stop()
 	
 	var song_track := tracks.tracks[0]
 	track.stream = song_track.stream

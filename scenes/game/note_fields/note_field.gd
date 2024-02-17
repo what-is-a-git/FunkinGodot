@@ -160,50 +160,53 @@ func _input_bot() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not takes_input:
 		return
+	if event.is_echo():
+		return
 	
 	# If this SOMEHOW, by a MIRCALE
 	# becomes an issue, then uncomment this code.
 	# if not event is InputEventKey:
 	# 	return
 	
-	var pressed: Array = []
-	for i in _lanes:
-		pressed.push_back(Input.is_action_just_pressed('input_%s' % i))
+	var is_input: bool = false
+	var lane: int = -1
 	
-	var released: Array = []
 	for i in _lanes:
-		released.push_back(not Input.is_action_pressed('input_%s' % i))
+		if event.is_action('input_%s' % i):
+			is_input = true
+			lane = i
+			break
 	
-	if pressed.has(true):
-		for i in _lanes:
-			if pressed[i]:
-				_receptors[i].play_anim('press')
-				_receptors[i]._automatically_play_static = false
+	if not is_input:
+		return
+	
+	var pressed: bool = event.is_pressed()
+	
+	if pressed:
+		_receptors[lane].play_anim('press')
+		_receptors[lane]._automatically_play_static = false
 		
 		for note in _notes.get_children():
-			if not pressed[absi(note.data.direction) % _lanes]:
-				continue
 			if note._hit:
 				continue
-			if Conductor.time >= note.data.time - _input_zone:
-				hit_note(note)
-				pressed[absi(note.data.direction) % _lanes] = false
+			var index: int = absi(note.data.direction) % _lanes
+			if index != lane:
 				continue
 			
-			break
-	elif released.has(true):
-		for i in _lanes:
-			if released[i]:
-				_receptors[i].play_anim('static')
+			if Conductor.time >= note.data.time - _input_zone:
+				hit_note(note)
+				break
+			# break
+	else:
+		_receptors[lane].play_anim('static')
 		
 		for note in _notes.get_children():
-			if not released.has(true):
-				break
 			if not note._hit:
 				continue
 			var index: int = absi(note.data.direction) % _lanes
-			if not released[index]:
+			if index != lane:
 				continue
+			
 			# Give a bit of lee-way
 			if note.length <= 1.0 / (Conductor.beat_delta * 8.0):
 				# We do this because the animations get funky sometimes lol.
@@ -211,4 +214,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				continue
 			
 			miss_note(note)
-			released[index] = false

@@ -1,30 +1,14 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=9 format=3 uid="uid://c5d47mbdc14ja"]
+[gd_resource type="Resource" script_class="SongMetadata" load_steps=4 format=3 uid="uid://c5d47mbdc14ja"]
 
 [ext_resource type="Script" path="res://scripts/resources/song_metadata.gd" id="1_ubbcs"]
 [ext_resource type="Script" path="res://scripts/resources/song_author.gd" id="1_vcagy"]
-[ext_resource type="Script" path="res://scripts/resources/song_track.gd" id="3_f6quc"]
-[ext_resource type="AudioStream" uid="uid://dg8sjatixhgew" path="res://songs/bopeebo/tracks/Inst.ogg" id="4_cnd2j"]
-[ext_resource type="AudioStream" uid="uid://c2c75i5aodb0l" path="res://songs/bopeebo/tracks/Voices.ogg" id="5_8jp5i"]
 
 [sub_resource type="Resource" id="Resource_1nmij"]
 script = ExtResource("1_vcagy")
 name = &"Kawai Sprite"
 role = &"Composer"
 
-[sub_resource type="Resource" id="Resource_y4e71"]
-script = ExtResource("3_f6quc")
-stream = ExtResource("4_cnd2j")
-bus = &"Music"
-volume = 1.0
-
-[sub_resource type="Resource" id="Resource_4hu21"]
-script = ExtResource("3_f6quc")
-stream = ExtResource("5_8jp5i")
-bus = &"Music"
-volume = 1.0
-
 [resource]
 script = ExtResource("1_ubbcs")
 display_name = &"Bopeebo"
 authors = Array[ExtResource("1_vcagy")]([SubResource("Resource_1nmij")])
-tracks = Array[ExtResource("3_f6quc")]([SubResource("Resource_y4e71"), SubResource("Resource_4hu21")])

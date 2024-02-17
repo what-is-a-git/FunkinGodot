@@ -31,19 +31,20 @@ func display() -> void:
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name.to_pascal_case()
 	
-	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\n%s / %s <CPU>\nFunkin\' Godot v%s\n%s' % [
+	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s\n%s\n%.2fms Offset\n%.2fms Conductor' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
 		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
-		String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 		version,
 		scene_name,
+		AudioServer.get_output_latency() * 1000.0, absf(Conductor.offset) * 1000.0
 	]
 	
 	if OS.is_debug_build():
-		label.text = '%s\n%s nodes (%s orphans)' % [
+		label.text = '%s\n\n== DEBUG INFO ==\n%s / %s <CPU>\n%s Nodes (%s Orphaned)' % [
 			label.text,
+			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
 		]
