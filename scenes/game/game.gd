@@ -181,7 +181,7 @@ func _process(delta: float) -> void:
 	hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
 	
 	if is_instance_valid(tracks):
-		if Conductor.time >= 0.0 and not tracks.playing:
+		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
 			Conductor.time = Conductor.offset
 			song_start.emit()

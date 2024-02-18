@@ -76,7 +76,7 @@ func check_sync(force: bool = false) -> void:
 				break
 	
 	if not any_desynced:
-		if absf(target_time - Conductor.time) >= 0.1:
+		if absf(target_time - Conductor.time - Conductor.offset) >= 0.1:
 			Conductor.time = target_time + \
 					AudioServer.get_time_since_last_mix() + Conductor.offset
 			Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
