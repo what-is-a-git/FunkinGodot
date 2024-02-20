@@ -4,6 +4,9 @@
 # Godot export ignores
 bin/
 
+# Repository owner specific ignores
+plans/
+
 # Custom songs
 songs/mods/
 resources/videos/cutscenes/mods/

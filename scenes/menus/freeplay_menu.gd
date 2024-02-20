@@ -107,7 +107,7 @@ func select_song() -> void:
 	var funkin_chart := FunkinChart.new()
 	var json_string := FileAccess.get_file_as_string(json_path)
 	funkin_chart.json = JSON.parse_string(json_string)
-	
+	Game.scroll_speed = funkin_chart.json.song.get('speed', 2.6)
 	Game.song = song_name
 	Game.difficulty = difficulty.to_lower()
 	Game.chart = funkin_chart.parse()

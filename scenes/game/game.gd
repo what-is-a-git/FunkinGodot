@@ -26,6 +26,7 @@ var rating_tween: Tween
 
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
+var camera_bumps: bool = false
 
 @onready var _stage: Node2D = $stage
 @onready var _characters: Node2D = $characters
@@ -80,6 +81,7 @@ func _ready() -> void:
 		funkin_chart.json = JSON.parse_string(\
 				FileAccess.get_file_as_string('res://songs/%s/charts/%s.json' % [
 					song, difficulty]))
+		scroll_speed = funkin_chart.json.song.get('speed', 2.6)
 		chart = funkin_chart.parse()
 	
 	chart.notes.sort_custom(func(a, b):
@@ -147,6 +149,8 @@ func _ready() -> void:
 	
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
+	_opponent_field.note_hit.connect(func(note: Note):
+		camera_bumps = true)
 	
 	song_label.text = '%s • [%s]' % [metadata.display_name, difficulty.to_upper()]
 	
@@ -169,7 +173,10 @@ func _ready() -> void:
 	_on_beat_hit(Conductor.beat)
 	
 	var window := get_tree().get_root()
-	window.size_changed.connect(tracks.check_sync.bind(true))
+	window.size_changed.connect(func():
+		if song_started:
+			tracks.check_sync(true)
+	)
 
 
 func _process(delta: float) -> void:
@@ -177,10 +184,12 @@ func _process(delta: float) -> void:
 		return
 	
 	camera.position = lerp(camera.position, target_camera_position, delta * 3.0)
-	camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
-	hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
 	
-	if is_instance_valid(tracks):
+	if camera_bumps:
+		camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
+		hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
+	
+	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
 			Conductor.time = Conductor.offset
@@ -212,10 +221,18 @@ func _on_beat_hit(beat: int) -> void:
 	spectator.dance()
 	
 	# Countdown lol
-	if Conductor.time < 0.0 and beat < 0:
+	if Conductor.time < 0.0 and beat < 0 and not song_started:
 		var index: int = clampi(4 - absi(beat), 0, 4)
 		_display_countdown_sprite(index)
 		_play_countdown_sound(index)
+
+
+func _on_measure_hit(measure: int) -> void:
+	if not camera_bumps:
+		return
+	
+	camera.zoom += Vector2(0.015, 0.015)
+	hud.scale += Vector2(0.03, 0.03)
 
 
 func _play_countdown_sound(index: int) -> void:
@@ -248,23 +265,21 @@ func _display_countdown_sprite(index: int) -> void:
 	tween.tween_callback(sprite.queue_free).set_delay(1.0 / Conductor.beat_delta)
 
 
-func _on_measure_hit(measure: int) -> void:
-	camera.zoom += Vector2(0.015, 0.015)
-	hud.scale += Vector2(0.03, 0.03)
-
-
 func _on_event_hit(event: EventData) -> void:
 	match event.name.to_lower():
 		&'bpm change':
 			Conductor.bpm = event.data[0]
 		&'camera pan':
-			var character: Character = player if event.data[0] == 1 else opponent
+			var character: Character = player if event.data[0] == \
+					CameraPan.Side.PLAYER else opponent
 			target_camera_position = character._camera_offset.global_position
 			
 			if event.time <= 0.0:
 				camera.position = target_camera_position
 		_:
 			pass
+	
+	event_hit.emit(event)
 
 
 func _on_note_miss(note: Note) -> void:

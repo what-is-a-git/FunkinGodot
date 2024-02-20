@@ -10,6 +10,9 @@ var static_memory_peak: float = 0.0
 
 
 func display() -> void:
+	if not visible:
+		return
+	
 	var video_memory_current: float = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)
 	
 	if video_memory_current > video_memory_peak:
@@ -48,3 +51,12 @@ func display() -> void:
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
 		]
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action('toggle_debug') and \
+			event.is_action_pressed('toggle_debug'):
+		visible = not visible
+		
+		if visible:
+			display()

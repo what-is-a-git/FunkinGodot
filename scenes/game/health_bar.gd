@@ -22,6 +22,10 @@ func _ready() -> void:
 	if not is_instance_valid(Game.instance):
 		return
 	
+	if is_instance_valid(player_icon) and is_instance_valid(opponent_icon):
+		player_icon.queue_free()
+		opponent_icon.queue_free()
+	
 	player_icon = Icon.create_sprite(Game.instance.player.icon)
 	player_icon.position.x = 50.0
 	icons.add_child(player_icon)
@@ -33,7 +37,8 @@ func _ready() -> void:
 	icons.add_child(opponent_icon)
 	opponent_color = Game.instance.opponent.icon.color
 	
-	Conductor.beat_hit.connect(_on_beat_hit)
+	if not Conductor.beat_hit.is_connected(_on_beat_hit):
+		Conductor.beat_hit.connect(_on_beat_hit)
 
 
 func _process(delta: float) -> void:

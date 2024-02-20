@@ -10,7 +10,7 @@ const MINIMUM_DESYNC_ALLOWED: float = 0.010
 var playing: bool = false
 
 var _tracks: Array[AudioStreamPlayerEX] = []
-var _last_mix_time: float = 0.0
+var _playing: Array[bool] = []
 
 signal finished
 
@@ -40,9 +40,15 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 		stream_player.bus = track.bus
 		stream_player.name = 'track_%s' % index
 		stream_player.volume_db = linear_to_db(track.volume)
+		stream_player.looping = 1
 		add_child(stream_player)
 		
+		var playing_index: int = index - 1
+		stream_player.finished.connect(func():
+			_playing[playing_index] = false)
+		
 		_tracks.push_back(stream_player)
+		_playing.push_back(false)
 		index += 1
 
 
@@ -50,8 +56,12 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 func play(from_position: float = 0.0) -> void:
 	playing = true
 	
+	var i: int = 0
+	
 	for track in _tracks:
 		track.play(from_position)
+		_playing[i] = true
+		i += 1
 
 
 ## Checks the sync of all tracks and resyncs them if they
@@ -61,9 +71,16 @@ func check_sync(force: bool = false) -> void:
 		return
 	
 	var last_time: float = Conductor.time
-	var any_desynced: bool = force
-	var first_track := _tracks[0]
+	var track_index: int = 0
+	var first_track := _tracks[track_index]
+	
+	while track_index + 1 <= _tracks.size() - 1 and not first_track.playing:
+		track_index += 1
+		first_track = _tracks[track_index]
+	
 	var target_time := first_track.get_playback_position()
+	var any_desynced: bool = force or \
+			absf(target_time - Conductor.time + Conductor.offset) >= 0.05
 	
 	if not any_desynced:
 		for track in _tracks:
@@ -76,17 +93,17 @@ func check_sync(force: bool = false) -> void:
 				break
 	
 	if not any_desynced:
-		if absf(target_time - Conductor.time - Conductor.offset) >= 0.1:
-			Conductor.time = target_time + \
-					AudioServer.get_time_since_last_mix() + Conductor.offset
-			Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
-		
 		return
 	
+	var any_playing: bool = false
+	
 	for track in _tracks:
+		if not track.playing:
+			continue
 		if track == first_track:
 			continue
 		
+		any_playing = true
 		track.seek(target_time)
 	
 	Conductor.time = target_time + AudioServer.get_time_since_last_mix() + Conductor.offset
@@ -114,15 +131,6 @@ func _physics_process(delta: float) -> void:
 	if playing:
 		check_sync()
 	
-	_last_mix_time = AudioServer.get_time_to_next_mix()
-	
-	var any_playing: bool = false
-	
-	for track in _tracks:
-		if track.playing:
-			any_playing = true
-			break
-	
-	if playing and not any_playing:
+	if playing and not _playing.has(true):
 		finished.emit()
 		queue_free()

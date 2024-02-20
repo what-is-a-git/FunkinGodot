@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=2 format=3 uid="uid://cg3s6a2h0pu7q"]
-
-[ext_resource type="Script" path="res://scripts/resources/song_assets.gd" id="1_fsb20"]
-
-[resource]
-script = ExtResource("1_fsb20")

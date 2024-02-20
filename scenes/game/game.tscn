@@ -95,16 +95,16 @@ health = 1.15
 [node name="game" type="Node2D"]
 script = ExtResource("1_tneyb")
 
-[node name="scripts" type="Node" parent="."]
-script = ExtResource("2_oquto")
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_speed = 4.0
 
 [node name="tracks" type="Node" parent="."]
 editor_description = "Node to contain all audio tracks for the given song that is playing."
 script = ExtResource("2_j74rm")
 
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2(640, 360)
-position_smoothing_speed = 4.0
+[node name="scripts" type="Node" parent="."]
+script = ExtResource("2_oquto")
 
 [node name="hud_layer" type="CanvasLayer" parent="."]
 

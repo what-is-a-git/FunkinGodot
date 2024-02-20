@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SongTracks" load_steps=7 format=3 uid="uid://iny5nq17uihw"]
+
+[ext_resource type="Script" path="res://scripts/resources/song_tracks.gd" id="1_gdpdc"]
+[ext_resource type="Script" path="res://scripts/resources/song_track.gd" id="2_4v2f5"]
+[ext_resource type="AudioStream" uid="uid://8evd1q5o38of" path="res://songs/dad_battle/tracks/Inst.ogg" id="3_v5urb"]
+[ext_resource type="AudioStream" uid="uid://dkiwcbaxm4gy" path="res://songs/dad_battle/tracks/Voices.ogg" id="4_68bse"]
+
+[sub_resource type="Resource" id="Resource_40mc7"]
+script = ExtResource("2_4v2f5")
+stream = ExtResource("3_v5urb")
+bus = &"Music"
+volume = 1.0
+
+[sub_resource type="Resource" id="Resource_jne5n"]
+script = ExtResource("2_4v2f5")
+stream = ExtResource("4_68bse")
+bus = &"Music"
+volume = 1.0
+
+[resource]
+script = ExtResource("1_gdpdc")
+tracks = Array[ExtResource("2_4v2f5")]([SubResource("Resource_40mc7"), SubResource("Resource_jne5n")])

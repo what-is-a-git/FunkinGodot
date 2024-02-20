@@ -70,8 +70,8 @@ func _process(delta: float) -> void:
 			beat += (time - last_time) * beat_delta
 			_target_audio_last_time = audio_position
 	else:
-		time += delta
-		beat += delta * beat_delta
+		time += delta * rate
+		beat += delta * rate * beat_delta
 	
 	if floor(step) > last_step:
 		step_hit.emit(floor(step))

@@ -53,6 +53,7 @@ enabled=PackedStringArray("res://addons/parallax_node/plugin.cfg")
 
 folder_colors={
 "res://addons/": "gray",
+"res://plans/": "yellow",
 "res://resources/": "orange",
 "res://scenes/": "blue",
 "res://scripts/": "pink",

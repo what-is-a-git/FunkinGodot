@@ -32,7 +32,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			event.is_action_pressed('menu_reload'):
 		get_tree().reload_current_scene()
 		return
-	if event.is_action('toggle_debug') and \
-			event.is_action_pressed('toggle_debug'):
-		RuntimeInfo.visible = not RuntimeInfo.visible
-		return
