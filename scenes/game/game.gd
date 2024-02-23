@@ -10,29 +10,22 @@ static var mode: PlayMode = PlayMode.FREEPLAY
 static var instance: Game = null
 
 @onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
-@onready var ratings_calculator: RatingsCalculator = %ratings_calculator
 @onready var tracks: Tracks = $tracks
 @onready var scripts: ScriptContainer = $scripts
 @onready var camera: Camera2D = $camera
-@onready var hud: Node2D = $hud_layer/hud
-@onready var health_bar: HealthBar = %health_bar
-@onready var rating_container: Node2D = %rating_container
-@onready var rating_sprite: Sprite2D = rating_container.get_node('rating')
-var rating_tween: Tween
-@onready var combo_node: Node2D = rating_container.get_node('combo')
-@onready var song_label: Label = hud.get_node('song_label')
-@onready var countdown_container: Node2D = $hud_layer/hud/countdown_container
-@onready var diff_label: Label = $hud_layer/hud/rating_container/diff_label
+
+@onready var hud: HUD = %hud
+@onready var _player_field: NoteField = hud.get_node('note_fields/player')
+@onready var _opponent_field: NoteField = hud.get_node('note_fields/opponent')
 
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
+var camera_bump_amount: Vector2 = Vector2(0.015, 0.015)
 var camera_bumps: bool = false
+var song_started: bool = false
 
 @onready var _stage: Node2D = $stage
 @onready var _characters: Node2D = $characters
-
-@onready var _player_field: NoteField = $hud_layer/hud/note_fields/player
-@onready var _opponent_field: NoteField = $hud_layer/hud/note_fields/opponent
 
 ## Each note type is stored here for use in any note field.
 var note_types := NoteTypes.new()
@@ -59,18 +52,20 @@ var accuracy: float = 0.0:
 		return 0.0
 
 @onready var skin: HUDSkin = load('res://resources/hud_skins/default.tres')
-
 @onready var _default_note := load('res://scenes/game/notes/note.tscn')
 var _event: int = 0
 
-var song_started: bool = false
-
+signal ready_post
 signal song_start
 signal event_hit(event: EventData)
+signal song_finished(event: CancellableEvent)
 
 
 func _ready() -> void:
 	instance = self
+	hud.game = instance
+	hud.process_mode = Node.PROCESS_MODE_INHERIT
+	
 	GlobalAudio.get_player('MUSIC').stop()
 	
 	tracks.load_tracks(song)
@@ -95,6 +90,8 @@ func _ready() -> void:
 	
 	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
 		metadata = load('res://songs/%s/meta.tres' % song)
+	
+	hud._ready()
 	
 	if ResourceLoader.exists('res://songs/%s/assets.tres' % song):
 		# Load SongAssets tres.
@@ -141,18 +138,10 @@ func _ready() -> void:
 		_player_field._default_character = player
 		_opponent_field._default_character = opponent
 	
-	health_bar._ready()
-	
-	combo_node.scale = skin.combo_scale
-	rating_sprite.scale = skin.rating_scale
-	countdown_container.scale = skin.countdown_scale
-	
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
 	_opponent_field.note_hit.connect(func(note: Note):
 		camera_bumps = true)
-	
-	song_label.text = '%s • [%s]' % [metadata.display_name, difficulty.to_upper()]
 	
 	Conductor.reset()
 	Conductor.beat_hit.connect(_on_beat_hit)
@@ -160,23 +149,23 @@ func _ready() -> void:
 	
 	scripts.load_scripts(song)
 	
-	if chart.events.is_empty():
-		return
-	
-	while (not chart.events.is_empty()) and _event < chart.events.size() \
-			and chart.events[_event].time <= 0.0:
-		_on_event_hit(chart.events[_event])
-		_event += 1
+	if not chart.events.is_empty():
+		while (not chart.events.is_empty()) and _event < chart.events.size() \
+				and chart.events[_event].time <= 0.0:
+			_on_event_hit(chart.events[_event])
+			_event += 1
 	
 	Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
 	Conductor.beat = -4.0
-	_on_beat_hit(Conductor.beat)
+	Conductor.beat_hit.emit(Conductor.beat)
 	
 	var window := get_tree().get_root()
 	window.size_changed.connect(func():
 		if song_started:
 			tracks.check_sync(true)
 	)
+	
+	ready_post.emit()
 
 
 func _process(delta: float) -> void:
@@ -187,7 +176,6 @@ func _process(delta: float) -> void:
 	
 	if camera_bumps:
 		camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
-		hud.scale = lerp(hud.scale, Vector2.ONE, delta * 3.0)
 	
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
@@ -212,57 +200,20 @@ func _input(event: InputEvent) -> void:
 	if not playing:
 		return
 	if event.is_action('ui_cancel') and event.is_pressed():
-		_song_finished()
+		_song_finished(true)
 
 
 func _on_beat_hit(beat: int) -> void:
 	player.dance()
 	opponent.dance()
 	spectator.dance()
-	
-	# Countdown lol
-	if Conductor.time < 0.0 and beat < 0 and not song_started:
-		var index: int = clampi(4 - absi(beat), 0, 4)
-		_display_countdown_sprite(index)
-		_play_countdown_sound(index)
 
 
 func _on_measure_hit(measure: int) -> void:
 	if not camera_bumps:
 		return
 	
-	camera.zoom += Vector2(0.015, 0.015)
-	hud.scale += Vector2(0.03, 0.03)
-
-
-func _play_countdown_sound(index: int) -> void:
-	# Don't play things that don't exist.
-	if not is_instance_valid(skin.countdown_sounds[index]):
-		return
-	
-	var player := AudioStreamPlayerEX.new()
-	player.stream = skin.countdown_sounds[index]
-	player.bus = &'SFX'
-	player.finished.connect(player.queue_free)
-	countdown_container.add_child(player)
-	player.play()
-
-
-func _display_countdown_sprite(index: int) -> void:
-	# Don't display things that don't exist.
-	if not is_instance_valid(skin.countdown_textures[index]):
-		return
-	
-	var sprite := Sprite2D.new()
-	sprite.scale = Vector2(1.05, 1.05)
-	sprite.texture = skin.countdown_textures[index]
-	countdown_container.add_child(sprite)
-	
-	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
-			.set_ease(Tween.EASE_OUT).set_parallel()
-	tween.tween_property(sprite, 'modulate:a', 0.0, 1.0 / Conductor.beat_delta)
-	tween.tween_property(sprite, 'scale', Vector2.ONE, 1.0 / Conductor.beat_delta)
-	tween.tween_callback(sprite.queue_free).set_delay(1.0 / Conductor.beat_delta)
+	camera.zoom += camera_bump_amount
 
 
 func _on_event_hit(event: EventData) -> void:
@@ -283,72 +234,29 @@ func _on_event_hit(event: EventData) -> void:
 
 
 func _on_note_miss(note: Note) -> void:
-	rating_container.visible = false
-	
 	accuracy_calculator.record_hit(Conductor.default_input_zone)
 	health = clampf(health - 2.0, 0.0, 100.0)
 	misses += 1
 	score -= 10
 	combo = 0
-	health_bar.update_score_label()
 
 
 func _on_note_hit(note: Note) -> void:
-	var difference: float = tracks.get_playback_position() - note.data.time
-	if not _player_field.takes_input:
-		difference = 0.0
-	
-	accuracy_calculator.record_hit(absf(difference))
-	
-	diff_label.text = '%.2fms' % [difference * 1000.0]
-	diff_label.modulate = Color.ORANGE if difference < 0.0 else Color.AQUA
-	
-	if is_instance_valid(rating_tween) and rating_tween.is_running():
-		rating_tween.kill()
-	
-	var rating := ratings_calculator.get_rating(absf(difference * 1000.0))
-	match rating.name:
-		&'marvelous':
-			rating_sprite.texture = skin.marvelous
-		&'sick':
-			rating_sprite.texture = skin.sick
-		&'good':
-			rating_sprite.texture = skin.good
-		&'bad':
-			rating_sprite.texture = skin.bad
-		&'shit':
-			rating_sprite.texture = skin.shit
-	
-	rating_container.visible = true
-	rating_container.modulate.a = 1.0
-	rating_container.scale = Vector2(1.1, 1.1)
-	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)
-	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.15).set_delay(0.2)
-	
-	health = clampf(health + rating.health, 0.0, 100.0)
-	score += rating.score
 	combo += 1
-	
-	var combo_str := str(combo).pad_zeros(3)
-	combo_node.position.x = -22.5 * (combo_str.length() - 1)
-	
-	for i in combo_node.get_child_count():
-		var number: Sprite2D = combo_node.get_child(i)
-		
-		if i <= combo_str.length() - 1:
-			number.frame = int(combo_str[i])
-			number.visible = true
-		else:
-			number.frame = 0
-			number.visible = false
-	
-	health_bar.update_score_label()
 
 
-func _song_finished() -> void:
+func _song_finished(force: bool = false) -> void:
 	if not playing:
 		return
+	
+	var event: CancellableEvent = CancellableEvent.new()
+	
+	if not force:
+		song_finished.emit(event)
+	
+	if event.status == CancellableEvent.EventStatus.CANCEL:
+		return
+	
 	playing = false
 	GlobalAudio.get_player('MENU/CANCEL').play()
 	

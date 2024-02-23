@@ -95,21 +95,19 @@ func check_sync(force: bool = false) -> void:
 	if not any_desynced:
 		return
 	
-	var any_playing: bool = false
-	
 	for track in _tracks:
 		if not track.playing:
 			continue
 		if track == first_track:
 			continue
 		
-		any_playing = true
 		track.seek(target_time)
 	
 	Conductor.time = target_time + AudioServer.get_time_since_last_mix() + Conductor.offset
 	Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 
 
+## Gets the playback position (factoring in offset) from the track specified.
 func get_playback_position(track: int = 0) -> float:
 	if _tracks.is_empty() or track < 0 or not playing:
 		return Conductor.time
@@ -118,13 +116,18 @@ func get_playback_position(track: int = 0) -> float:
 			AudioServer.get_time_since_last_mix() + Conductor.offset
 
 
+## Sets the playback position of all tracks and Conductor.time to the position
+## specified.
 func set_playback_position(position: float) -> void:
 	if _tracks.is_empty() or not playing:
 		return
 	
 	for track in _tracks:
 		track.seek(position)
+	
+	var last_time: float = Conductor.time
 	Conductor.time = position + Conductor.offset
+	Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 
 
 func _physics_process(delta: float) -> void:
@@ -132,5 +135,5 @@ func _physics_process(delta: float) -> void:
 		check_sync()
 	
 	if playing and not _playing.has(true):
+		process_mode = Node.PROCESS_MODE_DISABLED
 		finished.emit()
-		queue_free()

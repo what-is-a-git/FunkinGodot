@@ -33,6 +33,11 @@ func _ready() -> void:
 		camera = game.camera
 		game.song_start.connect(_on_song_start)
 		game.event_hit.connect(_on_event_hit)
+		game.ready_post.connect(_ready_post)
+
+
+func _ready_post() -> void:
+	pass
 
 
 func _on_beat_hit(beat: int) -> void:

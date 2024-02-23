@@ -4,8 +4,8 @@ class_name SongAssets extends Resource
 @export_category('Characters')
 
 @export var player: PackedScene = null
-@export var opponent: PackedScene = null
 @export var spectator: PackedScene = null
+@export var opponent: PackedScene = null
 
 @export_category('Misc')
 

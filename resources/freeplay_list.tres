@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=46 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=48 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -241,6 +241,19 @@ song_name = &"mods/trick-or-treat"
 song_difficulties = [&"normal"]
 icon = SubResource("Resource_7ycvi")
 
+[sub_resource type="Resource" id="Resource_tlff8"]
+script = ExtResource("1_6tpon")
+texture = SubResource("PlaceholderTexture2D_7r0sq")
+color = Color(1, 1, 1, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_ppxcq"]
+script = ExtResource("1_vnt78")
+song_name = &"mods/sansno"
+song_difficulties = [&"hard"]
+icon = SubResource("Resource_tlff8")
+
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_cyq2m"), SubResource("Resource_fidxu"), SubResource("Resource_cesok"), SubResource("Resource_mwuwn"), SubResource("Resource_f8tbs"), SubResource("Resource_gb4lp"), SubResource("Resource_cvv5r"), SubResource("Resource_b36am"), SubResource("Resource_4jqkm"), SubResource("Resource_u4uxh"), SubResource("Resource_rvfue"), SubResource("Resource_af6ba")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_cyq2m"), SubResource("Resource_fidxu"), SubResource("Resource_cesok"), SubResource("Resource_mwuwn"), SubResource("Resource_f8tbs"), SubResource("Resource_gb4lp"), SubResource("Resource_cvv5r"), SubResource("Resource_b36am"), SubResource("Resource_4jqkm"), SubResource("Resource_u4uxh"), SubResource("Resource_rvfue"), SubResource("Resource_af6ba"), SubResource("Resource_ppxcq")])
