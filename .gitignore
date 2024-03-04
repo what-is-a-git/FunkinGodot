@@ -6,6 +6,7 @@ bin/
 
 # Repository owner specific ignores
 plans/
+addons/script-ide/
 
 # Custom songs
 songs/mods/

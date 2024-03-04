@@ -1,0 +1,212 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7fwxsepnt38j"]
+
+[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
+[ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://resources/images/menus/main_menu/background.png" id="1_wymee"]
+[ext_resource type="Script" path="res://addons/parallax_node/parallax_node.gd" id="2_af0kt"]
+[ext_resource type="Texture2D" uid="uid://bcq8cfghjibg1" path="res://resources/images/menus/main_menu/background_pink.png" id="2_dbg3w"]
+[ext_resource type="Script" path="res://scripts/menus/scene_main_menu_button.gd" id="4_4uv5u"]
+[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7kxsk"]
+[ext_resource type="SpriteFrames" uid="uid://wifv2wsiwcum" path="res://resources/images/menus/main_menu/buttons.res" id="4_c5hes"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="4_emyfo"]
+[ext_resource type="Script" path="res://scripts/menus/donate_main_menu_button.gd" id="8_6spca"]
+
+[sub_resource type="Animation" id="Animation_58e2s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite_pink:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_oa7ut"]
+resource_name = "loop"
+length = 0.3
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite_pink:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08ydn"]
+_data = {
+"RESET": SubResource("Animation_58e2s"),
+"loop": SubResource("Animation_oa7ut")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_lig6g"]
+font = ExtResource("4_7kxsk")
+font_size = 12
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="main_menu" type="Node2D"]
+script = ExtResource("1_mwtkx")
+
+[node name="timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 1.1
+one_shot = true
+
+[node name="background" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("2_af0kt")
+parallax_factor = Vector2(0, 0.1)
+position_as_offset = true
+
+[node name="sprite" type="Sprite2D" parent="background"]
+texture = ExtResource("1_wymee")
+
+[node name="sprite_pink" type="Sprite2D" parent="background"]
+visible = false
+texture = ExtResource("2_dbg3w")
+
+[node name="animation_player" type="AnimationPlayer" parent="background"]
+libraries = {
+"": SubResource("AnimationLibrary_08ydn")
+}
+
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="ui_layer" type="CanvasLayer" parent="."]
+
+[node name="scroll_container" type="ScrollContainer" parent="ui_layer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container" type="VBoxContainer" parent="ui_layer/scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="story_mode" type="Control" parent="ui_layer/scroll_container/container"]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("4_4uv5u")
+animation_name = &"story mode"
+
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/story_mode"]
+position = Vector2(0, 61)
+sprite_frames = ExtResource("4_c5hes")
+animation = &"story mode idle"
+frame_progress = 0.37059
+script = ExtResource("4_emyfo")
+playing = true
+
+[node name="freeplay" type="Control" parent="ui_layer/scroll_container/container"]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("4_4uv5u")
+scene_path = "res://scenes/menus/freeplay_menu.tscn"
+animation_name = &"freeplay"
+
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/freeplay"]
+position = Vector2(0, 61)
+sprite_frames = ExtResource("4_c5hes")
+animation = &"freeplay idle"
+frame_progress = 0.0168246
+script = ExtResource("4_emyfo")
+playing = true
+
+[node name="donate" type="Control" parent="ui_layer/scroll_container/container"]
+custom_minimum_size = Vector2(0, 117)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_6spca")
+animation_name = &"donate"
+
+[node name="kickstarter" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/donate"]
+visible = false
+position = Vector2(0, 58)
+sprite_frames = ExtResource("4_c5hes")
+animation = &"kickstarter idle"
+frame_progress = 0.0122715
+script = ExtResource("4_emyfo")
+playing = true
+
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/donate"]
+position = Vector2(0, 58)
+sprite_frames = ExtResource("4_c5hes")
+animation = &"donate idle"
+frame_progress = 0.301414
+script = ExtResource("4_emyfo")
+playing = true
+
+[node name="options" type="Control" parent="ui_layer/scroll_container/container"]
+custom_minimum_size = Vector2(0, 111)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("4_4uv5u")
+animation_name = &"options"
+
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/options"]
+position = Vector2(0, 55)
+sprite_frames = ExtResource("4_c5hes")
+animation = &"options idle"
+frame_progress = 0.74363
+script = ExtResource("4_emyfo")
+playing = true
+
+[node name="version_label" type="Label" parent="ui_layer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Funkin' Godot v$VERSION"
+label_settings = SubResource("LabelSettings_lig6g")
+vertical_alignment = 2
+metadata/_edit_lock_ = true

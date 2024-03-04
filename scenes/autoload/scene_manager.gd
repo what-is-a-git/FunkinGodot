@@ -12,7 +12,8 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 		tween.kill()
 	
 	tween = tree.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT_IN)
-	path = 'res://%s' % path
+	if not path.begins_with('res://'):
+		path = 'res://%s' % path
 	
 	if use_transition:
 		tween.tween_property(transition.material, 'shader_parameter/progress', 1.0, 0.5)

@@ -34,14 +34,16 @@ func display() -> void:
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name.to_pascal_case()
 	
-	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s\n%s\n%.2fms Offset\n%.2fms Conductor' % [
+	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s\n%s\n%.2fms Offset\n%.2fms Conductor\n%s Draw Calls (%s Drawn Objects)' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
 		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
 		version,
 		scene_name,
-		AudioServer.get_output_latency() * 1000.0, absf(Conductor.offset) * 1000.0
+		AudioServer.get_output_latency() * 1000.0, absf(Conductor.offset) * 1000.0,
+		Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
+		Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
 	]
 	
 	if OS.is_debug_build():
@@ -54,8 +56,7 @@ func display() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action('toggle_debug') and \
-			event.is_action_pressed('toggle_debug'):
+	if event.is_action('toggle_debug') and event.is_pressed():
 		visible = not visible
 		
 		if visible:

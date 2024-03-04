@@ -144,6 +144,10 @@ alt={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/locale/difficulties.en.translation")
+
 [rendering]
 
 textures/vram_compression/import_s3tc_bptc=true

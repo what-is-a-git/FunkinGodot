@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxk008iuw4n7u"]
+[gd_scene load_steps=15 format=3 uid="uid://cxk008iuw4n7u"]
 
 [ext_resource type="Script" path="res://scenes/menus/title_screen.gd" id="1_0m8ln"]
 [ext_resource type="SpriteFrames" uid="uid://duovsfdon2i2v" path="res://resources/images/menus/title/gf.res" id="1_ii0wr"]
+[ext_resource type="Material" uid="uid://bo61teq831cd6" path="res://resources/materials/title_screen.tres" id="2_grdy1"]
 [ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="3_s2rvo"]
-[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="4_d3eoe"]
+[ext_resource type="SpriteFrames" uid="uid://b44d0w8yqu7tp" path="res://resources/images/menus/title/logo.res" id="5_nv456"]
+[ext_resource type="SpriteFrames" uid="uid://puwno4nflsjc" path="res://resources/images/menus/title/enter.res" id="6_hraot"]
 
 [sub_resource type="Animation" id="Animation_6rots"]
 length = 0.001
@@ -133,13 +135,107 @@ _data = {
 "dance_right": SubResource("Animation_mh840")
 }
 
+[sub_resource type="Animation" id="Animation_vg1w0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Press Enter to Begin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lm570"]
+resource_name = "loop"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Press Enter to Begin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qdiad"]
+resource_name = "press"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ENTER PRESSED"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4274r"]
+_data = {
+"RESET": SubResource("Animation_vg1w0"),
+"loop": SubResource("Animation_lm570"),
+"press": SubResource("Animation_qdiad")
+}
+
 [node name="title_screen" type="Node2D"]
 script = ExtResource("1_0m8ln")
+swag_material = ExtResource("2_grdy1")
 
 [node name="girlfriend" type="Node2D" parent="."]
-position = Vector2(640, 360)
+position = Vector2(891, 373)
 
 [node name="sprite" type="AnimatedSprite2D" parent="girlfriend"]
+material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("1_ii0wr")
 animation = &"gfDance"
 script = ExtResource("3_s2rvo")
@@ -149,22 +245,37 @@ libraries = {
 "": SubResource("AnimationLibrary_j25c3")
 }
 
-[node name="alphabet" type="Node2D" parent="."]
-position = Vector2(43, 548)
-script = ExtResource("4_d3eoe")
-text = "press enter to go to
-freeplay"
+[node name="logo" type="Node2D" parent="."]
+position = Vector2(354, 246)
 
-[node name="alphabet_2" type="Node2D" parent="."]
-position = Vector2(4, 686)
-rotation = 1.5708
-scale = Vector2(0.5, -0.5)
-script = ExtResource("4_d3eoe")
-text = ":3"
+[node name="sprite" type="AnimatedSprite2D" parent="logo"]
+material = ExtResource("2_grdy1")
+sprite_frames = ExtResource("5_nv456")
+animation = &"bump"
+script = ExtResource("3_s2rvo")
 
-[node name="alphabet_3" type="Node2D" parent="."]
-position = Vector2(1275, 686)
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-script = ExtResource("4_d3eoe")
-text = ":3"
+[node name="enter" type="Node2D" parent="."]
+position = Vector2(805, 636)
+
+[node name="sprite" type="AnimatedSprite2D" parent="enter"]
+material = ExtResource("2_grdy1")
+sprite_frames = ExtResource("6_hraot")
+animation = &"Press Enter to Begin"
+frame = 31
+frame_progress = 0.712825
+script = ExtResource("3_s2rvo")
+
+[node name="animation_player" type="AnimationPlayer" parent="enter"]
+libraries = {
+"": SubResource("AnimationLibrary_4274r")
+}
+
+[node name="flash" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)

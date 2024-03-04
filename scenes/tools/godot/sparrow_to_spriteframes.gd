@@ -98,7 +98,8 @@ func _import() -> Error:
 		for sparrow_frame in sparrow_frames:
 			if sparrow_frame.source == frame.source and \
 					sparrow_frame.offsets == frame.offsets:
-				frame = sparrow_frame
+				frame.atlas = sparrow_frame.atlas
+				break
 
 		# Unique new frame! Awesome.
 		if frame.atlas == null:

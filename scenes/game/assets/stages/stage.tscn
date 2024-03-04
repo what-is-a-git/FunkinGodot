@@ -36,11 +36,11 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("5_lk1og")
 centered = false
 
-[node name="player" type="Node2D" parent="."]
+[node name="player" type="Marker2D" parent="."]
 position = Vector2(1000, 800)
 
-[node name="opponent" type="Node2D" parent="."]
+[node name="opponent" type="Marker2D" parent="."]
 position = Vector2(256, 800)
 
-[node name="spectator" type="Node2D" parent="."]
+[node name="spectator" type="Marker2D" parent="."]
 position = Vector2(625, 750)

@@ -53,6 +53,10 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
+	if event.is_action('ui_cancel'):
+		active = false
+		GlobalAudio.get_player('MENU/CANCEL').play()
+		SceneManager.switch_to('scenes/menus/main_menu.tscn')
 	if event.is_action('freeplay_random'):
 		change_selection(randi_range(-song_nodes.size() + 1, song_nodes.size() - 1))
 	if event.is_action('ui_up') or event.is_action('ui_down'):
@@ -82,7 +86,7 @@ func change_difficulty(amount: int = 0) -> void:
 	if difficulties.is_empty():
 		difficulty_label.text = '< N/A >'
 	else:
-		difficulty_label.text = '< %s >' % difficulty.to_upper()
+		difficulty_label.text = '< %s >' % tr(difficulty.to_lower()).to_upper()
 
 
 func select_song() -> void:

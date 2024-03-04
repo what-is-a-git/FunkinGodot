@@ -168,7 +168,8 @@ offset_top = 32.0
 offset_right = 640.0
 offset_bottom = 96.0
 grow_horizontal = 2
-text = "Score:0 • Misses:0 • Accuracy:N/A (N/A)"
+text = "Score:0 • Misses:0 • Accuracy:N/A (N/A)
+"
 label_settings = SubResource("LabelSettings_ku58i")
 horizontal_alignment = 1
 
@@ -223,7 +224,7 @@ vertical_alignment = 1
 [node name="countdown_container" type="Node2D" parent="hud_layer/hud"]
 
 [node name="song_label" type="Label" parent="hud_layer/hud"]
-modulate = Color(1, 1, 1, 0.75)
+modulate = Color(1, 1, 1, 0.74902)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

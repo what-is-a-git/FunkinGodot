@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbnt5wnliubys"
-path.bptc="res://.godot/imported/enter.png-d658fd94465e2c53f0cde99e758aeb3e.bptc.ctex"
+uid="uid://bcq8cfghjibg1"
+path.bptc="res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/images/menus/title/enter.png"
-dest_files=["res://.godot/imported/enter.png-d658fd94465e2c53f0cde99e758aeb3e.bptc.ctex"]
+source_file="res://resources/images/menus/main_menu/background_pink.png"
+dest_files=["res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.bptc.ctex"]
 
 [params]
 

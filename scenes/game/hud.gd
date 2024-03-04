@@ -102,7 +102,9 @@ func _on_note_hit(note: Note) -> void:
 	rating_container.scale = Vector2(1.1, 1.1)
 	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)
-	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.15).set_delay(0.2)
+	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.25).set_delay(0.25)
+	rating_tween.tween_callback(func():
+		rating_container.visible = false).set_delay(0.5)
 	
 	game.health = clampf(health + rating.health, 0.0, 100.0)
 	game.score += rating.score

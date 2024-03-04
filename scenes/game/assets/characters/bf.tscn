@@ -825,5 +825,5 @@ libraries = {
 "": SubResource("AnimationLibrary_mki60")
 }
 
-[node name="camera_offset" type="Node2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="."]
 position = Vector2(-116, -268)

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbnt5wnliubys"
-path.bptc="res://.godot/imported/enter.png-d658fd94465e2c53f0cde99e758aeb3e.bptc.ctex"
+uid="uid://ltkynwwp1o8s"
+path.bptc="res://.godot/imported/background.png-3a25c502a510b6661b330e29c62a7cbd.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/images/menus/title/enter.png"
-dest_files=["res://.godot/imported/enter.png-d658fd94465e2c53f0cde99e758aeb3e.bptc.ctex"]
+source_file="res://resources/images/menus/main_menu/background.png"
+dest_files=["res://.godot/imported/background.png-3a25c502a510b6661b330e29c62a7cbd.bptc.ctex"]
 
 [params]
 
