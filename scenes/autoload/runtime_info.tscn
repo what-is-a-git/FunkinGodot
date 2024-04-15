@@ -1,29 +1,34 @@
 [gd_scene load_steps=4 format=3 uid="uid://d4lyul6n3wfmw"]
 
 [ext_resource type="Script" path="res://scenes/autoload/runtime_info.gd" id="1_now7c"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="1_pbsgd"]
+[ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://resources/fonts/mono.ttf" id="2_tntl2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rqscu"]
-line_spacing = 2.0
-font = ExtResource("1_pbsgd")
-font_size = 12
+line_spacing = -4.0
+font = ExtResource("2_tntl2")
+font_size = 14
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="runtime_info" type="CanvasLayer"]
+process_mode = 3
 layer = 64
 visible = false
 script = ExtResource("1_now7c")
 
 [node name="label" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0.95)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 8.0
-offset_right = 68.0
-offset_bottom = 31.0
-text = "0 FPS (0.00ms)
-0 MiB / 0 MiB (GPU)
-0 MiB / 0 MiB (CPU)
+offset_top = 5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0FPS (0.00ms)
+0MiB / 0MiB (GPU)
+0MiB / 0MiB (CPU)
 Funkin' Godot v0.0.1"
 label_settings = SubResource("LabelSettings_rqscu")
 

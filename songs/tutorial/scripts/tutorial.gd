@@ -2,7 +2,7 @@ extends FunkinScript
 
 
 func _ready() -> void:
-	super._ready()
+	super()
 	
 	if not (is_instance_valid(game) and is_instance_valid(camera)):
 		print(game)
@@ -25,7 +25,7 @@ func _ready() -> void:
 		game.target_camera_position = opponent._camera_offset.global_position
 		camera.position = game.target_camera_position
 		
-		game.health_bar._ready()
+		game.hud.health_bar._ready()
 		opponent_field._default_character = opponent
 
 

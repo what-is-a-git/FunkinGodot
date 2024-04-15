@@ -1,20 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt7vny7nmtw41"]
+[gd_scene load_steps=6 format=3 uid="uid://dt7vny7nmtw41"]
 
 [ext_resource type="Script" path="res://scenes/autoload/global_audio.gd" id="1_ete5d"]
 [ext_resource type="AudioStream" uid="uid://dergcpn8f5cju" path="res://resources/music/menus/main_theme.ogg" id="2_ew3pn"]
-[ext_resource type="Script" path="res://scripts/audio_stream_player_ex.gd" id="3_5fsok"]
 [ext_resource type="AudioStream" uid="uid://bmt2cyc46u6om" path="res://resources/sfx/menus/scroll.ogg" id="4_2sg76"]
 [ext_resource type="AudioStream" uid="uid://cw4cxfwsg33fg" path="res://resources/sfx/menus/confirm.ogg" id="5_fbmua"]
 [ext_resource type="AudioStream" uid="uid://ks4syot2ec3p" path="res://resources/sfx/menus/cancel.ogg" id="6_i8ihw"]
 
 [node name="global_audio" type="Node"]
+process_mode = 3
 script = ExtResource("1_ete5d")
 
 [node name="MUSIC" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ew3pn")
 bus = &"Music"
-script = ExtResource("3_5fsok")
-looping = 2
+parameters/looping = true
 
 [node name="MENU" type="Node" parent="."]
 
@@ -23,17 +22,14 @@ stream = ExtResource("4_2sg76")
 volume_db = -10.0
 max_polyphony = 16
 bus = &"SFX"
-script = ExtResource("3_5fsok")
 
 [node name="CONFIRM" type="AudioStreamPlayer" parent="MENU"]
 stream = ExtResource("5_fbmua")
 volume_db = -10.0
 bus = &"SFX"
-script = ExtResource("3_5fsok")
 
 [node name="CANCEL" type="AudioStreamPlayer" parent="MENU"]
 stream = ExtResource("6_i8ihw")
 volume_db = -10.0
 max_polyphony = 2
 bus = &"SFX"
-script = ExtResource("3_5fsok")

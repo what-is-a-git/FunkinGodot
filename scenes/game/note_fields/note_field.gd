@@ -4,6 +4,8 @@ class_name NoteField extends Node2D
 @export var takes_input: bool = false
 @export_enum('Opponent', 'Player') var side: int = 0
 @export var dynamic_positioning: bool = false
+@export var ignore_speed_changes: bool = false
+@export var note_splash: PackedScene = null
 
 @onready var _receptors_node: Node2D = $receptors
 @onready var _receptors: Array = []
@@ -12,10 +14,12 @@ class_name NoteField extends Node2D
 var _note_index: int = 0
 var _chart: Chart = null
 var _scroll_speed: float = -1.0
+var _scroll_speed_modifier: float = 1.0
 var _lanes: int
 var _input_zone: float = 0.18
 var _default_character: Character = null
 var _note_types: NoteTypes = null
+var _note_splash_alpha: float = 0.6
 
 
 signal note_hit(note: Note)
@@ -29,6 +33,7 @@ func _ready() -> void:
 		_chart = Game.chart
 	if _scroll_speed <= 0.0:
 		_scroll_speed = Game.scroll_speed
+	_note_splash_alpha = Config.get_value('interface', 'note_splash_alpha') / 100.0
 	
 	# If you have another node in here that isn't a Node2D
 	# that is just currently not supported.
@@ -58,7 +63,8 @@ func _process(delta: float) -> void:
 		else:
 			note.position.y = receptor_y
 		
-		note.position.y += (Conductor.time - note.data.time) * 1000.0 * 0.45 * _scroll_speed
+		note.position.y -= (Conductor.time - note.data.time) * 1000.0 * 0.45 \
+				* _scroll_speed * _scroll_speed_modifier
 		
 		# This is probably a bit more costly
 		# than you'd expected, but whatever.
@@ -97,15 +103,13 @@ func hit_note(note: Note):
 	note_hit.emit(note)
 	note._hit = true
 	note._clip_target = _receptors[0].global_position.y
-	note._field = self
 	
 	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time
-	
+		
 		if Conductor.time > note.data.time:
-			note.sustain.size.y = note.length * 1000.0 * 0.45 * Game.scroll_speed / note.scale.y \
-					- note.tail.texture.get_height()
-			note.sustain.position.y = note.clip_rect.size.y - note.sustain.size.y
+			note.sustain.size.y = note.data.length * 1000.0 * 0.45 * _scroll_speed \
+					/ note.scale.y - note.tail.texture.get_height()
 
 
 func miss_note(note: Note) -> void:
@@ -135,9 +139,11 @@ func _try_spawning() -> void:
 			continue
 		
 		var note: Note = _note_types.types['default'].instantiate()
+		note._field = self
 		note.data = data
 		note.position.x = _receptors[0].position.x + \
 				(112.0 * (absi(note.data.direction) % _lanes))
+		note._splash = note_splash
 		_notes.add_child(note)
 		_note_index += 1
 
@@ -193,7 +199,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			if index != lane:
 				continue
 			
-			if Conductor.time >= note.data.time - _input_zone:
+			var before_zone: bool = Conductor.time < note.data.time - _input_zone
+			var after_zone: bool = Conductor.time > note.data.time + _input_zone
+			
+			if not (before_zone or after_zone):
 				hit_note(note)
 				break
 			# break
@@ -214,3 +223,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				continue
 			
 			miss_note(note)
+
+
+func _on_scroll_speed_changed() -> void:
+	if ignore_speed_changes:
+		return
+	
+	_scroll_speed = Game.scroll_speed

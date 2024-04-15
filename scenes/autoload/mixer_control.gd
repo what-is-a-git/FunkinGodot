@@ -9,16 +9,31 @@ extends CanvasLayer
 @onready var icon_label: Label = $root/panel/icon_label
 @onready var icon_rect: TextureRect = $root/panel/icon
 
+var tween: Tween
 var target_bus: StringName = &'Master'
 var volume: float = 0.5:
 	set(value):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(target_bus), 
 				linear_to_db(value))
+		
+		var buses: Dictionary = Config.get_value('sound', 'buses')
+		buses[target_bus] = value * 100.0
+		Config.set_value('sound', 'buses', buses)
 	get:
 		return db_to_linear(AudioServer.get_bus_volume_db(\
 				AudioServer.get_bus_index(target_bus)))
 
-var tween: Tween
+
+func _ready() -> void:
+	visible = false
+	var buses: Dictionary = Config.get_value('sound', 'buses')
+	for bus in buses.keys():
+		var bus_index: int = AudioServer.get_bus_index(bus)
+		if bus_index < 0:
+			continue
+		
+		AudioServer.set_bus_volume_db(bus_index, \
+				linear_to_db(buses.get(bus, 100.0) * 0.01))
 
 
 func _input(event: InputEvent) -> void:
@@ -37,6 +52,8 @@ func _input(event: InputEvent) -> void:
 	tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(panel, 'size:y', 92, 0.5)
 	tween.tween_property(panel, 'size:y', 0, 0.5).set_delay(1.0)
+	tween.tween_property(self, 'visible', false, 0.0)
+	visible = true
 	
 	var modifier: int = Input.get_axis('alt', 'shift')
 	var bus_index: int = AudioServer.get_bus_index(target_bus)

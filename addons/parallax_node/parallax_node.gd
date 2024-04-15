@@ -1,6 +1,7 @@
 ## Alternative node type to [ParallaxLayer] and [ParallaxBackground]
 ## that works independently and doesn't effect it's position based on
 ## the camera's current zoom.
+## @deprecated
 @icon('res://addons/parallax_node/parallax_node.svg')
 class_name ParallaxNode extends Node2D
 
@@ -32,12 +33,18 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_update.call_deferred()
+
+
+func _update() -> void:
 	if not ignore_camera_changes:
 		_camera = get_viewport().get_camera_2d()
 	
 	if _camera == null:
 		position = Vector2.ZERO
 		return
+	if not (is_inside_tree() and _camera.is_inside_tree()):
+		return
 	
 	position = _offset + (_camera.get_screen_center_position() - \
-			(get_viewport_rect().size / 2.0)) * (Vector2.ONE - parallax_factor)
+		(get_viewport_rect().size / 2.0)) * (Vector2.ONE - parallax_factor)

@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://3diy2p3nknpi"]
+[gd_scene load_steps=5 format=3 uid="uid://3diy2p3nknpi"]
 
 [ext_resource type="Script" path="res://scenes/game/note_fields/note_field.gd" id="1_amido"]
-[ext_resource type="SpriteFrames" path="res://resources/images/game/skins/default/receptors.res" id="1_c48oa"]
+[ext_resource type="SpriteFrames" uid="uid://bgu74f4y0e7dx" path="res://resources/images/game/skins/default/receptors.res" id="1_c48oa"]
+[ext_resource type="PackedScene" uid="uid://bx6f5ldidoswy" path="res://scenes/game/notes/note_splash.tscn" id="2_ij236"]
 [ext_resource type="Script" path="res://scenes/game/note_fields/receptor.gd" id="3_q3u3a"]
 
 [node name="4_lanes" type="Node2D"]
 script = ExtResource("1_amido")
+note_splash = ExtResource("2_ij236")
 
 [node name="receptors" type="Node2D" parent="."]
 position = Vector2(-1.52588e-05, 0)

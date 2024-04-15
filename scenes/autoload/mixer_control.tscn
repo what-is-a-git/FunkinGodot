@@ -28,7 +28,9 @@ font_size = 10
 font_color = Color(0.7, 0.7, 0.7, 1)
 
 [node name="mixer_control" type="CanvasLayer"]
+process_mode = 3
 layer = 48
+visible = false
 script = ExtResource("1_fobyb")
 icons = Array[Texture2D]([ExtResource("3_f6m6h"), ExtResource("3_d0bi8"), ExtResource("4_rgfc6")])
 

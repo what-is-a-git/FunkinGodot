@@ -1,0 +1,302 @@
+[gd_scene load_steps=16 format=3 uid="uid://djsixwr7qenx1"]
+
+[ext_resource type="Script" path="res://scenes/menus/options_menu.gd" id="1_7e45p"]
+[ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_jmigv"]
+[ext_resource type="Script" path="res://scenes/menus/options/gameplay_section.gd" id="3_0f5e4"]
+[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="3_3mdte"]
+[ext_resource type="SpriteFrames" uid="uid://wifv2wsiwcum" path="res://resources/images/menus/main_menu/buttons.res" id="3_yv0yv"]
+[ext_resource type="Script" path="res://scenes/menus/options/title_sprite.gd" id="4_6ck0r"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="4_k5v7g"]
+[ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="5_461pe"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="5_qlnc3"]
+[ext_resource type="Script" path="res://scenes/menus/options/categories.gd" id="6_k5s7i"]
+[ext_resource type="SpriteFrames" path="res://resources/images/menus/options/categories.res" id="6_lf7w2"]
+[ext_resource type="Script" path="res://scenes/menus/options/option.gd" id="9_rgp4e"]
+[ext_resource type="Script" path="res://scenes/menus/options/category.gd" id="11_3cmdf"]
+[ext_resource type="Script" path="res://scenes/menus/options/number_option.gd" id="12_i3ttd"]
+[ext_resource type="Script" path="res://scenes/menus/options/list_option.gd" id="13_cy0y1"]
+
+[node name="options_menu" type="Node2D"]
+script = ExtResource("1_7e45p")
+
+[node name="background" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+
+[node name="sprite" type="Sprite2D" parent="background"]
+modulate = Color(0.541176, 0.827451, 0.87451, 1)
+position = Vector2(640, 360)
+texture = ExtResource("1_jmigv")
+
+[node name="categories_layer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="categories" type="HBoxContainer" parent="categories_layer"]
+unique_name_in_owner = true
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("6_k5s7i")
+
+[node name="gameplay" type="Control" parent="categories_layer/categories" node_paths=PackedStringArray("category")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+category = NodePath("../../../section/options/gameplay")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/gameplay"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"gameplay"
+frame_progress = 0.351861
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="graphics" type="Control" parent="categories_layer/categories"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/graphics"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"graphics"
+frame_progress = 0.46701
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="interface" type="Control" parent="categories_layer/categories"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/interface"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"interface"
+frame_progress = 0.661538
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="sound" type="Control" parent="categories_layer/categories"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/sound"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"sound"
+frame_progress = 0.228139
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="performance" type="Control" parent="categories_layer/categories"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/performance"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"performance"
+frame_progress = 0.261356
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="accessibility" type="Control" parent="categories_layer/categories"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("11_3cmdf")
+
+[node name="sprite" type="AnimatedSprite2D" parent="categories_layer/categories/accessibility"]
+position = Vector2(75, 75)
+sprite_frames = ExtResource("6_lf7w2")
+animation = &"accessibility"
+frame_progress = 0.291922
+script = ExtResource("4_k5v7g")
+playing = true
+
+[node name="section" type="Node2D" parent="."]
+position = Vector2(640, 1080)
+
+[node name="options" type="Node2D" parent="section"]
+position = Vector2(-320, 0)
+
+[node name="gameplay" type="Node2D" parent="section/options"]
+script = ExtResource("3_0f5e4")
+max_y = 160.0
+
+[node name="timer" type="Timer" parent="section/options/gameplay"]
+wait_time = 0.5
+one_shot = true
+
+[node name="scroll_speed" type="Node2D" parent="section/options/gameplay"]
+position = Vector2(80, 264)
+script = ExtResource("5_qlnc3")
+text = "--scroll speed--"
+centered = true
+
+[node name="options" type="Node2D" parent="section/options/gameplay"]
+
+[node name="keybinds" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(-91, -184)
+script = ExtResource("9_rgp4e")
+
+[node name="label" type="Node2D" parent="section/options/gameplay/options/keybinds"]
+script = ExtResource("5_qlnc3")
+text = "keybinds"
+centered = true
+
+[node name="downscroll" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(-32, -88)
+script = ExtResource("3_3mdte")
+key = &"scroll_direction"
+strings = Array[String](["up", "down"])
+
+[node name="alphabet" type="Node2D" parent="section/options/gameplay/options/downscroll"]
+script = ExtResource("5_qlnc3")
+text = "downscroll"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="section/options/gameplay/options/downscroll"]
+position = Vector2(319, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("5_461pe")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("4_k5v7g")
+
+[node name="middlescroll" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(6, 8)
+script = ExtResource("3_3mdte")
+
+[node name="alphabet" type="Node2D" parent="section/options/gameplay/options/middlescroll"]
+script = ExtResource("5_qlnc3")
+text = "middlescroll"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="section/options/gameplay/options/middlescroll"]
+position = Vector2(351, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("5_461pe")
+animation = &"unselected"
+script = ExtResource("4_k5v7g")
+
+[node name="offset" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(0, 104)
+script = ExtResource("12_i3ttd")
+value_suffix = &"ms"
+
+[node name="label" type="Node2D" parent="section/options/gameplay/options/offset"]
+position = Vector2(-140, 0)
+script = ExtResource("5_qlnc3")
+text = "offset:"
+centered = true
+
+[node name="value" type="Node2D" parent="section/options/gameplay/options/offset"]
+position = Vector2(32, -34)
+script = ExtResource("5_qlnc3")
+text = "< 0 >"
+
+[node name="method" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(0, 360)
+script = ExtResource("13_cy0y1")
+list = Array[String](["chart", "constant"])
+display_raw = false
+
+[node name="label" type="Node2D" parent="section/options/gameplay/options/method"]
+position = Vector2(-135, 0)
+script = ExtResource("5_qlnc3")
+text = "method:"
+centered = true
+
+[node name="value" type="Node2D" parent="section/options/gameplay/options/method"]
+position = Vector2(48, -34)
+script = ExtResource("5_qlnc3")
+text = "chart"
+
+[node name="value" type="Node2D" parent="section/options/gameplay/options"]
+position = Vector2(-22, 456)
+script = ExtResource("12_i3ttd")
+key = &"custom_scroll_speed"
+integers = false
+ranged = true
+minimum = 0.1
+step = 0.1
+
+[node name="label" type="Node2D" parent="section/options/gameplay/options/value"]
+position = Vector2(-140, 0)
+script = ExtResource("5_qlnc3")
+text = "value:"
+centered = true
+
+[node name="value" type="Node2D" parent="section/options/gameplay/options/value"]
+position = Vector2(16, -34)
+script = ExtResource("5_qlnc3")
+text = "< 0 >"
+
+[node name="preview" type="Parallax2D" parent="section"]
+scroll_scale = Vector2(0, 0)
+scroll_offset = Vector2(320, 0)
+
+[node name="background" type="ColorRect" parent="section/preview"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -264.0
+offset_right = 320.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="stuff" type="Node2D" parent="section/preview"]
+position = Vector2(80, 48)
+
+[node name="top" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+
+[node name="bar_background" type="ColorRect" parent="top"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="options_label" type="AnimatedSprite2D" parent="top"]
+position = Vector2(168, 48)
+scale = Vector2(0.6, 0.6)
+sprite_frames = ExtResource("3_yv0yv")
+animation = &"options idle"
+frame_progress = 0.148302
+script = ExtResource("4_6ck0r")
+playing = true
+
+[node name="section_label" type="Node2D" parent="top"]
+position = Vector2(640, 48)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("5_qlnc3")
+text = "Gameplay"
+centered = true
+
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[connection signal="timeout" from="section/options/gameplay/timer" to="section/options/gameplay" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="section/options/gameplay/options/downscroll/checkbox" to="section/options/gameplay/options/downscroll" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="section/options/gameplay/options/middlescroll/checkbox" to="section/options/gameplay/options/middlescroll" method="_on_checkbox_animation_finished"]

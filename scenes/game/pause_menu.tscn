@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3n853hu8o3ik"]
+
+[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://resources/fonts/funkin.ttf" id="1_2640p"]
+[ext_resource type="Script" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
+[ext_resource type="Script" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0m3gd"]
+font = ExtResource("1_2640p")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_83nit"]
+font = ExtResource("1_2640p")
+font_size = 36
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+layer = 36
+script = ExtResource("1_vrvda")
+
+[node name="root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="ColorRect" parent="root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="title" type="Label" parent="root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+text = "Pause Menu"
+label_settings = SubResource("LabelSettings_0m3gd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="song_label" type="Label" parent="root"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 72.0
+offset_bottom = 108.0
+grow_horizontal = 2
+text = "Penis (HARD) / Freeplay"
+label_settings = SubResource("LabelSettings_83nit")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="options" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="resume" type="Node2D" parent="options"]
+position = Vector2(90, 326.5)
+script = ExtResource("3_380tn")
+text = "resume"
+
+[node name="restart" type="Node2D" parent="options"]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(110, 482)
+script = ExtResource("3_380tn")
+target_y = 1
+text = "restart"
+
+[node name="options" type="Node2D" parent="options"]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(130, 636.5)
+script = ExtResource("3_380tn")
+target_y = 2
+text = "options"
+
+[node name="quit" type="Node2D" parent="options"]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(150, 794)
+script = ExtResource("3_380tn")
+target_y = 3
+text = "quit"

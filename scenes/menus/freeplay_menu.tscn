@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://3rua2gpac5p8"]
+[gd_scene load_steps=10 format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
-[ext_resource type="Script" path="res://scripts/audio_stream_player_ex.gd" id="2_wfwxb"]
+[ext_resource type="AudioStream" uid="uid://dw2hnatyaitfi" path="res://songs/tutorial/tracks/Inst.ogg" id="2_j8v40"]
+[ext_resource type="Script" path="res://scenes/menus/freeplay_info.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7yg7l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
@@ -14,13 +15,13 @@ expand_margin_bottom = 8.0
 [sub_resource type="LabelSettings" id="LabelSettings_mco15"]
 font = ExtResource("4_7yg7l")
 
-[sub_resource type="LabelSettings" id="LabelSettings_v78yk"]
-font = ExtResource("4_7yg7l")
-font_size = 12
-
 [sub_resource type="LabelSettings" id="LabelSettings_1ivw4"]
 font = ExtResource("4_7yg7l")
 font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_v78yk"]
+font = ExtResource("4_7yg7l")
+font_size = 12
 
 [node name="freeplay_menu" type="Node2D"]
 script = ExtResource("1_p2lt6")
@@ -29,9 +30,10 @@ script = ExtResource("1_p2lt6")
 one_shot = true
 
 [node name="track" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_j8v40")
+volume_db = -6.0
 bus = &"Music"
-script = ExtResource("2_wfwxb")
-looping = 2
+parameters/looping = true
 
 [node name="background" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -50,7 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="panel_container" type="PanelContainer" parent="root_control"]
+[node name="panel" type="Panel" parent="root_control" node_paths=PackedStringArray("parent")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -59,35 +61,42 @@ offset_left = -256.0
 offset_bottom = 64.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_h4xxx")
+script = ExtResource("4_5dymk")
+parent = NodePath("../..")
 
-[node name="song_label" type="Label" parent="root_control/panel_container"]
-custom_minimum_size = Vector2(0, 28)
+[node name="song_label" type="Label" parent="root_control/panel"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
+offset_top = 7.0
+offset_right = 256.0
+offset_bottom = 23.0
+size_flags_vertical = 10
 text = "Test"
 label_settings = SubResource("LabelSettings_mco15")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="accuracy_label" type="Label" parent="root_control/panel_container"]
-custom_minimum_size = Vector2(0, 56)
+[node name="difficulty_label" type="Label" parent="root_control/panel"]
 layout_mode = 2
-size_flags_horizontal = 4
+offset_top = 29.0
+offset_right = 256.0
+offset_bottom = 45.0
+size_flags_vertical = 3
+text = "< NORMAL >"
+label_settings = SubResource("LabelSettings_1ivw4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="accuracy_label" type="Label" parent="root_control/panel"]
+layout_mode = 2
+offset_top = 51.0
+offset_right = 256.0
+offset_bottom = 64.0
 size_flags_vertical = 8
 text = "N/A"
 label_settings = SubResource("LabelSettings_v78yk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="difficulty_label" type="Label" parent="root_control/panel_container"]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "< NORMAL >"
-label_settings = SubResource("LabelSettings_1ivw4")
-horizontal_alignment = 1
-vertical_alignment = 1
-
+[connection signal="difficulty_changed" from="." to="root_control/panel" method="_on_difficulty_changed"]
+[connection signal="song_changed" from="." to="root_control/panel" method="_on_song_changed"]
 [connection signal="timeout" from="track_timer" to="." method="_load_tracks"]

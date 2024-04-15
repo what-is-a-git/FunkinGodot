@@ -1,22 +1,11 @@
-[gd_resource type="Resource" script_class="SongTracks" load_steps=7 format=3 uid="uid://dp4yuv1mw5m8b"]
+[gd_resource type="AudioStreamSynchronized" load_steps=3 format=3 uid="uid://baw1xwl6xq704"]
 
-[ext_resource type="Script" path="res://scripts/resources/song_tracks.gd" id="1_5tqwp"]
-[ext_resource type="Script" path="res://scripts/resources/song_track.gd" id="2_nw3xr"]
-[ext_resource type="AudioStream" uid="uid://b5qx52aqandq8" path="res://songs/fresh/tracks/Inst.ogg" id="3_hckgl"]
-[ext_resource type="AudioStream" uid="uid://ciylelnp4f8vu" path="res://songs/fresh/tracks/Voices.ogg" id="4_wlfeo"]
-
-[sub_resource type="Resource" id="Resource_h0rss"]
-script = ExtResource("2_nw3xr")
-stream = ExtResource("3_hckgl")
-bus = &"Music"
-volume = 1.0
-
-[sub_resource type="Resource" id="Resource_pqtoq"]
-script = ExtResource("2_nw3xr")
-stream = ExtResource("4_wlfeo")
-bus = &"Music"
-volume = 1.0
+[ext_resource type="AudioStream" uid="uid://b5qx52aqandq8" path="res://songs/fresh/tracks/Inst.ogg" id="1_jcuiy"]
+[ext_resource type="AudioStream" uid="uid://ciylelnp4f8vu" path="res://songs/fresh/tracks/Voices.ogg" id="2_evgya"]
 
 [resource]
-script = ExtResource("1_5tqwp")
-tracks = Array[ExtResource("2_nw3xr")]([SubResource("Resource_h0rss"), SubResource("Resource_pqtoq")])
+stream_count = 2
+stream_0/stream = ExtResource("1_jcuiy")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_evgya")
+stream_1/volume = 0.0

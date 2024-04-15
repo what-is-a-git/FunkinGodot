@@ -80,7 +80,7 @@ func _import() -> Error:
 
 		if frame.name == '':
 			continue
-
+		
 		frame.source = Rect2i(
 			Vector2i(xml.get_named_attribute_value_safe('x').to_int(),
 					xml.get_named_attribute_value_safe('y').to_int(),),
@@ -92,7 +92,7 @@ func _import() -> Error:
 			Vector2i(xml.get_named_attribute_value_safe('frameWidth').to_int(),
 					xml.get_named_attribute_value_safe('frameHeight').to_int(),),)
 		frame.has_offsets = xml.has_attribute('frameX') and options.get('use_offsets', true)
-
+		
 		var frame_data: Array = _get_frame_name_and_number(frame)
 		
 		for sparrow_frame in sparrow_frames:

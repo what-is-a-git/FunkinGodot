@@ -9,6 +9,8 @@ static var mode: PlayMode = PlayMode.FREEPLAY
 
 static var instance: Game = null
 
+@onready var pause_menu: PackedScene = load('res://scenes/game/pause_menu.tscn')
+
 @onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
 @onready var tracks: Tracks = $tracks
 @onready var scripts: ScriptContainer = $scripts
@@ -59,6 +61,8 @@ signal ready_post
 signal song_start
 signal event_hit(event: EventData)
 signal song_finished(event: CancellableEvent)
+signal scroll_speed_changed
+signal died(event: CancellableEvent)
 
 
 func _ready() -> void:
@@ -78,6 +82,18 @@ func _ready() -> void:
 					song, difficulty]))
 		scroll_speed = funkin_chart.json.song.get('speed', 2.6)
 		chart = funkin_chart.parse()
+	
+	match Config.get_value('gameplay', 'scroll_speed_method'):
+		'chart':
+			scroll_speed *= Config.get_value('gameplay', 'custom_scroll_speed')
+		'constant':
+			scroll_speed = Config.get_value('gameplay', 'custom_scroll_speed')
+	
+	scroll_speed_changed.emit()
+	
+	if ResourceLoader.exists('res://songs/%s/events.tres' % song):
+		var events: SongEvents = load('res://songs/%s/events.tres' % song)
+		chart.events.append_array(events.events)
 	
 	chart.notes.sort_custom(func(a, b):
 		return a.time < b.time)
@@ -172,10 +188,22 @@ func _process(delta: float) -> void:
 	if not playing:
 		return
 	
-	camera.position = lerp(camera.position, target_camera_position, delta * 3.0)
+	if health <= 0.0:
+		var event: CancellableEvent = CancellableEvent.new()
+		died.emit(event)
+		
+		if event.status == CancellableEvent.EventStatus.CONTINUE:
+			Gameover.camera_position = camera.global_position
+			Gameover.camera_zoom = camera.zoom
+			Gameover.character_path = player.death_character
+			Gameover.character_position = player.global_position
+			SceneManager.switch_to('scenes/game/gameover.tscn', false)
+			return
+	
+	camera.position = camera.position.lerp(target_camera_position, delta * 3.0)
 	
 	if camera_bumps:
-		camera.zoom = lerp(camera.zoom, target_camera_zoom, delta * 3.0)
+		camera.zoom = camera.zoom.lerp(target_camera_zoom, delta * 3.0)
 	
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
@@ -190,17 +218,23 @@ func _process(delta: float) -> void:
 	while _event < chart.events.size() and \
 			Conductor.time >= chart.events[_event].time:
 		var event := chart.events[_event]
-		
 		_on_event_hit(event)
-		event_hit.emit(event)
 		_event += 1
 
 
 func _input(event: InputEvent) -> void:
+	if not event.is_pressed():
+		return
+	if event.is_echo():
+		return
 	if not playing:
 		return
-	if event.is_action('ui_cancel') and event.is_pressed():
+	if event.is_action('ui_cancel'):
 		_song_finished(true)
+	if event.is_action('pause_game'):
+		var menu: CanvasLayer = pause_menu.instantiate()
+		add_child(menu)
+		get_tree().paused = true
 
 
 func _on_beat_hit(beat: int) -> void:

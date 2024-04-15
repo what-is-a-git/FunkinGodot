@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7fwxsepnt38j"]
+[gd_scene load_steps=13 format=3 uid="uid://b7fwxsepnt38j"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://resources/images/menus/main_menu/background.png" id="1_wymee"]
-[ext_resource type="Script" path="res://addons/parallax_node/parallax_node.gd" id="2_af0kt"]
 [ext_resource type="Texture2D" uid="uid://bcq8cfghjibg1" path="res://resources/images/menus/main_menu/background_pink.png" id="2_dbg3w"]
 [ext_resource type="Script" path="res://scripts/menus/scene_main_menu_button.gd" id="4_4uv5u"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7kxsk"]
@@ -87,13 +86,11 @@ unique_name_in_owner = true
 wait_time = 1.1
 one_shot = true
 
-[node name="background" type="Node2D" parent="."]
+[node name="background" type="Parallax2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(640, 360)
 scale = Vector2(1.1, 1.1)
-script = ExtResource("2_af0kt")
-parallax_factor = Vector2(0, 0.1)
-position_as_offset = true
+scroll_scale = Vector2(0, 0.1)
+scroll_offset = Vector2(640, 360)
 
 [node name="sprite" type="Sprite2D" parent="background"]
 texture = ExtResource("1_wymee")
@@ -139,7 +136,7 @@ animation_name = &"story mode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.37059
+frame_progress = 0.427979
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -155,7 +152,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.0168246
+frame_progress = 0.0742126
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -171,7 +168,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.0122715
+frame_progress = 0.0696596
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -179,7 +176,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.301414
+frame_progress = 0.3588
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -188,13 +185,14 @@ custom_minimum_size = Vector2(0, 111)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("4_4uv5u")
+scene_path = "res://scenes/menus/options_menu.tscn"
 animation_name = &"options"
 
 [node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/options"]
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.74363
+frame_progress = 0.801017
 script = ExtResource("4_emyfo")
 playing = true
 

@@ -3,6 +3,9 @@ class_name HUD extends Node2D
 
 @export var bump_amount: Vector2 = Vector2(0.03, 0.03)
 
+@onready var note_fields: Node2D = $note_fields
+@onready var player_field: NoteField = $note_fields/player
+@onready var opponent_field: NoteField = $note_fields/opponent
 @onready var health_bar: HealthBar = %health_bar
 @onready var song_label: Label = $song_label
 @onready var diff_label: Label = $rating_container/diff_label
@@ -18,6 +21,52 @@ var game: Game
 var tracks: Tracks
 var skin: HUDSkin
 
+var scroll_direction: StringName = &'up':
+	set(value):
+		var tween := create_tween()\
+				.set_trans(Tween.TRANS_SINE)\
+				.set_ease(Tween.EASE_OUT)\
+				.set_parallel()
+		var duration: float = 1.0 / Conductor.beat_delta if game.song_started else 0.0
+		
+		match value:
+			&'up':
+				tween.tween_property(note_fields, 'position:y', -248.0, duration)
+				tween.tween_property(health_bar, 'position:y', 285.0, duration)
+				tween.tween_property(song_label, 'position:y', -352.0, duration)
+				song_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+				tween.tween_property(player_field, '_scroll_speed_modifier', 1.0, duration)
+				tween.tween_property(opponent_field, '_scroll_speed_modifier', 1.0, duration)
+			&'down':
+				tween.tween_property(note_fields, 'position:y', 248.0, duration)
+				tween.tween_property(health_bar, 'position:y', -285.0, duration)
+				tween.tween_property(song_label, 'position:y', 288.0, duration)
+				song_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+				tween.tween_property(player_field, '_scroll_speed_modifier', -1.0, duration)
+				tween.tween_property(opponent_field, '_scroll_speed_modifier', -1.0, duration)
+			_:
+				push_warning('A scroll direction of %s is not supported.' % value)
+		
+		scroll_direction = value
+var centered_receptors: bool = false:
+	set(value):
+		var tween := create_tween()\
+				.set_trans(Tween.TRANS_SINE)\
+				.set_ease(Tween.EASE_OUT)\
+				.set_parallel()
+		var duration: float = 1.0 / Conductor.beat_delta if game.song_started else 0.0
+		
+		if value:
+			tween.tween_property(player_field, 'position:x', 0.0, duration)
+			tween.tween_property(opponent_field, 'position:x', 0.0, duration)
+			tween.tween_property(opponent_field, 'modulate:a', 0.0, duration)
+		else:
+			tween.tween_property(player_field, 'position:x', 300.0, duration)
+			tween.tween_property(opponent_field, 'position:x', -300.0, duration)
+			tween.tween_property(opponent_field, 'modulate:a', 1.0, duration)
+		
+		centered_receptors = value
+
 
 func _ready() -> void:
 	if is_instance_valid(Game.instance):
@@ -28,6 +77,8 @@ func _ready() -> void:
 		return
 	
 	song_label.text = '%s • [%s]' % [game.metadata.display_name, Game.difficulty.to_upper()]
+	scroll_direction = Config.get_value('gameplay', 'scroll_direction')
+	centered_receptors = Config.get_value('gameplay', 'centered_receptors')
 	
 	skin = game.skin
 	Conductor.beat_hit.connect(_on_beat_hit)
@@ -97,6 +148,14 @@ func _on_note_hit(note: Note) -> void:
 		&'shit':
 			rating_sprite.texture = skin.shit
 	
+	if note._splash != null and \
+			(rating.name == &'marvelous' or rating.name == &'sick'):
+		var splash = note._splash.instantiate()
+		splash.note = note
+		add_child(splash)
+		splash.global_position = note._field._receptors_node.\
+				get_child(absi(note.data.direction) % 4).global_position
+	
 	rating_container.visible = true
 	rating_container.modulate.a = 1.0
 	rating_container.scale = Vector2(1.1, 1.1)
@@ -152,7 +211,7 @@ func _play_countdown_sound(index: int) -> void:
 	if not is_instance_valid(skin.countdown_sounds[index]):
 		return
 	
-	var player := AudioStreamPlayerEX.new()
+	var player := AudioStreamPlayer.new()
 	player.stream = skin.countdown_sounds[index]
 	player.bus = &'SFX'
 	player.finished.connect(player.queue_free)

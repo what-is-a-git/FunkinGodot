@@ -105,6 +105,8 @@ position_smoothing_speed = 4.0
 editor_description = "Node to contain all audio tracks for the given song that is playing."
 script = ExtResource("2_j74rm")
 
+[node name="player" type="AudioStreamPlayer" parent="tracks"]
+
 [node name="scripts" type="Node" parent="."]
 script = ExtResource("2_oquto")
 
@@ -116,19 +118,19 @@ position = Vector2(640, 360)
 script = ExtResource("4_pmg4t")
 
 [node name="note_fields" type="Node2D" parent="hud_layer/hud"]
-position = Vector2(0, 248)
+position = Vector2(0, -248)
+
+[node name="opponent" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
+position = Vector2(-300, 0)
 
 [node name="player" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
 position = Vector2(300, 0)
 takes_input = true
 side = 1
 
-[node name="opponent" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
-position = Vector2(-300, 0)
-
 [node name="health_bar" type="Node2D" parent="hud_layer/hud"]
 unique_name_in_owner = true
-position = Vector2(0, -285)
+position = Vector2(0, 285)
 script = ExtResource("4_qcdwk")
 
 [node name="bar" type="ProgressBar" parent="hud_layer/hud/health_bar"]
@@ -176,6 +178,7 @@ horizontal_alignment = 1
 [node name="rating_container" type="Node2D" parent="hud_layer/hud"]
 unique_name_in_owner = true
 visible = false
+position = Vector2(0, -32)
 
 [node name="rating" type="Sprite2D" parent="hud_layer/hud/rating_container"]
 scale = Vector2(0.7, 0.7)
@@ -231,15 +234,14 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -640.0
-offset_top = 288.0
+offset_top = -352.0
 offset_right = 640.0
-offset_bottom = 352.0
+offset_bottom = -288.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Test • [NORMAL]"
 label_settings = SubResource("LabelSettings_odcbh")
 horizontal_alignment = 1
-vertical_alignment = 2
 
 [node name="stage" type="Node2D" parent="."]
 
@@ -254,3 +256,6 @@ accuracy_curve = SubResource("Curve_5selw")
 unique_name_in_owner = true
 script = ExtResource("7_3j5vg")
 ratings = Array[ExtResource("8_2643p")]([SubResource("Resource_ybh81"), SubResource("Resource_2xl48"), SubResource("Resource_u7x50"), SubResource("Resource_jbop4"), SubResource("Resource_aj00i")])
+
+[connection signal="scroll_speed_changed" from="." to="hud_layer/hud/note_fields/opponent" method="_on_scroll_speed_changed"]
+[connection signal="scroll_speed_changed" from="." to="hud_layer/hud/note_fields/player" method="_on_scroll_speed_changed"]

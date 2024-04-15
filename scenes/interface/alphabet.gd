@@ -11,10 +11,17 @@ class_name Alphabet extends Node2D
 		text = value
 		_create_characters()
 
+@export var centered: bool = false:
+	set(value):
+		centered = value
+		_create_characters()
+
 const UNCHANGED_CHARACTERS: StringName = &'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const MAGIC_OFFSET: float = 20.0
 
 var bounding_box: Vector2i = Vector2i.ZERO
+
+signal updated
 
 
 func _ready() -> void:
@@ -46,6 +53,12 @@ func _create_characters() -> void:
 			bounding_box.x = x_position
 		if y_position + character_data[1].y > bounding_box.y:
 			bounding_box.y = y_position + character_data[1].y
+	
+	if centered:
+		for child in get_children():
+			child.position -= bounding_box * 0.5
+	
+	updated.emit()
 
 
 func _create_character(x: float, y: float, character: String) -> Array:

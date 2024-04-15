@@ -15,11 +15,12 @@ var active: bool = true
 func _ready() -> void:
 	enter_animation.play('loop')
 	
-	if not GlobalAudio.get_player('MUSIC').playing:
-		GlobalAudio.get_player('MUSIC').play()
+	var music_player := GlobalAudio.get_player('MUSIC')
+	if not music_player.playing:
 		Conductor.reset()
+		music_player.play()
 		Conductor.bpm = 102.0
-		Conductor.target_audio = GlobalAudio.get_player('MUSIC')
+		Conductor.target_audio = music_player
 	
 	Conductor.beat_hit.connect(_on_beat_hit)
 	_on_beat_hit(0)

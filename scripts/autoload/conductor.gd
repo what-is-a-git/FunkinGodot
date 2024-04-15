@@ -30,6 +30,7 @@ var manual_offset: float = 0.0
 var offset: float = audio_offset + manual_offset
 
 var _last_mix: float = 0.0
+var _resync_latency: bool = false
 
 var default_input_zone: float = 0.18
 
@@ -38,16 +39,25 @@ signal beat_hit(beat: int)
 signal measure_hit(measure: int)
 
 
+func _ready() -> void:
+	SceneManager.scene_changed.connect(_on_scene_changed)
+	Config.value_changed.connect(_on_config_value_changed)
+	_on_config_value_changed('gameplay', 'manual_offset', 
+			Config.get_value('gameplay', 'manual_offset'))
+	_on_scene_changed()
+
+
 func _process(delta: float) -> void:
 	if not active:
 		return
 	
-	var mix_time: float = AudioServer.get_time_since_last_mix()
-	
-	if mix_time < _last_mix:
-		offset = audio_offset + manual_offset
-	
-	_last_mix = mix_time
+	if _resync_latency:
+		var mix_time: float = AudioServer.get_time_since_last_mix()
+		
+		if mix_time < _last_mix:
+			offset = audio_offset + manual_offset
+		
+		_last_mix = mix_time
 	
 	var last_step: int =  floor(step)
 	var last_beat: int =  floor(beat)
@@ -81,8 +91,17 @@ func _process(delta: float) -> void:
 		measure_hit.emit(floor(measure))
 
 
+func _on_scene_changed() -> void:
+	_resync_latency = Config.get_value('sound', 'recalculate_output_latency')
+
+
+func _on_config_value_changed(section: String, key: String, value: Variant) -> void:
+	if section == 'gameplay' and key == 'manual_offset':
+		manual_offset = value / 1000.0
+
+
 func reset() -> void:
-	offset = audio_offset + manual_offset
+	offset = audio_offset - manual_offset
 	beat = 0.0
 	time = offset
 	target_audio = null

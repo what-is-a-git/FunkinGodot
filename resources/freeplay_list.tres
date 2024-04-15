@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=51 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=34 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bjvclgmif1gi7" path="res://resources/images/game/assets/icons/bf_pixel.png" id="2_5frbf"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://resources/images/game/assets/icons/gf.png" id="2_vxcu7"]
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://resources/images/game/assets/icons/dad.png" id="4_chb64"]
-[ext_resource type="Texture2D" uid="uid://bk7jsl1s5ax2o" path="res://resources/images/game/assets/icons/face.png" id="6_8nyig"]
-[ext_resource type="Script" path="res://scripts/resources/difficulty_map.gd" id="7_j2vpm"]
+[ext_resource type="Texture2D" uid="uid://kvej5vf831d2" path="res://songs/extra/blammed erect/assets/icon-pico.png" id="6_mkca4"]
+[ext_resource type="Texture2D" uid="uid://b343870nv7yxf" path="res://songs/extra/shitno/assets/icons/icon-shitno.png" id="7_o24ni"]
 
 [sub_resource type="Resource" id="Resource_7iypv"]
 script = ExtResource("1_6tpon")
@@ -18,7 +18,7 @@ filter = 0
 
 [sub_resource type="Resource" id="Resource_bsxmn"]
 script = ExtResource("1_vnt78")
-song_name = &"Tutorial"
+song_name = &"tutorial"
 song_difficulties = [&"normal", &"hard"]
 icon = SubResource("Resource_7iypv")
 
@@ -31,7 +31,7 @@ filter = 0
 
 [sub_resource type="Resource" id="Resource_bvc40"]
 script = ExtResource("1_vnt78")
-song_name = &"Bopeebo"
+song_name = &"bopeebo"
 song_difficulties = [&"easy", &"normal", &"hard"]
 icon = SubResource("Resource_3qve5")
 
@@ -44,7 +44,7 @@ filter = 0
 
 [sub_resource type="Resource" id="Resource_w108v"]
 script = ExtResource("1_vnt78")
-song_name = &"Fresh"
+song_name = &"fresh"
 song_difficulties = [&"easy", &"normal", &"hard"]
 icon = SubResource("Resource_42rpv")
 
@@ -57,7 +57,7 @@ filter = 0
 
 [sub_resource type="Resource" id="Resource_hu5ot"]
 script = ExtResource("1_vnt78")
-song_name = &"Dad_Battle"
+song_name = &"dad_battle"
 song_difficulties = [&"easy", &"normal", &"hard"]
 icon = SubResource("Resource_ul62k")
 
@@ -70,209 +70,91 @@ filter = 1
 
 [sub_resource type="Resource" id="Resource_22f7a"]
 script = ExtResource("1_vnt78")
-song_name = &"Test"
+song_name = &"test"
 song_difficulties = [&"normal"]
 icon = SubResource("Resource_hyym4")
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7r0sq"]
-
-[sub_resource type="Resource" id="Resource_7qnv4"]
+[sub_resource type="Resource" id="Resource_l6gbt"]
 script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_cyq2m"]
-script = ExtResource("1_vnt78")
-song_name = &"mods"
-song_difficulties = []
-icon = SubResource("Resource_7qnv4")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dler1"]
-
-[sub_resource type="Resource" id="Resource_v4386"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_dler1")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_fidxu"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/amusia"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_v4386")
-
-[sub_resource type="Resource" id="Resource_p5xph"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_cesok"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/bushwhack"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_p5xph")
-
-[sub_resource type="Resource" id="Resource_1i02u"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_mwuwn"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/frown-mask"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_1i02u")
-
-[sub_resource type="Resource" id="Resource_2elvb"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_f8tbs"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/ghoul"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_2elvb")
-
-[sub_resource type="Resource" id="Resource_nspb6"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_gb4lp"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/hijinx"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_nspb6")
-
-[sub_resource type="Resource" id="Resource_g87gr"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_cvv5r"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/unbeatable"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_g87gr")
-
-[sub_resource type="Resource" id="Resource_1t6gu"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_b36am"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/toggle_downfall"
-song_difficulties = [&"mania"]
-icon = SubResource("Resource_1t6gu")
-
-[sub_resource type="Resource" id="Resource_dk6a4"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_4jqkm"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/crossed-my-road"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_dk6a4")
-
-[sub_resource type="Resource" id="Resource_0saeq"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_u4uxh"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/hello_bpm_2021"
-song_difficulties = [&"challenge"]
-icon = SubResource("Resource_0saeq")
-
-[sub_resource type="Resource" id="Resource_g6obw"]
-script = ExtResource("7_j2vpm")
-mapping = {
-"climax": &"mods/on-stage-climax"
-}
-
-[sub_resource type="Resource" id="Resource_7vtbj"]
-script = ExtResource("1_6tpon")
-texture = ExtResource("4_chb64")
-color = Color(0.686275, 0.4, 0.807843, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_rvfue"]
-script = ExtResource("1_vnt78")
-song_name = &"mods/on-stage"
-song_difficulties = [&"normal", &"climax"]
-icon = SubResource("Resource_7vtbj")
-difficulty_remap = SubResource("Resource_g6obw")
-
-[sub_resource type="Resource" id="Resource_7ycvi"]
-script = ExtResource("1_6tpon")
-texture = ExtResource("6_8nyig")
-color = Color(0.835294, 0.494118, 0, 1)
+texture = ExtResource("6_mkca4")
+color = Color(0.764706, 0.901961, 0.352941, 1)
 frames = Vector2i(2, 1)
 filter = 0
 
-[sub_resource type="Resource" id="Resource_af6ba"]
+[sub_resource type="Resource" id="Resource_q0jyw"]
 script = ExtResource("1_vnt78")
-song_name = &"mods/trick-or-treat"
-song_difficulties = [&"normal"]
-icon = SubResource("Resource_7ycvi")
+song_name = &"extra/blammed erect"
+song_difficulties = ["erect"]
+icon = SubResource("Resource_l6gbt")
 
-[sub_resource type="Resource" id="Resource_tlff8"]
+[sub_resource type="Resource" id="Resource_idgcb"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/game-on grindset"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_1vsam"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/authenticity"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_w07p7"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/agro nerd"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_y5b8f"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/the potato warrior"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_tyn3p"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/hell"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_ch8bj"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/voiid sporting"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_gfny3"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/silly spookeez"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_bopu4"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/boingo-doo"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_hafi5"]
 script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
+texture = ExtResource("7_o24ni")
+color = Color(0.811765, 0.623529, 0, 1)
+frames = Vector2i(2, 1)
+filter = 1
 
-[sub_resource type="Resource" id="Resource_ppxcq"]
+[sub_resource type="Resource" id="Resource_51d1y"]
 script = ExtResource("1_vnt78")
-song_name = &"mods/sansno"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_tlff8")
+song_name = &"extra/shitno"
+song_difficulties = ["hard"]
+icon = SubResource("Resource_hafi5")
 
-[sub_resource type="Resource" id="Resource_aaskt"]
-script = ExtResource("1_6tpon")
-texture = SubResource("PlaceholderTexture2D_7r0sq")
-color = Color(1, 1, 1, 1)
-frames = Vector2i(1, 1)
-filter = 0
-
-[sub_resource type="Resource" id="Resource_81xbd"]
+[sub_resource type="Resource" id="Resource_0dxe2"]
 script = ExtResource("1_vnt78")
-song_name = &"mods/death-toll"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_aaskt")
+song_name = &"extra/monochrome"
+song_difficulties = ["hard"]
 
-[sub_resource type="Resource" id="Resource_yj2s4"]
+[sub_resource type="Resource" id="Resource_wtxqs"]
 script = ExtResource("1_vnt78")
-song_name = &"mods/overdue"
-song_difficulties = [&"hard"]
-icon = SubResource("Resource_aaskt")
+song_name = &"extra/amusia"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_ikqmb"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/crossing my road"
+song_difficulties = ["hard"]
 
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_cyq2m"), SubResource("Resource_fidxu"), SubResource("Resource_cesok"), SubResource("Resource_mwuwn"), SubResource("Resource_f8tbs"), SubResource("Resource_gb4lp"), SubResource("Resource_cvv5r"), SubResource("Resource_b36am"), SubResource("Resource_4jqkm"), SubResource("Resource_u4uxh"), SubResource("Resource_rvfue"), SubResource("Resource_af6ba"), SubResource("Resource_ppxcq"), SubResource("Resource_81xbd"), SubResource("Resource_yj2s4")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb")])

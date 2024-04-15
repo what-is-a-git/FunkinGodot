@@ -36,9 +36,14 @@ func _ready() -> void:
 	opponent_icon.position.x = -50.0
 	icons.add_child(opponent_icon)
 	opponent_color = Game.instance.opponent.icon.color
-	
-	if not Conductor.beat_hit.is_connected(_on_beat_hit):
-		Conductor.beat_hit.connect(_on_beat_hit)
+
+
+func _icon_ease(x: float) -> float:
+	return sin(x * PI / 2.0)
+
+
+func _icon_lerp() -> float:
+	return _icon_ease(Conductor.beat - floorf(Conductor.beat))
 
 
 func _process(delta: float) -> void:
@@ -46,8 +51,8 @@ func _process(delta: float) -> void:
 		return
 	
 	bar.value = Game.instance.health
-	icons.position.x = 320.0 - (Game.instance.health * 6.4)
-	icons.scale = lerp(icons.scale, Vector2.ONE, delta * 9.0)
+	icons.scale = Vector2(1.2, 1.2).lerp(Vector2.ONE, _icon_lerp())
+	call_deferred('_position_icons')
 	
 	var player_frames: int = player_icon.hframes * player_icon.vframes
 	var opponent_frames: int = opponent_icon.hframes * opponent_icon.vframes
@@ -90,5 +95,5 @@ func update_score_label() -> void:
 	]
 
 
-func _on_beat_hit(beat: int) -> void:
-	icons.scale += Vector2(0.2, 0.2)
+func _position_icons() -> void:
+	icons.position.x = 320.0 - (Game.instance.health * 6.4)

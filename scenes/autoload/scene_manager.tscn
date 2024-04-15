@@ -9,7 +9,9 @@ shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 20.0
 
 [node name="scene_manager" type="CanvasLayer"]
+process_mode = 3
 layer = 32
+visible = false
 script = ExtResource("1_qc8cf")
 
 [node name="transition" type="ColorRect" parent="."]

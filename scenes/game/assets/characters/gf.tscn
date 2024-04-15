@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://resources/images/game/assets/icons/gf.png" id="3_2glvu"]
 [ext_resource type="SpriteFrames" path="res://resources/images/game/assets/characters/gf/speakers.res" id="4_ckyj7"]
 [ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_a3eoy"]
-[ext_resource type="SpriteFrames" path="res://resources/images/game/assets/characters/gf/sprites.res" id="6_dvdyh"]
+[ext_resource type="SpriteFrames" uid="uid://bppdumsv5svb1" path="res://resources/images/game/assets/characters/gf/sprites.res" id="6_dvdyh"]
 
 [sub_resource type="Resource" id="Resource_1qgms"]
 script = ExtResource("2_jrmk7")
@@ -317,7 +317,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(73, 8)]
+"values": [Vector2(16, 8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -406,7 +406,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(60, 10)]
+"values": [Vector2(0, 10)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -495,7 +495,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(58, 8)]
+"values": [Vector2(0, 8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -584,7 +584,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(65, -10)]
+"values": [Vector2(7, -12)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -659,7 +659,7 @@ centered = false
 script = ExtResource("5_a3eoy")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-226, -655)
+position = Vector2(-170, -655)
 sprite_frames = ExtResource("6_dvdyh")
 animation = &"GF Dancing Beat"
 centered = false

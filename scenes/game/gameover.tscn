@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c05dah5aarqg8"]
+
+[ext_resource type="Script" path="res://scenes/game/gameover.gd" id="1_drfcy"]
+
+[node name="gameover" type="Node2D"]
+script = ExtResource("1_drfcy")
+
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+position_smoothing_speed = 2.4

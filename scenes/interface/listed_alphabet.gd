@@ -9,5 +9,6 @@ class_name ListedAlphabet extends Alphabet
 func _process(delta: float) -> void:
 	position = position.lerp(Vector2(
 		target_y * 20.0 + 90.0,
-		target_y * 1.3 * 120.0 + 360.0 - bounding_box.y * 0.5
-	), clampf(delta * rate, 0.0, 1.0))
+		# 156 = 120 * 1.3
+		target_y * 156.0 + 360.0 - bounding_box.y * 0.5
+	), minf(delta * rate, 1.0))

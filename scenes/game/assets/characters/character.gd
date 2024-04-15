@@ -7,6 +7,7 @@ class_name Character extends Node2D
 @export var dance_steps: Array[StringName] = [&'idle']
 @export_range(0.0, 1024.0, 0.01) var sing_steps: float = 4.0
 var _dance_step: int = 0
+@export_file('*.tscn') var death_character: String = 'res://scenes/game/assets/characters/face.tscn'
 
 @onready var _camera_offset: Node2D = $camera_offset
 @onready var _animation_player: AnimationPlayer = $animation_player
