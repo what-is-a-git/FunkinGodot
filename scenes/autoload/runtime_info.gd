@@ -7,6 +7,7 @@ extends CanvasLayer
 var video_memory_peak: float = 0.0
 var texture_memory_peak: float = 0.0
 var static_memory_peak: float = 0.0
+var tween: Tween
 
 
 func _ready() -> void:
@@ -66,4 +67,21 @@ func _input(event: InputEvent) -> void:
 		Config.set_value('performance', 'performance_info_visible', visible)
 		
 		if visible:
+			label.modulate.a = 0.5
+			
+			if is_instance_valid(tween) and tween.is_running():
+				tween.kill()
+			
+			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_property(label, 'modulate:a', 1.0, 0.2)
 			display()
+		else:
+			visible = true
+			label.modulate.a = 1.0
+			
+			if is_instance_valid(tween) and tween.is_running():
+				tween.kill()
+			
+			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_property(label, 'modulate:a', 0.0, 0.2)
+			tween.tween_property(self, 'visible', false, 0.0)

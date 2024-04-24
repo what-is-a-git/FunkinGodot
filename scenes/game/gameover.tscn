@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c05dah5aarqg8"]
+[gd_scene load_steps=5 format=3 uid="uid://c05dah5aarqg8"]
 
 [ext_resource type="Script" path="res://scenes/game/gameover.gd" id="1_drfcy"]
+[ext_resource type="AudioStream" uid="uid://dj3krjnstguwg" path="res://resources/music/game/gameover_theme.ogg" id="2_rrri4"]
+[ext_resource type="AudioStream" uid="uid://m36stqbwyc5k" path="res://resources/sfx/game/gameover/on_death.ogg" id="3_3j1mk"]
+[ext_resource type="AudioStream" uid="uid://cglpk5tuq0rha" path="res://resources/sfx/game/gameover/retry.ogg" id="3_x0mbf"]
 
 [node name="gameover" type="Node2D"]
 script = ExtResource("1_drfcy")
@@ -9,3 +12,21 @@ script = ExtResource("1_drfcy")
 unique_name_in_owner = true
 position = Vector2(640, 360)
 position_smoothing_speed = 2.4
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_rrri4")
+bus = &"Music"
+parameters/looping = true
+
+[node name="on_death" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_3j1mk")
+bus = &"SFX"
+parameters/looping = false
+
+[node name="retry" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_x0mbf")
+bus = &"SFX"
+parameters/looping = false

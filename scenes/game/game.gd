@@ -235,6 +235,16 @@ func _input(event: InputEvent) -> void:
 		var menu: CanvasLayer = pause_menu.instantiate()
 		add_child(menu)
 		get_tree().paused = true
+	if OS.is_debug_build() and event.is_action('toggle_botplay'):
+		_player_field.takes_input = not _player_field.takes_input
+		
+		for receptor in _player_field._receptors:
+			receptor._automatically_play_static = not _player_field.takes_input
+		
+		if not _player_field.takes_input:
+			hud.song_label.text += ' (BOT)'
+		elif hud.song_label.text.contains(' (BOT)'):
+			hud.song_label.text = hud.song_label.text.replace(' (BOT)', '')
 
 
 func _on_beat_hit(beat: int) -> void:

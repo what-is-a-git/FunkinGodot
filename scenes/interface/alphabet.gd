@@ -16,6 +16,11 @@ class_name Alphabet extends Node2D
 		centered = value
 		_create_characters()
 
+@export_enum('Left', 'Center', 'Right') var horizontal_alignment: String = 'Left':
+	set(value):
+		horizontal_alignment = value
+		_create_characters()
+
 const UNCHANGED_CHARACTERS: StringName = &'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const MAGIC_OFFSET: float = 20.0
 
@@ -32,31 +37,79 @@ func _create_characters() -> void:
 	for child in get_children():
 		child.queue_free()
 	
-	var x_position: float = 0.0
-	var y_position: float = 0.0
 	bounding_box = Vector2i.ZERO
 	
+	var x_position: float = 0.0
+	var y_position: float = 0.0
+	var lines: Array[Dictionary] = []
+	var line_index: int = 0
+	
 	for character in text:
+		if lines.size() - 1 < line_index:
+			lines.push_back({
+				'size': Vector2i.ZERO,
+				'characters': [],
+			})
+		
 		if character == ' ':
 			x_position += 50.0
 			continue
 		if character == '\n':
 			x_position = 0.0
 			y_position += 70.0
+			line_index += 1
 			continue
 		
 		var character_data := _create_character(x_position, y_position, character)
 		add_child(character_data[0])
+		
 		x_position += character_data[1].x
 		
 		if x_position > bounding_box.x:
 			bounding_box.x = x_position
 		if y_position + character_data[1].y > bounding_box.y:
 			bounding_box.y = y_position + character_data[1].y
+		
+		var line_dict := lines[line_index]
+		line_dict.get('characters', []).push_back(character_data[0])
+		
+		var size: Vector2i = line_dict.get('size', Vector2i.ZERO)
+		
+		# x should basically be always true lol
+		if x_position > size.x:
+			size.x = x_position
+		if y_position + character_data[1].y > size.y:
+			size.y = y_position + character_data[1].y
+		
+		line_dict['size'] = size
 	
 	if centered:
 		for child in get_children():
 			child.position -= bounding_box * 0.5
+	
+	match horizontal_alignment:
+		'Left':
+			pass
+		'Center':
+			for line in lines:
+				var characters: Array = line.get('characters', [])
+				var size: Vector2i = line.get('size', Vector2i.ZERO)
+				
+				if characters.is_empty() or size <= Vector2i.ZERO:
+					continue
+				
+				for character in characters:
+					character.position.x += (bounding_box.x - size.x) / 2.0
+		'Right':
+			for line in lines:
+				var characters: Array = line.get('characters', [])
+				var size: Vector2i = line.get('size', Vector2i.ZERO)
+				
+				if characters.is_empty() or size <= Vector2i.ZERO:
+					continue
+				
+				for character in characters:
+					character.position.x -= size.x - bounding_box.x
 	
 	updated.emit()
 
@@ -79,7 +132,6 @@ func _create_character(x: float, y: float, character: String) -> Array:
 		size = frame_texture.get_size()
 	
 	node.offset.y -= (size.y - 65.0) / 2.0
-	
 	return [node, size]
 
 

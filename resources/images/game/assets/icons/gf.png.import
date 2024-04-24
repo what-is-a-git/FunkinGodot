@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2c1hlp80sm2q"
-path.bptc="res://.godot/imported/gf.png-b10f219099bf2f9899c3f15275bb0fdd.bptc.ctex"
+path="res://.godot/imported/gf.png-b10f219099bf2f9899c3f15275bb0fdd.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/icons/gf.png"
-dest_files=["res://.godot/imported/gf.png-b10f219099bf2f9899c3f15275bb0fdd.bptc.ctex"]
+dest_files=["res://.godot/imported/gf.png-b10f219099bf2f9899c3f15275bb0fdd.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1

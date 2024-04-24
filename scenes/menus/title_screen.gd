@@ -1,15 +1,27 @@
-extends Node2D
+class_name TitleScreen extends Node2D
 
+
+static var first_open: bool = true
 
 @export var swag_material: ShaderMaterial
 
-@onready var girlfriend_animation: AnimationPlayer = $girlfriend/animation_player
-@onready var logo_sprite: AnimatedSprite = $logo/sprite
-@onready var enter_animation: AnimationPlayer = $enter/animation_player
+@onready var post_intro: Node2D = $post_intro
+@onready var girlfriend_animation: AnimationPlayer = $post_intro/girlfriend/animation_player
+@onready var logo_sprite: AnimatedSprite = $post_intro/logo/sprite
+@onready var enter_animation: AnimationPlayer = $post_intro/enter/animation_player
 @onready var flash: ColorRect = $flash
+
+@onready var intro_sequence: Node2D = $intro_sequence
+@onready var intro_animation: AnimationPlayer = $intro_sequence/animation_player
+@onready var alphabet: Alphabet = %alphabet
+var introing: bool = false
 
 var dance_left: bool = false
 var active: bool = true
+
+var random_lines: Array = ['test1', 'test2']
+var random_line_index: int = 0
+var tween: Tween
 
 
 func _ready() -> void:
@@ -22,6 +34,13 @@ func _ready() -> void:
 		Conductor.bpm = 102.0
 		Conductor.target_audio = music_player
 	
+	if first_open:
+		_start_intro()
+	else:
+		intro_sequence.queue_free()
+		post_intro.visible = true
+	
+	first_open = false
 	Conductor.beat_hit.connect(_on_beat_hit)
 	_on_beat_hit(0)
 
@@ -35,23 +54,72 @@ func _process(delta: float) -> void:
 			swag_material.get_shader_parameter('value') + delta * 0.1 * swag_axis)
 
 
-func _on_beat_hit(_beat: int) -> void:
+func _on_beat_hit(beat: int) -> void:
 	dance_left = not dance_left
 	girlfriend_animation.play('dance_left' if dance_left else 'dance_right')
 	logo_sprite.play('bump')
 	logo_sprite.frame = 0
+	
+	if introing:
+		if float(beat) >= intro_animation.current_animation_length:
+			_skip_intro()
+			return
+		
+		var previous: String = alphabet.text
+		intro_animation.seek(float(beat), true)
+		
+		if alphabet.text == '!random':
+			alphabet.text = previous
+			_add_random_line()
+		if alphabet.text == '!keep':
+			alphabet.text = previous
 
 
 func _input(event: InputEvent) -> void:
 	if not active:
 		return
 	if event.is_action('ui_accept') and event.is_action_pressed('ui_accept'):
+		if introing:
+			_skip_intro()
+			return
+		
 		active = false
 		GlobalAudio.get_player('MENU/CONFIRM').play()
 		enter_animation.play('press')
 		
 		flash.color = Color.WHITE
 		
-		var tween := create_tween()
+		if is_instance_valid(tween) and tween.is_running():
+			tween.kill()
+		
+		tween = create_tween()
 		tween.tween_property(flash, 'color:a', 0.0, 1.0)
 		tween.tween_callback(SceneManager.switch_to.bind('scenes/menus/main_menu.tscn'))
+
+
+func _start_intro() -> void:
+	randomize()
+	
+	introing = true
+	intro_animation.play(&'intro')
+	
+	var lines: String = FileAccess.get_file_as_string('res://resources/intro_messages.txt')
+	lines = lines.strip_edges()
+	var lines_array := lines.split('\n', false)
+	var index: int = randi_range(0, lines_array.size() - 1)
+	random_lines = Array(lines_array[index].split('--'))
+
+
+func _add_random_line() -> void:
+	alphabet.text += random_lines[random_line_index] + '\n'
+	random_line_index = wrapi(random_line_index + 1, 0, random_lines.size())
+
+
+func _skip_intro() -> void:
+	introing = false
+	intro_sequence.queue_free()
+	post_intro.visible = true
+	flash.color = Color.WHITE
+	
+	tween = create_tween()
+	tween.tween_property(flash, 'color:a', 0.0, 1.0)

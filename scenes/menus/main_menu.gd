@@ -28,6 +28,10 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action('ui_down') or event.is_action('ui_up'):
 		change_selection(int(roundf(Input.get_axis('ui_up', 'ui_down'))))
+	if event.is_action('ui_cancel'):
+		GlobalAudio.get_player('MENU/CANCEL').play()
+		active = false
+		SceneManager.switch_to('scenes/menus/title_screen.tscn')
 	if event.is_action('ui_accept'):
 		GlobalAudio.get_player('MENU/CONFIRM').play()
 		active = false

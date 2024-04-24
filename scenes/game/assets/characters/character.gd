@@ -7,7 +7,7 @@ class_name Character extends Node2D
 @export var dance_steps: Array[StringName] = [&'idle']
 @export_range(0.0, 1024.0, 0.01) var sing_steps: float = 4.0
 var _dance_step: int = 0
-@export_file('*.tscn') var death_character: String = 'res://scenes/game/assets/characters/face.tscn'
+@export_file('*.tscn') var death_character: String = 'res://scenes/game/assets/characters/bf-dead.tscn'
 
 @onready var _camera_offset: Node2D = $camera_offset
 @onready var _animation_player: AnimationPlayer = $animation_player
@@ -18,9 +18,13 @@ var _singing: bool = false
 var _sing_timer: float = 0.0
 var _in_special_anim: bool = false
 
+signal animation_finished(animation: StringName)
+
 
 func _ready() -> void:
 	dance(true)
+	_animation_player.animation_finished.connect(func(animation: StringName):
+		animation_finished.emit(animation))
 
 
 func play_anim(anim: StringName, force: bool = false, special: bool = false) -> void:

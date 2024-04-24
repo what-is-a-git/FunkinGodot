@@ -37,6 +37,8 @@ func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
 	if event.is_action('ui_cancel'):
+		get_viewport().set_input_as_handled()
+		
 		active = false
 		selected = 0
 		change_selection(0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://da8mu3oqto3qq"]
+[gd_scene load_steps=27 format=3 uid="uid://da8mu3oqto3qq"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_tneyb"]
 [ext_resource type="Script" path="res://scenes/game/tracks.gd" id="2_j74rm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/game/health_bar.gd" id="4_qcdwk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="5_kd5im"]
 [ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://resources/images/game/skins/default/ratings/marvelous.png" id="6_h7vl1"]
+[ext_resource type="PackedScene" uid="uid://bx6f5ldidoswy" path="res://scenes/game/notes/note_splash.tscn" id="6_huuqk"]
 [ext_resource type="Script" path="res://scripts/game/accuracy_calculator.gd" id="6_ur1sh"]
 [ext_resource type="Script" path="res://scripts/game/ratings_calculator.gd" id="7_3j5vg"]
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://resources/images/game/skins/default/combo/numbers.png" id="7_u2hsg"]
@@ -122,11 +123,13 @@ position = Vector2(0, -248)
 
 [node name="opponent" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
 position = Vector2(-300, 0)
+default_note_splash = ExtResource("6_huuqk")
 
 [node name="player" parent="hud_layer/hud/note_fields" instance=ExtResource("3_046jb")]
 position = Vector2(300, 0)
 takes_input = true
 side = 1
+default_note_splash = ExtResource("6_huuqk")
 
 [node name="health_bar" type="Node2D" parent="hud_layer/hud"]
 unique_name_in_owner = true

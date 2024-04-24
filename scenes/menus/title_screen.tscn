@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxk008iuw4n7u"]
+[gd_scene load_steps=20 format=3 uid="uid://cxk008iuw4n7u"]
 
 [ext_resource type="Script" path="res://scenes/menus/title_screen.gd" id="1_0m8ln"]
 [ext_resource type="SpriteFrames" uid="uid://duovsfdon2i2v" path="res://resources/images/menus/title/gf.res" id="1_ii0wr"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="3_s2rvo"]
 [ext_resource type="SpriteFrames" uid="uid://bn0475c0dg3yo" path="res://resources/images/menus/title/logo.res" id="5_nv456"]
 [ext_resource type="SpriteFrames" uid="uid://puwno4nflsjc" path="res://resources/images/menus/title/enter.res" id="6_hraot"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="7_al1xt"]
+[ext_resource type="Texture2D" uid="uid://d1ovx7oy0v4qy" path="res://resources/images/menus/title/newgrounds_logo.png" id="7_fhw6b"]
 
 [sub_resource type="Animation" id="Animation_6rots"]
 length = 0.001
@@ -227,37 +229,139 @@ _data = {
 "press": SubResource("Animation_qdiad")
 }
 
+[sub_resource type="Animation" id="Animation_gpcxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alphabet:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alphabet:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("newgrounds_logo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0iyna"]
+resource_name = "intro"
+length = 16.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alphabet:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "ninjamuffin99
+phantomArcade
+kawaisprite
+evilsk8r", "ninjamuffin99
+phantomArcade
+kawaisprite
+evilsk8r
+don't present", "", "in no association
+with", "in no association
+with
+newgrounds", "", "!random", "!keep", "!random", "", "Friday", "Friday
+Night", "Friday
+Night
+Funkin'", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alphabet:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4, 5, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 35.5), Vector2(0, 0), Vector2(0, -77), Vector2(0, -40), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("newgrounds_logo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v06vg"]
+_data = {
+"RESET": SubResource("Animation_gpcxv"),
+"intro": SubResource("Animation_0iyna")
+}
+
 [node name="title_screen" type="Node2D"]
 script = ExtResource("1_0m8ln")
 swag_material = ExtResource("2_grdy1")
 
-[node name="girlfriend" type="Node2D" parent="."]
+[node name="post_intro" type="Node2D" parent="."]
+visible = false
+
+[node name="girlfriend" type="Node2D" parent="post_intro"]
 position = Vector2(891, 373)
 
-[node name="sprite" type="AnimatedSprite2D" parent="girlfriend"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/girlfriend"]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("1_ii0wr")
 animation = &"gfDance"
 script = ExtResource("3_s2rvo")
 
-[node name="animation_player" type="AnimationPlayer" parent="girlfriend"]
+[node name="animation_player" type="AnimationPlayer" parent="post_intro/girlfriend"]
 libraries = {
 "": SubResource("AnimationLibrary_j25c3")
 }
 
-[node name="logo" type="Node2D" parent="."]
+[node name="logo" type="Node2D" parent="post_intro"]
 position = Vector2(354, 246)
 
-[node name="sprite" type="AnimatedSprite2D" parent="logo"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/logo"]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("5_nv456")
 animation = &"bump"
 script = ExtResource("3_s2rvo")
 
-[node name="enter" type="Node2D" parent="."]
+[node name="enter" type="Node2D" parent="post_intro"]
 position = Vector2(805, 636)
 
-[node name="sprite" type="AnimatedSprite2D" parent="enter"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/enter"]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("6_hraot")
 animation = &"Press Enter to Begin"
@@ -265,9 +369,29 @@ frame = 31
 frame_progress = 0.712825
 script = ExtResource("3_s2rvo")
 
-[node name="animation_player" type="AnimationPlayer" parent="enter"]
+[node name="animation_player" type="AnimationPlayer" parent="post_intro/enter"]
 libraries = {
 "": SubResource("AnimationLibrary_4274r")
+}
+
+[node name="intro_sequence" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="newgrounds_logo" type="Sprite2D" parent="intro_sequence"]
+position = Vector2(-21, 204)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_fhw6b")
+
+[node name="alphabet" type="Node2D" parent="intro_sequence"]
+unique_name_in_owner = true
+script = ExtResource("7_al1xt")
+centered = true
+horizontal_alignment = "Center"
+
+[node name="animation_player" type="AnimationPlayer" parent="intro_sequence"]
+callback_mode_process = 2
+libraries = {
+"": SubResource("AnimationLibrary_v06vg")
 }
 
 [node name="flash" type="ColorRect" parent="."]
@@ -279,3 +403,4 @@ offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true

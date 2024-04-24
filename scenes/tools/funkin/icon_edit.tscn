@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl3vgtgslpeho"]
+
+[ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_qys6f"]
+[ext_resource type="Theme" uid="uid://bnfirbbvjsv2r" path="res://resources/themes/tools_theme.tres" id="2_hiduc"]
+[ext_resource type="Texture2D" uid="uid://bk7jsl1s5ax2o" path="res://resources/images/game/assets/icons/face.png" id="3_a4k0p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lrfox"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku5px"]
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="icon_edit" type="Node"]
+auto_translate_mode = 1
+
+[node name="background" type="TextureRect" parent="."]
+auto_translate_mode = 1
+modulate = Color(0.34052, 0.25589, 0.507813, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qys6f")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="root" type="Control" parent="."]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hiduc")
+
+[node name="panel" type="Panel" parent="root"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="icon_texture" type="TextureRect" parent="root/panel"]
+auto_translate_mode = 1
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 128.0
+texture = ExtResource("3_a4k0p")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="change_texture" type="Button" parent="root/panel"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 38.0
+offset_right = 64.0
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "Change"
+
+[node name="h_frames" type="SpinBox" parent="root/panel"]
+auto_translate_mode = 1
+layout_mode = 1
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 264.0
+offset_bottom = 192.0
+min_value = 1.0
+max_value = 99.0
+value = 1.0
+alignment = 1
+suffix = "hframes"
+
+[node name="x" type="Label" parent="root/panel"]
+auto_translate_mode = 1
+layout_mode = 1
+offset_left = 268.0
+offset_top = 128.0
+offset_right = 332.0
+offset_bottom = 192.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lrfox")
+text = "X"
+label_settings = SubResource("LabelSettings_ku5px")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="v_frames" type="SpinBox" parent="root/panel"]
+auto_translate_mode = 1
+layout_mode = 1
+offset_left = 336.0
+offset_top = 128.0
+offset_right = 592.0
+offset_bottom = 192.0
+min_value = 1.0
+max_value = 99.0
+value = 1.0
+alignment = 1
+suffix = "vframes"

@@ -17,7 +17,6 @@ visible = false
 script = ExtResource("1_now7c")
 
 [node name="label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.95)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtesj06jpfvle"]
+[gd_scene load_steps=15 format=3 uid="uid://dtesj06jpfvle"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_1wum3"]
 [ext_resource type="Theme" uid="uid://bnfirbbvjsv2r" path="res://resources/themes/tools_theme.tres" id="1_jrjn8"]
 [ext_resource type="Script" path="res://scenes/tools/funkin/freeplay_list_editor.gd" id="2_eqltv"]
 [ext_resource type="Texture2D" uid="uid://bk7jsl1s5ax2o" path="res://resources/images/game/assets/icons/face.png" id="3_kfdri"]
 [ext_resource type="Texture2D" uid="uid://dfl1iso62n4rn" path="res://resources/images/icons/edit.svg" id="4_xdnbj"]
+[ext_resource type="PackedScene" uid="uid://cl3vgtgslpeho" path="res://scenes/tools/funkin/icon_edit.tscn" id="6_xr1f8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uyslf"]
 font_size = 48
@@ -242,7 +243,48 @@ current_tab = 0
 [node name="Add" type="Control" parent="panel/tabs/tab_container"]
 layout_mode = 2
 
+[node name="song_name" type="LineEdit" parent="panel/tabs/tab_container/Add"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 610.0
+offset_bottom = 72.0
+placeholder_text = "Song Name"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="icon_location" type="Marker2D" parent="panel/tabs/tab_container/Add"]
+position = Vector2(72, 144)
+
+[node name="icon" type="Sprite2D" parent="panel/tabs/tab_container/Add/icon_location"]
+scale = Vector2(0.853, 0.853)
+texture = ExtResource("3_kfdri")
+hframes = 2
+
+[node name="icon_edit" type="Button" parent="panel/tabs/tab_container/Add"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 216.0
+offset_right = 136.0
+offset_bottom = 280.0
+text = "Edit"
+
 [node name="Edit" type="Control" parent="panel/tabs/tab_container"]
 auto_translate_mode = 1
 visible = false
 layout_mode = 2
+
+[node name="window" type="Window" parent="."]
+title = "Icon Editor"
+initial_position = 1
+size = Vector2i(640, 480)
+visible = false
+transient = true
+unresizable = true
+min_size = Vector2i(640, 480)
+
+[node name="icon_edit" parent="window" instance=ExtResource("6_xr1f8")]
+
+[connection signal="pressed" from="panel/tabs/tab_container/Add/icon_edit" to="window" method="show"]
+[connection signal="close_requested" from="window" to="window" method="hide"]

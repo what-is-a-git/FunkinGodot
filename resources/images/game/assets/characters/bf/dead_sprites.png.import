@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk7jsl1s5ax2o"
-path="res://.godot/imported/face.png-21bfd51def6d2b3d3050436f85a5325f.ctex"
+uid="uid://c06ygpw7m7dxm"
+path.bptc="res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://resources/images/game/assets/icons/face.png"
-dest_files=["res://.godot/imported/face.png-21bfd51def6d2b3d3050436f85a5325f.ctex"]
+source_file="res://resources/images/game/assets/characters/bf/dead_sprites.png"
+dest_files=["res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.bptc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1

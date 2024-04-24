@@ -5,7 +5,7 @@ class_name NoteField extends Node2D
 @export_enum('Opponent', 'Player') var side: int = 0
 @export var dynamic_positioning: bool = false
 @export var ignore_speed_changes: bool = false
-@export var note_splash: PackedScene = null
+@export var default_note_splash: PackedScene = null
 
 @onready var _receptors_node: Node2D = $receptors
 @onready var _receptors: Array = []
@@ -143,7 +143,7 @@ func _try_spawning() -> void:
 		note.data = data
 		note.position.x = _receptors[0].position.x + \
 				(112.0 * (absi(note.data.direction) % _lanes))
-		note._splash = note_splash
+		note._splash = default_note_splash
 		_notes.add_child(note)
 		_note_index += 1
 
