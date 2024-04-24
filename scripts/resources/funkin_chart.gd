@@ -47,7 +47,6 @@ func parse() -> Chart:
 				continue
 			
 			var note_data := NoteData.new()
-			
 			note_data.time = float(note[0]) / 1000.0
 			note_data.beat = beat + ((note_data.time - time) / beat_delta)
 			note_data.direction = int(note[1])
