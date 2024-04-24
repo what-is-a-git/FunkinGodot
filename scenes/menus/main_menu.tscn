@@ -130,13 +130,14 @@ custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("4_4uv5u")
+scene_path = "res://scenes/menus/story_mode_menu.tscn"
 animation_name = &"story mode"
 
 [node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/story_mode"]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.0403917
+frame_progress = 0.00450554
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -152,7 +153,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.686624
+frame_progress = 0.650737
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -168,7 +169,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.682072
+frame_progress = 0.646185
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -176,7 +177,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.971211
+frame_progress = 0.935324
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -192,7 +193,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.41343
+frame_progress = 0.377543
 script = ExtResource("4_emyfo")
 playing = true
 

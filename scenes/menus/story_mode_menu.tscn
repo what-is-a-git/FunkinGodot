@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnqia1i12b3mt"]
+
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="1_c5rt7"]
+[ext_resource type="Script" path="res://scenes/menus/story_mode_menu.gd" id="1_el8f4"]
+
+[node name="story_mode_menu" type="Node2D"]
+script = ExtResource("1_el8f4")
+
+[node name="alphabet" type="Node2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("1_c5rt7")
+text = "nothing yet
+
+this is wip :3c"
+centered = true
+horizontal_alignment = "Center"
