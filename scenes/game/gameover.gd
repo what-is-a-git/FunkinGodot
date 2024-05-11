@@ -21,7 +21,7 @@ func _ready() -> void:
 	active = true
 	
 	# 1 in a million chance!
-	if randi_range(1, 1_000_000) == 696969:
+	if randi_range(1, 1000) == 273:
 		active = false
 		secret.get_node('player').play()
 		return
