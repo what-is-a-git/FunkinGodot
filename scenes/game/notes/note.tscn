@@ -224,5 +224,5 @@ flip_v = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sv3fl")
-animation = &"left note"
+animation = &"down sustain end"
 script = ExtResource("2_uegtt")

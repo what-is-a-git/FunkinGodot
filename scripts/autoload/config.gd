@@ -57,7 +57,7 @@ func _parse_default_as_config() -> ConfigFile:
 	return new_file
 
 
-const default_configuration: Dictionary = {
+var default_configuration: Dictionary = {
 	'gameplay': {
 		'scroll_direction': 'up',
 		'centered_receptors': false,

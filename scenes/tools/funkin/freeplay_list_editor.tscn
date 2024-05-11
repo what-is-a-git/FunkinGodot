@@ -242,6 +242,7 @@ current_tab = 0
 
 [node name="Add" type="Control" parent="panel/tabs/tab_container"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="song_name" type="LineEdit" parent="panel/tabs/tab_container/Add"]
 layout_mode = 1
@@ -274,6 +275,7 @@ text = "Edit"
 auto_translate_mode = 1
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="window" type="Window" parent="."]
 title = "Icon Editor"

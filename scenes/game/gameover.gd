@@ -10,12 +10,24 @@ static var camera_position: Vector2 = Vector2.ZERO
 @onready var music_player: AudioStreamPlayer = %music
 @onready var on_death: AudioStreamPlayer = %on_death
 @onready var retry: AudioStreamPlayer = %retry
+@onready var secret: CanvasLayer = $secret
 
 var character: Character
 var active: bool = true
 
 
 func _ready() -> void:
+	randomize()
+	active = true
+	
+	# 1 in a million chance!
+	if randi_range(1, 1_000_000) == 696969:
+		active = false
+		secret.get_node('player').play()
+		return
+	else:
+		secret.free()
+	
 	Conductor.reset()
 	Conductor.bpm = 100.0
 	Conductor.target_audio = music_player
