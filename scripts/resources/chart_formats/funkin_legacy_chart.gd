@@ -1,4 +1,4 @@
-class_name FunkinChart extends Resource
+class_name FunkinLegacyChart extends Resource
 
 
 var json: Dictionary
@@ -54,7 +54,7 @@ func parse() -> Chart:
 			if not section.mustHitSection:
 				note_data.direction = (note_data.direction + 4) % 8
 			
-			note_data.length = clampf(float(note[2]) * 0.001, 0.0, INF)
+			note_data.length = clampf(float(note[2]) / 1000.0, 0.0, INF)
 			note_data.type = &'default'
 			
 			chart.notes.push_back(note_data)

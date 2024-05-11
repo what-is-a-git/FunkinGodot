@@ -76,12 +76,7 @@ func _ready() -> void:
 	tracks.finished.connect(_song_finished)
 	
 	if not chart:
-		var funkin_chart := FunkinChart.new()
-		funkin_chart.json = JSON.parse_string(\
-				FileAccess.get_file_as_string('res://songs/%s/charts/%s.json' % [
-					song, difficulty]))
-		scroll_speed = funkin_chart.json.song.get('speed', 2.6)
-		chart = funkin_chart.parse()
+		chart = Chart.load_song(song, difficulty)
 	
 	match Config.get_value('gameplay', 'scroll_speed_method'):
 		'chart':
@@ -242,9 +237,9 @@ func _input(event: InputEvent) -> void:
 			receptor._automatically_play_static = not _player_field.takes_input
 		
 		if not _player_field.takes_input:
-			hud.song_label.text += ' (BOT)'
-		elif hud.song_label.text.contains(' (BOT)'):
-			hud.song_label.text = hud.song_label.text.replace(' (BOT)', '')
+			hud.song_label.text += ' [BOT]'
+		elif hud.song_label.text.contains(' [BOT]'):
+			hud.song_label.text = hud.song_label.text.replace(' [BOT]', '')
 
 
 func _on_beat_hit(beat: int) -> void:

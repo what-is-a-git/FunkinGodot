@@ -145,9 +145,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k0cmr")
 
 [node name="convert" type="Button" parent="panel"]
 layout_mode = 0
-offset_left = 544.0
+offset_left = 816.0
 offset_top = 548.0
-offset_right = 736.0
+offset_right = 1008.0
 offset_bottom = 612.0
 mouse_default_cursor_shape = 2
 text = "Convert"
@@ -192,6 +192,20 @@ button_pressed = true
 text = "Offsets"
 alignment = 1
 
+[node name="image_textures" type="CheckBox" parent="panel"]
+layout_mode = 0
+offset_left = 524.0
+offset_top = 548.0
+offset_right = 759.0
+offset_bottom = 612.0
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_kjt1g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4ef")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7s37j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sv6vt")
+button_pressed = true
+text = "Use ImageTextures"
+alignment = 1
+
 [node name="pick" type="Button" parent="panel"]
 layout_mode = 0
 offset_left = 1048.0
@@ -231,5 +245,6 @@ use_native_dialog = true
 [connection signal="value_changed" from="panel/framerate" to="." method="_set_framerate"]
 [connection signal="toggled" from="panel/looping" to="." method="_set_looped"]
 [connection signal="toggled" from="panel/offsets" to="." method="_set_offsets"]
+[connection signal="toggled" from="panel/image_textures" to="." method="_set_image_textures"]
 [connection signal="pressed" from="panel/pick" to="file_dialog" method="popup_centered"]
 [connection signal="file_selected" from="file_dialog" to="." method="_set_file"]

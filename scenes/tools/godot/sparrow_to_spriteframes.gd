@@ -2,6 +2,7 @@ class_name SparrowConverter extends Control
 
 
 var use_offsets: bool = true
+var use_image_textures: bool = true
 var animations_looped: bool = false
 var animation_framerate: int = 24
 var source_file: String = ''
@@ -15,6 +16,10 @@ func _set_offsets(value: bool) -> void:
 
 func _set_looped(value: bool) -> void:
 	animations_looped = value
+
+
+func _set_image_textures(toggled_on: bool) -> void:
+	use_image_textures = toggled_on
 
 
 func _set_framerate(value: int) -> void:
@@ -104,7 +109,6 @@ func _import() -> Error:
 		# Unique new frame! Awesome.
 		if frame.atlas == null:
 			frame.atlas = AtlasTexture.new()
-			
 			var rotated: bool = xml.get_named_attribute_value_safe('rotated') == 'true'
 			
 			# Just used to not have to reference frame 24/7.
@@ -146,7 +150,7 @@ func _import() -> Error:
 				atlas_image.rotate_90(COUNTERCLOCKWISE)
 				
 				var atlas_texture: ImageTexture = ImageTexture.create_from_image(atlas_image)
-
+				
 				if margin != Rect2i(-1, -1, -1, -1):
 					# source is based on the frame, not the whole texture.
 					# This is because rotating the image messes with the offests,
@@ -154,11 +158,11 @@ func _import() -> Error:
 					# :]
 					var source: Rect2i = Rect2(Vector2.ZERO, atlas_texture.get_size())
 					var offsets: Rect2i = frame.offsets
-
+					
 					atlas = AtlasTexture.new()
 					atlas.atlas = atlas_texture
 					atlas.region = source
-
+					
 					margin = Rect2i(
 						-offsets.position.x, -offsets.position.y,
 						offsets.size.x - source.size.x, offsets.size.y - source.size.y)

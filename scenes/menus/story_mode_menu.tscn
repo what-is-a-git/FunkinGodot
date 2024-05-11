@@ -1,16 +1,298 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnqia1i12b3mt"]
+[gd_scene load_steps=20 format=3 uid="uid://cnqia1i12b3mt"]
 
-[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="1_c5rt7"]
 [ext_resource type="Script" path="res://scenes/menus/story_mode_menu.gd" id="1_el8f4"]
+[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="2_3esc8"]
+[ext_resource type="Script" path="res://scenes/menus/story_menu/songs_label.gd" id="3_552ey"]
+[ext_resource type="Texture2D" uid="uid://vbft4ijb0s4b" path="res://resources/images/menus/story_menu/week_sprites/tutorial.png" id="4_3r44s"]
+[ext_resource type="Texture2D" uid="uid://bsjowh7qqed78" path="res://resources/images/menus/story_menu/difficulty_sprites/normal.png" id="4_j0vh7"]
+[ext_resource type="Script" path="res://scenes/menus/story_menu/weeks.gd" id="4_owtj4"]
+[ext_resource type="Texture2D" uid="uid://g4kew3bfwjeq" path="res://resources/images/menus/story_menu/week_sprites/week1.png" id="5_1dfdl"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_61vqd"]
+[ext_resource type="Texture2D" uid="uid://dvg5eqxmjlafc" path="res://resources/images/menus/story_menu/week_sprites/week2.png" id="6_j1txi"]
+[ext_resource type="SpriteFrames" path="res://resources/images/menus/story_menu/interface/arrows.res" id="6_kynlf"]
+[ext_resource type="Texture2D" uid="uid://bq5la0hfbrpl8" path="res://resources/images/menus/story_menu/week_sprites/week3.png" id="7_vnad8"]
+[ext_resource type="Texture2D" uid="uid://cgo7w2s43je8g" path="res://resources/images/menus/story_menu/week_sprites/week4.png" id="8_3cyiw"]
+[ext_resource type="Texture2D" uid="uid://hm6cmw7ef0fw" path="res://resources/images/menus/story_menu/week_sprites/week5.png" id="9_d6cuw"]
+[ext_resource type="Texture2D" uid="uid://d4njum5np1uj8" path="res://resources/images/menus/story_menu/week_sprites/week6.png" id="10_3nek6"]
+[ext_resource type="Texture2D" uid="uid://36fthrvyjtyp" path="res://resources/images/menus/story_menu/week_sprites/week7.png" id="11_cec37"]
+[ext_resource type="Texture2D" uid="uid://bfivvmfupkyju" path="res://resources/images/menus/story_menu/week_sprites/weekend1.png" id="12_3spfd"]
 
-[node name="story_mode_menu" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_kq7xu"]
+font = ExtResource("2_3esc8")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_uaspw"]
+font = ExtResource("2_3esc8")
+font_size = 24
+font_color = Color(0.929688, 0.403107, 0.625258, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c4fjc"]
+font = ExtResource("2_3esc8")
+font_size = 24
+font_color = Color(0.929688, 0.403107, 0.625258, 1)
+
+[node name="story_mode_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_el8f4")
+metadata/_edit_lock_ = true
 
-[node name="alphabet" type="Node2D" parent="."]
-position = Vector2(640, 360)
-script = ExtResource("1_c5rt7")
-text = "nothing yet
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
-this is wip :3c"
-centered = true
-horizontal_alignment = "Center"
+[node name="week_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.976471, 0.811765, 0.317647, 1)
+
+[node name="top_bar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="high_score" type="Label" parent="top_bar"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = 631.0
+grow_vertical = 2
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_kq7xu")
+vertical_alignment = 1
+
+[node name="week_name" type="Label" parent="top_bar"]
+modulate = Color(1, 1, 1, 0.75)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -649.0
+offset_right = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Daddy Dearest"
+label_settings = SubResource("LabelSettings_kq7xu")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="characters" type="Node2D" parent="."]
+position = Vector2(640, 256)
+
+[node name="left" type="Node2D" parent="characters"]
+position = Vector2(-360, 0)
+
+[node name="center" type="Node2D" parent="characters"]
+
+[node name="right" type="Node2D" parent="characters"]
+position = Vector2(360, 0)
+
+[node name="bottom" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="songs" type="Control" parent="bottom"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 376.0
+grow_vertical = 2
+
+[node name="top_label" type="Label" parent="bottom/songs"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -4.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "Songs"
+label_settings = SubResource("LabelSettings_uaspw")
+horizontal_alignment = 1
+
+[node name="songs_label" type="Label" parent="bottom/songs"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -222.0
+offset_right = -4.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Bopeebo
+Fresh
+Dad Battle"
+label_settings = SubResource("LabelSettings_c4fjc")
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 8
+script = ExtResource("3_552ey")
+
+[node name="timer" type="Timer" parent="bottom/songs/songs_label"]
+wait_time = 0.5
+autostart = true
+
+[node name="weeks" type="Control" parent="bottom"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_owtj4")
+
+[node name="tutorial" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_right = 456.0
+offset_bottom = 82.0
+grow_horizontal = 2
+texture = ExtResource("4_3r44s")
+stretch_mode = 5
+
+[node name="week_1" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 90.0
+offset_right = 456.0
+offset_bottom = 179.0
+grow_horizontal = 2
+texture = ExtResource("5_1dfdl")
+stretch_mode = 5
+
+[node name="week_2" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 187.0
+offset_right = 456.0
+offset_bottom = 276.0
+grow_horizontal = 2
+texture = ExtResource("6_j1txi")
+stretch_mode = 5
+
+[node name="week_3" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 284.0
+offset_right = 456.0
+offset_bottom = 373.0
+grow_horizontal = 2
+texture = ExtResource("7_vnad8")
+stretch_mode = 5
+
+[node name="week_4" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 381.0
+offset_right = 456.0
+offset_bottom = 470.0
+grow_horizontal = 2
+texture = ExtResource("8_3cyiw")
+stretch_mode = 5
+
+[node name="week_5" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 478.0
+offset_right = 456.0
+offset_bottom = 569.0
+grow_horizontal = 2
+texture = ExtResource("9_d6cuw")
+stretch_mode = 5
+
+[node name="week_6" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 577.0
+offset_right = 456.0
+offset_bottom = 669.0
+grow_horizontal = 2
+texture = ExtResource("10_3nek6")
+stretch_mode = 5
+
+[node name="week_7" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_top = 677.0
+offset_right = 456.0
+offset_bottom = 776.0
+grow_horizontal = 2
+texture = ExtResource("11_cec37")
+stretch_mode = 5
+
+[node name="weekend_1" type="TextureRect" parent="bottom/weeks"]
+layout_mode = 2
+offset_left = -51.0
+offset_top = 784.0
+offset_right = 507.0
+offset_bottom = 988.0
+grow_horizontal = 2
+texture = ExtResource("12_3spfd")
+stretch_mode = 5
+
+[node name="difficulties" type="Control" parent="bottom"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -440.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="difficulty" type="Sprite2D" parent="bottom/difficulties"]
+position = Vector2(220, 132)
+texture = ExtResource("4_j0vh7")
+
+[node name="animated" type="AnimatedSprite2D" parent="bottom/difficulties/difficulty"]
+visible = false
+animation = &""
+script = ExtResource("5_61vqd")
+
+[node name="left_arrow" type="AnimatedSprite2D" parent="bottom/difficulties"]
+position = Vector2(32, 132)
+sprite_frames = ExtResource("6_kynlf")
+animation = &"leftIdle"
+frame_progress = 1.0
+script = ExtResource("5_61vqd")
+
+[node name="right_arrow" type="AnimatedSprite2D" parent="bottom/difficulties"]
+position = Vector2(408, 132)
+sprite_frames = ExtResource("6_kynlf")
+animation = &"rightIdle"
+script = ExtResource("5_61vqd")
+
+[connection signal="timeout" from="bottom/songs/songs_label/timer" to="bottom/songs/songs_label" method="_tick"]

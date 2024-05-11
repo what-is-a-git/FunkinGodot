@@ -116,17 +116,15 @@ func select_song() -> void:
 				break
 	
 	var json_path := 'res://songs/%s/charts/%s.json' % [song_name, difficulty.to_lower()]
-	if not FileAccess.file_exists(json_path):
+	Game.chart = Chart.load_song(song_name, difficulty)
+	
+	if not is_instance_valid(Game.chart):
 		active = true
+		printerr('Song at path %s doesn\'t exist!' % json_path)
 		return
 	
-	var funkin_chart := FunkinChart.new()
-	var json_string := FileAccess.get_file_as_string(json_path)
-	funkin_chart.json = JSON.parse_string(json_string)
-	Game.scroll_speed = funkin_chart.json.song.get('speed', 2.6)
 	Game.song = song_name
 	Game.difficulty = difficulty.to_lower()
-	Game.chart = funkin_chart.parse()
 	Game.mode = Game.PlayMode.FREEPLAY
 	SceneManager.switch_to('scenes/game/game.tscn')
 
