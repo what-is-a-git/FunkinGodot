@@ -12,6 +12,9 @@ var tween: Tween
 
 func _ready() -> void:
 	visible = Config.get_value('performance', 'performance_info_visible')
+	
+	if OS.is_debug_build():
+		get_node('timer').wait_time = 0.2
 
 
 func display() -> void:
@@ -39,22 +42,24 @@ func display() -> void:
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name.to_pascal_case()
 	
-	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s\n%s\n%.2fms Offset\n%.2fms Conductor (%.2fms manual)\n%s Draw Calls (%s Drawn Objects)' % [
+	label.text = '%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
 		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
 		version,
-		scene_name,
-		AudioServer.get_output_latency() * -1000.0, Conductor.offset * 1000.0,
-		Conductor.manual_offset * 1000.0,
-		Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
-		Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
 	]
 	
 	if OS.is_debug_build():
-		label.text = '%s\n\n== DEBUG INFO ==\n%s / %s <CPU>\n%s Nodes (%s Orphaned)' % [
+		label.text = '%s\n\n-=##=- DEBUG -=##=-\n%s (Scene)\n%.2fms Offset\n%.2fms Conductor (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n%s Draw Calls (%s Drawn Objects)\n%s / %s <CPU>\n%s Nodes (%s Orphaned)' % [
 			label.text,
+			scene_name,
+			AudioServer.get_output_latency() * -1000.0, Conductor.offset * 1000.0,
+			Conductor.manual_offset * 1000.0,
+			Conductor.time, Conductor.beat, Conductor.step, Conductor.measure,
+			Conductor.bpm,
+			Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
+			Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
 			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),

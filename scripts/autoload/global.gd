@@ -36,6 +36,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		fullscreened = not fullscreened
 		return
+	if not OS.is_debug_build():
+		return
 	if event.is_action('menu_reload'):
 		get_tree().reload_current_scene()
+		get_tree().paused = false
 		return
