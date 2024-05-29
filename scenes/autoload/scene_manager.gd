@@ -13,7 +13,8 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 	
 	var tree := get_tree()
 	
-	if is_instance_valid(tween) and tween.is_running():
+	var killed := is_instance_valid(tween) and tween.is_running()
+	if killed:
 		tween.kill()
 	
 	if use_transition:
@@ -32,5 +33,9 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 			tween.tween_property(self, 'visible', false, 0.0)
 		)
 	else:
+		if killed:
+			transition.material.set('shader_parameter/progress', 0.0)
+			visible = false
+		
 		tree.call_deferred('change_scene_to_file', path)
 		scene_changed.emit()

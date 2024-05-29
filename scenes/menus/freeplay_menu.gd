@@ -14,6 +14,9 @@ var song_nodes: Array[FreeplaySongNode] = []
 @onready var track: AudioStreamPlayer = $track
 @onready var track_timer: Timer = $track_timer
 
+# hacky workaround for looping audiostreamsynced atm :3
+var last_track_position: float = -INF
+
 var list_song: FreeplaySong:
 	get: return list.list[index]
 
@@ -49,6 +52,16 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	background.modulate = background.modulate.lerp(target_background_color, delta * 5.0)
+	
+	if is_instance_valid(track.stream):
+		# SHIT DON'T GO BACK NOW DUZ IT?
+		if track.get_playback_position() < last_track_position:
+			track.playing = false
+		
+		if not track.playing:
+			track.play()
+	
+	last_track_position = track.get_playback_position()
 
 
 func _input(event: InputEvent) -> void:
@@ -82,6 +95,7 @@ func change_selection(amount: int = 0) -> void:
 	change_difficulty()
 	
 	track.stop()
+	track.stream = null
 	track_timer.start(0.0)
 	
 	if amount != 0:
@@ -173,4 +187,3 @@ func _load_tracks() -> void:
 	
 	track.stream = tracks
 	track.play()
-	track.set('parameters/looping', true)

@@ -17,7 +17,6 @@ func _ready() -> void:
 
 func space_children() -> void:
 	var y: float = 16.0
-	
 	for child in get_children():
 		child = child as TextureRect
 		child.position.y = y

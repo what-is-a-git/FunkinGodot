@@ -1,7 +1,8 @@
 class_name OptionsMenu extends Node
 
 
-static var from_pause: bool = false
+const default_target_scene: String = 'scenes/menus/main_menu.tscn'
+static var target_scene: String = default_target_scene
 
 @onready var options_label: AnimatedSprite2D = $top/options_label
 var active: bool = true
@@ -26,11 +27,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action('ui_cancel'):
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		if from_pause:
-			from_pause = false
-			SceneManager.switch_to('scenes/game/game.tscn')
-		else:
-			SceneManager.switch_to('scenes/menus/main_menu.tscn')
+		SceneManager.switch_to(target_scene)
+		target_scene = default_target_scene
 
 
 func _process(delta: float) -> void:

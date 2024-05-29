@@ -2,6 +2,7 @@ extends Node
 
 
 var file := ConfigFile.new()
+var first_launch: bool = false
 
 signal value_changed(section: String, key: String, value: Variant)
 
@@ -43,6 +44,7 @@ func _load_user_config() -> Error:
 		
 		return OK
 	
+	first_launch = true
 	return ERR_FILE_NOT_FOUND
 
 
@@ -73,17 +75,17 @@ var default_configuration: Dictionary = {
 	},
 	'sound': {
 		'buses': {
-			'Master': 100.0,
+			'Master': 50.0,
 			'Music': 100.0,
 			'SFX': 100.0,
 		},
 		'bus_effects': {
 			'Master': {
 				'limiter': {
-				'ceiling': -8.0,
-				'threshold': 0.0,
-				'soft_clip': 2.0,
-				'soft_clip_ratio': 10.0,
+					'ceiling': -8.0,
+					'threshold': 0.0,
+					'soft_clip': 2.0,
+					'soft_clip_ratio': 10.0,
 				},
 			},
 			'Music': {},

@@ -4,7 +4,9 @@ extends CanvasLayer
 @onready var options: Node2D = %options
 @onready var root: Control = $root
 @onready var song_label: Label = %song_label
+@onready var music: AudioStreamPlayer = $music
 
+var music_volume: float = 0.0
 var active: bool = true
 var selected: int = 0
 
@@ -16,6 +18,8 @@ func _ready() -> void:
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(root, 'modulate:a', 1.0, 0.5)
 	
+	create_tween().tween_property(self, 'music_volume', 0.9, 2.0).set_delay(0.5)
+	
 	if not is_instance_valid(Game.instance):
 		return
 	
@@ -24,6 +28,10 @@ func _ready() -> void:
 		Game.instance.metadata.display_name, Game.difficulty.to_upper(),
 		keys[Game.mode].to_upper(),
 	]
+
+
+func _process(delta: float) -> void:
+	music.volume_db = linear_to_db(music_volume)
 
 
 func _input(event: InputEvent) -> void:
@@ -52,7 +60,7 @@ func _input(event: InputEvent) -> void:
 					_close()
 					get_tree().reload_current_scene()
 				&'options':
-					OptionsMenu.from_pause = true
+					OptionsMenu.target_scene = 'scenes/game/game.tscn'
 					_close()
 					SceneManager.switch_to('scenes/menus/options_menu.tscn')
 				&'quit':
@@ -80,4 +88,6 @@ func _close() -> void:
 	visible = false
 	get_tree().paused = false
 	queue_free()
-	Game.instance.tracks.check_sync(true)
+	
+	if Game.instance.song_started:
+		Game.instance.tracks.check_sync(true)

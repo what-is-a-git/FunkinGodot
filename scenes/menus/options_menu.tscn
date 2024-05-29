@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djsixwr7qenx1"]
+[gd_scene load_steps=16 format=3 uid="uid://3daku38i1a50"]
 
 [ext_resource type="Script" path="res://scenes/menus/options_menu.gd" id="1_7e45p"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_jmigv"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="5_qlnc3"]
 [ext_resource type="Script" path="res://scenes/menus/options/categories.gd" id="6_k5s7i"]
 [ext_resource type="SpriteFrames" path="res://resources/images/menus/options/categories.res" id="6_lf7w2"]
-[ext_resource type="Script" path="res://scenes/menus/options/option.gd" id="9_rgp4e"]
+[ext_resource type="Script" path="res://scenes/menus/options/keybinds.gd" id="9_vyhsy"]
 [ext_resource type="Script" path="res://scenes/menus/options/category.gd" id="11_3cmdf"]
 [ext_resource type="Script" path="res://scenes/menus/options/number_option.gd" id="12_i3ttd"]
 [ext_resource type="Script" path="res://scenes/menus/options/list_option.gd" id="13_cy0y1"]
@@ -53,7 +53,7 @@ category = NodePath("../../../section/options/gameplay")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
-frame_progress = 0.351861
+frame_progress = 0.874013
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -66,7 +66,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"graphics"
-frame_progress = 0.46701
+frame_progress = 0.989158
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -79,7 +79,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.661538
+frame_progress = 0.183684
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -92,7 +92,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
-frame_progress = 0.228139
+frame_progress = 0.750285
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -105,7 +105,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
-frame_progress = 0.261356
+frame_progress = 0.783503
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -118,7 +118,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
-frame_progress = 0.291922
+frame_progress = 0.814069
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -146,7 +146,7 @@ centered = true
 
 [node name="keybinds" type="Node2D" parent="section/options/gameplay/options"]
 position = Vector2(-91, -184)
-script = ExtResource("9_rgp4e")
+script = ExtResource("9_vyhsy")
 
 [node name="label" type="Node2D" parent="section/options/gameplay/options/keybinds"]
 script = ExtResource("5_qlnc3")
@@ -242,6 +242,7 @@ script = ExtResource("5_qlnc3")
 text = "< 0 >"
 
 [node name="preview" type="Parallax2D" parent="section"]
+unique_name_in_owner = true
 scroll_scale = Vector2(0, 0)
 scroll_offset = Vector2(320, 0)
 
@@ -257,9 +258,11 @@ offset_right = 320.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.5)
 
-[node name="stuff" type="Node2D" parent="section/preview"]
+[node name="current_preview" type="Node2D" parent="section/preview"]
+unique_name_in_owner = true
 position = Vector2(80, 48)
 
 [node name="top" type="Parallax2D" parent="."]

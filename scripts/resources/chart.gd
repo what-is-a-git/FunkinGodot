@@ -37,7 +37,15 @@ static func load_song(name: StringName, difficulty: StringName) -> Chart:
 		var json_meta := FileAccess.get_file_as_string(path_meta)
 		fnfc.json_chart = JSON.parse_string(json_chart)
 		fnfc.json_meta = JSON.parse_string(json_meta)
-		Game.scroll_speed = fnfc.json_chart.scrollSpeed.get(difficulty.to_lower(), 2.6)
+		
+		if fnfc.json_chart.scrollSpeed is float:
+			Game.scroll_speed = fnfc.json_chart.scrollSpeed
+		else:
+			if fnfc.json_chart.scrollSpeed.has(difficulty.to_lower()):
+				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get(difficulty.to_lower(), 2.6)
+			else:
+				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get('default', 2.6)
+		
 		chart = fnfc.parse(difficulty)
 		return chart
 	

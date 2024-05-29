@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
-[ext_resource type="AudioStream" uid="uid://dw2hnatyaitfi" path="res://songs/tutorial/tracks/Inst.ogg" id="2_j8v40"]
+[ext_resource type="AudioStream" uid="uid://bu8uskde2kej8" path="res://songs/tutorial/tracks/Inst.ogg" id="2_j8v40"]
 [ext_resource type="Script" path="res://scenes/menus/freeplay_info.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7yg7l"]
 

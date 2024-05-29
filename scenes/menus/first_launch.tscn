@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dasf7d5k8p30f"]
+
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="1_8fdwr"]
+[ext_resource type="Script" path="res://scenes/menus/first_launch.gd" id="1_tlkk5"]
+
+[node name="first_launch" type="Node2D"]
+position = Vector2(640, 360)
+script = ExtResource("1_tlkk5")
+
+[node name="main_label" type="Node2D" parent="."]
+position = Vector2(0, -64)
+script = ExtResource("1_8fdwr")
+text = "Hey! It seems this
+is your first time!
+
+Would you like to
+change your settings
+before playing?"
+centered = true
+horizontal_alignment = "Center"
+
+[node name="yes" type="Node2D" parent="."]
+position = Vector2(-180, 240)
+script = ExtResource("1_8fdwr")
+text = "sure"
+centered = true
+horizontal_alignment = "Center"
+
+[node name="no" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(180, 240)
+script = ExtResource("1_8fdwr")
+text = "nope"
+centered = true
+horizontal_alignment = "Center"

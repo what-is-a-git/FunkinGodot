@@ -3,10 +3,7 @@
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://resources/fonts/funkin.ttf" id="1_2640p"]
 [ext_resource type="Script" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
 [ext_resource type="Script" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0m3gd"]
-font = ExtResource("1_2640p")
-font_size = 64
+[ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://resources/music/menus/pause_theme.ogg" id="4_6wbaw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_83nit"]
 font = ExtResource("1_2640p")
@@ -34,25 +31,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
 
-[node name="title" type="Label" parent="root"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 72.0
-grow_horizontal = 2
-text = "Pause Menu"
-label_settings = SubResource("LabelSettings_0m3gd")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="song_label" type="Label" parent="root"]
 unique_name_in_owner = true
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 72.0
-offset_bottom = 108.0
+offset_top = 16.0
+offset_bottom = 52.0
 grow_horizontal = 2
 text = "Penis (HARD) / Freeplay"
 label_settings = SubResource("LabelSettings_83nit")
@@ -87,3 +73,9 @@ position = Vector2(150, 794)
 script = ExtResource("3_380tn")
 target_y = 3
 text = "quit"
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6wbaw")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"

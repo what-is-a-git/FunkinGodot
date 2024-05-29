@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=34 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=42 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjvclgmif1gi7" path="res://resources/images/game/assets/icons/bf_pixel.png" id="2_5frbf"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://resources/images/game/assets/icons/gf.png" id="2_vxcu7"]
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://resources/images/game/assets/icons/dad.png" id="4_chb64"]
+[ext_resource type="Script" path="res://scripts/resources/difficulty_map.gd" id="4_dwhfr"]
 
 [sub_resource type="Resource" id="Resource_7iypv"]
 script = ExtResource("1_6tpon")
@@ -17,8 +18,15 @@ filter = 0
 [sub_resource type="Resource" id="Resource_bsxmn"]
 script = ExtResource("1_vnt78")
 song_name = &"tutorial"
-song_difficulties = ["easy", &"hard"]
+song_difficulties = ["easy", "normal", "hard"]
 icon = SubResource("Resource_7iypv")
+
+[sub_resource type="Resource" id="Resource_24xx4"]
+script = ExtResource("4_dwhfr")
+mapping = {
+"erect": &"bopeebo_erect",
+"nightmare": &"bopeebo_erect"
+}
 
 [sub_resource type="Resource" id="Resource_3qve5"]
 script = ExtResource("1_6tpon")
@@ -30,8 +38,16 @@ filter = 0
 [sub_resource type="Resource" id="Resource_bvc40"]
 script = ExtResource("1_vnt78")
 song_name = &"bopeebo"
-song_difficulties = [&"easy", &"normal", &"hard"]
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
 icon = SubResource("Resource_3qve5")
+difficulty_remap = SubResource("Resource_24xx4")
+
+[sub_resource type="Resource" id="Resource_606up"]
+script = ExtResource("4_dwhfr")
+mapping = {
+"erect": &"fresh_erect",
+"nightmare": &"fresh_erect"
+}
 
 [sub_resource type="Resource" id="Resource_42rpv"]
 script = ExtResource("1_6tpon")
@@ -43,8 +59,16 @@ filter = 0
 [sub_resource type="Resource" id="Resource_w108v"]
 script = ExtResource("1_vnt78")
 song_name = &"fresh"
-song_difficulties = [&"easy", &"normal", &"hard"]
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
 icon = SubResource("Resource_42rpv")
+difficulty_remap = SubResource("Resource_606up")
+
+[sub_resource type="Resource" id="Resource_q8m0k"]
+script = ExtResource("4_dwhfr")
+mapping = {
+"erect": &"dad_battle_erect",
+"nightmare": &"dad_battle_erect"
+}
 
 [sub_resource type="Resource" id="Resource_ul62k"]
 script = ExtResource("1_6tpon")
@@ -56,8 +80,9 @@ filter = 0
 [sub_resource type="Resource" id="Resource_hu5ot"]
 script = ExtResource("1_vnt78")
 song_name = &"dad_battle"
-song_difficulties = [&"easy", &"normal", &"hard"]
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
 icon = SubResource("Resource_ul62k")
+difficulty_remap = SubResource("Resource_q8m0k")
 
 [sub_resource type="Resource" id="Resource_hyym4"]
 script = ExtResource("1_6tpon")
@@ -145,18 +170,38 @@ song_difficulties = ["hard"]
 [sub_resource type="Resource" id="Resource_lqup2"]
 script = ExtResource("1_vnt78")
 song_name = &"extra/weekend1/darnell"
-song_difficulties = ["hard"]
+song_difficulties = ["easy", "normal", "hard"]
 
 [sub_resource type="Resource" id="Resource_8axvm"]
 script = ExtResource("1_vnt78")
 song_name = &"extra/weekend1/lit up"
-song_difficulties = ["hard"]
+song_difficulties = ["easy", "normal", "hard"]
 
 [sub_resource type="Resource" id="Resource_yss6v"]
 script = ExtResource("1_vnt78")
 song_name = &"extra/weekend1/2hot"
+song_difficulties = ["easy", "normal", "hard"]
+
+[sub_resource type="Resource" id="Resource_qjme5"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/yipe"
 song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_dqwpl"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/the final verdict"
+song_difficulties = ["challenge"]
+
+[sub_resource type="Resource" id="Resource_mtd2w"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/psycho_red/breathe"
+song_difficulties = [&"easy", &"normal", &"hard"]
+
+[sub_resource type="Resource" id="Resource_ri8gu"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/psycho_red/artery"
+song_difficulties = [&"easy", &"normal", &"hard"]
 
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v"), SubResource("Resource_qjme5"), SubResource("Resource_dqwpl"), SubResource("Resource_mtd2w"), SubResource("Resource_ri8gu")])

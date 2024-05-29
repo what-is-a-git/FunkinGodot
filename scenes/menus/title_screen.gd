@@ -25,6 +25,11 @@ var tween: Tween
 
 
 func _ready() -> void:
+	if Config.first_launch:
+		Config.first_launch = false
+		SceneManager.switch_to('scenes/menus/first_launch.tscn', false)
+		return
+	
 	enter_animation.play('loop')
 	
 	var music_player := GlobalAudio.get_player('MUSIC')

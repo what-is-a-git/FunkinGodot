@@ -1,11 +1,14 @@
-[gd_resource type="AudioStreamSynchronized" load_steps=3 format=3 uid="uid://cndktdklsoy23"]
+[gd_resource type="AudioStreamSynchronized" load_steps=4 format=3 uid="uid://cndktdklsoy23"]
 
-[ext_resource type="AudioStream" uid="uid://dg8sjatixhgew" path="res://songs/bopeebo/tracks/Inst.ogg" id="1_d2c0e"]
-[ext_resource type="AudioStream" uid="uid://c2c75i5aodb0l" path="res://songs/bopeebo/tracks/Voices.ogg" id="2_7yybx"]
+[ext_resource type="AudioStream" uid="uid://cuuwkj68fid50" path="res://songs/bopeebo/tracks/Inst.ogg" id="1_d2c0e"]
+[ext_resource type="AudioStream" uid="uid://d2hqs74vrhveg" path="res://songs/bopeebo/tracks/Voices-bf.ogg" id="2_a4vjt"]
+[ext_resource type="AudioStream" uid="uid://c8c3xxb5ngney" path="res://songs/bopeebo/tracks/Voices-dad.ogg" id="3_5jvac"]
 
 [resource]
-stream_count = 2
+stream_count = 3
 stream_0/stream = ExtResource("1_d2c0e")
 stream_0/volume = 0.0
-stream_1/stream = ExtResource("2_7yybx")
+stream_1/stream = ExtResource("2_a4vjt")
 stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_5jvac")
+stream_2/volume = 0.0

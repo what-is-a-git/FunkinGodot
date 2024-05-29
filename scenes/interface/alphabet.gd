@@ -16,6 +16,8 @@ class_name Alphabet extends Node2D
 		centered = value
 		_create_characters()
 
+@export var no_offset: bool = false
+
 @export_enum('Left', 'Center', 'Right') var horizontal_alignment: String = 'Left':
 	set(value):
 		horizontal_alignment = value
@@ -151,7 +153,7 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 		'\\':
 			data.name = 'back slash'
 		',':
-			data.name = 'comma'
+			data.name = 'apostrophe' # data.name = 'comma'
 			data.offset.y = MAGIC_OFFSET
 		'“', '"':
 			data.name = 'start quote'
@@ -171,7 +173,7 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 			data.name = 'period'
 			data.offset.y = MAGIC_OFFSET
 		'?':
-			data.name = 'question mark'
+			data.name = 'question'
 		'←':
 			data.name = 'left arrow'
 		'↓':
@@ -191,7 +193,31 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 		_:
 			data.name = character
 	
+	if no_offset:
+		data.offset = Vector2.ZERO
+	
 	return data
+
+
+static func keycode_to_character(input: Key) -> String:
+	return string_to_character(OS.get_keycode_string(input))
+
+
+static func string_to_character(input: String) -> String:
+	match input.to_lower():
+		'apostrophe': return '"'
+		'backslash': return '\\'
+		'comma': return ','
+		'period': return '.'
+		'semicolon': return ':'
+		'slash': return '/'
+		'minus': return '-'
+		'left': return '<'
+		'down': return 'v'
+		'up': return 'ô'
+		'right': return '>'
+	
+	return input
 
 
 class AlphabetAnimationData extends Object:

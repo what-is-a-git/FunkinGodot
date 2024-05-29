@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Friday Night Funkin'"
-config/version="0.0.2"
+config/version="0.1.0"
 config/tags=PackedStringArray("2d", "modding", "rhythm")
 run/main_scene="res://scenes/menus/title_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
@@ -28,6 +28,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 Global="*res://scripts/autoload/global.gd"
 GlobalAudio="*res://scenes/autoload/global_audio.tscn"
 Config="*res://scripts/autoload/config.gd"
+Keybinds="*res://scripts/autoload/keybinds.gd"
 RuntimeInfo="*res://scenes/autoload/runtime_info.tscn"
 MixerControl="*res://scenes/autoload/mixer_control.tscn"
 SceneManager="*res://scenes/autoload/scene_manager.tscn"

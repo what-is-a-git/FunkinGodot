@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://c54n5pwgvqym0"]
+
+[ext_resource type="SpriteFrames" path="res://resources/images/game/skins/default/receptors.res" id="1_dgmlx"]
+[ext_resource type="Script" path="res://scenes/menus/options/previews/keybinds.gd" id="1_ol6wa"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="2_d1c8h"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="3_g24lb"]
+
+[node name="keybinds" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_ol6wa")
+
+[node name="left" type="AnimatedSprite2D" parent="."]
+position = Vector2(-236, 0)
+sprite_frames = ExtResource("1_dgmlx")
+animation = &"left static"
+script = ExtResource("2_d1c8h")
+
+[node name="key" type="Node2D" parent="left"]
+position = Vector2(0, -128)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_g24lb")
+text = "D"
+centered = true
+no_offset = true
+horizontal_alignment = "Center"
+
+[node name="down" type="AnimatedSprite2D" parent="."]
+position = Vector2(-79, 0)
+sprite_frames = ExtResource("1_dgmlx")
+animation = &"down static"
+script = ExtResource("2_d1c8h")
+
+[node name="key" type="Node2D" parent="down"]
+position = Vector2(0, -128)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_g24lb")
+text = "F"
+centered = true
+no_offset = true
+horizontal_alignment = "Center"
+
+[node name="up" type="AnimatedSprite2D" parent="."]
+position = Vector2(79, 0)
+sprite_frames = ExtResource("1_dgmlx")
+animation = &"up static"
+script = ExtResource("2_d1c8h")
+
+[node name="key" type="Node2D" parent="up"]
+position = Vector2(0, -128)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_g24lb")
+text = "J"
+centered = true
+no_offset = true
+horizontal_alignment = "Center"
+
+[node name="right" type="AnimatedSprite2D" parent="."]
+position = Vector2(236, 0)
+sprite_frames = ExtResource("1_dgmlx")
+animation = &"right static"
+script = ExtResource("2_d1c8h")
+
+[node name="key" type="Node2D" parent="right"]
+position = Vector2(0, -128)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_g24lb")
+text = "K"
+centered = true
+no_offset = true
+horizontal_alignment = "Center"

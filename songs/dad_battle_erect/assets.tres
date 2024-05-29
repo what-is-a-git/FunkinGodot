@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SongAssets" load_steps=2 format=3 uid="uid://b4lhkfjftxiix"]
+
+[ext_resource type="Script" path="res://scripts/resources/song_assets.gd" id="1_di7lv"]
+
+[resource]
+script = ExtResource("1_di7lv")
+scripts = Array[PackedScene]([])

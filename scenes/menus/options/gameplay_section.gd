@@ -43,8 +43,10 @@ func _input(event: InputEvent) -> void:
 
 
 func change_selection(amount: int = 0) -> void:
+	options.get_child(selected)._unfocus()
 	selected = wrapi(selected + amount, 0, options.get_child_count())
 	selected_option = options.get_child(selected)
+	selected_option._focus()
 	
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()

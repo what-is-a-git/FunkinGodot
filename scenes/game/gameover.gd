@@ -20,13 +20,14 @@ func _ready() -> void:
 	randomize()
 	active = true
 	
-	# 1 in a million chance!
-	if randi_range(1, 1000) == 273:
+	var value := randi_range(1, 1000)
+	if value == 273:
 		active = false
 		secret.get_node('player').play()
 		return
 	else:
-		secret.free()
+		print('You failed the roll! Rolled a %s.' % value)
+		secret.queue_free()
 	
 	Conductor.reset()
 	Conductor.bpm = 100.0
@@ -53,6 +54,9 @@ func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
 	if not active:
+		if event.is_action('menu_reload'):
+			get_viewport().set_input_as_handled()
+		
 		return
 	
 	if event.is_action('ui_cancel'):

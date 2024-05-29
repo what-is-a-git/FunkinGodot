@@ -1,11 +1,14 @@
-[gd_resource type="AudioStreamSynchronized" load_steps=3 format=3 uid="uid://c08sbwrwxic50"]
+[gd_resource type="AudioStreamSynchronized" load_steps=4 format=3 uid="uid://c08sbwrwxic50"]
 
-[ext_resource type="AudioStream" uid="uid://8evd1q5o38of" path="res://songs/dad_battle/tracks/Inst.ogg" id="1_f17cg"]
-[ext_resource type="AudioStream" uid="uid://dkiwcbaxm4gy" path="res://songs/dad_battle/tracks/Voices.ogg" id="2_suwlp"]
+[ext_resource type="AudioStream" uid="uid://urn13wa6ix1j" path="res://songs/dad_battle/tracks/Inst.ogg" id="1_f17cg"]
+[ext_resource type="AudioStream" uid="uid://4h8kdqyqjpwx" path="res://songs/dad_battle/tracks/Voices-bf.ogg" id="2_2j5n7"]
+[ext_resource type="AudioStream" uid="uid://k2veeegcjqk0" path="res://songs/dad_battle/tracks/Voices-dad.ogg" id="3_oo5jk"]
 
 [resource]
-stream_count = 2
+stream_count = 3
 stream_0/stream = ExtResource("1_f17cg")
 stream_0/volume = 0.0
-stream_1/stream = ExtResource("2_suwlp")
+stream_1/stream = ExtResource("2_2j5n7")
 stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_oo5jk")
+stream_2/volume = 0.0

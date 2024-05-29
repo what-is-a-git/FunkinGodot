@@ -17,7 +17,7 @@ func parse(difficulty: StringName) -> Chart:
 			if event.get('e') == 'FocusCamera':
 				if event.get('v') is Dictionary:
 					chart.events.push_back(CameraPan.new(event.get('t') / 1000.0, 
-							event.get('v').get('char', 0) == 0))
+							int(event.get('v').get('char', 0)) == 0))
 				else:
 					chart.events.push_back(CameraPan.new(event.get('t') / 1000.0, 
 							event.get('v') == 0))

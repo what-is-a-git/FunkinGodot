@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnqia1i12b3mt"]
+[gd_scene load_steps=21 format=3 uid="uid://cnqia1i12b3mt"]
 
 [ext_resource type="Script" path="res://scenes/menus/story_mode_menu.gd" id="1_el8f4"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="2_3esc8"]
@@ -30,6 +30,8 @@ font_color = Color(0.929688, 0.403107, 0.625258, 1)
 font = ExtResource("2_3esc8")
 font_size = 24
 font_color = Color(0.929688, 0.403107, 0.625258, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hdv4e"]
 
 [node name="story_mode_menu" type="Control"]
 layout_mode = 3
@@ -279,7 +281,7 @@ texture = ExtResource("4_j0vh7")
 
 [node name="animated" type="AnimatedSprite2D" parent="bottom/difficulties/difficulty"]
 visible = false
-animation = &""
+sprite_frames = SubResource("SpriteFrames_hdv4e")
 script = ExtResource("5_61vqd")
 
 [node name="left_arrow" type="AnimatedSprite2D" parent="bottom/difficulties"]

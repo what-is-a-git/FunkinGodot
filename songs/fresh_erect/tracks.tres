@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamSynchronized" load_steps=4 format=3 uid="uid://lsjgfka5tjll"]
+
+[ext_resource type="AudioStream" uid="uid://b30ipans6ra8f" path="res://songs/fresh_erect/tracks/Inst-erect.ogg" id="1_nne7o"]
+[ext_resource type="AudioStream" uid="uid://b281rrygpxr0r" path="res://songs/fresh_erect/tracks/Voices-bf-erect.ogg" id="2_jk8k0"]
+[ext_resource type="AudioStream" uid="uid://drc6c84l62kh6" path="res://songs/fresh_erect/tracks/Voices-dad-erect.ogg" id="3_uwuto"]
+
+[resource]
+stream_count = 3
+stream_0/stream = ExtResource("1_nne7o")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_jk8k0")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_uwuto")
+stream_2/volume = 0.0

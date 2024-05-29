@@ -82,15 +82,15 @@ func update_score_label() -> void:
 	var rank: StringName = &'N/A'
 	
 	for rank_data in ranks:
-		if snappedf(Game.instance.accuracy, 0.01) >= rank_data[0]:
+		if Game.instance.accuracy >= rank_data[0]:
 			rank = rank_data[1]
-		else:
-			break
+			continue
+		break
 	
 	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.2f%% (%s)' % [
 		Game.instance.score,
 		Game.instance.misses,
-		Game.instance.accuracy,
+		float(round(Game.instance.accuracy * 100.0)) / 100.0,
 		rank,
 	]
 
