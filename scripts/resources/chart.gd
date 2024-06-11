@@ -10,11 +10,63 @@ func _to_string() -> String:
 
 
 static func load_song(name: StringName, difficulty: StringName) -> Chart:
+	var start: int = Time.get_ticks_usec()
+	
 	name = name.to_lower()
 	difficulty = difficulty.to_lower()
 	
 	var chart: Chart = null
 	var base_path: String = 'res://songs/%s' % name
+	
+	chart = _try_legacy(base_path, difficulty)
+	if is_instance_valid(chart):
+		_print_time_elapsed(start)
+		return chart
+	
+	chart = _try_fnfc(base_path, difficulty)
+	if is_instance_valid(chart):
+		_print_time_elapsed(start)
+		return chart
+	
+	printerr('Chart of song %s with difficulty %s not found.' % [name, difficulty])
+	return chart
+
+
+static func _print_time_elapsed(start: int) -> void:
+	print('Loaded in %.3fms.' % [float(Time.get_ticks_usec() - start) / 1000.0])
+
+
+static func sort_chart_notes(chart: Chart) -> void:
+	chart.notes.sort_custom(func(a: NoteData, b: NoteData):
+		return a.time < b.time)
+
+
+static func remove_stacked_notes(chart: Chart) -> int:
+	var index: int = 0
+	var last_note: NoteData = null
+	var stacked_notes: int = 0
+	
+	while (not chart.notes.is_empty()) and index < chart.notes.size():
+		var note: NoteData = chart.notes[index]
+		
+		if not is_instance_valid(last_note):
+			index += 1
+			last_note = note
+			continue
+		
+		if last_note.direction == note.direction and \
+				absf(last_note.time - note.time) <= 0.001:
+			chart.notes.remove_at(index)
+			stacked_notes += 1
+			continue
+		
+		last_note = note
+		index += 1
+	
+	return stacked_notes
+
+
+static func _try_legacy(base_path: String, difficulty: StringName) -> Chart:
 	var legacy_exists: bool = FileAccess.file_exists('%s/charts/%s.json' % [base_path, difficulty])
 	
 	if legacy_exists:
@@ -23,9 +75,12 @@ static func load_song(name: StringName, difficulty: StringName) -> Chart:
 		var json := FileAccess.get_file_as_string(path)
 		funkin.json = JSON.parse_string(json)
 		Game.scroll_speed = funkin.json.song.get('speed', 2.6)
-		chart = funkin.parse()
-		return chart
+		return funkin.parse()
 	
+	return null
+
+
+static func _try_fnfc(base_path: String, difficulty: StringName) -> Chart:
 	var fnfc_exists: bool = FileAccess.file_exists('%s/charts/chart.json' % [base_path]) and \
 			FileAccess.file_exists('%s/charts/meta.json' % [base_path])
 	
@@ -46,8 +101,6 @@ static func load_song(name: StringName, difficulty: StringName) -> Chart:
 			else:
 				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get('default', 2.6)
 		
-		chart = fnfc.parse(difficulty)
-		return chart
+		return fnfc.parse(difficulty)
 	
-	printerr('Chart of song %s with difficulty %s not found.' % [name, difficulty])
-	return chart
+	return null

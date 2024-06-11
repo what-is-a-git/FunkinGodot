@@ -21,12 +21,13 @@ var _default_character: Character = null
 var _note_types: NoteTypes = null
 var _note_splash_alpha: float = 0.6
 
-
 signal note_hit(note: Note)
 signal note_miss(note: Note)
 
 
 func _ready() -> void:
+	Conductor.step_hit.connect(_on_step_hit)
+	
 	if is_instance_valid(Game.instance) and not is_instance_valid(_note_types):
 		_note_types = Game.instance.note_types
 	if is_instance_valid(Game.chart):
@@ -44,14 +45,14 @@ func _ready() -> void:
 		receptor._automatically_play_static = not takes_input
 
 
-func _physics_process(delta: float) -> void:
-	if (not is_instance_valid(_chart)) and is_instance_valid(Game.chart):
-		_chart = Game.chart
-	
-	call_deferred_thread_group('_try_spawning')
+func _on_step_hit(step: int) -> void:
+	call_deferred_thread_group(&'_try_spawning')
 
 
 func _process(delta: float) -> void:
+	if (not is_instance_valid(_chart)) and is_instance_valid(Game.chart):
+		_chart = Game.chart
+	
 	var receptor_y: float = _receptors[0].position.y
 	
 	for note in _notes.get_children():
@@ -143,6 +144,7 @@ func _try_spawning() -> void:
 		note.data = data
 		note.position.x = _receptors[0].position.x + \
 				(112.0 * (absi(note.data.direction) % _lanes))
+		note.position.y = -100000.0
 		note._splash = default_note_splash
 		_notes.add_child(note)
 		_note_index += 1

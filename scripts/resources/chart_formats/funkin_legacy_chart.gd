@@ -69,29 +69,8 @@ func parse() -> Chart:
 		beat += 4.0
 		time += 4.0 / beat_delta
 	
-	var index: int = 0
-	var last_note: NoteData = null
-	var stacked_notes: int = 0
-	
-	chart.notes.sort_custom(func(a: NoteData, b: NoteData):
-		return a.time < b.time)
-	
-	while (not chart.notes.is_empty()) and index < chart.notes.size():
-		var note: NoteData = chart.notes[index]
-		
-		if not is_instance_valid(last_note):
-			index += 1
-			last_note = note
-			continue
-		
-		if last_note.direction == note.direction and \
-				absf(last_note.time - note.time) <= 0.001:
-			chart.notes.remove_at(index)
-			stacked_notes += 1
-			continue
-		
-		last_note = note
-		index += 1
+	Chart.sort_chart_notes(chart)
+	var stacked_notes := Chart.remove_stacked_notes(chart)
 	
 	print('Loaded FunkinChart(%s) with %s stacked notes detected.' % [
 		data.song, stacked_notes

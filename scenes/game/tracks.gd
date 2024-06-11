@@ -56,13 +56,15 @@ func check_sync(force: bool = false) -> void:
 	var track_index: int = 0
 	
 	var target_time := player.get_playback_position()
-	var any_desynced: bool = force or \
-			absf(target_time - Conductor.time + Conductor.offset) >= 0.05
+	var desync: float = absf(target_time - Conductor.time + Conductor.offset)
+	var any_desynced: bool = force or desync >= 0.02
 	
 	if not any_desynced:
 		return
 	
-	Conductor.time = target_time + AudioServer.get_time_since_last_mix() + Conductor.offset
+	#print('Resynced with %.3fms of desync!%s' % [desync * 1000.0, 
+	#		' (forced)' if force else ''])
+	Conductor.time = get_playback_position()
 	Conductor.beat += (Conductor.time - last_time) * Conductor.beat_delta
 
 
@@ -93,6 +95,7 @@ func _physics_process(delta: float) -> void:
 		if player.get_playback_position() < last_playback_position:
 			player.stop()
 			_on_finished()
+			return
 		
 		check_sync()
 	

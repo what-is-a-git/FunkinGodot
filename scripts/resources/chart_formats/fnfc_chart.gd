@@ -10,7 +10,7 @@ func parse(difficulty: StringName) -> Chart:
 	
 	if not json_chart.notes.has(difficulty):
 		printerr('Chart did not have difficulty of "%s"!' % difficulty)
-		return chart
+		return null
 	
 	if json_chart.has('events'):
 		for event in json_chart.get('events'):
@@ -40,5 +40,12 @@ func parse(difficulty: StringName) -> Chart:
 	for change in json_meta.get('timeChanges', []):
 		chart.events.push_back(BPMChange.new(change.get('t') / 1000.0, 
 				float(change.get('bpm'))))
+	
+	Chart.sort_chart_notes(chart)
+	var stacked_notes := Chart.remove_stacked_notes(chart)
+	
+	print('Loaded FNFCChart(%s) with %s stacked notes detected.' % [
+		'%s/%s' % [json_meta.get('songName', 'Unknown'), difficulty], stacked_notes
+	])
 	
 	return chart

@@ -8,6 +8,7 @@ static var scroll_speed: float = 3.3
 static var mode: PlayMode = PlayMode.FREEPLAY
 
 static var instance: Game = null
+static var playlist: Array[GamePlaylistEntry] = []
 
 @onready var pause_menu: PackedScene = load('res://scenes/game/pause_menu.tscn')
 
@@ -25,6 +26,7 @@ var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
 var camera_bump_amount: Vector2 = Vector2(0.015, 0.015)
 var camera_bumps: bool = false
 var song_started: bool = false
+var save_score: bool = true
 
 @onready var _stage: Node2D = $stage
 @onready var _characters: Node2D = $characters
@@ -52,6 +54,12 @@ var accuracy: float = 0.0:
 			return accuracy_calculator.get_accuracy()
 		
 		return 0.0
+var rank: String:
+	get:
+		if is_instance_valid(hud.health_bar):
+			return hud.health_bar.rank
+		
+		return 'N/A'
 
 @onready var skin: HUDSkin = load('res://resources/hud_skins/default.tres')
 @onready var _default_note := load('res://scenes/game/notes/note.tscn')
@@ -203,7 +211,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
-			Conductor.time = Conductor.offset
+			Conductor.time = tracks.get_playback_position()
 			song_start.emit()
 			song_started = true
 	
@@ -231,6 +239,7 @@ func _input(event: InputEvent) -> void:
 		add_child(menu)
 		get_tree().paused = true
 	if OS.is_debug_build() and event.is_action('toggle_botplay'):
+		save_score = false
 		_player_field.takes_input = not _player_field.takes_input
 		
 		for receptor in _player_field._receptors:
@@ -292,14 +301,47 @@ func _song_finished(force: bool = false) -> void:
 	
 	if not force:
 		song_finished.emit(event)
+	else:
+		save_score = false
 	
 	if event.status == CancellableEvent.EventStatus.CANCEL:
 		return
 	
 	playing = false
-	GlobalAudio.get_player('MENU/CANCEL').play()
 	
+	if save_score:
+		var current_score := Scores.get_score(song, difficulty)
+		
+		if str(current_score.get('score', 'N/A')) == 'N/A' or score > current_score.get('score'):
+			Scores.set_score(song, difficulty, {
+				'score': score,
+				'misses': misses,
+				'accuracy': accuracy,
+				'rank': rank
+			})
+	
+	if not (playlist.is_empty() or force):
+		var new_song: StringName = playlist[0].name
+		var new_difficulty: StringName = playlist[0].difficulty
+		Game.chart = Chart.load_song(new_song, new_difficulty)
+		
+		if not is_instance_valid(Game.chart):
+			var json_path := 'res://songs/%s/charts/%s.json' % [new_song, new_difficulty.to_lower()]
+			printerr('Song at path %s doesn\'t exist!' % json_path)
+			GlobalAudio.get_player('MENU/CANCEL').play()
+			SceneManager.switch_to('scenes/menus/main_menu.tscn')
+			return
+		
+		Game.song = new_song
+		Game.difficulty = new_difficulty.to_lower()
+		playlist.pop_front()
+		get_tree().reload_current_scene()
+		return
+	
+	GlobalAudio.get_player('MENU/CANCEL').play()
 	match mode:
+		PlayMode.STORY:
+			SceneManager.switch_to('scenes/menus/story_mode_menu.tscn')
 		PlayMode.FREEPLAY:
 			SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')
 		_:

@@ -65,28 +65,28 @@ script = ExtResource("8_2643p")
 name = &"shit"
 timing = 166.66
 score = 50
-health = 1.15
+health = 0.0
 
 [sub_resource type="Resource" id="Resource_2xl48"]
 script = ExtResource("8_2643p")
 name = &"bad"
 timing = 135.0
 score = 100
-health = 1.15
+health = 0.25
 
 [sub_resource type="Resource" id="Resource_u7x50"]
 script = ExtResource("8_2643p")
 name = &"good"
 timing = 90.0
 score = 200
-health = 1.15
+health = 0.75
 
 [sub_resource type="Resource" id="Resource_jbop4"]
 script = ExtResource("8_2643p")
 name = &"sick"
 timing = 45.0
 score = 350
-health = 1.15
+health = 1.0
 
 [sub_resource type="Resource" id="Resource_aj00i"]
 script = ExtResource("8_2643p")

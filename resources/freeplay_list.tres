@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=42 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=44 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -202,6 +202,16 @@ script = ExtResource("1_vnt78")
 song_name = &"extra/psycho_red/artery"
 song_difficulties = [&"easy", &"normal", &"hard"]
 
+[sub_resource type="Resource" id="Resource_33qe6"]
+script = ExtResource("1_vnt78")
+song_name = &"extra/lovesick cannibal"
+song_difficulties = ["hard"]
+
+[sub_resource type="Resource" id="Resource_3o6rh"]
+script = ExtResource("1_vnt78")
+song_name = &"invalid_song"
+song_difficulties = ["this", "song", "does", "not", "exist", ":3", "lol"]
+
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v"), SubResource("Resource_qjme5"), SubResource("Resource_dqwpl"), SubResource("Resource_mtd2w"), SubResource("Resource_ri8gu")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v"), SubResource("Resource_qjme5"), SubResource("Resource_dqwpl"), SubResource("Resource_mtd2w"), SubResource("Resource_ri8gu"), SubResource("Resource_33qe6"), SubResource("Resource_3o6rh")])

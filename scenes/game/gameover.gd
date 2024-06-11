@@ -41,11 +41,28 @@ func _ready() -> void:
 		camera.position = character.position + character._camera_offset.position)
 	
 	character = load(character_path).instantiate()
+	
+	if is_instance_valid(character.gameover_assets):
+		var assets := character.gameover_assets
+		
+		if is_instance_valid(assets.on_death):
+			on_death.stream = assets.on_death
+		if is_instance_valid(assets.looping_music):
+			music_player.stream = assets.looping_music
+			Conductor.bpm = assets.music_bpm # hehe
+		if is_instance_valid(assets.retry):
+			retry.stream = assets.retry
+	
 	add_child(character)
 	character.global_position = character_position
-	character.play_anim(&'death')
-	character.animation_finished.connect(_on_animation_finished)
-	on_death.play()
+	if character.has_anim(&'death'):
+		character.play_anim(&'death')
+		character.animation_finished.connect(_on_animation_finished)
+		on_death.play()
+	else:
+		on_death.play()
+		await on_death.finished
+		_on_animation_finished(&'death')
 
 
 func _input(event: InputEvent) -> void:

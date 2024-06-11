@@ -16,6 +16,7 @@ var opponent_color: Color:
 	set(value):
 		opponent_color = value
 		bar.get('theme_override_styles/background').bg_color = opponent_color
+var rank: StringName = &'N/A'
 
 
 func _ready() -> void:
@@ -79,7 +80,7 @@ func update_score_label() -> void:
 		[95.0, &'S'],
 		[100.0, &'S+'],
 	]
-	var rank: StringName = &'N/A'
+	rank = &'N/A'
 	
 	for rank_data in ranks:
 		if Game.instance.accuracy >= rank_data[0]:

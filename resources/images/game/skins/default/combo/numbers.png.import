@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ds3g63uwcq4jw"
-path="res://.godot/imported/numbers.png-2f931ab08422a9280bb46b8ed89e5011.ctex"
+path.bptc="res://.godot/imported/numbers.png-2f931ab08422a9280bb46b8ed89e5011.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/skins/default/combo/numbers.png"
-dest_files=["res://.godot/imported/numbers.png-2f931ab08422a9280bb46b8ed89e5011.ctex"]
+dest_files=["res://.godot/imported/numbers.png-2f931ab08422a9280bb46b8ed89e5011.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

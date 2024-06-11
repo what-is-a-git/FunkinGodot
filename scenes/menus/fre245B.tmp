@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://3rua2gpac5p8"]
+[gd_scene load_steps=13 format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scenes/menus/freeplay/info_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7yg7l"]
 [ext_resource type="Script" path="res://scenes/menus/freeplay/score_panel.gd" id="6_mti1l"]
-[ext_resource type="Script" path="res://scenes/menus/freeplay/reset_panel.gd" id="7_detv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -33,10 +32,6 @@ corner_radius_bottom_left = 10
 [sub_resource type="LabelSettings" id="LabelSettings_06b8i"]
 font = ExtResource("4_7yg7l")
 font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_s0bc2"]
-font = ExtResource("4_7yg7l")
-font_size = 10
 
 [node name="freeplay_menu" type="Node2D"]
 script = ExtResource("1_p2lt6")
@@ -72,7 +67,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="info_panel" type="Panel" parent="root_control" node_paths=PackedStringArray("parent")]
-unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -136,8 +130,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -39.5
-offset_bottom = -26.5
+offset_top = -32.5
+offset_bottom = -19.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -152,8 +146,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -22.5
-offset_bottom = -9.5
+offset_top = -15.5
+offset_bottom = -2.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -168,8 +162,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -4.5
-offset_bottom = 8.5
+offset_top = 2.5
+offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -184,74 +178,12 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 12.5
-offset_bottom = 25.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 8
-text = "Rank: N/A"
-label_settings = SubResource("LabelSettings_06b8i")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="reset_label" type="Label" parent="root_control/score_panel"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -17.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-text = "(R to reset)"
-label_settings = SubResource("LabelSettings_s0bc2")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="reset_panel" type="Panel" parent="root_control"]
-unique_name_in_owner = true
-clip_contents = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_top = 184.0
-offset_bottom = 280.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
-script = ExtResource("7_detv5")
-
-[node name="question_label" type="Label" parent="root_control/reset_panel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -27.5
-offset_bottom = 1.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 8
-text = "Are you sure you want to
-reset your score?"
-label_settings = SubResource("LabelSettings_06b8i")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="answers_label" type="Label" parent="root_control/reset_panel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
 offset_top = 19.5
 offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
-text = "[Y]es / [N]o"
+text = "Rank: N/A"
 label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -10,7 +10,7 @@
 [resource]
 script = ExtResource("2_7vyhy")
 player = ExtResource("2_ypkit")
-opponent = ExtResource("1_ubio8")
 spectator = ExtResource("4_iyl2g")
+opponent = ExtResource("1_ubio8")
 stage = ExtResource("3_2quk8")
 scripts = Array[PackedScene]([ExtResource("4_isrcb")])

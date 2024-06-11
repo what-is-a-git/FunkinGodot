@@ -42,3 +42,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 		get_tree().paused = false
 		return
+
+
+static func free_children_from(node: Node, immediate: bool = false) -> void:
+	for child in node.get_children():
+		if immediate:
+			child.free()
+		else:
+			child.queue_free()

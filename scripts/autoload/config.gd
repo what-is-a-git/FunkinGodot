@@ -69,8 +69,8 @@ var default_configuration: Dictionary = {
 		'binds': [
 			KEY_D,
 			KEY_F,
-			KEY_K,
 			KEY_J,
+			KEY_K,
 		],
 	},
 	'sound': {

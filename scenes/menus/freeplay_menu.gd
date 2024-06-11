@@ -6,13 +6,13 @@ static var difficulty_index: int = 0
 
 @onready var list: FreeplayList = load('res://resources/freeplay_list.tres')
 
-@onready var background: Sprite2D = $background
+@onready var background: Sprite2D = %background
 var target_background_color: Color = Color.WHITE
-@onready var songs = $songs
+@onready var songs = %songs
 var song_nodes: Array[FreeplaySongNode] = []
 
-@onready var track: AudioStreamPlayer = $track
-@onready var track_timer: Timer = $track_timer
+@onready var track: AudioStreamPlayer = %track
+@onready var track_timer: Timer = %track_timer
 
 # hacky workaround for looping audiostreamsynced atm :3
 var last_track_position: float = -INF
@@ -129,10 +129,10 @@ func select_song() -> void:
 				song_name = difficulty_remap.mapping.get(key, &'').to_lower()
 				break
 	
-	var json_path := 'res://songs/%s/charts/%s.json' % [song_name, difficulty.to_lower()]
 	Game.chart = Chart.load_song(song_name, difficulty)
 	
 	if not is_instance_valid(Game.chart):
+		var json_path := 'res://songs/%s/charts/%s.json' % [song_name, difficulty.to_lower()]
 		active = true
 		printerr('Song at path %s doesn\'t exist!' % json_path)
 		return
@@ -140,6 +140,7 @@ func select_song() -> void:
 	Game.song = song_name
 	Game.difficulty = difficulty.to_lower()
 	Game.mode = Game.PlayMode.FREEPLAY
+	Game.playlist.clear()
 	SceneManager.switch_to('scenes/game/game.tscn')
 
 
@@ -149,8 +150,23 @@ func _load_song(i: int) -> void:
 	var meta_exists := ResourceLoader.exists(meta_path)
 	
 	if not meta_exists:
-		printerr('There is no metadata for song %s! Path to metadata should be: "res://songs/%s/meta.tres"' \
-				% [song.song_name, song.song_name.to_lower()])
+		#printerr('WARNING: There is no metadata for song %s! Path to metadata should be: "res://songs/%s/meta.tres"' \
+				#% [song.song_name, song.song_name.to_lower()])
+		
+		var node := FreeplaySongNode.new()
+		node.position = Vector2.ZERO
+		node.song = song
+		node.text = song.song_name
+		node.target_y = i
+		node.modulate = Color.SALMON
+		song_nodes.push_back(node)
+		songs.add_child(node)
+		
+		var lock := Sprite2D.new()
+		lock.texture = load('res://resources/images/menus/story_menu/interface/lock.png')
+		lock.position = Vector2(node.bounding_box.x + 75.0, 35.0)
+		lock.modulate = Color.WHITE / node.modulate
+		node.add_child(lock)
 		return
 	
 	song.song_meta = load(meta_path)
@@ -158,7 +174,7 @@ func _load_song(i: int) -> void:
 	var node := FreeplaySongNode.new()
 	node.position = Vector2.ZERO
 	node.song = song
-	node.text = song.song_meta.display_name if meta_exists else song.song_name
+	node.text = song.song_meta.display_name
 	node.target_y = i
 	song_nodes.push_back(node)
 	songs.add_child(node)

@@ -1,9 +1,11 @@
 extends Control
 
 
+static var selected_static: int = 0
 var selected: int = 0:
 	set(value):
 		selected = value
+		selected_static = selected
 		
 		for index in get_child_count():
 			get_child(index).modulate.a = 1.0 if index == selected else 0.6
@@ -12,7 +14,7 @@ var selected: int = 0:
 
 func _ready() -> void:
 	space_children()
-	selected = 0
+	selected = selected_static
 
 
 func space_children() -> void:
