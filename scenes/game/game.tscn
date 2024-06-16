@@ -47,7 +47,7 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("10_3wdji")
 font_size = 48
 outline_size = 18
-outline_color = Color(0, 0, 0, 0.75)
+outline_color = Color(0.1, 0.1, 0.1, 0.75)
 
 [sub_resource type="LabelSettings" id="LabelSettings_odcbh"]
 font = ExtResource("5_kd5im")
@@ -217,7 +217,7 @@ position = Vector2(340, 0)
 texture = ExtResource("7_u2hsg")
 hframes = 10
 
-[node name="diff_label" type="Label" parent="hud_layer/hud/rating_container"]
+[node name="difference_label" type="Label" parent="hud_layer/hud/rating_container"]
 offset_left = -150.0
 offset_top = 106.0
 offset_right = 150.0

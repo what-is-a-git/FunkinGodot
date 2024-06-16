@@ -38,4 +38,4 @@ func refresh(data: Dictionary) -> void:
 	if data.get('accuracy', 'N/A') is String:
 		accuracy_label.text = 'Accuracy: %s' % data.get('accuracy', 'N/A')
 	else:
-		accuracy_label.text = 'Accuracy: %.2f%%' % data.get('accuracy')
+		accuracy_label.text = 'Accuracy: %.3f%%' % data.get('accuracy')

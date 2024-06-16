@@ -8,7 +8,7 @@ class_name HUD extends Node2D
 @onready var opponent_field: NoteField = $note_fields/opponent
 @onready var health_bar: HealthBar = %health_bar
 @onready var song_label: Label = $song_label
-@onready var diff_label: Label = $rating_container/diff_label
+@onready var difference_label: Label = $rating_container/difference_label
 @onready var countdown_container: Node2D = $countdown_container
 
 @onready var ratings_calculator: RatingsCalculator = %ratings_calculator
@@ -128,8 +128,8 @@ func _on_note_hit(note: Note) -> void:
 	
 	game.accuracy_calculator.record_hit(absf(difference))
 	
-	diff_label.text = '%.2fms' % [difference * 1000.0]
-	diff_label.modulate = Color8(255, 176, 96) \
+	difference_label.text = '%.2fms' % [difference * 1000.0]
+	difference_label.modulate = Color8(255, 176, 96) \
 			if difference < 0.0 else Color8(111, 185, 255)
 	
 	if is_instance_valid(rating_tween) and rating_tween.is_running():
