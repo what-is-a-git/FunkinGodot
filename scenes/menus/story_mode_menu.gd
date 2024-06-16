@@ -79,7 +79,7 @@ func _load_active_playlist() -> void:
 	
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	
-	for i in range(1, selected_week.songs.size()):
+	for i: int in range(1, selected_week.songs.size()):
 		var entry := GamePlaylistEntry.new()
 		entry.name = selected_week.get_song_name(i, difficulty)
 		entry.difficulty = difficulty
@@ -117,7 +117,7 @@ func change_selection(amount: int = 0) -> void:
 	var song_paths: PackedStringArray = selected_week.songs
 	var song_names: PackedStringArray = []
 	
-	for path in song_paths:
+	for path: String in song_paths:
 		if ResourceLoader.exists('res://songs/%s/meta.tres' % path):
 			var meta: SongMetadata = load('res://songs/%s/meta.tres' % path)
 			song_names.push_back(meta.display_name)

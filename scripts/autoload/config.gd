@@ -37,8 +37,8 @@ func _load_user_config() -> Error:
 			push_error('Config could not be loaded with error code %s!' % error)
 			return error
 		
-		for section in user_cfg.get_sections():
-			for key in user_cfg.get_section_keys(section):
+		for section: String in user_cfg.get_sections():
+			for key: String in user_cfg.get_section_keys(section):
 				if file.has_section_key(section, key):
 					file.set_value(section, key, user_cfg.get_value(section, key))
 		
@@ -51,9 +51,9 @@ func _load_user_config() -> Error:
 func _parse_default_as_config() -> ConfigFile:
 	var new_file := ConfigFile.new()
 	
-	for section in default_configuration.keys():
+	for section: String in default_configuration.keys():
 		var section_value: Dictionary = default_configuration.get(section, {})
-		for key in section_value.keys():
+		for key: String in section_value.keys():
 			new_file.set_value(section, key, section_value.get(key, null))
 	
 	return new_file
@@ -66,12 +66,12 @@ var default_configuration: Dictionary = {
 		'manual_offset': 0.0,
 		'scroll_speed_method': 'chart_based',
 		'custom_scroll_speed': 1.0,
-		'binds': [
-			KEY_D,
-			KEY_F,
-			KEY_J,
-			KEY_K,
-		],
+		'binds': {
+			'left': KEY_D,
+			'down': KEY_F,
+			'up': KEY_J,
+			'right': KEY_K,
+		},
 	},
 	'sound': {
 		'buses': {

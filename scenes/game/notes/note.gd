@@ -4,6 +4,7 @@ class_name Note extends Node2D
 @export var sing_suffix: StringName = &''
 
 var data: NoteData
+var lane: int = 0
 var length: float = 0.0
 
 const directions: PackedStringArray = ['left', 'down', 'up', 'right']
@@ -24,7 +25,10 @@ var _splash: PackedScene = null
 func _ready() -> void:
 	length = data.length
 	
-	sprite.animation = '%s note' % [directions[absi(data.direction) % 4]]
+	# this is technically just temporary as it gets set again later on but whatever
+	lane = absi(data.direction) % directions.size()
+	
+	sprite.animation = '%s note' % [directions[lane]]
 	sprite.play()
 	
 	if not is_instance_valid(_field):
@@ -32,7 +36,7 @@ func _ready() -> void:
 	
 	if length > 0.0:
 		var sustain_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain' % [
-			directions[absi(data.direction) % 4]
+			directions[lane]
 		], 0).duplicate()
 		sustain_texture.region.position.y += 1
 		sustain_texture.region.size.y -= 2
@@ -40,7 +44,7 @@ func _ready() -> void:
 		sustain.texture = sustain_texture
 		
 		var tail_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain end' % [
-			directions[absi(data.direction) % 4]
+			directions[lane]
 		], 0).duplicate()
 		tail_texture.region.position.y += 1
 		tail_texture.region.size.y -= 1
@@ -112,5 +116,5 @@ func _process(delta: float) -> void:
 		# Because of how this is coded this will simply play
 		# the press animation over and over rather than
 		# actually trying to hit the same note multiple times.
-		_field.hit_note(self)
+		_field.get_receptor_from_lane(lane).hit_note(self)
 		_previous_step = step

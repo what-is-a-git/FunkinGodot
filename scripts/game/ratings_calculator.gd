@@ -8,12 +8,11 @@ func get_rating(difference: float) -> Rating:
 	if ratings.is_empty():
 		return null
 	
-	var rating: Rating = ratings[0]
-	
-	for rating_iter in ratings:
-		if difference <= rating_iter.timing:
-			rating = rating_iter
+	var returned_rating: Rating = ratings[0]
+	for rating: Rating in ratings:
+		if difference <= rating.timing:
+			returned_rating = rating
 		else:
 			break
 	
-	return rating
+	return returned_rating

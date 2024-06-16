@@ -13,9 +13,10 @@ var song_nodes: Array[FreeplaySongNode] = []
 
 @onready var track: AudioStreamPlayer = %track
 @onready var track_timer: Timer = %track_timer
+@onready var _info_panel: Panel = %info_panel
 
 # hacky workaround for looping audiostreamsynced atm :3
-var last_track_position: float = -INF
+var _last_track_position: float = -INF
 
 var list_song: FreeplaySong:
 	get: return list.list[index]
@@ -35,7 +36,7 @@ signal difficulty_changed(difficulty: StringName)
 func _ready() -> void:
 	randomize()
 	
-	for i in list.list.size():
+	for i: int in list.list.size():
 		_load_song(i)
 	
 	if song_nodes.is_empty():
@@ -55,13 +56,13 @@ func _process(delta: float) -> void:
 	
 	if is_instance_valid(track.stream):
 		# SHIT DON'T GO BACK NOW DUZ IT?
-		if track.get_playback_position() < last_track_position:
+		if track.get_playback_position() < _last_track_position:
 			track.playing = false
 		
 		if not track.playing:
 			track.play()
 	
-	last_track_position = track.get_playback_position()
+	_last_track_position = track.get_playback_position()
 
 
 func _input(event: InputEvent) -> void:
@@ -101,7 +102,7 @@ func change_selection(amount: int = 0) -> void:
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()
 	
-	for i in song_nodes.size():
+	for i: int in song_nodes.size():
 		var node := song_nodes[i]
 		node.target_y = i - index
 		node.modulate.a = 1.0 if node.target_y == 0 else 0.6
@@ -109,6 +110,7 @@ func change_selection(amount: int = 0) -> void:
 
 func change_difficulty(amount: int = 0) -> void:
 	difficulty_index = wrapi(difficulty_index + amount, 0, difficulties.size())
+	_info_panel.difficulty_count = difficulties.size()
 	if difficulties.is_empty():
 		difficulty_changed.emit(&'N/A')
 	else:
@@ -124,7 +126,7 @@ func select_song() -> void:
 	var difficulty_remap := list_song.difficulty_remap
 	
 	if is_instance_valid(difficulty_remap) and not difficulty_remap.mapping.is_empty():
-		for key in difficulty_remap.mapping.keys():
+		for key: StringName in difficulty_remap.mapping.keys():
 			if key.to_lower() == difficulty.to_lower():
 				song_name = difficulty_remap.mapping.get(key, &'').to_lower()
 				break
@@ -150,6 +152,8 @@ func _load_song(i: int) -> void:
 	var meta_exists := ResourceLoader.exists(meta_path)
 	
 	if not meta_exists:
+		# less elegant error handling that can cause other issues
+		# sometimes:
 		#printerr('WARNING: There is no metadata for song %s! Path to metadata should be: "res://songs/%s/meta.tres"' \
 				#% [song.song_name, song.song_name.to_lower()])
 		

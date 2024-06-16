@@ -57,8 +57,7 @@ func sing(note: Note, force: bool = false) -> void:
 	_sing_timer = 0.0
 	
 	const swapped: PackedStringArray = [&'left', &'right']
-	var direction: StringName = Note.directions[absi(note.data.direction) % 
-			Note.directions.size()]
+	var direction: StringName = Note.directions[note.lane]
 	
 	if _is_player != starts_as_player and swapped.has(direction):
 		direction = swapped[wrapi(swapped.find(direction) + 1, 0, swapped.size())]
@@ -74,8 +73,7 @@ func sing_miss(note: Note, force: bool = false) -> void:
 	_sing_timer = 0.0
 	
 	const swapped: PackedStringArray = [&'left', &'right']
-	var direction: StringName = Note.directions[absi(note.data.direction) % 
-			Note.directions.size()]
+	var direction: StringName = Note.directions[note.lane]
 	
 	if _is_player != starts_as_player and swapped.has(direction):
 		direction = swapped[wrapi(swapped.find(direction) + 1, 0, swapped.size())]

@@ -1,32 +1,114 @@
-class_name Receptor extends AnimatedSprite
+class_name Receptor extends Node2D
+
+
+static var input_zone: float = 0.18
 
 
 @export var direction: StringName = &'left'
-var _automatically_play_static: bool = false:
+@export var lane: int = 0
+@export var takes_input: bool = false
+
+@onready var sprite: AnimatedSprite2D = $sprite
+@onready var _automatically_play_static: bool = false:
 	set(value):
 		if _automatically_play_static != value:
 			if value:
-				animation_finished.connect(_on_animation_finished)
-			elif animation_finished.is_connected(_on_animation_finished):
-				animation_finished.disconnect(_on_animation_finished)
+				sprite.animation_finished.connect(_on_animation_finished)
+			elif sprite.animation_finished.is_connected(_on_animation_finished):
+				sprite.animation_finished.disconnect(_on_animation_finished)
 			
 			_automatically_play_static = value
+var _pressed: bool = false
+@onready var _notes: Node2D = %notes
+
+signal on_hit_note(note: Note)
+signal on_miss_note(note: Note)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not takes_input:
+		return
+	if event.is_echo():
+		return
+	
+	if not event.is_action(&'input_%s' % direction):
+		return
+	
+	var pressed: bool = event.is_pressed()
+	
+	if pressed:
+		_pressed = true
+		play_anim(&'press')
+		_automatically_play_static = false
+		
+		for note: Note in _notes.get_children():
+			if note._hit:
+				continue
+			if note.lane != lane:
+				continue
+			
+			var before_zone: bool = Conductor.time < note.data.time - input_zone
+			var after_zone: bool = Conductor.time > note.data.time + input_zone
+			
+			if not (before_zone or after_zone):
+				hit_note(note)
+				break
+			break
+	else:
+		_pressed = false
+		play_anim(&'static')
+		
+		for note: Note in _notes.get_children():
+			if not note._hit:
+				continue
+			if note.lane != lane:
+				continue
+			
+			# give a bit of lee-way
+			if note.length <= 1.0 / (Conductor.beat_delta * 8.0):
+				# we do this because the animations get funky sometimes lol
+				_automatically_play_static = true
+				continue
+			
+			on_miss_note.emit(note)
+
+
+func _process(delta: float) -> void:
+	if not takes_input:
+		_auto_input()
+
+
+func _auto_input() -> void:
+	for note: Note in _notes.get_children():
+		if note._hit:
+			continue
+		if note.lane != lane:
+			continue
+		if Conductor.time >= note.data.time:
+			hit_note(note)
+			continue
+		break
+
+
+func hit_note(note: Note) -> void:
+	play_anim(&'confirm', true)
+	on_hit_note.emit(note)
 
 
 func _ready() -> void:
 	if _automatically_play_static:
-		animation_finished.connect(_on_animation_finished)
+		sprite.animation_finished.connect(_on_animation_finished)
 
 
 func play_anim(anim: StringName, force: bool = false) -> void:
-	play('%s %s' % [direction, anim])
+	sprite.play('%s %s' % [direction, anim])
 	
 	if force:
-		frame = 0
+		sprite.frame = 0
 
 
 func _on_animation_finished() -> void:
-	if animation.ends_with('static'):
+	if sprite.animation.ends_with('static'):
 		return
 	
-	play_anim('static')
+	play_anim(&'static')

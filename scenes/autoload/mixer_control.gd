@@ -27,7 +27,8 @@ var volume: float = 0.5:
 func _ready() -> void:
 	visible = false
 	var buses: Dictionary = Config.get_value('sound', 'buses')
-	for bus in buses.keys():
+	
+	for bus: String in buses.keys():
 		var bus_index: int = AudioServer.get_bus_index(bus)
 		if bus_index < 0:
 			continue

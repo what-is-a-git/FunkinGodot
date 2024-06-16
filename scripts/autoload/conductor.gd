@@ -32,8 +32,6 @@ var offset: float = audio_offset + manual_offset
 var _last_mix: float = 0.0
 var _resync_latency: bool = false
 
-var default_input_zone: float = 0.18
-
 signal step_hit(step: int)
 signal beat_hit(beat: int)
 signal measure_hit(measure: int)

@@ -13,8 +13,9 @@ func parse(difficulty: StringName) -> Chart:
 		return null
 	
 	if json_chart.has('events'):
-		for event in json_chart.get('events'):
+		for event: Dictionary in json_chart.get('events'):
 			if event.get('e') == 'FocusCamera':
+				# jesus christ focus camera
 				if event.get('v') is Dictionary:
 					chart.events.push_back(CameraPan.new(event.get('t') / 1000.0, 
 							int(event.get('v').get('char', 0)) == 0))
@@ -25,7 +26,7 @@ func parse(difficulty: StringName) -> Chart:
 				chart.events.push_back(DynamicEvent.new(event.get('e'),
 						event.get('t') / 1000.0, event.get('v')))
 	
-	for note in json_chart.notes.get(difficulty):
+	for note: Dictionary in json_chart.notes.get(difficulty):
 		var note_data := NoteData.new()
 		note_data.time = note.get('t') / 1000.0
 		## TODO: Fix the stupid beat i'm too lazy rn cuz its not used uwu
@@ -37,7 +38,7 @@ func parse(difficulty: StringName) -> Chart:
 		note_data.type = note.get('k', &'default')
 		chart.notes.push_back(note_data)
 	
-	for change in json_meta.get('timeChanges', []):
+	for change: Dictionary in json_meta.get('timeChanges', []):
 		chart.events.push_back(BPMChange.new(change.get('t') / 1000.0, 
 				float(change.get('bpm'))))
 	

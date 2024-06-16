@@ -18,6 +18,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
+	if event.is_action('freeplay_random'): # same keybind moment
+		return
 	if event.is_action('freeplay_reset_score'):
 		active = true
 	if not active:

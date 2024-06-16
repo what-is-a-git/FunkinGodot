@@ -53,10 +53,10 @@ func change_selection(amount: int = 0) -> void:
 
 
 func _update_items(delta: float) -> void:
-	# 0.0714 ~~ 1 / 14 = max amount of delta allowed in our lerpfs
+	# 0.0714 ~~ 1 / 14 aka the max amount of delta allowed in our lerpfs
 	delta = minf(delta, 0.0714)
 	
-	for i in options.get_child_count():
+	for i: int in options.get_child_count():
 		var target_alpha: float = 1.0 if i == selected else 0.5
 		var child: Node2D = options.get_child(i) as Node2D
 		child.modulate.a = lerpf(child.modulate.a, target_alpha, delta * 14.0)

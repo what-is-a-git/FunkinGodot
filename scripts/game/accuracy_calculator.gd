@@ -9,7 +9,7 @@ var total_accuracy: float = 0.0
 func record_hit(difference: float) -> void:
 	hit_count += 1
 	total_accuracy += clampf(
-			accuracy_curve.sample(difference / Conductor.default_input_zone),
+			accuracy_curve.sample(difference / Receptor.input_zone),
 			0.0,
 			1.0)
 

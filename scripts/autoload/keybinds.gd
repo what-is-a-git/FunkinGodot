@@ -7,16 +7,16 @@ func _ready() -> void:
 
 
 func update_bindings() -> void:
-	var binds: Array = Config.get_value('gameplay', 'binds')
+	var binds: Dictionary = Config.get_value('gameplay', 'binds')
 	
-	for i in binds.size():
-		var action := &'input_%s' % i
+	for key: String in binds.keys():
+		var action := &'input_%s' % key
 		var action_events := InputMap.action_get_events(action)
+		# erase last event to prepare our new one
 		InputMap.action_erase_event(action, action_events[action_events.size() - 1])
 		
-		var key: Key = binds[i]
 		var event := InputEventKey.new()
-		event.keycode = key
+		event.keycode = binds[key]
 		InputMap.action_add_event(action, event)
 
 

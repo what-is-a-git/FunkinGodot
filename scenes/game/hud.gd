@@ -154,7 +154,7 @@ func _on_note_hit(note: Note) -> void:
 		splash.note = note
 		add_child(splash)
 		splash.global_position = note._field._receptors_node.\
-				get_child(absi(note.data.direction) % 4).global_position
+				get_child(note.lane).global_position
 	
 	rating_container.visible = true
 	rating_container.modulate.a = 1.0
@@ -171,7 +171,7 @@ func _on_note_hit(note: Note) -> void:
 	var combo_str := str(game.combo).pad_zeros(3)
 	combo_node.position.x = -22.5 * (combo_str.length() - 1)
 	
-	for i in combo_node.get_child_count():
+	for i: int in combo_node.get_child_count():
 		var number: Sprite2D = combo_node.get_child(i)
 		
 		if i <= combo_str.length() - 1:

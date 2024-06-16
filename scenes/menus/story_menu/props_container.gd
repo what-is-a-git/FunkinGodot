@@ -50,7 +50,7 @@ func beat_hit() -> void:
 	children.append_array(center.get_children())
 	children.append_array(right.get_children())
 	
-	for child in children:
+	for child: StoryMenuProp in children:
 		child.dance()
 
 

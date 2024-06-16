@@ -45,7 +45,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 static func free_children_from(node: Node, immediate: bool = false) -> void:
-	for child in node.get_children():
+	for child: Node in node.get_children():
 		if immediate:
 			child.free()
 		else:

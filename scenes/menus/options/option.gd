@@ -6,12 +6,15 @@ var selected: bool = false
 
 
 func _select() -> void:
-	print('Selected option %s!' % name)
+	pass
+	# print('Selected option %s!' % name)
 
 
 func _focus() -> void:
-	print('Focused option %s!' % name)
+	pass
+	# print('Focused option %s!' % name)
 
 
 func _unfocus() -> void:
-	print('Unfocused option %s!' % name)
+	pass
+	# print('Unfocused option %s!' % name)

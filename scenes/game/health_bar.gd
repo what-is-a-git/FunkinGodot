@@ -82,16 +82,16 @@ func update_score_label() -> void:
 	]
 	rank = &'N/A'
 	
-	for rank_data in ranks:
+	for rank_data: Array in ranks:
 		if Game.instance.accuracy >= rank_data[0]:
 			rank = rank_data[1]
 			continue
 		break
 	
-	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.2f%% (%s)' % [
+	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.3f%% (%s)' % [
 		Game.instance.score,
 		Game.instance.misses,
-		float(round(Game.instance.accuracy * 100.0)) / 100.0,
+		Game.instance.accuracy,
 		rank,
 	]
 

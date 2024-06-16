@@ -11,6 +11,7 @@ extends Node
 
 var song: StringName
 var difficulty: StringName
+var difficulty_count: int = 0
 var score_data: Dictionary
 var song_index: int
 var song_node: FreeplaySongNode
@@ -42,5 +43,8 @@ func _on_difficulty_changed(new_difficulty: StringName) -> void:
 	score_data = Scores.get_score(song, difficulty)
 	score_panel.refresh(score_data)
 	
-	difficulty_label.text = '< %s >' % tr(difficulty.to_lower()).to_upper()
+	if difficulty_count > 1:
+		difficulty_label.text = '< %s >' % tr(difficulty.to_lower()).to_upper()
+	else:
+		difficulty_label.text = '%s' % tr(difficulty.to_lower()).to_upper()
 	score_label.text = '%s [TAB]' % score_data.get('score')

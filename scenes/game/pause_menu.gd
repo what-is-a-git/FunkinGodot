@@ -47,7 +47,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_down') or event.is_action('ui_up'):
 		_change_selection(Input.get_axis('ui_up', 'ui_down'))
 	if event.is_action('ui_accept'):
-		for option in options.get_children():
+		for option: ListedAlphabet in options.get_children():
 			if option.target_y != 0:
 				continue
 			
@@ -76,7 +76,7 @@ func _change_selection(amount: int = 0) -> void:
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()
 	
-	for i in options.get_child_count():
+	for i: int in options.get_child_count():
 		var option := options.get_child(i)
 		option.target_y = i - selected
 		option.modulate.a = 1.0 if option.target_y == 0 else 0.6

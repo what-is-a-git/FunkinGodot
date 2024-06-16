@@ -242,7 +242,8 @@ func _input(event: InputEvent) -> void:
 		save_score = false
 		_player_field.takes_input = not _player_field.takes_input
 		
-		for receptor in _player_field._receptors:
+		for receptor: Receptor in _player_field._receptors:
+			receptor.takes_input = _player_field.takes_input
 			receptor._automatically_play_static = not _player_field.takes_input
 		
 		if not _player_field.takes_input:
@@ -282,7 +283,7 @@ func _on_event_hit(event: EventData) -> void:
 
 
 func _on_note_miss(note: Note) -> void:
-	accuracy_calculator.record_hit(Conductor.default_input_zone)
+	accuracy_calculator.record_hit(Receptor.input_zone)
 	health = clampf(health - 2.0, 0.0, 100.0)
 	misses += 1
 	score -= 10

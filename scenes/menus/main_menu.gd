@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 		
 		timer.start(0.0)
 		
-		for connection in timer.timeout.get_connections():
+		for connection: Dictionary in timer.timeout.get_connections():
 			if connection.callable == null:
 				continue
 			
@@ -62,7 +62,7 @@ func _press_animation() -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
 	
-	for i in items.get_child_count():
+	for i: int in items.get_child_count():
 		if i == selected:
 			continue
 		
@@ -76,7 +76,7 @@ func _cancel_animation() -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
 	
-	for i in items.get_child_count():
+	for i: int in items.get_child_count():
 		if i == selected:
 			continue
 		

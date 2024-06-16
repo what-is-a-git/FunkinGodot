@@ -15,11 +15,10 @@ var _note_index: int = 0
 var _chart: Chart = null
 var _scroll_speed: float = -1.0
 var _scroll_speed_modifier: float = 1.0
-var _lanes: int
-var _input_zone: float = 0.18
 var _default_character: Character = null
 var _note_types: NoteTypes = null
 var _note_splash_alpha: float = 0.6
+var _lane_count: int
 
 signal note_hit(note: Note)
 signal note_miss(note: Note)
@@ -39,13 +38,20 @@ func _ready() -> void:
 	# If you have another node in here that isn't a Node2D
 	# that is just currently not supported.
 	_receptors = _receptors_node.get_children()
-	_lanes = _receptors.size()
+	_lane_count = _receptors.size()
 	
-	for receptor in _receptors:
+	for receptor: Receptor in _receptors:
+		receptor.play_anim(&'static')
+		receptor.takes_input = takes_input
 		receptor._automatically_play_static = not takes_input
+		receptor.on_hit_note.connect(_on_hit_note)
+		receptor.on_miss_note.connect(miss_note)
 
 
 func _on_step_hit(step: int) -> void:
+	if not is_inside_tree(): # multithreading weirdness
+		return
+	
 	call_deferred_thread_group(&'_try_spawning')
 
 
@@ -55,11 +61,11 @@ func _process(delta: float) -> void:
 	
 	var receptor_y: float = _receptors[0].position.y
 	
-	for note in _notes.get_children():
+	for note: Note in _notes.get_children():
 		var receptor: Receptor = null
 		
 		if dynamic_positioning:
-			receptor = _receptors[note.data.direction % _lanes]
+			receptor = _receptors[note.lane]
 			note.position = receptor.position
 		else:
 			note.position.y = receptor_y
@@ -73,26 +79,25 @@ func _process(delta: float) -> void:
 			note._clip_target = receptor.global_position.y
 		
 		if (not note._hit) and (note.data.time + note.data.length
-				- Conductor.time < -_input_zone):
+				- Conductor.time < -Receptor.input_zone):
 			miss_note(note)
 	
-	if not takes_input:
-		_input_bot()
-	elif is_instance_valid(_default_character):
-		for i in _lanes:
-			if Input.is_action_pressed('input_%s' % i):
-				_default_character._sing_timer = 0.0
-				return
+	if not (takes_input and is_instance_valid(_default_character)):
+		return
+	
+	for receptor: Receptor in _receptors:
+		if not receptor._pressed:
+			continue
+		
+		_default_character._sing_timer = 0.0
+		return
 
 
-func hit_note(note: Note):
+func _on_hit_note(note: Note):
 	# If issues somehow arise with this potential
 	# edge case, then uncomment this code.
-	# if not _notes.has_node(note.get_path()):
-	# 	return
-	
-	var receptor: Receptor = _receptors[note.data.direction % _lanes]
-	receptor.play_anim('confirm', true)
+	#if not _notes.has_node(note.get_path()):
+	#	return
 	
 	if (not is_instance_valid(note._character)) and \
 			is_instance_valid(_default_character):
@@ -103,7 +108,7 @@ func hit_note(note: Note):
 	
 	note_hit.emit(note)
 	note._hit = true
-	note._clip_target = _receptors[0].global_position.y
+	note._clip_target = _receptors[note.lane].global_position.y
 	
 	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time
@@ -142,89 +147,12 @@ func _try_spawning() -> void:
 		var note: Note = _note_types.types['default'].instantiate()
 		note._field = self
 		note.data = data
-		note.position.x = _receptors[0].position.x + \
-				(112.0 * (absi(note.data.direction) % _lanes))
+		note.lane = absi(data.direction) % _lane_count
+		note.position.x = _receptors[0].position.x + 112.0 * (note.lane % _lane_count)
 		note.position.y = -100000.0
 		note._splash = default_note_splash
 		_notes.add_child(note)
 		_note_index += 1
-
-
-func _input_bot() -> void:
-	# This should never happen but just in case.
-	if takes_input:
-		return
-	
-	for note in _notes.get_children():
-		if note._hit:
-			continue
-		if Conductor.time >= note.data.time:
-			hit_note(note)
-			continue
-		
-		break
-
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	if not takes_input:
-		return
-	if event.is_echo():
-		return
-	
-	# If this SOMEHOW, by a MIRCALE
-	# becomes an issue, then uncomment this code.
-	# if not event is InputEventKey:
-	# 	return
-	
-	var is_input: bool = false
-	var lane: int = -1
-	
-	for i in _lanes:
-		if event.is_action('input_%s' % i):
-			is_input = true
-			lane = i
-			break
-	
-	if not is_input:
-		return
-	
-	var pressed: bool = event.is_pressed()
-	
-	if pressed:
-		_receptors[lane].play_anim('press')
-		_receptors[lane]._automatically_play_static = false
-		
-		for note in _notes.get_children():
-			if note._hit:
-				continue
-			var index: int = absi(note.data.direction) % _lanes
-			if index != lane:
-				continue
-			
-			var before_zone: bool = Conductor.time < note.data.time - _input_zone
-			var after_zone: bool = Conductor.time > note.data.time + _input_zone
-			
-			if not (before_zone or after_zone):
-				hit_note(note)
-				break
-			# break
-	else:
-		_receptors[lane].play_anim('static')
-		
-		for note in _notes.get_children():
-			if not note._hit:
-				continue
-			var index: int = absi(note.data.direction) % _lanes
-			if index != lane:
-				continue
-			
-			# Give a bit of lee-way
-			if note.length <= 1.0 / (Conductor.beat_delta * 8.0):
-				# We do this because the animations get funky sometimes lol.
-				_receptors[index]._automatically_play_static = true
-				continue
-			
-			miss_note(note)
 
 
 func _on_scroll_speed_changed() -> void:
@@ -232,3 +160,11 @@ func _on_scroll_speed_changed() -> void:
 		return
 	
 	_scroll_speed = Game.scroll_speed
+
+
+func get_receptor_from_lane(lane: int) -> Receptor:
+	for receptor: Receptor in _receptors:
+		if receptor.lane == lane:
+			return receptor
+	
+	return null

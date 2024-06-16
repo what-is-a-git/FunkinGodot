@@ -12,7 +12,7 @@ var real_list: FreeplayList = FreeplayList.new()
 func _ready() -> void:
 	template.visible = false
 	
-	for song in base_list.list:
+	for song: FreeplaySong in base_list.list:
 		var good_song := song.duplicate(true)
 		real_list.list.append(good_song)
 		_make_song(good_song)

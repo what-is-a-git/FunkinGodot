@@ -20,7 +20,7 @@ func parse() -> Chart:
 	if event_objects != null:
 		# disclaimer: this does NOT help the camera pans, but at least
 		# everything else is accurate for now :]
-		for object in event_objects:
+		for object: Dictionary in event_objects:
 			if object.get('type', '').to_lower() != 'bpm change':
 				continue
 			
@@ -39,10 +39,10 @@ func parse() -> Chart:
 	
 	chart.events.push_back(CameraPan.new(time, must_hit))
 	
-	for section in data.notes:
+	for section: Dictionary in data.notes:
 		var beat_delta: float = bpm / 60.0
 		
-		for note in section.sectionNotes:
+		for note: Array in section.sectionNotes:
 			if int(note[1]) < 0:
 				continue
 			

@@ -10,10 +10,12 @@ func load_scripts(song: StringName, song_path: String = '') -> void:
 		song_path = song_path.left(song_path.length() - 1)
 	
 	var assets: SongAssets = load('%s/%s/assets.tres' % [song_path, song])
-	
 	if assets.scripts.is_empty():
 		return
 	
-	for script in assets.scripts:
+	for script: PackedScene in assets.scripts:
+		if not is_instance_valid(script):
+			continue
+		
 		var script_instance = script.instantiate()
 		add_child(script_instance)

@@ -36,7 +36,7 @@ func _ready() -> void:
 
 
 func _create_characters() -> void:
-	for child in get_children():
+	for child: AnimatedSprite2D in get_children():
 		child.queue_free()
 	
 	bounding_box = Vector2i.ZERO
@@ -46,7 +46,7 @@ func _create_characters() -> void:
 	var lines: Array[Dictionary] = []
 	var line_index: int = 0
 	
-	for character in text:
+	for character: String in text:
 		if lines.size() - 1 < line_index:
 			lines.push_back({
 				'size': Vector2i.ZERO,
@@ -86,32 +86,25 @@ func _create_characters() -> void:
 		line_dict['size'] = size
 	
 	if centered:
-		for child in get_children():
+		for child: AnimatedSprite2D in get_children():
 			child.position -= bounding_box * 0.5
 	
 	match horizontal_alignment:
 		'Left':
 			pass
-		'Center':
-			for line in lines:
+		'Center', 'Right':
+			for line: Dictionary in lines:
 				var characters: Array = line.get('characters', [])
 				var size: Vector2i = line.get('size', Vector2i.ZERO)
 				
 				if characters.is_empty() or size <= Vector2i.ZERO:
 					continue
 				
-				for character in characters:
-					character.position.x += (bounding_box.x - size.x) / 2.0
-		'Right':
-			for line in lines:
-				var characters: Array = line.get('characters', [])
-				var size: Vector2i = line.get('size', Vector2i.ZERO)
-				
-				if characters.is_empty() or size <= Vector2i.ZERO:
-					continue
-				
-				for character in characters:
-					character.position.x -= size.x - bounding_box.x
+				for character: AnimatedSprite2D in characters:
+					if horizontal_alignment == 'Center':
+						character.position.x += (bounding_box.x - size.x) / 2.0
+					else: # Right
+						character.position.x -= size.x - bounding_box.x
 	
 	updated.emit()
 
@@ -220,6 +213,6 @@ static func string_to_character(input: String) -> String:
 	return input
 
 
-class AlphabetAnimationData extends Object:
+class AlphabetAnimationData extends RefCounted:
 	var name: StringName
 	var offset: Vector2

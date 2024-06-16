@@ -14,6 +14,6 @@ func _ready() -> void:
 		return
 	
 	material = material as ShaderMaterial
-	material.set_shader_parameter(&'base_color', colors[absi(note.data.direction) % 4])
+	material.set_shader_parameter(&'base_color', colors[note.lane])
 	play('splash %s' % str(randi_range(1, sprite_frames.get_animation_names().size())))
 	speed_scale = randf_range(0.9, 1.1)

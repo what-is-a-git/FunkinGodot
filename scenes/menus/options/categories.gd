@@ -82,7 +82,7 @@ func _update_items(delta: float) -> void:
 	# 0.1 = 1 / 10 = max amount of delta allowed in our lerpfs
 	delta = minf(delta, 0.1)
 	
-	for i in get_child_count():
+	for i: int in get_child_count():
 		var target_alpha: float = 1.0 if i == selected else 0.5
 		var target_scale: float = 1.0 if i == selected else 0.75
 		var child: Control = get_child(i) as Control
