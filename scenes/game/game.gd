@@ -165,7 +165,6 @@ func _ready() -> void:
 	Conductor.reset()
 	Conductor.beat_hit.connect(_on_beat_hit)
 	Conductor.measure_hit.connect(_on_measure_hit)
-	
 	scripts.load_scripts(song)
 	
 	if not chart.events.is_empty():

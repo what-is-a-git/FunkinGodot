@@ -20,6 +20,7 @@ var rating_tween: Tween
 var game: Game
 var tracks: Tracks
 var skin: HUDSkin
+var allow_countdown: bool = true
 
 var scroll_direction: StringName = &'up':
 	set(value):
@@ -99,11 +100,18 @@ func _ready_post() -> void:
 
 
 func _on_beat_hit(beat: int) -> void:
-	# Countdown lol
-	if Conductor.time < 0.0 and beat < 0 and not game.song_started:
-		var index: int = clampi(4 - absi(beat), 0, 4)
-		_display_countdown_sprite(index)
-		_play_countdown_sound(index)
+	if beat >= 0 or game.song_started:
+		return
+	
+	if not allow_countdown:
+		Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
+		Conductor.beat = -4.0
+		return
+	
+	# countdown lol
+	var index: int = clampi(4 - absi(beat), 0, 3)
+	_display_countdown_sprite(index)
+	_play_countdown_sound(index)
 
 
 func _on_measure_hit(measure: int) -> void:
