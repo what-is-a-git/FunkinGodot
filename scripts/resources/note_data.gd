@@ -1,12 +1,12 @@
 class_name NoteData extends Resource
 
 
-var time: float
-var beat: float
-var direction: int
-var length: float
+@export var time: float
+@export var beat: float
+@export var direction: int
+@export var length: float
 
-var type: StringName
+@export var type: StringName
 
 
 func _to_string() -> String:

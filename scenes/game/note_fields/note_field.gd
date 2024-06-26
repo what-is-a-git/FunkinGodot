@@ -112,10 +112,8 @@ func _on_hit_note(note: Note):
 	
 	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time
-		
-		if Conductor.time > note.data.time:
-			note.sustain.size.y = note.data.length * 1000.0 * 0.45 * _scroll_speed \
-					/ note.scale.y - note.tail.texture.get_height()
+		note.data.length -= Conductor.time - note.data.time
+		note._sustain_offset = -(Conductor.time - note.data.time)
 
 
 func miss_note(note: Note) -> void:
@@ -130,23 +128,20 @@ func miss_note(note: Note) -> void:
 func _try_spawning() -> void:
 	if (not is_instance_valid(_chart)) or _note_index > _chart.notes.size() - 1:
 		return
-	
 	while _note_index < _chart.notes.size() and \
 			_chart.notes[_note_index].time - Conductor.time < 2.5:
 		if _note_index > _chart.notes.size() - 1:
 			return
-		
 		var data := _chart.notes[_note_index]
 		var skip: bool = data.direction < 0 or \
 				(data.direction < 4 if side == 0 else data.direction > 3)
-		
 		if skip:
 			_note_index += 1
 			continue
 		
 		var note: Note = _note_types.types['default'].instantiate()
 		note._field = self
-		note.data = data
+		note.data = data.duplicate()
 		note.lane = absi(data.direction) % _lane_count
 		note.position.x = _receptors[0].position.x + 112.0 * (note.lane % _lane_count)
 		note.position.y = -100000.0
@@ -158,7 +153,6 @@ func _try_spawning() -> void:
 func _on_scroll_speed_changed() -> void:
 	if ignore_speed_changes:
 		return
-	
 	_scroll_speed = Game.scroll_speed
 
 
@@ -166,5 +160,4 @@ func get_receptor_from_lane(lane: int) -> Receptor:
 	for receptor: Receptor in _receptors:
 		if receptor.lane == lane:
 			return receptor
-	
 	return null

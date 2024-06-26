@@ -82,11 +82,14 @@ func _process(delta: float) -> void:
 		beat += delta * rate * beat_delta
 	
 	if floor(step) > last_step:
-		step_hit.emit(floor(step))
+		for step_value in range(last_step + 1, floor(step) + 1):
+			step_hit.emit(step_value)
 	if floor(beat) > last_beat:
-		beat_hit.emit(floor(beat))
+		for beat_value in range(last_beat + 1, floor(beat) + 1):
+			beat_hit.emit(beat_value)
 	if floor(measure) > last_measure:
-		measure_hit.emit(floor(measure))
+		for measure_value in range(last_measure + 1, floor(measure) + 1):
+			measure_hit.emit(measure_value)
 
 
 func _on_scene_changed() -> void:

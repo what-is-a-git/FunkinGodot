@@ -46,6 +46,9 @@ func _ready() -> void:
 		printerr('Freeplay has no songs, returning.')
 		return
 	
+	Conductor.reset()
+	Conductor.target_audio = track
+	
 	target_background_color = song_nodes[index].song.icon.color
 	background.modulate = target_background_color
 	change_selection()
@@ -60,6 +63,7 @@ func _process(delta: float) -> void:
 			track.playing = false
 		
 		if not track.playing:
+			Conductor.reset()
 			track.play()
 	
 	_last_track_position = track.get_playback_position()
@@ -168,7 +172,7 @@ func _load_song(i: int) -> void:
 		
 		var lock := Sprite2D.new()
 		lock.texture = load('res://resources/images/menus/story_menu/interface/lock.png')
-		lock.position = Vector2(node.bounding_box.x + 75.0, 35.0)
+		lock.position = Vector2(node.size.x + 75.0, 35.0)
 		lock.modulate = Color.WHITE / node.modulate
 		node.add_child(lock)
 		return
@@ -188,7 +192,7 @@ func _load_song(i: int) -> void:
 	
 	var icon := Icon.create_sprite(song.icon)
 	# 37.5 = 150.0 * 0.25
-	icon.position = Vector2(node.bounding_box.x + 75.0, 37.5)
+	icon.position = Vector2(node.size.x + 75.0, 37.5)
 	node.add_child(icon)
 
 
@@ -204,6 +208,6 @@ func _load_tracks() -> void:
 		return
 	
 	GlobalAudio.get_player('MUSIC').stop()
-	
+	Conductor.reset()
 	track.stream = tracks
 	track.play()

@@ -26,7 +26,7 @@ class_name Alphabet extends Node2D
 const UNCHANGED_CHARACTERS: StringName = &'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const MAGIC_OFFSET: float = 20.0
 
-var bounding_box: Vector2i = Vector2i.ZERO
+var size: Vector2i = Vector2i.ZERO
 
 signal updated
 
@@ -39,7 +39,7 @@ func _create_characters() -> void:
 	for child: AnimatedSprite2D in get_children():
 		child.queue_free()
 	
-	bounding_box = Vector2i.ZERO
+	size = Vector2i.ZERO
 	
 	var x_position: float = 0.0
 	var y_position: float = 0.0
@@ -67,27 +67,27 @@ func _create_characters() -> void:
 		
 		x_position += character_data[1].x
 		
-		if x_position > bounding_box.x:
-			bounding_box.x = x_position
-		if y_position + character_data[1].y > bounding_box.y:
-			bounding_box.y = y_position + character_data[1].y
-		
-		var line_dict := lines[line_index]
-		line_dict.get('characters', []).push_back(character_data[0])
-		
-		var size: Vector2i = line_dict.get('size', Vector2i.ZERO)
-		
-		# x should basically be always true lol
 		if x_position > size.x:
 			size.x = x_position
 		if y_position + character_data[1].y > size.y:
 			size.y = y_position + character_data[1].y
 		
-		line_dict['size'] = size
+		var line_dict := lines[line_index]
+		line_dict.get('characters', []).push_back(character_data[0])
+		
+		var line_size: Vector2i = line_dict.get('size', Vector2i.ZERO)
+		
+		# x should basically be always true lol
+		if x_position > line_size.x:
+			line_size.x = x_position
+		if y_position + character_data[1].y > line_size.y:
+			line_size.y = y_position + character_data[1].y
+		
+		line_dict['size'] = line_size
 	
 	if centered:
 		for child: AnimatedSprite2D in get_children():
-			child.position -= bounding_box * 0.5
+			child.position -= size * 0.5
 	
 	match horizontal_alignment:
 		'Left':
@@ -95,16 +95,16 @@ func _create_characters() -> void:
 		'Center', 'Right':
 			for line: Dictionary in lines:
 				var characters: Array = line.get('characters', [])
-				var size: Vector2i = line.get('size', Vector2i.ZERO)
+				var line_size: Vector2i = line.get('size', Vector2i.ZERO)
 				
-				if characters.is_empty() or size <= Vector2i.ZERO:
+				if characters.is_empty() or line_size <= Vector2i.ZERO:
 					continue
 				
 				for character: AnimatedSprite2D in characters:
 					if horizontal_alignment == 'Center':
-						character.position.x += (bounding_box.x - size.x) / 2.0
+						character.position.x += (size.x - line_size.x) / 2.0
 					else: # Right
-						character.position.x -= size.x - bounding_box.x
+						character.position.x -= line_size.x - size.x
 	
 	updated.emit()
 
@@ -120,19 +120,17 @@ func _create_character(x: float, y: float, character: String) -> Array:
 	node.offset = animation_data.offset
 	node.play()
 	
-	var size: Vector2 = Vector2.ZERO
-	
+	var character_size: Vector2 = Vector2.ZERO
 	if node.sprite_frames.has_animation(node.animation):
 		var frame_texture := node.sprite_frames.get_frame_texture(node.animation, 0)
-		size = frame_texture.get_size()
+		character_size = frame_texture.get_size()
 	
-	node.offset.y -= (size.y - 65.0) / 2.0
-	return [node, size]
+	node.offset.y -= (character_size.y - 65.0) / 2.0
+	return [node, character_size]
 
 
 func _character_to_animation(character: String) -> AlphabetAnimationData:
 	var data := AlphabetAnimationData.new()
-	
 	if UNCHANGED_CHARACTERS.contains(character.to_upper()):
 		data.name = character.to_lower() if no_casing else character
 		data.offset = Vector2.ZERO

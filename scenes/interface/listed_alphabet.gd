@@ -10,5 +10,5 @@ func _process(delta: float) -> void:
 	position = position.lerp(Vector2(
 		target_y * 20.0 + 90.0,
 		# 156 = 120 * 1.3
-		target_y * 156.0 + 360.0 - bounding_box.y * 0.5
+		target_y * 156.0 + 360.0 - size.y * 0.5
 	), minf(delta * rate, 1.0))

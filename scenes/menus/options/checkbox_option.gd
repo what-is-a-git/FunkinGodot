@@ -26,10 +26,10 @@ var toggled: bool:
 
 func _ready() -> void:
 	if alphabet.centered:
-		checkbox.position.x = (alphabet.bounding_box.x * 0.5) + 64.0
+		checkbox.position.x = (alphabet.size.x * 0.5) + 64.0
 	else:
-		checkbox.position.x = alphabet.bounding_box.x + 64.0
-		checkbox.position.y = alphabet.bounding_box.y * 0.5
+		checkbox.position.x = alphabet.size.x + 64.0
+		checkbox.position.y = alphabet.size.y * 0.5
 	
 	update_animation()
 

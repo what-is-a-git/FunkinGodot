@@ -16,6 +16,7 @@ const directions: PackedStringArray = ['left', 'down', 'up', 'right']
 
 var _hit: bool = false
 var _clip_target: float = NAN
+var _sustain_offset: float = 0.0
 var _field: NoteField = null
 var _character: Character = null
 var _previous_step: int = -128
@@ -93,6 +94,8 @@ func _process(delta: float) -> void:
 			else:
 				clip_rect.position.y = 0.0
 				sustain.position.y = 0.0
+		
+		sustain.position.y += _sustain_offset * 1000.0 * 0.45 * _field._scroll_speed
 	
 	if not _hit:
 		return
@@ -108,7 +111,6 @@ func _process(delta: float) -> void:
 	length -= delta
 	
 	var step: int = floor(Conductor.step)
-	
 	if step > _previous_step:
 		if is_instance_valid(_character):
 			_character.sing(self, true)
