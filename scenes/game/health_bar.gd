@@ -102,8 +102,9 @@ func reload_icon_colors() -> void:
 	opponent_color = Game.instance.opponent.icon.color
 
 
+# ease out sine
 func _icon_ease(x: float) -> float:
-	return sin(x * PI / 2.0)
+	return sin((x * PI) / 2.0)
 
 
 func _icon_lerp() -> float:

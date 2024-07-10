@@ -27,7 +27,6 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 		song_path = song_path.left(song_path.length() - 1)
 	
 	var tracks: AudioStream = load('%s/%s/tracks.tres' % [song_path, song])
-	
 	if not tracks:
 		printerr('ERROR: Couldn\'t find a tracks.tres for song "%s" at song_path "%s"' \
 				% [song, song_path])

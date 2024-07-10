@@ -126,8 +126,9 @@ func miss_note(note: Note) -> void:
 func _try_spawning() -> void:
 	if (not is_instance_valid(_chart)) or _note_index > _chart.notes.size() - 1:
 		return
+	var wait_allowed: float = 800.0 / (450.0 * _scroll_speed * absf(_scroll_speed_modifier))
 	while _note_index < _chart.notes.size() and \
-			_chart.notes[_note_index].time - Conductor.time < 2.5:
+			_chart.notes[_note_index].time - Conductor.time < wait_allowed:
 		if _note_index > _chart.notes.size() - 1:
 			return
 		var data := _chart.notes[_note_index]

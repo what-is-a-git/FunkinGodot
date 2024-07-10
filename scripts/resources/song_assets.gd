@@ -14,10 +14,9 @@ class_name SongAssets extends Resource
 
 @export_category('Misc')
 
-@export var tracks: AudioStreamSynchronized = null
 @export var scripts: Array[PackedScene] = []
 
 
 func _to_string() -> String:
-	return 'SongAssets(player: %s, opponent: %s, spectator: %s, stage: %s, tracks: %s, scripts: %s)' \
-			% [player, opponent, spectator, stage, tracks, scripts]
+	return 'SongAssets(player: %s, opponent: %s, spectator: %s, stage: %s, scripts: %s)' \
+			% [player, opponent, spectator, stage, scripts]
