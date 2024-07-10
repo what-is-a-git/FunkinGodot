@@ -18,42 +18,26 @@ var opponent_color: Color:
 		bar.get('theme_override_styles/background').bg_color = opponent_color
 var rank: StringName = &'N/A'
 
+var game: Game
+
 
 func _ready() -> void:
 	if not is_instance_valid(Game.instance):
+		process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	
-	if is_instance_valid(player_icon) and is_instance_valid(opponent_icon):
-		player_icon.queue_free()
-		opponent_icon.queue_free()
-	
-	player_icon = Icon.create_sprite(Game.instance.player.icon)
-	player_icon.position.x = 50.0
-	icons.add_child(player_icon)
-	player_color = Game.instance.player.icon.color
-	player_icon.flip_h = true
-	
-	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon)
-	opponent_icon.position.x = -50.0
-	icons.add_child(opponent_icon)
-	opponent_color = Game.instance.opponent.icon.color
+	game = Game.instance
+	game.hud_setup.connect(_on_hud_setup)
 
 
-func _icon_ease(x: float) -> float:
-	return sin(x * PI / 2.0)
-
-
-func _icon_lerp() -> float:
-	return _icon_ease(Conductor.beat - floorf(Conductor.beat))
+func _on_hud_setup() -> void:
+	reload_icons()
 
 
 func _process(delta: float) -> void:
-	if not is_instance_valid(Game.instance):
-		return
-	
-	bar.value = Game.instance.health
+	bar.value = game.health
 	icons.scale = Vector2(1.2, 1.2).lerp(Vector2.ONE, _icon_lerp())
-	call_deferred('_position_icons')
+	_position_icons(game.health)
 	
 	var player_frames: int = player_icon.hframes * player_icon.vframes
 	var opponent_frames: int = opponent_icon.hframes * opponent_icon.vframes
@@ -83,18 +67,48 @@ func update_score_label() -> void:
 	rank = &'N/A'
 	
 	for rank_data: Array in ranks:
-		if Game.instance.accuracy >= rank_data[0]:
+		if game.accuracy >= rank_data[0]:
 			rank = rank_data[1]
 			continue
 		break
 	
 	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.3f%% (%s)' % [
-		Game.instance.score,
-		Game.instance.misses,
-		Game.instance.accuracy,
+		game.score,
+		game.misses,
+		game.accuracy,
 		rank,
 	]
 
 
-func _position_icons() -> void:
-	icons.position.x = 320.0 - (Game.instance.health * 6.4)
+func reload_icons() -> void:
+	if is_instance_valid(player_icon) and is_instance_valid(opponent_icon):
+		player_icon.queue_free()
+		opponent_icon.queue_free()
+	
+	reload_icon_colors()
+	
+	player_icon = Icon.create_sprite(Game.instance.player.icon)
+	player_icon.position.x = 50.0
+	icons.add_child(player_icon)
+	player_icon.flip_h = true
+	
+	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon)
+	opponent_icon.position.x = -50.0
+	icons.add_child(opponent_icon)
+
+
+func reload_icon_colors() -> void:
+	player_color = Game.instance.player.icon.color
+	opponent_color = Game.instance.opponent.icon.color
+
+
+func _icon_ease(x: float) -> float:
+	return sin(x * PI / 2.0)
+
+
+func _icon_lerp() -> float:
+	return _icon_ease(Conductor.beat - floorf(Conductor.beat))
+
+
+func _position_icons(health: float) -> void:
+	icons.position.x = 320.0 - (health * 6.4)

@@ -9,9 +9,9 @@ var active: bool = true
 
 
 func _ready() -> void:
-	var music_player := GlobalAudio.get_player('MUSIC')
+	var music_player := GlobalAudio.music
 	
-	Conductor.bpm = 125.0
+	Conductor.tempo = 125.0
 	music_player.stream = load('res://resources/music/menus/options_theme.ogg')
 	music_player.play()
 	Conductor.reset()
@@ -40,5 +40,5 @@ func _on_beat_hit(beat: int) -> void:
 
 
 func _exit_tree() -> void:
-	var music_player := GlobalAudio.get_player('MUSIC')
+	var music_player := GlobalAudio.music
 	music_player.stream = load('res://resources/music/menus/main_theme.ogg')

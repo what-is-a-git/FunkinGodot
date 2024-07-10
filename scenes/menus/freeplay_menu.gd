@@ -207,7 +207,7 @@ func _load_tracks() -> void:
 	if not is_instance_valid(tracks):
 		return
 	
-	GlobalAudio.get_player('MUSIC').stop()
+	GlobalAudio.music.stop()
 	Conductor.reset()
 	track.stream = tracks
 	track.play()

@@ -34,9 +34,14 @@ func _ready() -> void:
 		game.song_start.connect(_on_song_start)
 		game.event_hit.connect(_on_event_hit)
 		game.ready_post.connect(_ready_post)
+		game.process_post.connect(_process_post)
 
 
 func _ready_post() -> void:
+	pass
+
+
+func _process_post(delta: float) -> void:
 	pass
 
 

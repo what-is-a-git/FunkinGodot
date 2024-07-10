@@ -1,6 +1,9 @@
 extends Node
 
 
+@onready var music: AudioStreamPlayer = get_player('MUSIC')
+
+
 func get_player(path: NodePath) -> AudioStreamPlayer:
 	var player: AudioStreamPlayer = null
 	

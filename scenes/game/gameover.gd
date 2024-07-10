@@ -30,7 +30,7 @@ func _ready() -> void:
 		secret.queue_free()
 	
 	Conductor.reset()
-	Conductor.bpm = 100.0
+	Conductor.tempo = 100.0
 	Conductor.target_audio = music_player
 	
 	camera.zoom = camera_zoom
@@ -49,7 +49,7 @@ func _ready() -> void:
 			on_death.stream = assets.on_death
 		if is_instance_valid(assets.looping_music):
 			music_player.stream = assets.looping_music
-			Conductor.bpm = assets.music_bpm # hehe
+			Conductor.tempo = assets.music_bpm # hehe
 		if is_instance_valid(assets.retry):
 			retry.stream = assets.retry
 	

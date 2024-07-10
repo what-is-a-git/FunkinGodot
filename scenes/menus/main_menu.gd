@@ -13,8 +13,8 @@ var active: bool = true
 
 
 func _ready() -> void:
-	if not GlobalAudio.get_player('MUSIC').playing:
-		GlobalAudio.get_player('MUSIC').play()
+	if not GlobalAudio.music.playing:
+		GlobalAudio.music.play()
 	
 	version_label.text = \
 			version_label.text.replace('$VERSION', RuntimeInfo.version)

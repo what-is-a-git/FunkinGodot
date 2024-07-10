@@ -58,7 +58,7 @@ func display() -> void:
 			AudioServer.get_output_latency() * -1000.0, Conductor.offset * 1000.0,
 			Conductor.manual_offset * 1000.0,
 			Conductor.time, Conductor.beat, Conductor.step, Conductor.measure,
-			Conductor.bpm,
+			Conductor.tempo,
 			Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 			Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
 			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),

@@ -1,12 +1,12 @@
 extends Node
 
 
-var bpm: float = 0.0
+var tempo: float = 0.0
 
 var beat: float = 0.0
 var beat_delta: float = 0.0:
 	get:
-		return bpm / 60.0
+		return tempo / 60.0
 
 var step: float = 0.0:
 	get:

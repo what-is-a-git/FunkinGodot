@@ -32,11 +32,11 @@ func _ready() -> void:
 	
 	enter_animation.play('loop')
 	
-	var music_player := GlobalAudio.get_player('MUSIC')
+	var music_player := GlobalAudio.music
 	if not music_player.playing:
 		Conductor.reset()
 		music_player.play()
-		Conductor.bpm = 102.0
+		Conductor.tempo = 102.0
 		Conductor.target_audio = music_player
 	
 	if first_open:

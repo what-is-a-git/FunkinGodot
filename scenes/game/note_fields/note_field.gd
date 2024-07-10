@@ -19,16 +19,19 @@ var _default_character: Character = null
 var _note_types: NoteTypes = null
 var _note_splash_alpha: float = 0.6
 var _lane_count: int
+var _game: Game = null
 
 signal note_hit(note: Note)
 signal note_miss(note: Note)
 
 
 func _ready() -> void:
-	Conductor.step_hit.connect(_on_step_hit)
-	
-	if is_instance_valid(Game.instance) and not is_instance_valid(_note_types):
-		_note_types = Game.instance.note_types
+	if is_instance_valid(Game.instance):
+		_game = Game.instance
+		_game.scroll_speed_changed.connect(_on_scroll_speed_changed)
+		
+		if not is_instance_valid(_note_types):
+			_note_types = _game.note_types
 	if is_instance_valid(Game.chart):
 		_chart = Game.chart
 	if _scroll_speed <= 0.0:
@@ -48,16 +51,11 @@ func _ready() -> void:
 		receptor.on_miss_note.connect(miss_note)
 
 
-func _on_step_hit(step: int) -> void:
-	if not is_inside_tree(): # multithreading weirdness
-		return
-	
-	call_deferred_thread_group(&'_try_spawning')
-
-
 func _process(delta: float) -> void:
 	if (not is_instance_valid(_chart)) and is_instance_valid(Game.chart):
 		_chart = Game.chart
+	if is_inside_tree(): # multithreading weirdness
+		call_deferred_thread_group(&'_try_spawning')
 	
 	var receptor_y: float = _receptors[0].position.y
 	

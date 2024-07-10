@@ -17,9 +17,10 @@ static var playlist: Array[GamePlaylistEntry] = []
 @onready var scripts: ScriptContainer = $scripts
 @onready var camera: Camera2D = $camera
 
+@onready var hud_layer: CanvasLayer = %hud_layer
 @onready var hud: HUD = %hud
-@onready var _player_field: NoteField = hud.get_node('note_fields/player')
-@onready var _opponent_field: NoteField = hud.get_node('note_fields/opponent')
+@onready var _player_field: NoteField = hud.player_field
+@onready var _opponent_field: NoteField = hud.opponent_field
 
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
@@ -61,11 +62,13 @@ var rank: String:
 		
 		return 'N/A'
 
-@onready var skin: HUDSkin = load('res://resources/hud_skins/default.tres')
+var skin: HUDSkin
 @onready var _default_note := load('res://scenes/game/notes/note.tscn')
 var _event: int = 0
 
+signal hud_setup
 signal ready_post
+signal process_post(delta: float)
 signal song_start
 signal event_hit(event: EventData)
 signal song_finished(event: CancellableEvent)
@@ -73,18 +76,19 @@ signal scroll_speed_changed
 signal died(event: CancellableEvent)
 
 
-func _ready() -> void:
+func _init() -> void:
 	instance = self
-	hud.game = instance
-	hud.process_mode = Node.PROCESS_MODE_INHERIT
-	
-	GlobalAudio.get_player('MUSIC').stop()
-	
-	tracks.load_tracks(song)
-	tracks.finished.connect(_song_finished)
 	
 	if not chart:
 		chart = Chart.load_song(song, difficulty)
+	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
+		metadata = load('res://songs/%s/meta.tres' % song)
+
+
+func _ready() -> void:
+	GlobalAudio.music.stop()
+	tracks.load_tracks(song)
+	tracks.finished.connect(_song_finished)
 	
 	match Config.get_value('gameplay', 'scroll_speed_method'):
 		'chart':
@@ -104,13 +108,6 @@ func _ready() -> void:
 		return a.time < b.time)
 	
 	note_types.types['default'] = _default_note
-	_player_field._note_types = note_types
-	_opponent_field._note_types = note_types
-	
-	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
-		metadata = load('res://songs/%s/meta.tres' % song)
-	
-	hud._ready()
 	
 	if ResourceLoader.exists('res://songs/%s/assets.tres' % song):
 		# Load SongAssets tres.
@@ -124,6 +121,8 @@ func _ready() -> void:
 			assets.spectator = load('res://scenes/game/assets/characters/gf.tscn')
 		if not is_instance_valid(assets.stage):
 			assets.stage = load('res://scenes/game/assets/stages/stage.tscn')
+		if not is_instance_valid(assets.hud_skin):
+			assets.hud_skin = load('res://resources/hud_skins/default.tres')
 		
 		# Instantiate the PackedScene(s) and add them to the scene.
 		player = assets.player.instantiate()
@@ -153,10 +152,29 @@ func _ready() -> void:
 		spectator.global_position = spectator_point.global_position
 		spectator.scale *= spectator_point.scale
 		
+		if is_instance_valid(assets.hud):
+			hud.free()
+			hud = assets.hud.instantiate()
+			hud_layer.add_child(hud)
+			_player_field = hud.player_field
+			_opponent_field = hud.opponent_field
+		
 		# Set the NoteField characters.
 		_player_field._default_character = player
 		_opponent_field._default_character = opponent
+		
+		skin = assets.hud_skin
+		
+		if is_instance_valid(skin.pause_menu):
+			pause_menu = skin.pause_menu
+	else:
+		skin = load('res://resources/hud_skins/default.tres')
 	
+	hud.setup()
+	hud_setup.emit()
+	
+	_player_field._note_types = note_types
+	_opponent_field._note_types = note_types
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
 	_opponent_field.note_hit.connect(func(note: Note):
@@ -187,6 +205,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	call_deferred('_process_post', delta)
+	
 	if not playing:
 		return
 	
@@ -224,6 +244,10 @@ func _process(delta: float) -> void:
 		_event += 1
 
 
+func _process_post(delta: float) -> void:
+	process_post.emit(delta)
+
+
 func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
@@ -245,10 +269,11 @@ func _input(event: InputEvent) -> void:
 			receptor.takes_input = _player_field.takes_input
 			receptor._automatically_play_static = not _player_field.takes_input
 		
-		if not _player_field.takes_input:
-			hud.song_label.text += ' [BOT]'
-		elif hud.song_label.text.contains(' [BOT]'):
-			hud.song_label.text = hud.song_label.text.replace(' [BOT]', '')
+		if 'song_label' in hud:
+			if not _player_field.takes_input:
+				hud.song_label.text += ' [BOT]'
+			elif hud.song_label.text.contains(' [BOT]'):
+				hud.song_label.text = hud.song_label.text.replace(' [BOT]', '')
 
 
 func _on_beat_hit(beat: int) -> void:
@@ -267,7 +292,7 @@ func _on_measure_hit(measure: int) -> void:
 func _on_event_hit(event: EventData) -> void:
 	match event.name.to_lower():
 		&'bpm change':
-			Conductor.bpm = event.data[0]
+			Conductor.tempo = event.data[0]
 		&'camera pan':
 			var character: Character = player if event.data[0] == \
 					CameraPan.Side.PLAYER else opponent

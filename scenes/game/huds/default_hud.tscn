@@ -1,0 +1,227 @@
+[gd_scene load_steps=22 format=3 uid="uid://cr0c14kq4sye1"]
+
+[ext_resource type="Script" path="res://scenes/game/huds/default_hud.gd" id="1_hv0yb"]
+[ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="2_0rw2j"]
+[ext_resource type="PackedScene" uid="uid://bx6f5ldidoswy" path="res://scenes/game/notes/note_splash.tscn" id="3_1ubyb"]
+[ext_resource type="Script" path="res://scenes/game/health_bar.gd" id="4_spp67"]
+[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="5_gpwne"]
+[ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://resources/images/game/skins/default/ratings/marvelous.png" id="6_mktee"]
+[ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://resources/images/game/skins/default/combo/numbers.png" id="7_7svf3"]
+[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://resources/fonts/funkin.ttf" id="8_in2av"]
+[ext_resource type="Script" path="res://scripts/game/ratings_calculator.gd" id="9_xshlu"]
+[ext_resource type="Script" path="res://scripts/game/rating.gd" id="10_vo01y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vjxi"]
+bg_color = Color(0.529412, 0.545098, 0.545098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sakno"]
+bg_color = Color(0.905882, 0.92549, 0.933333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wblnk"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku58i"]
+font = ExtResource("5_gpwne")
+font_size = 14
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6egcm"]
+font = ExtResource("8_in2av")
+font_size = 48
+outline_size = 18
+outline_color = Color(0.1, 0.1, 0.1, 0.75)
+
+[sub_resource type="LabelSettings" id="LabelSettings_odcbh"]
+font = ExtResource("5_gpwne")
+font_size = 14
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_ybh81"]
+script = ExtResource("10_vo01y")
+name = &"shit"
+timing = 166.66
+score = 50
+health = 0.0
+
+[sub_resource type="Resource" id="Resource_2xl48"]
+script = ExtResource("10_vo01y")
+name = &"bad"
+timing = 135.0
+score = 100
+health = 0.25
+
+[sub_resource type="Resource" id="Resource_u7x50"]
+script = ExtResource("10_vo01y")
+name = &"good"
+timing = 90.0
+score = 200
+health = 0.75
+
+[sub_resource type="Resource" id="Resource_jbop4"]
+script = ExtResource("10_vo01y")
+name = &"sick"
+timing = 45.0
+score = 350
+health = 1.0
+
+[sub_resource type="Resource" id="Resource_aj00i"]
+script = ExtResource("10_vo01y")
+name = &"marvelous"
+timing = 22.5
+score = 350
+health = 1.15
+
+[node name="hud" type="Node2D"]
+position = Vector2(640, 360)
+script = ExtResource("1_hv0yb")
+
+[node name="note_fields" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -248)
+
+[node name="opponent" parent="note_fields" instance=ExtResource("2_0rw2j")]
+position = Vector2(-300, 0)
+default_note_splash = ExtResource("3_1ubyb")
+
+[node name="player" parent="note_fields" instance=ExtResource("2_0rw2j")]
+position = Vector2(300, 0)
+takes_input = true
+side = 1
+default_note_splash = ExtResource("3_1ubyb")
+
+[node name="health_bar" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 285)
+script = ExtResource("4_spp67")
+
+[node name="bar" type="ProgressBar" parent="health_bar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -8.0
+offset_right = 320.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7vjxi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sakno")
+value = 50.0
+fill_mode = 1
+show_percentage = false
+
+[node name="outline" type="Panel" parent="health_bar/bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wblnk")
+
+[node name="icons" type="Node2D" parent="health_bar"]
+
+[node name="score_label" type="Label" parent="health_bar"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -640.0
+offset_top = 32.0
+offset_right = 640.0
+offset_bottom = 96.0
+grow_horizontal = 2
+text = "Score:0 • Misses:0 • Accuracy:N/A (N/A)
+"
+label_settings = SubResource("LabelSettings_ku58i")
+horizontal_alignment = 1
+
+[node name="rating_container" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -32)
+
+[node name="rating" type="Sprite2D" parent="rating_container"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_mktee")
+
+[node name="combo" type="Node2D" parent="rating_container"]
+position = Vector2(-45, 75)
+scale = Vector2(0.5, 0.5)
+
+[node name="1" type="Sprite2D" parent="rating_container/combo"]
+texture = ExtResource("7_7svf3")
+hframes = 10
+
+[node name="2" type="Sprite2D" parent="rating_container/combo"]
+position = Vector2(85, 0)
+texture = ExtResource("7_7svf3")
+hframes = 10
+
+[node name="3" type="Sprite2D" parent="rating_container/combo"]
+position = Vector2(170, 0)
+texture = ExtResource("7_7svf3")
+hframes = 10
+
+[node name="4" type="Sprite2D" parent="rating_container/combo"]
+visible = false
+position = Vector2(255, 0)
+texture = ExtResource("7_7svf3")
+hframes = 10
+
+[node name="5" type="Sprite2D" parent="rating_container/combo"]
+visible = false
+position = Vector2(340, 0)
+texture = ExtResource("7_7svf3")
+hframes = 10
+
+[node name="difference_label" type="Label" parent="rating_container"]
+offset_left = -150.0
+offset_top = 106.0
+offset_right = 150.0
+offset_bottom = 131.0
+text = "0ms"
+label_settings = SubResource("LabelSettings_6egcm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="countdown_container" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="song_label" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.74902)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -352.0
+offset_right = 640.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Test • [NORMAL]"
+label_settings = SubResource("LabelSettings_odcbh")
+horizontal_alignment = 1
+
+[node name="ratings_calculator" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_xshlu")
+ratings = Array[ExtResource("10_vo01y")]([SubResource("Resource_ybh81"), SubResource("Resource_2xl48"), SubResource("Resource_u7x50"), SubResource("Resource_jbop4"), SubResource("Resource_aj00i")])

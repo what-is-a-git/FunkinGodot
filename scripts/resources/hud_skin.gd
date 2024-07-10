@@ -32,3 +32,7 @@ class_name HUDSkin extends Resource
 	preload('res://resources/sfx/game/countdown/go.ogg'),
 ]
 @export var countdown_scale: Vector2 = Vector2(0.7, 0.7)
+
+@export_category('Misc')
+
+@export var pause_menu: PackedScene = null

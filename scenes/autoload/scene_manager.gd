@@ -12,25 +12,28 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 		path = 'res://%s' % path
 	
 	var tree := get_tree()
-	
 	var killed := is_instance_valid(tween) and tween.is_running()
 	if killed:
 		tween.kill()
 	
 	if use_transition:
+		var last_paused := tree.paused
+		tree.paused = true
 		visible = true
-		tween = tree.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT_IN)
+		tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(transition.material, 'shader_parameter/progress', 1.0, 0.5)
-		tween.tween_callback(func():
-			tree.call_deferred('change_scene_to_file', path)
-			scene_changed.emit()
-			
+		tween.tween_callback(func():	
 			if is_instance_valid(tween) and tween.is_running():
 				tween.kill()
 			
-			tween = tree.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT_IN)
+			tree.call_deferred('change_scene_to_file', path)
+			scene_changed.emit()
+			
+			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(transition.material, 'shader_parameter/progress', 0.0, 0.5)
-			tween.tween_property(self, 'visible', false, 0.0)
+			tween.tween_callback(func():
+				visible = false)
+			tree.paused = last_paused
 		)
 	else:
 		if killed:
