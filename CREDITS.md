@@ -10,5 +10,5 @@
 	* null / face character sprites.
 - [Vortex](https://github.com/Vortex2Oblivion)
 	* Contributor
-- [IdealistCat](https://github.com/IdealistCat)
+- [Sinco](https://github.com/sphis-Sinco)
 	* Contributor
