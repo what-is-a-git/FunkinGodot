@@ -2,9 +2,9 @@
 
 Recreation of [Friday Night Funkin'](https://github.com/FunkinCrew/Funkin) in the [Godot Game Engine](https://godotengine.org) that has been expanded to support different extra features.
 
-## State of this branch (the rewrite)
+## State of this branch (rewrite/main)
 
-Currently in major development, once a stable release is made this page should be updated with more information.
+This branch will not be updated
 
 ## Credits
 
