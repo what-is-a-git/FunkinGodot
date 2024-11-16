@@ -371,10 +371,10 @@ libraries = {
 }
 
 [node name="intro_sequence" type="Node2D" parent="."]
-position = Vector2(640, 360)
+position = Vector2(640, 232)
 
 [node name="newgrounds_logo" type="Sprite2D" parent="intro_sequence"]
-position = Vector2(-21, 204)
+position = Vector2(-21, 228)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_fhw6b")
 

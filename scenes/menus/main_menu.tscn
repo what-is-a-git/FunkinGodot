@@ -137,7 +137,7 @@ animation_name = &"story mode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.684973
+frame_progress = 0.718365
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -153,7 +153,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.331201
+frame_progress = 0.364592
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -169,7 +169,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.326649
+frame_progress = 0.36004
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -177,7 +177,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.615791
+frame_progress = 0.649181
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -193,7 +193,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.0580119
+frame_progress = 0.0914018
 script = ExtResource("4_emyfo")
 playing = true
 

@@ -2,3 +2,5 @@
 - MENU/CONFIRM now plays for keybind changing after you change your keybind
 - MENU/CONFIRM now plays for keybind changing after you select the note you would like to change the keybind of
 - MENU/CONFIRM now plays when you change your Scroll Speed Method
+- Title Screen intro sequence is now more centered
+- Removed Unused/Unloadable songs
