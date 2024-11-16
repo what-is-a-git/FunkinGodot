@@ -8,3 +8,7 @@
 	* Improved Alphabet Font
 - [SuokArts3](https://twitter.com/SuokArts3)
 	* null / face character sprites.
+- [Vortex](https://github.com/Vortex2Oblivion)
+	* Contributor
+- [IdealistCat](https://github.com/IdealistCat)
+	* Contributor
