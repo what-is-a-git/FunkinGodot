@@ -53,7 +53,7 @@ category = NodePath("../../../section/options/gameplay")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
-frame_progress = 0.84673
+frame_progress = 0.994337
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -66,7 +66,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"graphics"
-frame_progress = 0.961846
+frame_progress = 0.109453
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -79,7 +79,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.156535
+frame_progress = 0.304144
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -92,7 +92,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
-frame_progress = 0.723
+frame_progress = 0.870608
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -105,7 +105,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
-frame_progress = 0.756208
+frame_progress = 0.903816
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -118,7 +118,7 @@ script = ExtResource("11_3cmdf")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
-frame_progress = 0.786727
+frame_progress = 0.934333
 script = ExtResource("4_k5v7g")
 playing = true
 

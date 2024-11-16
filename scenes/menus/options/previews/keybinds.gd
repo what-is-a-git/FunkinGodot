@@ -29,6 +29,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		_handle_button(event)
 	if event is InputEventKey and selected != -1:
+		GlobalAudio.get_player('MENU/CONFIRM').play()
 		_handle_key(event)
 
 
@@ -72,3 +73,4 @@ func _handle_button(event: InputEventMouseButton) -> void:
 		return
 	
 	selected = hovering
+	GlobalAudio.get_player('MENU/CONFIRM').play()

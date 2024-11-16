@@ -40,6 +40,7 @@ func _ready() -> void:
 func _select() -> void:
 	selected = not selected
 	root.active = not selected
+	GlobalAudio.get_player('MENU/CONFIRM').play()
 
 
 func _process(delta: float) -> void:

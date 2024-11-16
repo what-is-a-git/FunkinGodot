@@ -35,6 +35,7 @@ func _ready() -> void:
 
 
 func _select() -> void:
+	GlobalAudio.get_player('MENU/CONFIRM').play()
 	toggled = not toggled
 	update_animation()
 
