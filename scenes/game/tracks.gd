@@ -34,7 +34,6 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 		return
 	
 	var index: int = 1
-	
 	player.stream = tracks
 	player.bus = &'Music'
 	player.set('parameters/looping', false)
@@ -107,5 +106,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_finished() -> void:
 	player.stop()
-	#process_mode = Node.PROCESS_MODE_DISABLED
 	finished.emit()
+	process_mode = Node.PROCESS_MODE_DISABLED

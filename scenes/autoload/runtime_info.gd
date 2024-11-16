@@ -50,17 +50,18 @@ func display() -> void:
 	]
 	
 	if OS.is_debug_build():
-		text_output += '\n\n-=##=- DEBUG -=##=-\n%s (Scene)\n%.2fms Offset\n%.2fms Conductor (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n%d Draw Calls (%d Drawn Objects)\n%s / %s <CPU>\n%d Nodes (%d Orphaned)\n%s' % [
+		text_output += '\n\n[Debug]\nScene: %s\n%s / %s <CPU>\n%d Nodes (%d Orphaned)\n\n[Conductor]\n%.2fms AudioServer Offset\n%.2fms Offset (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n\n[Rendering]\n%d Draw Calls (%d Drawn Objects)\nAPI: %s' % [
 			scene_name,
-			AudioServer.get_output_latency() * -1000.0, Conductor.offset * 1000.0,
+			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
+			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
+			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
+			AudioServer.get_output_latency() * -1000.0,
+			Conductor.offset * 1000.0,
 			Conductor.manual_offset * 1000.0,
 			Conductor.time, Conductor.beat, Conductor.step, Conductor.measure,
 			Conductor.tempo,
 			Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 			Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
-			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
-			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
-			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
 			get_rendering_driver()
 		]
 	

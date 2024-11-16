@@ -44,8 +44,7 @@ func _ready() -> void:
 	super()
 	value = Config.get_value(section, key)
 	
-	if not is_instance_valid(root): 
-		root = get_parent().get_parent().get_parent()
+	assert(is_instance_valid(root), 'No root given to number option. This could cause issues, so here is your error.')
 
 
 func _select() -> void:

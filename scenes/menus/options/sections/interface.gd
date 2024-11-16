@@ -23,6 +23,7 @@ func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, options.size())
 	selected_option = options[selected]
 	selected_option._focus()
+	
 	if amount != 0:
 		GlobalAudio.get_player(^'MENU/SCROLL').play()
 
@@ -42,6 +43,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action(&'ui_up') or event.is_action(&'ui_down'):
 		change_selection(Input.get_axis(&'ui_up', &'ui_down'))
 	if event.is_action(&'ui_accept'):
+		get_viewport().set_input_as_handled()
 		selected_option._select()
 
 

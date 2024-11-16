@@ -70,10 +70,11 @@ sprite_frames = ExtResource("5_pu18o")
 animation = &"unselected"
 script = ExtResource("6_ubeli")
 
-[node name="offset" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("current_preview")]
+[node name="offset" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("root", "current_preview")]
 position = Vector2(0, 288)
 script = ExtResource("7_wvbcq")
 value_suffix = &"ms"
+root = NodePath("../../..")
 PREVIEW = "res://scenes/menus/options/previews/offset.tscn"
 current_preview = NodePath("../../../preview_bg/preview_marker")
 
@@ -105,7 +106,7 @@ position = Vector2(48, -34)
 script = ExtResource("2_getyr")
 text = "chart"
 
-[node name="value" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("current_preview")]
+[node name="value" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("root", "current_preview")]
 position = Vector2(-22, 640)
 script = ExtResource("7_gp12a")
 key = &"custom_scroll_speed"
@@ -113,6 +114,7 @@ integers = false
 ranged = true
 minimum = 0.1
 step = 0.1
+root = NodePath("../../..")
 PREVIEW = ""
 current_preview = NodePath("../../../preview_bg/preview_marker")
 

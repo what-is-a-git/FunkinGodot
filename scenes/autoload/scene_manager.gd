@@ -8,6 +8,10 @@ signal scene_changed()
 
 
 func switch_to(path: String, use_transition: bool = true) -> void:
+	# tehe
+	if not Config.get_value('interface', 'scene_transitions'):
+		use_transition = false
+	
 	if not path.begins_with('res://'):
 		path = 'res://%s' % path
 	

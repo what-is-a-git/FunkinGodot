@@ -3,6 +3,7 @@ extends MainMenuButton
 
 @onready var menu: Node2D = get_tree().current_scene
 @onready var timer: Timer = %timer
+@onready var background: Sprite2D = %background.get_node(^'sprite')
 @onready var background_animations: AnimationPlayer = %background.get_node('animation_player')
 @onready var donate: AnimatedSprite = $sprite
 @onready var kickstarter: AnimatedSprite = $kickstarter
@@ -24,6 +25,7 @@ func press() -> void:
 			.set_ease(Tween.EASE_OUT).set_parallel()
 	tween.tween_property(donate, 'position:x', -300.0, 0.5)
 	tween.tween_property(kickstarter, 'position:x', 275.0, 0.5)
+	tween.tween_property(background, ^'modulate', Color('#b5a48f'), 0.5)
 	active = true
 
 
@@ -53,6 +55,7 @@ func _input(event: InputEvent) -> void:
 				.set_ease(Tween.EASE_OUT).set_parallel()
 		tween.tween_property(donate, 'position:x', 0.0, 0.5)
 		tween.tween_property(kickstarter, 'position:x', 0.0, 0.5)
+		tween.tween_property(background, ^'modulate', Color.WHITE, 0.5)
 		tween.tween_callback(func():
 			kickstarter.visible = false).set_delay(0.15)
 		return
@@ -67,7 +70,6 @@ func _input(event: InputEvent) -> void:
 		return
 	var horizontal: bool = event.is_action('ui_left') or event.is_action('ui_right')
 	var vertical: bool = event.is_action('ui_up') or event.is_action('ui_down')
-	
 	if horizontal or vertical:
 		if horizontal:
 			change_selection(int(roundf(Input.get_axis('ui_left', 'ui_right'))))

@@ -68,8 +68,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08ydn"]
 _data = {
-"RESET": SubResource("Animation_58e2s"),
-"loop": SubResource("Animation_oa7ut")
+&"RESET": SubResource("Animation_58e2s"),
+&"loop": SubResource("Animation_oa7ut")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_lig6g"]
@@ -101,7 +101,7 @@ texture = ExtResource("2_dbg3w")
 
 [node name="animation_player" type="AnimationPlayer" parent="background"]
 libraries = {
-"": SubResource("AnimationLibrary_08ydn")
+&"": SubResource("AnimationLibrary_08ydn")
 }
 
 [node name="camera" type="Camera2D" parent="."]
@@ -137,7 +137,7 @@ animation_name = &"story mode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.684973
+frame_progress = 0.934226
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -153,7 +153,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.331201
+frame_progress = 0.580445
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -169,7 +169,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.326649
+frame_progress = 0.575893
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -177,7 +177,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.615791
+frame_progress = 0.865038
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -193,7 +193,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.0580119
+frame_progress = 0.307258
 script = ExtResource("4_emyfo")
 playing = true
 
