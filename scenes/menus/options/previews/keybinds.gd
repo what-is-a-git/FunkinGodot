@@ -46,6 +46,7 @@ func _handle_key(event: InputEventKey):
 	
 	# reset selected
 	selected = -1
+	GlobalAudio.get_player(^'MENU/CONFIRM').play()
 
 
 func _handle_motion(event: InputEventMouseMotion) -> void:
@@ -53,7 +54,6 @@ func _handle_motion(event: InputEventMouseMotion) -> void:
 		return
 	
 	hovering = -1
-	
 	for i: int in keys.size():
 		var key: Node2D = keys[i]
 		var key_rect: Rect2 = Rect2(key.global_position.x - 50.0,
@@ -74,3 +74,4 @@ func _handle_button(event: InputEventMouseButton) -> void:
 	
 	selected = hovering
 	keys[selected].get_node('key').text = '_'
+	GlobalAudio.get_player(^'MENU/CONFIRM').play()

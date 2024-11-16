@@ -36,6 +36,7 @@ var value: float = 0.0:
 		else:
 			value_label.text = '%s%s%s%s' % [left, 
 					str(snapped(final_value, step)).pad_decimals(1), value_suffix, right]
+		GlobalAudio.get_player(^'MENU/SCROLL').play()
 		_value_changed()
 
 
@@ -89,6 +90,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_accept') or event.is_action('ui_cancel'):
 		get_viewport().set_input_as_handled()
 		_select()
+		GlobalAudio.get_player(^'MENU/CONFIRM').play()
 
 
 func _value_changed() -> void:

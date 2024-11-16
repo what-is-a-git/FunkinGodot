@@ -25,6 +25,7 @@ bus = &"SFX"
 [node name="CONFIRM" type="AudioStreamPlayer" parent="MENU"]
 stream = ExtResource("5_fbmua")
 volume_db = -10.0
+max_polyphony = 4
 bus = &"SFX"
 
 [node name="CANCEL" type="AudioStreamPlayer" parent="MENU"]

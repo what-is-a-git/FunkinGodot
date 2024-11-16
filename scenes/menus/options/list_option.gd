@@ -21,8 +21,8 @@ func _ready() -> void:
 
 func _select() -> void:
 	var index: int = list.find(value)
-	
 	if index < 0:
 		index = 0
 	
 	value = list[wrapi(index + 1, 0, list.size())]
+	GlobalAudio.get_player(^'MENU/CONFIRM').play()
