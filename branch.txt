@@ -1,0 +1,4 @@
+mainmenuQOL
+- Adds version_suffix to res://scripts/autoload/config.gd
+- Adds Version Suffix to Main Menu
+- BG color changes when you select and unselect the donate button

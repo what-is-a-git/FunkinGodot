@@ -1,5 +1,6 @@
 extends Node
 
+var version_suffix = "-indev"
 
 var file := ConfigFile.new()
 var first_launch: bool = false

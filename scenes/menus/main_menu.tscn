@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7fwxsepnt38j"]
+[gd_scene load_steps=15 format=3 uid="uid://b7fwxsepnt38j"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://resources/images/menus/main_menu/background.png" id="1_wymee"]
@@ -35,6 +35,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_oa7ut"]
 resource_name = "loop"
@@ -66,9 +78,69 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_kdhrb"]
+resource_name = "donate_intro"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.431797, 0.36424, 0.393616, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sgl0j"]
+resource_name = "donate_outro"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.02, 0.41),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.431797, 0.36424, 0.393616, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08ydn"]
 _data = {
 "RESET": SubResource("Animation_58e2s"),
+"donate_intro": SubResource("Animation_kdhrb"),
+"donate_outro": SubResource("Animation_sgl0j"),
 "loop": SubResource("Animation_oa7ut")
 }
 
@@ -137,7 +209,7 @@ animation_name = &"story mode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.684973
+frame_progress = 0.609793
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -153,7 +225,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.331201
+frame_progress = 0.256021
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -169,7 +241,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.326649
+frame_progress = 0.251467
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -177,7 +249,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.615791
+frame_progress = 0.540615
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -193,7 +265,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.0580119
+frame_progress = 0.982834
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -205,7 +277,7 @@ offset_left = 8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Funkin' Godot v$VERSION"
+text = "Funkin' Godot v$VERSION$SUFFIX"
 label_settings = SubResource("LabelSettings_lig6g")
 vertical_alignment = 2
 metadata/_edit_lock_ = true

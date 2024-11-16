@@ -48,47 +48,6 @@ tracks/2/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_mh840"]
-resource_name = "dance_right"
-length = 0.583338
-step = 0.0416667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"gfDance"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.583333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [15, 29]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.583333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_j1s0s"]
 resource_name = "dance_left"
 length = 0.583338
@@ -130,11 +89,52 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_mh840"]
+resource_name = "dance_right"
+length = 0.583338
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [15, 29]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j25c3"]
 _data = {
-&"RESET": SubResource("Animation_6rots"),
-&"dance_left": SubResource("Animation_j1s0s"),
-&"dance_right": SubResource("Animation_mh840")
+"RESET": SubResource("Animation_6rots"),
+"dance_left": SubResource("Animation_j1s0s"),
+"dance_right": SubResource("Animation_mh840")
 }
 
 [sub_resource type="Animation" id="Animation_vg1w0"]
@@ -224,9 +224,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4274r"]
 _data = {
-&"RESET": SubResource("Animation_vg1w0"),
-&"loop": SubResource("Animation_lm570"),
-&"press": SubResource("Animation_qdiad")
+"RESET": SubResource("Animation_vg1w0"),
+"loop": SubResource("Animation_lm570"),
+"press": SubResource("Animation_qdiad")
 }
 
 [sub_resource type="Animation" id="Animation_gpcxv"]
@@ -320,8 +320,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v06vg"]
 _data = {
-&"RESET": SubResource("Animation_gpcxv"),
-&"intro": SubResource("Animation_0iyna")
+"RESET": SubResource("Animation_gpcxv"),
+"intro": SubResource("Animation_0iyna")
 }
 
 [node name="title_screen" type="Node2D"]
@@ -342,7 +342,7 @@ script = ExtResource("3_s2rvo")
 
 [node name="animation_player" type="AnimationPlayer" parent="post_intro/girlfriend"]
 libraries = {
-&"": SubResource("AnimationLibrary_j25c3")
+"": SubResource("AnimationLibrary_j25c3")
 }
 
 [node name="logo" type="Node2D" parent="post_intro"]
@@ -367,7 +367,7 @@ script = ExtResource("3_s2rvo")
 
 [node name="animation_player" type="AnimationPlayer" parent="post_intro/enter"]
 libraries = {
-&"": SubResource("AnimationLibrary_4274r")
+"": SubResource("AnimationLibrary_4274r")
 }
 
 [node name="intro_sequence" type="Node2D" parent="."]
@@ -387,7 +387,7 @@ horizontal_alignment = "Center"
 [node name="animation_player" type="AnimationPlayer" parent="intro_sequence"]
 callback_mode_process = 2
 libraries = {
-&"": SubResource("AnimationLibrary_v06vg")
+"": SubResource("AnimationLibrary_v06vg")
 }
 
 [node name="flash" type="ColorRect" parent="."]

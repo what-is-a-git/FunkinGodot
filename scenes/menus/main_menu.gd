@@ -18,6 +18,8 @@ func _ready() -> void:
 	
 	version_label.text = \
 			version_label.text.replace('$VERSION', RuntimeInfo.version)
+	version_label.text = \
+			version_label.text.replace('$SUFFIX', Config.version_suffix)
 	change_selection()
 
 

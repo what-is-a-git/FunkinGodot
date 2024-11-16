@@ -16,6 +16,7 @@ func press() -> void:
 	timer.stop()
 	background_animations.stop()
 	kickstarter.visible = true
+	background_animations.play('donate_intro')
 	
 	if is_instance_valid(tween) and tween.is_running():
 		tween.kill()
@@ -45,6 +46,7 @@ func _input(event: InputEvent) -> void:
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		menu.active = true
 		menu._cancel_animation()
+		background_animations.play('donate_outro')
 		
 		if is_instance_valid(tween) and tween.is_running():
 			tween.kill()
