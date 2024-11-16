@@ -97,7 +97,6 @@ song_name = &"test"
 song_difficulties = [&"normal"]
 icon = SubResource("Resource_hyym4")
 
-
 [resource]
 script = ExtResource("1_bpwad")
 list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_22f7a")])
