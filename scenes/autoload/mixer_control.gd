@@ -68,7 +68,6 @@ func _input(event: InputEvent) -> void:
 		1:
 			volume = clampf(volume + 0.01 * direction, 0.0, 1.0)
 	
-	
 	bar.value = volume * 100.0
 	volume_label.text = '%d%% Volume' % [roundi(volume * 100.0)]
 	icon_label.text = target_bus

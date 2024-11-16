@@ -17,8 +17,8 @@ fill_to = Vector2(0.5, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wrh23"]
 shader = ExtResource("2_51y5b")
-shader_parameter/mix_factor = 1.0
 shader_parameter/overlay = SubResource("GradientTexture2D_5r0gq")
+shader_parameter/mix_factor = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_cske1"]
 font = ExtResource("4_b4mj3")
@@ -239,7 +239,6 @@ mode_overrides_title = false
 file_mode = 0
 filters = PackedStringArray("*.xml")
 show_hidden_files = true
-use_native_dialog = true
 
 [connection signal="pressed" from="panel/convert" to="." method="_import"]
 [connection signal="value_changed" from="panel/framerate" to="." method="_set_framerate"]
