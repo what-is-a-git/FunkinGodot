@@ -13,10 +13,10 @@
 [ext_resource type="SpriteFrames" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyTraffic.res" id="11_o5oj6"]
 [ext_resource type="Texture2D" uid="uid://bkb7c6uj1fafq" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyTraffic_lightmap.png" id="12_fcxpl"]
 [ext_resource type="Texture2D" uid="uid://c05kfndvl1v01" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyForeground.png" id="13_dkt1u"]
-[ext_resource type="SpriteFrames" path="res://resources/images/game/assets/stages/philly_streets/erect/paper.res" id="14_hmgxw"]
 [ext_resource type="Texture2D" uid="uid://i7wldmqqojxv" path="res://resources/images/game/assets/stages/philly_streets/erect/phillySkybox.png" id="15_j2dnk"]
 [ext_resource type="Texture2D" uid="uid://c1f1eyos87sev" path="res://resources/images/game/assets/stages/philly_streets/erect/mistMid.png" id="16_8xh06"]
 [ext_resource type="Texture2D" uid="uid://bhhmtkl0te62f" path="res://resources/images/game/assets/stages/philly_streets/erect/mistBack.png" id="17_gl3gy"]
+[ext_resource type="Script" path="res://scenes/game/assets/stages/character_preview.gd" id="17_hydkt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hydkt"]
 blend_mode = 1
@@ -150,19 +150,6 @@ position = Vector2(88, 317)
 texture = ExtResource("13_dkt1u")
 centered = false
 
-[node name="paper" type="Parallax2D" parent="."]
-visible = false
-scroll_scale = Vector2(1.1, 1.1)
-
-[node name="sprite" type="AnimatedSprite2D" parent="paper"]
-z_index = 800
-position = Vector2(350, 608)
-sprite_frames = ExtResource("14_hmgxw")
-animation = &"Paper Blowing instance 1"
-centered = false
-script = ExtResource("10_o5oj6")
-metadata/_custom_type_script = ExtResource("10_o5oj6")
-
 [node name="skybox" type="Parallax2D" parent="."]
 scale = Vector2(0.65, 0.65)
 scroll_scale = Vector2(0.1, 0.1)
@@ -268,10 +255,18 @@ texture = ExtResource("16_8xh06")
 centered = false
 
 [node name="player" type="Marker2D" parent="."]
+z_index = 400
 position = Vector2(2138, 1216)
+script = ExtResource("17_hydkt")
 
 [node name="opponent" type="Marker2D" parent="."]
+z_index = 350
 position = Vector2(826, 1175)
+script = ExtResource("17_hydkt")
+character_path = "res://scenes/game/assets/characters/darnell.tscn"
 
 [node name="spectator" type="Marker2D" parent="."]
+z_index = 300
 position = Vector2(1531, 1089)
+script = ExtResource("17_hydkt")
+character_path = "res://scenes/game/assets/characters/gf.tscn"
