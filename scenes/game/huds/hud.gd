@@ -36,6 +36,15 @@ func setup() -> void:
 	pass
 
 
+## This function is called whenever the player resumes the game
+## and wants there to be a countdown to resume.
+##
+## There is no default implementation because different HUDs have
+## different countdown systems.
+func countdown_resume() -> void:
+	pass
+
+
 func _ready_post() -> void:
 	pass
 

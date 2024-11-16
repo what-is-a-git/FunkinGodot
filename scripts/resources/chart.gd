@@ -68,7 +68,6 @@ static func remove_stacked_notes(chart: Chart) -> int:
 
 static func _try_legacy(base_path: String, difficulty: StringName) -> Chart:
 	var legacy_exists: bool = FileAccess.file_exists('%s/charts/%s.json' % [base_path, difficulty])
-	
 	if legacy_exists:
 		var path := '%s/charts/%s.json' % [base_path, difficulty]
 		var funkin := FunkinLegacyChart.new()

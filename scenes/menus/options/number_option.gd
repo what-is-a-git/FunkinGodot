@@ -1,4 +1,4 @@
-class_name NumberOption extends Option
+class_name NumberOption extends PreviewOption
 
 
 @export var section: StringName = &'gameplay'
@@ -24,28 +24,39 @@ var value: float = 0.0:
 		Config.set_value(section, key, final_value)
 		value = new_value
 		
+		var left: String = '< '
+		var right: String = ' >'
+		
+		if not selected:
+			left = ''
+			right = ''
+		
 		if integers:
-			value_label.text = '< %s%s >' % [final_value, value_suffix]
+			value_label.text = '%s%d%s%s' % [left, final_value, value_suffix, right]
 		else:
-			value_label.text = '< %s%s >' % [str(snapped(final_value, step)).pad_decimals(1), value_suffix]
+			value_label.text = '%s%s%s%s' % [left, 
+					str(snapped(final_value, step)).pad_decimals(1), value_suffix, right]
+		_value_changed()
 
 
 func _ready() -> void:
+	super()
 	value = Config.get_value(section, key)
 	
 	if not is_instance_valid(root): 
-		root = get_parent().get_parent()
+		root = get_parent().get_parent().get_parent()
 
 
 func _select() -> void:
+	super()
 	selected = not selected
 	root.active = not selected
+	value = value
 
 
 func _process(delta: float) -> void:
 	if not selected:
 		return
-	
 	var axis: float = Input.get_axis('ui_left', 'ui_right')
 	if axis == 0.0:
 		timer = 0.0
@@ -61,7 +72,6 @@ func _process(delta: float) -> void:
 			float(Input.is_action_pressed('alt')) * 3.0
 	if timer >= increment_delay / delay_modifier:
 		timer = 0.0
-		
 		if ranged:
 			value = clampf(value + axis * step, minimum, maximum)
 		else:
@@ -79,3 +89,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_accept') or event.is_action('ui_cancel'):
 		get_viewport().set_input_as_handled()
 		_select()
+
+
+func _value_changed() -> void:
+	pass

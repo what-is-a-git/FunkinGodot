@@ -70,7 +70,7 @@ func _do_shit() -> void:
 		main_symbol = _get_symbol_data(animation_data.ANIMATION)
 	length = main_symbol.length
 	
-	print('took %s ms to process shiz' % [float(Time.get_ticks_usec() - start) / 1000.0])
+	print('took %f ms to process shiz' % [float(Time.get_ticks_usec() - start) / 1000.0])
 	# print(main_symbol)
 	queue_redraw()
 

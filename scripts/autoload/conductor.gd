@@ -18,7 +18,6 @@ var measure: float = 0.0:
 
 var time: float = 0.0
 var target_audio: AudioStreamPlayer = null
-var _target_audio_last_time: float = INF
 
 var rate: float = 1.0
 
@@ -27,7 +26,7 @@ var active: bool = true
 var audio_offset: float:
 	get: return -AudioServer.get_output_latency()
 var manual_offset: float = 0.0
-var offset: float = audio_offset + manual_offset
+var offset: float = audio_offset - manual_offset
 
 var _last_mix: float = 0.0
 var _resync_latency: bool = false
@@ -35,6 +34,14 @@ var _resync_latency: bool = false
 signal step_hit(step: int)
 signal beat_hit(beat: int)
 signal measure_hit(measure: int)
+
+"""
+changes
+store time
+store beat
+
+beat = lastchange.beat + ((time - lastchange.time) / beat_delta)
+"""
 
 
 func _ready() -> void:
@@ -51,44 +58,34 @@ func _process(delta: float) -> void:
 	
 	if _resync_latency:
 		var mix_time: float = AudioServer.get_time_since_last_mix()
-		
 		if mix_time < _last_mix:
-			offset = audio_offset + manual_offset
-		
+			offset = audio_offset - manual_offset
 		_last_mix = mix_time
 	
-	var last_step: int =  floor(step)
-	var last_beat: int =  floor(beat)
-	var last_measure: int =  floor(measure)
+	var last_step: int = floori(step)
+	var last_beat: int = floori(beat)
+	var last_measure: int = floori(measure)
 	
-	if target_audio:
+	if is_instance_valid(target_audio):
 		var last_time: float = time
-		var audio_position: float = target_audio.get_playback_position()
-		var new_time: float = audio_position + \
-				AudioServer.get_time_since_last_mix() + offset
+		var audio_position: float = target_audio.get_playback_position() \
+				+ AudioServer.get_time_since_last_mix()
 		
-		if audio_position < _target_audio_last_time:
-			_target_audio_last_time = audio_position
-			last_time = offset
-			time = offset
-		
-		# bit hacky but it works! :3
-		if new_time > last_time:
-			time = new_time
+		if audio_position + offset > time:
+			time = audio_position + offset
 			beat += (time - last_time) * beat_delta
-			_target_audio_last_time = audio_position
 	else:
 		time += delta * rate
 		beat += delta * rate * beat_delta
 	
-	if floor(step) > last_step:
-		for step_value in range(last_step + 1, floor(step) + 1):
+	if floori(step) > last_step:
+		for step_value in range(last_step + 1, floori(step) + 1):
 			step_hit.emit(step_value)
-	if floor(beat) > last_beat:
-		for beat_value in range(last_beat + 1, floor(beat) + 1):
+	if floori(beat) > last_beat:
+		for beat_value in range(last_beat + 1, floori(beat) + 1):
 			beat_hit.emit(beat_value)
-	if floor(measure) > last_measure:
-		for measure_value in range(last_measure + 1, floor(measure) + 1):
+	if floori(measure) > last_measure:
+		for measure_value in range(last_measure + 1, floori(measure) + 1):
 			measure_hit.emit(measure_value)
 
 
@@ -102,8 +99,11 @@ func _on_config_value_changed(section: String, key: String, value: Variant) -> v
 
 
 func reset() -> void:
-	offset = audio_offset - manual_offset
+	reset_offset()
 	beat = 0.0
 	time = offset
 	target_audio = null
-	_target_audio_last_time = INF
+
+
+func reset_offset() -> void:
+	offset = audio_offset - manual_offset

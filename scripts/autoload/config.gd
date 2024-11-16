@@ -81,11 +81,11 @@ var default_configuration: Dictionary = {
 		},
 		'bus_effects': {
 			'Master': {
-				'limiter': {
-					'ceiling': -8.0,
-					'threshold': 0.0,
-					'soft_clip': 2.0,
-					'soft_clip_ratio': 10.0,
+				'hardlimiter': {
+					'ceiling': -6.0,
+					'pre_gain': -12.0,
+					'release': 0.1,
+					'enabled': false,
 				},
 			},
 			'Music': {},
@@ -93,27 +93,20 @@ var default_configuration: Dictionary = {
 		},
 		'recalculate_output_latency': true,
 	},
-	'graphics': {
-		'quality': 'default',
-		'scene_transitions': 'default',
-	},
 	'interface': {
-		'health_bar': 'default',
-		'icon_bounce': 'default',
-		'score_format': 'default',
-		'info_format': 'default',
-		'ratings': 'default',
 		'sustain_layer': 'below',
 		'cpu_strums_press': true,
-		'note_splash_alpha': 60,
+		'note_splash_alpha': 60.0,
 		'countdown_on_resume': false,
 	},
 	'performance': {
+		'quality': 'default',
+		'scene_transitions': 'default',
 		'fps_cap': -1,
 		'vsync_mode': 'disabled',
 		'auto_pause': false,
 		'performance_info': 'default',
-		'multithreaded_note_spawning': true,
+		'threaded_note_spawning': true,
 		'preload_notes': false,
 		'performance_info_visible': false,
 	},

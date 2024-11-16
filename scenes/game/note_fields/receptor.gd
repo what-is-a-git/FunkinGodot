@@ -6,7 +6,11 @@ static var input_zone: float = 0.18
 
 @export var direction: StringName = &'left'
 @export var lane: int = 0
-@export var takes_input: bool = false
+@export var takes_input: bool = false:
+	set(value):
+		takes_input = value
+		if (not takes_input) and not Config.get_value('interface', 'cpu_strums_press'):
+			play_confirm = false
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var _automatically_play_static: bool = false:
@@ -18,6 +22,7 @@ static var input_zone: float = 0.18
 				sprite.animation_finished.disconnect(_on_animation_finished)
 			
 			_automatically_play_static = value
+var play_confirm: bool = true
 var _pressed: bool = false
 @onready var _notes: Node2D = %notes
 
@@ -35,7 +40,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	var pressed: bool = event.is_pressed()
-	
 	if pressed:
 		_pressed = true
 		play_anim(&'press')
@@ -91,7 +95,8 @@ func _auto_input() -> void:
 
 
 func hit_note(note: Note) -> void:
-	play_anim(&'confirm', true)
+	if takes_input or play_confirm:
+		play_anim(&'confirm', true)
 	on_hit_note.emit(note)
 
 

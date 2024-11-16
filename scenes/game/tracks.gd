@@ -11,6 +11,7 @@ const MINIMUM_DESYNC_ALLOWED: float = 0.010
 var playing: bool:
 	get:
 		return player.is_playing()
+		
 var last_playback_position: float = 0.0
 
 signal finished
@@ -50,6 +51,10 @@ func play(from_position: float = 0.0) -> void:
 func check_sync(force: bool = false) -> void:
 	if not is_instance_valid(player.stream):
 		return
+	# With the newer target audio system it's
+	# no longer required to resync manually like this.
+	if Conductor.target_audio == player:
+		return
 	
 	var last_time: float = Conductor.time
 	var track_index: int = 0
@@ -81,6 +86,8 @@ func get_playback_position() -> float:
 func set_playback_position(position: float) -> void:
 	if not is_instance_valid(player.stream) or not player.is_playing():
 		return
+	if position < 0.0:
+		position = 0.0
 	
 	player.seek(position)
 	
@@ -91,17 +98,14 @@ func set_playback_position(position: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if playing:
-		if player.get_playback_position() < last_playback_position:
-			player.stop()
-			_on_finished()
-			return
-		
 		check_sync()
+	elif Game.instance.song_started:
+		_on_finished()
 	
 	last_playback_position = player.get_playback_position()
 
 
 func _on_finished() -> void:
 	player.stop()
-	process_mode = Node.PROCESS_MODE_DISABLED
+	#process_mode = Node.PROCESS_MODE_DISABLED
 	finished.emit()

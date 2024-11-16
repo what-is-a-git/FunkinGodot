@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://ks4syot2ec3p" path="res://resources/sfx/menus/cancel.ogg" id="6_i8ihw"]
 
 [node name="global_audio" type="Node"]
-process_mode = 3
 script = ExtResource("1_ete5d")
 
 [node name="MUSIC" type="AudioStreamPlayer" parent="."]

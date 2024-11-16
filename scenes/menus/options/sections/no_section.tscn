@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://di58m2bnkbajd"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/base_options_section.gd" id="1_48ko1"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="2_it2mv"]
+
+[node name="none" type="Node2D"]
+script = ExtResource("1_48ko1")
+
+[node name="alphabet" type="Node2D" parent="."]
+script = ExtResource("2_it2mv")
+text = "sorry!
+this section is unfinished!"
+centered = true
+horizontal_alignment = "Center"

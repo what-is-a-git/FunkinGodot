@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://dl2ws5fsuesd1"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/gameplay_section.gd" id="1_dvmij"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="2_getyr"]
+[ext_resource type="Script" path="res://scenes/menus/options/preview_option.gd" id="3_uqgqk"]
+[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="4_2w5sj"]
+[ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="5_pu18o"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="6_ubeli"]
+[ext_resource type="Script" path="res://scenes/menus/options/number_option.gd" id="7_gp12a"]
+[ext_resource type="Script" path="res://scenes/menus/options/offset_option.gd" id="7_wvbcq"]
+[ext_resource type="Script" path="res://scenes/menus/options/list_option.gd" id="8_8o1re"]
+
+[node name="gameplay" type="Node2D"]
+position = Vector2(-320, 0)
+script = ExtResource("1_dvmij")
+
+[node name="the_list" type="Node2D" parent="."]
+position = Vector2(0, -184)
+
+[node name="scroll_speed" type="Node2D" parent="the_list"]
+position = Vector2(0, 448)
+script = ExtResource("2_getyr")
+text = "scroll speed"
+centered = true
+
+[node name="options" type="Node2D" parent="the_list"]
+
+[node name="keybinds" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("current_preview")]
+position = Vector2(-91, 0)
+script = ExtResource("3_uqgqk")
+current_preview = NodePath("../../../preview_bg/preview_marker")
+
+[node name="label" type="Node2D" parent="the_list/options/keybinds"]
+script = ExtResource("2_getyr")
+text = "keybinds"
+centered = true
+
+[node name="downscroll" type="Node2D" parent="the_list/options"]
+position = Vector2(-32, 96)
+script = ExtResource("4_2w5sj")
+key = &"scroll_direction"
+strings = Array[String](["up", "down"])
+
+[node name="alphabet" type="Node2D" parent="the_list/options/downscroll"]
+script = ExtResource("2_getyr")
+text = "downscroll"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="the_list/options/downscroll"]
+position = Vector2(319, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("5_pu18o")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("6_ubeli")
+
+[node name="middlescroll" type="Node2D" parent="the_list/options"]
+position = Vector2(6, 192)
+script = ExtResource("4_2w5sj")
+
+[node name="alphabet" type="Node2D" parent="the_list/options/middlescroll"]
+script = ExtResource("2_getyr")
+text = "middlescroll"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="the_list/options/middlescroll"]
+position = Vector2(351, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("5_pu18o")
+animation = &"unselected"
+script = ExtResource("6_ubeli")
+
+[node name="offset" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("current_preview")]
+position = Vector2(0, 288)
+script = ExtResource("7_wvbcq")
+value_suffix = &"ms"
+PREVIEW = "res://scenes/menus/options/previews/offset.tscn"
+current_preview = NodePath("../../../preview_bg/preview_marker")
+
+[node name="label" type="Node2D" parent="the_list/options/offset"]
+position = Vector2(-140, 0)
+script = ExtResource("2_getyr")
+text = "offset:"
+centered = true
+
+[node name="value" type="Node2D" parent="the_list/options/offset"]
+position = Vector2(32, -34)
+script = ExtResource("2_getyr")
+text = "< 0 >"
+
+[node name="method" type="Node2D" parent="the_list/options"]
+position = Vector2(0, 544)
+script = ExtResource("8_8o1re")
+list = Array[String](["chart", "constant"])
+display_raw = false
+
+[node name="label" type="Node2D" parent="the_list/options/method"]
+position = Vector2(-135, 0)
+script = ExtResource("2_getyr")
+text = "method:"
+centered = true
+
+[node name="value" type="Node2D" parent="the_list/options/method"]
+position = Vector2(48, -34)
+script = ExtResource("2_getyr")
+text = "chart"
+
+[node name="value" type="Node2D" parent="the_list/options" node_paths=PackedStringArray("current_preview")]
+position = Vector2(-22, 640)
+script = ExtResource("7_gp12a")
+key = &"custom_scroll_speed"
+integers = false
+ranged = true
+minimum = 0.1
+step = 0.1
+PREVIEW = ""
+current_preview = NodePath("../../../preview_bg/preview_marker")
+
+[node name="label" type="Node2D" parent="the_list/options/value"]
+position = Vector2(-140, 0)
+script = ExtResource("2_getyr")
+text = "value:"
+centered = true
+
+[node name="value" type="Node2D" parent="the_list/options/value"]
+position = Vector2(16, -34)
+script = ExtResource("2_getyr")
+text = "0"
+
+[node name="preview_bg" type="ColorRect" parent="."]
+offset_left = 480.0
+offset_top = -264.0
+offset_right = 960.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="preview_marker" type="Marker2D" parent="preview_bg"]
+position = Vector2(240, 312)
+
+[connection signal="animation_finished" from="the_list/options/downscroll/checkbox" to="the_list/options/downscroll" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="the_list/options/middlescroll/checkbox" to="the_list/options/middlescroll" method="_on_checkbox_animation_finished"]

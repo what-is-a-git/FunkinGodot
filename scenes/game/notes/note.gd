@@ -51,7 +51,8 @@ func _ready() -> void:
 		tail_texture.region.size.y -= 1
 		
 		tail.texture = tail_texture
-		sustain.z_index -= 1
+		if Config.get_value('interface', 'sustain_layer') == 'below':
+			sustain.z_index -= 1
 	else:
 		sustain.queue_free()
 
@@ -110,7 +111,7 @@ func _process(delta: float) -> void:
 	sprite.visible = false
 	length -= delta
 	
-	var step: int = floor(Conductor.step)
+	var step: int = floori(Conductor.step)
 	if step > _previous_step:
 		if is_instance_valid(_character):
 			_character.sing(self, true)

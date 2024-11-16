@@ -70,6 +70,6 @@ func _input(event: InputEvent) -> void:
 	
 	
 	bar.value = volume * 100.0
-	volume_label.text = '%s%% Volume' % [round(volume * 100.0)]
+	volume_label.text = '%d%% Volume' % [roundi(volume * 100.0)]
 	icon_label.text = target_bus
 	icon_rect.texture = icons[bus_index] if bus_index < icons.size() else icons[0]

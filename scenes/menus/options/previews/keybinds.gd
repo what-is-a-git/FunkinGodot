@@ -9,6 +9,7 @@ var hovering: int = -1
 func _ready() -> void:
 	var binds: Dictionary = Config.get_value('gameplay', 'binds')
 	
+	keys = keys.filter(func(node): return node is AnimatedSprite)
 	for key: Node in keys:
 		key.get_node('key').text = Alphabet.keycode_to_character(binds[key.name])
 		key.modulate.a = 0.6
@@ -72,3 +73,4 @@ func _handle_button(event: InputEventMouseButton) -> void:
 		return
 	
 	selected = hovering
+	keys[selected].get_node('key').text = '_'

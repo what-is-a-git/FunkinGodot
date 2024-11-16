@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://drcqw4es4j7q4"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/sections/accessibility.gd" id="1_1hocu"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="2_1fbt3"]
+[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="2_c2csa"]
+[ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="4_7yydl"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_2odut"]
+
+[node name="accessibility" type="Node2D"]
+position = Vector2(-320, 0)
+script = ExtResource("1_1hocu")
+
+[node name="flashing_lights" type="Node2D" parent="."]
+position = Vector2(73, 0)
+script = ExtResource("2_c2csa")
+section = &"accessibility"
+key = &"flashing_lights"
+
+[node name="alphabet" type="Node2D" parent="flashing_lights"]
+script = ExtResource("2_1fbt3")
+text = "flashing lights"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="flashing_lights"]
+position = Vector2(421, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_7yydl")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_2odut")
+
+[connection signal="animation_finished" from="flashing_lights/checkbox" to="flashing_lights" method="_on_checkbox_animation_finished"]

@@ -1,7 +1,7 @@
 [configuration]
 
 entry_symbol = "ffmpeg_init"
-compatibility_minimum = 4.1
+compatibility_minimum = 4.3
 
 [libraries]
 windows.debug.x86_64 = "res://addons/ffmpeg/win64/libgdffmpeg.windows.template_debug.x86_64.dll"

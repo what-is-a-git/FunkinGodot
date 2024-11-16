@@ -26,7 +26,7 @@ func _ready() -> void:
 		secret.get_node('player').play()
 		return
 	else:
-		print('You failed the roll! Rolled a %s.' % value)
+		print('You failed the roll! Rolled a %d.' % value)
 		secret.queue_free()
 	
 	Conductor.reset()

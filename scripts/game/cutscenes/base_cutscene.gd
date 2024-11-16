@@ -10,11 +10,11 @@ class_name BaseCutscene extends FunkinScript
 
 func _ready() -> void:
 	super()
-	game.hud.allow_countdown = false
+	game.hud.pause_countdown = true
 
 
 ## Call this function to free this node and allow
 ## the game to start the countdown.
 func finish() -> void:
-	game.hud.allow_countdown = true
+	game.hud.pause_countdown = false
 	queue_free()

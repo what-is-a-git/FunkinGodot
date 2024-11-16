@@ -35,7 +35,6 @@ func _input(event: InputEvent) -> void:
 		change_selection(Input.get_axis('ui_left', 'ui_right'))
 	if event.is_action('ui_accept'):
 		var selection: Category = get_child(selected) as Category
-		
 		if is_instance_valid(selection.category):
 			GlobalAudio.get_player('MENU/CONFIRM').play()
 			options_menu.active = false

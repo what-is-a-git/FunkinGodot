@@ -75,6 +75,7 @@ target_y = 3
 text = "quit"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+process_mode = 1
 stream = ExtResource("4_6wbaw")
 volume_db = -80.0
 autoplay = true

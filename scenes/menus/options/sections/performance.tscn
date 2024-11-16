@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://jmkjkp1jvkpj"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/sections/interface.gd" id="1_lsu8b"]
+[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="2_4cqv6"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="3_p1may"]
+[ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="4_j1leb"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_7omr5"]
+
+[node name="performance" type="Node2D" node_paths=PackedStringArray("options")]
+position = Vector2(-320, 0)
+script = ExtResource("1_lsu8b")
+options = [NodePath("auto_pause"), NodePath("preload_notes"), NodePath("threaded_note_spawning")]
+
+[node name="auto_pause" type="Node2D" parent="."]
+position = Vector2(-17, -180)
+script = ExtResource("2_4cqv6")
+section = &"performance"
+key = &"auto_pause"
+
+[node name="alphabet" type="Node2D" parent="auto_pause"]
+script = ExtResource("3_p1may")
+text = "auto pause"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="auto_pause"]
+position = Vector2(307, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="preload_notes" type="Node2D" parent="."]
+position = Vector2(51, -85)
+script = ExtResource("2_4cqv6")
+section = &"performance"
+key = &"preload_notes"
+
+[node name="alphabet" type="Node2D" parent="preload_notes"]
+script = ExtResource("3_p1may")
+text = "preload notes"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="preload_notes"]
+position = Vector2(383, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="threaded_note_spawning" type="Node2D" parent="."]
+position = Vector2(208, 3)
+script = ExtResource("2_4cqv6")
+section = &"performance"
+key = &"threaded_note_spawning"
+
+[node name="alphabet" type="Node2D" parent="threaded_note_spawning"]
+script = ExtResource("3_p1may")
+text = "async note spawning"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="threaded_note_spawning"]
+position = Vector2(540, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[connection signal="animation_finished" from="auto_pause/checkbox" to="auto_pause" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="preload_notes/checkbox" to="preload_notes" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="threaded_note_spawning/checkbox" to="threaded_note_spawning" method="_on_checkbox_animation_finished"]

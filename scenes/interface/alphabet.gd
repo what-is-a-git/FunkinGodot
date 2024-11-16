@@ -8,11 +8,15 @@ class_name Alphabet extends Node2D
 
 @export_multiline var text: String = '':
 	set(value):
+		if text == value:
+			return
 		text = value
 		_create_characters()
 
 @export var centered: bool = false:
 	set(value):
+		if centered == value:
+			return
 		centered = value
 		_create_characters()
 
@@ -20,6 +24,8 @@ class_name Alphabet extends Node2D
 
 @export_enum('Left', 'Center', 'Right') var horizontal_alignment: String = 'Left':
 	set(value):
+		if horizontal_alignment == value:
+			return
 		horizontal_alignment = value
 		_create_characters()
 

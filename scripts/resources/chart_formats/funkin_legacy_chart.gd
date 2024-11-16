@@ -37,7 +37,7 @@ func parse() -> Chart:
 	else:
 		chart.events.push_back(BPMChange.new(time, bpm))
 	
-	chart.events.push_back(CameraPan.new(time, must_hit))
+	chart.events.push_back(CameraPan.new(time, int(not must_hit)))
 	
 	for section: Dictionary in data.notes:
 		var beat_delta: float = bpm / 60.0
@@ -64,7 +64,7 @@ func parse() -> Chart:
 			chart.events.push_back(BPMChange.new(time, bpm))
 		if section.mustHitSection != must_hit:
 			must_hit = section.mustHitSection
-			chart.events.push_back(CameraPan.new(time, must_hit))
+			chart.events.push_back(CameraPan.new(time, int(not must_hit)))
 		
 		beat += 4.0
 		time += 4.0 / beat_delta

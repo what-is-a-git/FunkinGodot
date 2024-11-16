@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://w4x38w0bt6n1"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/sections/interface.gd" id="1_6p62e"]
+[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="2_422dy"]
+[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="3_ih51s"]
+[ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="4_abqtr"]
+[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_fu6tn"]
+[ext_resource type="Script" path="res://scenes/menus/options/number_option.gd" id="6_1836p"]
+
+[node name="interface" type="Node2D" node_paths=PackedStringArray("options")]
+position = Vector2(-320, 0)
+script = ExtResource("1_6p62e")
+options = [NodePath("cpu_strums_press"), NodePath("countdown_on_resume"), NodePath("sustain_layer"), NodePath("splash_alpha")]
+
+[node name="cpu_strums_press" type="Node2D" parent="."]
+position = Vector2(72, -180)
+script = ExtResource("2_422dy")
+section = &"interface"
+key = &"cpu_strums_press"
+
+[node name="alphabet" type="Node2D" parent="cpu_strums_press"]
+script = ExtResource("3_ih51s")
+text = "cpu strum glow"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="cpu_strums_press"]
+position = Vector2(421, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_abqtr")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_fu6tn")
+
+[node name="countdown_on_resume" type="Node2D" parent="."]
+position = Vector2(186, -84)
+script = ExtResource("2_422dy")
+section = &"interface"
+key = &"countdown_on_resume"
+
+[node name="alphabet" type="Node2D" parent="countdown_on_resume"]
+script = ExtResource("3_ih51s")
+text = "countdown on resume"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="countdown_on_resume"]
+position = Vector2(531, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_abqtr")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_fu6tn")
+
+[node name="sustain_layer" type="Node2D" parent="."]
+position = Vector2(227, 7)
+script = ExtResource("2_422dy")
+section = &"interface"
+key = &"sustain_layer"
+strings = Array[String](["above", "below"])
+
+[node name="alphabet" type="Node2D" parent="sustain_layer"]
+script = ExtResource("3_ih51s")
+text = "sustains below strums"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="sustain_layer"]
+position = Vector2(569, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_abqtr")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_fu6tn")
+
+[node name="splash_alpha" type="Node2D" parent="."]
+position = Vector2(159, 97)
+script = ExtResource("6_1836p")
+section = &"interface"
+key = &"note_splash_alpha"
+ranged = true
+minimum = 0.0
+maximum = 100.0
+PREVIEW = ""
+
+[node name="label" type="Node2D" parent="splash_alpha"]
+position = Vector2(-140, 0)
+script = ExtResource("3_ih51s")
+text = "SPLASH ALPHA:"
+centered = true
+
+[node name="value" type="Node2D" parent="splash_alpha"]
+position = Vector2(179, -34)
+script = ExtResource("3_ih51s")
+text = "0"
+
+[connection signal="animation_finished" from="cpu_strums_press/checkbox" to="cpu_strums_press" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="countdown_on_resume/checkbox" to="countdown_on_resume" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="sustain_layer/checkbox" to="sustain_layer" method="_on_checkbox_animation_finished"]

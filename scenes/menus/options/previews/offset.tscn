@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctp6qq4w60hkd"]
+
+[ext_resource type="Script" path="res://scenes/menus/options/previews/offset.gd" id="1_508hw"]
+[ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="2_5bgr3"]
+
+[node name="offset" type="Node2D"]
+script = ExtResource("1_508hw")
+
+[node name="notes" parent="." instance=ExtResource("2_5bgr3")]
+position = Vector2(0, -240)

@@ -10,6 +10,7 @@ var fullscreened: bool = false:
 var game_size: Vector2:
 	get:
 		return get_viewport().get_visible_rect().size
+var was_paused: bool = false
 
 
 func _ready() -> void:
@@ -25,6 +26,25 @@ func _ready() -> void:
 	# Shouldn't be detrimental to this game specifically so...
 	PhysicsServer2D.set_active(false)
 	PhysicsServer3D.set_active(false)
+	
+	var window := get_window()
+	window.focus_entered.connect(_on_focus_enter)
+	window.focus_exited.connect(_on_focus_exit)
+
+
+func _on_focus_enter() -> void:
+	if not Config.get_value('performance', 'auto_pause'):
+		return
+	get_tree().paused = false
+
+
+func _on_focus_exit() -> void:
+	if not Config.get_value('performance', 'auto_pause'):
+		return
+	
+	var tree := get_tree()
+	was_paused = tree.paused
+	tree.paused = true
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

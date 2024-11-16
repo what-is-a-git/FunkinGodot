@@ -9,6 +9,9 @@ extends CanvasLayer
 var music_volume: float = 0.0
 var active: bool = true
 var selected: int = 0
+var tree: SceneTree:
+	get:
+		return get_tree()
 
 
 func _ready() -> void:
@@ -19,7 +22,6 @@ func _ready() -> void:
 	tween.tween_property(root, 'modulate:a', 1.0, 0.5)
 	
 	create_tween().tween_property(self, 'music_volume', 0.9, 2.0).set_delay(0.5)
-	
 	if not is_instance_valid(Game.instance):
 		return
 	
@@ -50,12 +52,13 @@ func _input(event: InputEvent) -> void:
 		for option: ListedAlphabet in options.get_children():
 			if option.target_y != 0:
 				continue
-			
 			var type: StringName = option.name.to_lower()
-			
 			match type:
 				&'resume':
 					_close()
+					if Game.instance.song_started and \
+							Config.get_value('interface', 'countdown_on_resume'):
+						Game.instance.countdown_resume()
 				&'restart':
 					_close()
 					get_tree().reload_current_scene()
@@ -83,11 +86,12 @@ func _change_selection(amount: int = 0) -> void:
 
 
 func _close() -> void:
-	active = false
-	get_viewport().set_input_as_handled()
-	visible = false
-	get_tree().paused = false
 	queue_free()
+	get_viewport().set_input_as_handled()
+	active = false
+	visible = false
+	tree.current_scene.process_mode = Node.PROCESS_MODE_INHERIT
+	Conductor.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	if Game.instance.song_started:
 		Game.instance.tracks.check_sync(true)

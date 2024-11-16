@@ -22,17 +22,14 @@ func display() -> void:
 		return
 	
 	var video_memory_current: float = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)
-	
 	if video_memory_current > video_memory_peak:
 		video_memory_peak = video_memory_current
 	
 	var texture_memory_current: float = Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)
-	
 	if texture_memory_current > texture_memory_peak:
 		texture_memory_peak = texture_memory_current
 	
 	var static_memory_current: float = Performance.get_monitor(Performance.MEMORY_STATIC)
-	
 	if static_memory_current > static_memory_peak:
 		static_memory_peak = static_memory_current
 	
@@ -44,7 +41,7 @@ func display() -> void:
 	
 	label.size = Vector2.ZERO
 	var text_output: String = \
-			'%s FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s' % [
+			'%d FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s' % [
 		Performance.get_monitor(Performance.TIME_FPS),
 		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
@@ -53,7 +50,7 @@ func display() -> void:
 	]
 	
 	if OS.is_debug_build():
-		text_output += '\n\n-=##=- DEBUG -=##=-\n%s (Scene)\n%.2fms Offset\n%.2fms Conductor (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n%s Draw Calls (%s Drawn Objects)\n%s / %s <CPU>\n%s Nodes (%s Orphaned)' % [
+		text_output += '\n\n-=##=- DEBUG -=##=-\n%s (Scene)\n%.2fms Offset\n%.2fms Conductor (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n%d Draw Calls (%d Drawn Objects)\n%s / %s <CPU>\n%d Nodes (%d Orphaned)\n%s' % [
 			scene_name,
 			AudioServer.get_output_latency() * -1000.0, Conductor.offset * 1000.0,
 			Conductor.manual_offset * 1000.0,
@@ -64,6 +61,7 @@ func display() -> void:
 			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
+			get_rendering_driver()
 		]
 	
 	label.text = text_output
@@ -93,3 +91,15 @@ func _input(event: InputEvent) -> void:
 			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(label, 'modulate:a', 0.0, 0.2)
 			tween.tween_property(self, 'visible', false, 0.0)
+
+
+func get_rendering_driver() -> String:
+	var version := RenderingServer.get_video_adapter_api_version()
+	if version.begins_with('12'):
+		return 'D3D12'
+	if version.begins_with('3'):
+		return 'OpenGL'
+	if version.begins_with('1'):
+		return 'Vulkan'
+	
+	return 'Metal'

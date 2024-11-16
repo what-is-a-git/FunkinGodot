@@ -1,13 +1,14 @@
 class_name CameraPan extends EventData
 
 
-func _init(new_time: float, side: bool) -> void:
+func _init(new_time: float, side: Side) -> void:
 	name = &'Camera Pan'
-	data.push_back(Side.PLAYER if side else Side.OPPONENT)
+	data.push_back(side)
 	time = new_time
 
 
 enum Side {
-	OPPONENT = 0,
-	PLAYER = 1,
+	PLAYER = 0,
+	OPPONENT = 1,
+	GIRLFRIEND = 2,
 }

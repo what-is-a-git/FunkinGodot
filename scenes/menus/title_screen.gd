@@ -72,7 +72,6 @@ func _on_beat_hit(beat: int) -> void:
 		
 		var previous: String = alphabet.text
 		intro_animation.seek(float(beat), true)
-		
 		if alphabet.text == '!random':
 			alphabet.text = previous
 			_add_random_line()

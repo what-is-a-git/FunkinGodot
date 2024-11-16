@@ -1,9 +1,9 @@
 extends BaseOptionsSection
 
 
-@export var max_y: float = 720.0
-@onready var section: Node2D = $'../..'
-@onready var options: Node2D = $options
+@export var max_y: float = 160.0
+@onready var the_list: Node2D = $the_list
+@onready var options: Node2D = the_list.get_node(^'options')
 var selected_option: Option
 
 
@@ -21,8 +21,8 @@ func _process(delta: float) -> void:
 	
 	if is_instance_valid(selected_option):
 		delta = minf(delta, 0.125)
-		var target := clampf(-184.0 - selected_option.position.y, -max_y, 0.0)
-		camera.position.y = 360.0 - target
+		var target := clampf(selected_option.position.y, 0.0, max_y)
+		the_list.position.y = lerpf(the_list.position.y, -184.0 - target, delta * 7.0)
 
 
 func _input(event: InputEvent) -> void:
@@ -38,7 +38,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_up') or event.is_action('ui_down'):
 		change_selection(Input.get_axis('ui_up', 'ui_down'))
 	if event.is_action('ui_accept'):
-		get_viewport().set_input_as_handled()
 		selected_option._select()
 
 
@@ -49,7 +48,7 @@ func change_selection(amount: int = 0) -> void:
 	selected_option._focus()
 	
 	if amount != 0:
-		GlobalAudio.get_player('MENU/SCROLL').play()
+		GlobalAudio.get_player(^'MENU/SCROLL').play()
 
 
 func _update_items(delta: float) -> void:

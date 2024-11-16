@@ -17,8 +17,7 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 		tween.kill()
 	
 	if use_transition:
-		var last_paused := tree.paused
-		tree.paused = true
+		tree.current_scene.process_mode = Node.PROCESS_MODE_DISABLED
 		visible = true
 		tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(transition.material, 'shader_parameter/progress', 1.0, 0.5)
@@ -33,7 +32,6 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 			tween.tween_property(transition.material, 'shader_parameter/progress', 0.0, 0.5)
 			tween.tween_callback(func():
 				visible = false)
-			tree.paused = last_paused
 		)
 	else:
 		if killed:

@@ -4,7 +4,7 @@ extends Node2D
 static var index: int = 0
 static var difficulty_index: int = 0
 
-@onready var list: FreeplayList = load('res://resources/freeplay_list.tres')
+var list: FreeplayList
 
 @onready var background: Sprite2D = %background
 var target_background_color: Color = Color.WHITE
@@ -36,6 +36,7 @@ signal difficulty_changed(difficulty: StringName)
 func _ready() -> void:
 	randomize()
 	
+	list = load('res://resources/freeplay_list.tres')
 	for i: int in list.list.size():
 		_load_song(i)
 	
@@ -49,9 +50,9 @@ func _ready() -> void:
 	Conductor.reset()
 	Conductor.target_audio = track
 	
+	change_selection()
 	target_background_color = song_nodes[index].song.icon.color
 	background.modulate = target_background_color
-	change_selection()
 
 
 func _process(delta: float) -> void:
@@ -95,8 +96,6 @@ func _input(event: InputEvent) -> void:
 func change_selection(amount: int = 0) -> void:
 	index = wrapi(index + amount, 0, song_nodes.size())
 	song_changed.emit(index)
-	
-	target_background_color = song_nodes[index].song.icon.color
 	change_difficulty()
 	
 	track.stop()
@@ -110,6 +109,8 @@ func change_selection(amount: int = 0) -> void:
 		var node := song_nodes[i]
 		node.target_y = i - index
 		node.modulate.a = 1.0 if node.target_y == 0 else 0.6
+	
+	target_background_color = song_nodes[index].song.icon.color
 
 
 func change_difficulty(amount: int = 0) -> void:

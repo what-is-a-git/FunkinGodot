@@ -1,4 +1,18 @@
 class_name Category extends Control
 
 
-@export var category: Node2D
+@export var category: PackedScene = preload('res://scenes/menus/options/sections/no_section.tscn')
+@onready var sprite: AnimatedSprite = $sprite
+
+var target_alpha: float = 0.6
+var target_scale: float = 0.8
+
+
+func _ready() -> void:
+	sprite.modulate.a = target_alpha
+	sprite.scale = Vector2(target_scale, target_scale)
+
+
+func _process(delta: float) -> void:
+	sprite.modulate.a = lerpf(sprite.modulate.a, target_alpha, delta * 6.0)
+	sprite.scale = sprite.scale.lerp(Vector2(target_scale, target_scale), delta * 6.0)

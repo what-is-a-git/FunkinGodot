@@ -16,7 +16,10 @@ extends HUD
 @onready var combo_node: Node2D = rating_container.get_node('combo')
 var rating_tween: Tween
 
-var allow_countdown: bool = true
+var pause_countdown: bool = false
+var _force_time: float = NAN
+var _force_countdown: bool = false
+var countdown_offset: int = 0
 var tracks: Tracks
 var skin: HUDSkin
 
@@ -48,6 +51,20 @@ func setup() -> void:
 	song_label.text = '%s • [%s]' % [game.metadata.display_name, Game.difficulty.to_upper()]
 
 
+func countdown_resume() -> void:
+	super()
+	if is_nan(_force_time):
+		_force_time = Game.instance.tracks.get_playback_position()
+	Game.instance.tracks.set_playback_position(
+			maxf(_force_time - 4.0 / Conductor.beat_delta, 0.0))
+	countdown_offset = -floori(Conductor.beat) - 5
+	_force_countdown = true
+	pause_countdown = false
+	
+	Game.instance.tracks.player.volume_db = -120.0
+	create_tween().tween_property(Game.instance.tracks.player, ^'volume_db', 0.0, 4.0 / Conductor.beat_delta)
+
+
 func _ready_post() -> void:
 	super()
 	
@@ -59,18 +76,23 @@ func _ready_post() -> void:
 func _on_beat_hit(beat: int) -> void:
 	super(beat)
 	
-	if not do_countdown:
+	if (not do_countdown) and not _force_countdown:
 		return
 	
-	if beat >= 0 or game.song_started:
+	if (beat >= 0 or game.song_started) and not _force_countdown:
 		return
 	
-	if not allow_countdown:
+	if pause_countdown:
 		Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
 		Conductor.beat = -4.0
 		return
 	
 	# countdown lol
+	beat += countdown_offset
+	if beat >= 0 and _force_countdown:
+		_force_countdown = false
+		_force_time = NAN
+		return
 	var index: int = clampi(4 - absi(beat), 0, 3)
 	_display_countdown_sprite(index)
 	_play_countdown_sound(index)

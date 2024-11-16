@@ -20,6 +20,7 @@ var _note_types: NoteTypes = null
 var _note_splash_alpha: float = 0.6
 var _lane_count: int
 var _game: Game = null
+var _force_no_chart: bool = false
 
 signal note_hit(note: Note)
 signal note_miss(note: Note)
@@ -52,10 +53,13 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if (not is_instance_valid(_chart)) and is_instance_valid(Game.chart):
+	if (not _force_no_chart) and \
+			(not is_instance_valid(_chart)) and is_instance_valid(Game.chart):
 		_chart = Game.chart
-	if is_inside_tree(): # multithreading weirdness
+	if Config.get_value('performance', 'threaded_note_spawning') and is_inside_tree(): # multithreading weirdness
 		call_deferred_thread_group(&'_try_spawning')
+	elif not Config.get_value('performance', 'threaded_note_spawning'):
+		_try_spawning()
 	
 	var receptor_y: float = _receptors[0].position.y
 	

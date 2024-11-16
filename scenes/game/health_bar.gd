@@ -72,7 +72,7 @@ func update_score_label() -> void:
 			continue
 		break
 	
-	score_label.text = 'Score:%s • Misses:%s • Accuracy:%.3f%% (%s)' % [
+	score_label.text = 'Score:%d • Misses:%d • Accuracy:%.3f%% (%s)' % [
 		game.score,
 		game.misses,
 		game.accuracy,

@@ -170,15 +170,15 @@ func _ready() -> void:
 	else:
 		skin = load('res://resources/hud_skins/default.tres')
 	
-	hud.setup()
-	hud_setup.emit()
-	
 	_player_field._note_types = note_types
 	_opponent_field._note_types = note_types
 	_player_field.note_miss.connect(_on_note_miss)
 	_player_field.note_hit.connect(_on_note_hit)
 	_opponent_field.note_hit.connect(func(note: Note):
 		camera_bumps = true)
+	
+	hud.setup()
+	hud_setup.emit()
 	
 	Conductor.reset()
 	Conductor.beat_hit.connect(_on_beat_hit)
@@ -230,12 +230,10 @@ func _process(delta: float) -> void:
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
-			Conductor.time = tracks.get_playback_position()
+			Conductor.beat = Conductor.offset / Conductor.beat_delta
+			Conductor.target_audio = tracks.player
 			song_start.emit()
 			song_started = true
-	
-	if not is_instance_valid(chart):
-		return
 	
 	while _event < chart.events.size() and \
 			Conductor.time >= chart.events[_event].time:
@@ -260,7 +258,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('pause_game'):
 		var menu: CanvasLayer = pause_menu.instantiate()
 		add_child(menu)
-		get_tree().paused = true
+		process_mode = Node.PROCESS_MODE_DISABLED
+		Conductor.process_mode = Node.PROCESS_MODE_DISABLED
 	if OS.is_debug_build() and event.is_action('toggle_botplay'):
 		save_score = false
 		_player_field.takes_input = not _player_field.takes_input
@@ -294,12 +293,40 @@ func _on_event_hit(event: EventData) -> void:
 		&'bpm change':
 			Conductor.tempo = event.data[0]
 		&'camera pan':
-			var character: Character = player if event.data[0] == \
-					CameraPan.Side.PLAYER else opponent
-			target_camera_position = character._camera_offset.global_position
+			var target: Character = spectator
+			match event.data[0]:
+				CameraPan.Side.PLAYER:
+					target = player
+				CameraPan.Side.OPPONENT:
+					target = opponent
+			
+			target_camera_position = target._camera_offset.global_position
 			
 			if event.time <= 0.0:
 				camera.position = target_camera_position
+		&'zoomcamera':
+			var data: Dictionary = event.data[0]
+			var steps: int = data.get('duration', 32)
+			var ease: String = data.get('ease', 'expoOut')
+			var mode: String = data.get('mode', 'stage')
+			var zoom: float = data.get('zoom', 1.05)
+			var tween := create_tween()
+			match ease:
+				'expoOut':
+					tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+				'elasticInOut':
+					tween.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
+				'linear': # default anyways
+					pass
+				'INSTANT':
+					tween.kill()
+					target_camera_zoom = Vector2(zoom, zoom)
+					return
+				_:
+					printerr('Ease of %s not supported at this time.' % ease)
+			
+			tween.tween_property(self, ^'target_camera_zoom', Vector2(zoom, zoom), 
+					(0.25 / Conductor.beat_delta) * float(steps))
 		_:
 			pass
 	
@@ -323,7 +350,6 @@ func _song_finished(force: bool = false) -> void:
 		return
 	
 	var event: CancellableEvent = CancellableEvent.new()
-	
 	if not force:
 		song_finished.emit(event)
 	else:
@@ -371,6 +397,10 @@ func _song_finished(force: bool = false) -> void:
 			SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')
 		_:
 			SceneManager.switch_to('scenes/menus/title_screen.tscn')
+
+
+func countdown_resume() -> void:
+	hud.countdown_resume()
 
 
 enum PlayMode {
