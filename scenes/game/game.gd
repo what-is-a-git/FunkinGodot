@@ -316,6 +316,10 @@ func _on_event_hit(event: EventData) -> void:
 					tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 				'elasticInOut':
 					tween.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
+				'quadInOut':
+					tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+				'smoothStepInOut':
+					tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 				'linear': # default anyways
 					pass
 				'INSTANT':

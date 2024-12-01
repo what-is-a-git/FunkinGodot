@@ -114,8 +114,9 @@ func _on_hit_note(note: Note):
 	
 	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time
-		note.data.length -= Conductor.time - note.data.time
+		note.data.length = note.length
 		note._sustain_offset = -(Conductor.time - note.data.time)
+		note._process(0.0)
 
 
 func miss_note(note: Note) -> void:

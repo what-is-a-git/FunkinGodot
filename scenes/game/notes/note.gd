@@ -63,8 +63,8 @@ func _process(delta: float) -> void:
 	
 	if data.length >= 0.0 and is_instance_valid(sustain):
 		sustain.size.y = data.length * 1000.0 * 0.45 * _field._scroll_speed \
-				/ scale.y - tail.texture.get_height()
-		clip_rect.size.y = sustain.size.y + tail.texture.get_height()
+				/ scale.y - tail.size.y
+		clip_rect.size.y = sustain.size.y + tail.size.y + 256.0
 		
 		# I forgot the scale.y so many times but this works
 		# as longg as the clip rect is big enough to fill the

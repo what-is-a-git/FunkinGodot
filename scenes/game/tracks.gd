@@ -17,6 +17,15 @@ var last_playback_position: float = 0.0
 signal finished
 
 
+func _unloop_track(track: AudioStream) -> void:
+	if track is AudioStreamMP3 or track is AudioStreamOggVorbis:
+		track.loop = false
+	elif track is AudioStreamWAV:
+		track.loop_mode = AudioStreamWAV.LOOP_DISABLED
+	else:
+		printerr('ERROR: Tried to unloop unsupported AudioStream type.')
+
+
 ## Loads the audio tracks from the song [param song]
 ## and places them into this Node as separate [AudioStreamPlayerEX]s.
 func load_tracks(song: StringName, song_path: String = '') -> void:
@@ -36,7 +45,12 @@ func load_tracks(song: StringName, song_path: String = '') -> void:
 	var index: int = 1
 	player.stream = tracks
 	player.bus = &'Music'
-	player.set('parameters/looping', false)
+	if tracks is AudioStreamSynchronized:
+		for i in tracks.stream_count:
+			_unloop_track(tracks.get_sync_stream(i))
+	else:
+		_unloop_track(tracks)
+	
 	player.finished.connect(_on_finished)
 
 

@@ -58,7 +58,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if not OS.is_debug_build():
 		return
-	if event.is_action('menu_reload'):
+	if event.is_action('menu_reload') and is_instance_valid(get_tree().current_scene):
 		get_tree().reload_current_scene()
 		get_tree().paused = false
 		return
