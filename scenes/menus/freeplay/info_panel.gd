@@ -20,6 +20,9 @@ var song_node: FreeplaySongNode
 func _ready() -> void:
 	if not is_instance_valid(parent):
 		parent = get_tree().current_scene
+	
+	parent.song_changed.connect(_on_song_changed)
+	parent.difficulty_changed.connect(_on_difficulty_changed)
 
 
 func _on_song_changed(index: int) -> void:

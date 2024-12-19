@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if data.length >= 0.0 and is_instance_valid(sustain):
-		sustain.size.y = data.length * 1000.0 * 0.45 * _field._scroll_speed \
+		sustain.size.y = data.length * 1000.0 * 0.45 * (_field._scroll_speed * absf(_field._scroll_speed_modifier)) \
 				/ scale.y - tail.size.y
 		clip_rect.size.y = sustain.size.y + tail.size.y + 256.0
 		
@@ -96,7 +96,8 @@ func _process(delta: float) -> void:
 				clip_rect.position.y = 0.0
 				sustain.position.y = 0.0
 		
-		sustain.position.y += _sustain_offset * 1000.0 * 0.45 * _field._scroll_speed
+		sustain.position.y += _sustain_offset * 1000.0 * 0.45 * \
+				(_field._scroll_speed * absf(_field._scroll_speed_modifier))
 	
 	if not _hit:
 		return

@@ -27,7 +27,8 @@ func _ready() -> void:
 		return
 	
 	game = Game.instance
-	game.hud_setup.connect(_on_hud_setup)
+	if not game.hud_setup.is_connected(_on_hud_setup):
+		game.hud_setup.connect(_on_hud_setup)
 
 
 func _on_hud_setup() -> void:

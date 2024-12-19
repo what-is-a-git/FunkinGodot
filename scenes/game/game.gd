@@ -9,6 +9,8 @@ static var mode: PlayMode = PlayMode.FREEPLAY
 
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
+static var camera_position: Vector2 = Vector2.INF
+static var camera_zoom: Vector2 = Vector2.INF
 
 @onready var pause_menu: PackedScene = load('res://scenes/game/pause_menu.tscn')
 
@@ -201,11 +203,17 @@ func _ready() -> void:
 			tracks.check_sync(true)
 	)
 	
+	if camera_position != Vector2.INF:
+		camera.position = camera_position
+	if camera_zoom != Vector2.INF:
+		camera.zoom = camera_zoom
 	ready_post.emit()
 
 
 func _process(delta: float) -> void:
 	call_deferred('_process_post', delta)
+	camera_position = camera.position
+	camera_zoom = camera.zoom
 	
 	if not playing:
 		return
@@ -320,6 +328,8 @@ func _on_event_hit(event: EventData) -> void:
 					tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 				'smoothStepInOut':
 					tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+				'circOut':
+					tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 				'linear': # default anyways
 					pass
 				'INSTANT':
@@ -394,6 +404,8 @@ func _song_finished(force: bool = false) -> void:
 		return
 	
 	GlobalAudio.get_player('MENU/CANCEL').play()
+	camera_position = Vector2.INF
+	camera_zoom = Vector2.INF
 	match mode:
 		PlayMode.STORY:
 			SceneManager.switch_to('scenes/menus/story_mode_menu.tscn')

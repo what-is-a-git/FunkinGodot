@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://u1gd5kt4gypw"]
 
-[ext_resource type="Script" path="res://scenes/tools/godot/sparrow_to_spriteframes.gd" id="1_7u426"]
+[ext_resource type="Script" uid="uid://cjow6k70i87vg" path="res://scenes/tools/godot/sparrow_to_spriteframes.gd" id="1_7u426"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="2_6mghc"]
-[ext_resource type="Shader" path="res://resources/shaders/texture_overlay.gdshader" id="2_51y5b"]
+[ext_resource type="Shader" uid="uid://dqe8scsjrespm" path="res://resources/shaders/texture_overlay.gdshader" id="2_51y5b"]
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://resources/fonts/funkin.ttf" id="4_b4mj3"]
 [ext_resource type="Theme" uid="uid://bnfirbbvjsv2r" path="res://resources/themes/tools_theme.tres" id="4_jbg5x"]
 

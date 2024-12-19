@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://da8mu3oqto3qq"]
 
-[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_tneyb"]
-[ext_resource type="Script" path="res://scenes/game/tracks.gd" id="2_j74rm"]
-[ext_resource type="Script" path="res://scenes/game/script_container.gd" id="2_oquto"]
+[ext_resource type="Script" uid="uid://dhv3phik4tia" path="res://scenes/game/game.gd" id="1_tneyb"]
+[ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://scenes/game/tracks.gd" id="2_j74rm"]
+[ext_resource type="Script" uid="uid://cm308tpfbi72q" path="res://scenes/game/script_container.gd" id="2_oquto"]
 [ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://scenes/game/huds/default_hud.tscn" id="4_4k22v"]
-[ext_resource type="Script" path="res://scripts/game/accuracy_calculator.gd" id="6_ur1sh"]
+[ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://scripts/game/accuracy_calculator.gd" id="6_ur1sh"]
 
 [sub_resource type="Curve" id="Curve_5selw"]
 bake_resolution = 180
@@ -21,6 +21,7 @@ position_smoothing_speed = 4.0
 [node name="tracks" type="Node" parent="."]
 editor_description = "Node to contain all audio tracks for the given song that is playing."
 script = ExtResource("2_j74rm")
+stop_on_finish = true
 
 [node name="player" type="AudioStreamPlayer" parent="tracks"]
 

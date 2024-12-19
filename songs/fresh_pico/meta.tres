@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SongMetadata" load_steps=3 format=3 uid="uid://bqc742u7mu8g8"]
+
+[ext_resource type="Script" uid="uid://b5vwuv0r4d1t4" path="res://scripts/resources/song_author.gd" id="1_yyeyk"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_meecp"]
+
+[resource]
+script = ExtResource("2_meecp")
+display_name = &"Fresh Pico Mix"
+authors = Array[ExtResource("1_yyeyk")]([])
+metadata/_custom_type_script = ExtResource("2_meecp")

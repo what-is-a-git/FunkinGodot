@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://qo1b6uuads03"]
 
-[ext_resource type="Script" path="res://scenes/tools/godot/spritemap_to_scene.gd" id="1_3e5lh"]
+[ext_resource type="Script" uid="uid://cr6v5py5luafs" path="res://scenes/tools/godot/spritemap_to_scene.gd" id="1_3e5lh"]
 
 [node name="spritemap_to_scene" type="Node2D"]
 script = ExtResource("1_3e5lh")
-spritemap = "res://songs/extra/weekend1/assets/characters/abot/systemEyes"
 
 [node name="canvas_layer" type="CanvasLayer" parent="."]
 layer = -10

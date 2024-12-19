@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_2q4rq"]
-[ext_resource type="Script" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
-[ext_resource type="AudioStream" uid="uid://bu8uskde2kej8" path="res://songs/tutorial/tracks/Inst.ogg" id="2_j8v40"]
-[ext_resource type="Script" path="res://scenes/menus/freeplay/info_panel.gd" id="4_5dymk"]
+[ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
+[ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://scenes/game/tracks.gd" id="2_fq3va"]
+[ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://scenes/menus/freeplay/info_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7yg7l"]
-[ext_resource type="Script" path="res://scenes/menus/freeplay/score_panel.gd" id="6_mti1l"]
-[ext_resource type="Script" path="res://scenes/menus/freeplay/reset_panel.gd" id="7_detv5"]
+[ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://scenes/menus/freeplay/score_panel.gd" id="6_mti1l"]
+[ext_resource type="Script" uid="uid://b3d82j8exp4ge" path="res://scenes/menus/freeplay/reset_panel.gd" id="7_detv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -45,12 +45,13 @@ script = ExtResource("1_p2lt6")
 unique_name_in_owner = true
 one_shot = true
 
-[node name="track" type="AudioStreamPlayer" parent="."]
+[node name="tracks" type="Node" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_j8v40")
-volume_db = -6.0
-bus = &"Music"
-parameters/looping = true
+script = ExtResource("2_fq3va")
+looping = true
+metadata/_custom_type_script = ExtResource("2_fq3va")
+
+[node name="player" type="AudioStreamPlayer" parent="tracks"]
 
 [node name="background" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -256,6 +257,4 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="difficulty_changed" from="." to="root_control/info_panel" method="_on_difficulty_changed"]
-[connection signal="song_changed" from="." to="root_control/info_panel" method="_on_song_changed"]
 [connection signal="timeout" from="track_timer" to="." method="_load_tracks"]

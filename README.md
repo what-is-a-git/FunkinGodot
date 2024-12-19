@@ -5,6 +5,11 @@ in the [Godot Game Engine](https://godotengine.org) to be a useful tool in makin
 whatever kind of mod you want, with more performance and easily accessible features
 thanks to Godot itself.
 
+## Godot Version
+
+Currently this is using whatever the latest Godot 4 dev build is, so 4.4dev6 as
+of writing. (December 19th 2024)
+
 ## State of this branch (the rewrite)
 
 Currently in the state of finishing out more minor options and things but nothing is
