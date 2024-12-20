@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SongMetadata" load_steps=3 format=3 uid="uid://beqfpjkjo21l5"]
+
+[ext_resource type="Script" uid="uid://b5vwuv0r4d1t4" path="res://scripts/resources/song_author.gd" id="1_j50od"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_yn8lc"]
+
+[resource]
+script = ExtResource("2_yn8lc")
+display_name = &"Bopeebo Pico Mix"
+authors = Array[ExtResource("1_j50od")]([])
+metadata/_custom_type_script = ExtResource("2_yn8lc")

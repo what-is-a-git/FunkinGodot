@@ -87,7 +87,12 @@ func _init() -> void:
 		metadata = load('res://songs/%s/meta.tres' % song)
 
 
+func _exit_tree() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	GlobalAudio.music.stop()
 	tracks.load_tracks(song)
 	tracks.finished.connect(_song_finished)
@@ -309,7 +314,6 @@ func _on_event_hit(event: EventData) -> void:
 					target = opponent
 			
 			target_camera_position = target._camera_offset.global_position
-			
 			if event.time <= 0.0:
 				camera.position = target_camera_position
 		&'zoomcamera':

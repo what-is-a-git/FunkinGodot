@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=55 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=59 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" uid="uid://d3miep1y6ya1p" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -85,6 +85,20 @@ song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
 icon = SubResource("Resource_ul62k")
 difficulty_remap = SubResource("Resource_q8m0k")
 
+[sub_resource type="Resource" id="Resource_g2vdc"]
+script = ExtResource("1_6tpon")
+texture = ExtResource("4_chb64")
+color = Color(0.744991, 0.435264, 0.878843, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_08tpj"]
+script = ExtResource("1_vnt78")
+song_name = &"bopeebo_pico"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_g2vdc")
+metadata/_custom_type_script = ExtResource("1_vnt78")
+
 [sub_resource type="Resource" id="Resource_j6a78"]
 script = ExtResource("1_6tpon")
 texture = ExtResource("4_chb64")
@@ -97,6 +111,20 @@ script = ExtResource("1_vnt78")
 song_name = &"fresh_pico"
 song_difficulties = [&"easy", &"normal", &"hard"]
 icon = SubResource("Resource_j6a78")
+metadata/_custom_type_script = ExtResource("1_vnt78")
+
+[sub_resource type="Resource" id="Resource_puthd"]
+script = ExtResource("1_6tpon")
+texture = ExtResource("4_chb64")
+color = Color(0.744991, 0.435264, 0.878843, 1)
+frames = Vector2i(1, 1)
+filter = 0
+
+[sub_resource type="Resource" id="Resource_smd7f"]
+script = ExtResource("1_vnt78")
+song_name = &"dad_battle_pico"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_puthd")
 metadata/_custom_type_script = ExtResource("1_vnt78")
 
 [sub_resource type="Resource" id="Resource_uie4k"]
@@ -274,4 +302,4 @@ song_difficulties = ["this", "song", "does", "not", "exist", ":3", "lol"]
 
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_1l15e"), SubResource("Resource_y6hjn"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v"), SubResource("Resource_qjme5"), SubResource("Resource_dqwpl"), SubResource("Resource_mtd2w"), SubResource("Resource_ri8gu"), SubResource("Resource_33qe6"), SubResource("Resource_k8xfe"), SubResource("Resource_h5ncf"), SubResource("Resource_ynvnj"), SubResource("Resource_5tr04"), SubResource("Resource_uwajg"), SubResource("Resource_1tk38"), SubResource("Resource_3o6rh")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_08tpj"), SubResource("Resource_1l15e"), SubResource("Resource_smd7f"), SubResource("Resource_y6hjn"), SubResource("Resource_22f7a"), SubResource("Resource_q0jyw"), SubResource("Resource_idgcb"), SubResource("Resource_1vsam"), SubResource("Resource_w07p7"), SubResource("Resource_y5b8f"), SubResource("Resource_tyn3p"), SubResource("Resource_ch8bj"), SubResource("Resource_gfny3"), SubResource("Resource_c1753"), SubResource("Resource_bopu4"), SubResource("Resource_51d1y"), SubResource("Resource_0dxe2"), SubResource("Resource_wtxqs"), SubResource("Resource_ikqmb"), SubResource("Resource_lqup2"), SubResource("Resource_8axvm"), SubResource("Resource_yss6v"), SubResource("Resource_qjme5"), SubResource("Resource_dqwpl"), SubResource("Resource_mtd2w"), SubResource("Resource_ri8gu"), SubResource("Resource_33qe6"), SubResource("Resource_k8xfe"), SubResource("Resource_h5ncf"), SubResource("Resource_ynvnj"), SubResource("Resource_5tr04"), SubResource("Resource_uwajg"), SubResource("Resource_1tk38"), SubResource("Resource_3o6rh")])
