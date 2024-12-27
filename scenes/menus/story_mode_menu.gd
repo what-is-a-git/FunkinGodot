@@ -55,7 +55,6 @@ func _input(event: InputEvent) -> void:
 		
 		if _load_first_song():
 			GlobalAudio.get_player('MENU/CONFIRM').play()
-			
 			if is_instance_valid(props.props[2]):
 				props.props[2].play_anim('confirm', true)
 				
@@ -73,12 +72,10 @@ func _input(event: InputEvent) -> void:
 func _load_active_playlist() -> void:
 	var selected_week = weeks.get_child(weeks.selected)
 	Game.playlist = []
-	
 	if selected_week.songs.size() == 1:
 		return
 	
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
-	
 	for i: int in range(1, selected_week.songs.size()):
 		var entry := GamePlaylistEntry.new()
 		entry.name = selected_week.get_song_name(i, difficulty)
@@ -88,7 +85,6 @@ func _load_active_playlist() -> void:
 
 func _load_first_song() -> bool:
 	var selected_week = weeks.get_child(weeks.selected)
-	
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	var song_name: String = selected_week.get_song_name(0, difficulty)
 	Game.chart = Chart.load_song(song_name, difficulty)

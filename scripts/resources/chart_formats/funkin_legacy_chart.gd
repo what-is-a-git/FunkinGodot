@@ -55,7 +55,10 @@ func parse() -> Chart:
 				note_data.direction = (note_data.direction + 4) % 8
 			
 			note_data.length = clampf(float(note[2]) / 1000.0, 0.0, INF)
-			note_data.type = &'default'
+			if note.size() > 3 and note[3] is String:
+				note_data.type = note[3]
+			else:
+				note_data.type = &'default'
 			
 			chart.notes.push_back(note_data)
 		

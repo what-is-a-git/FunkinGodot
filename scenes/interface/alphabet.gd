@@ -105,7 +105,6 @@ func _create_characters() -> void:
 				
 				if characters.is_empty() or line_size <= Vector2i.ZERO:
 					continue
-				
 				for character: AnimatedSprite2D in characters:
 					if horizontal_alignment == 'Center':
 						character.position.x += (size.x - line_size.x) / 2.0

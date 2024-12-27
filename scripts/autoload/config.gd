@@ -4,6 +4,7 @@ extends Node
 var file := ConfigFile.new()
 var first_launch: bool = false
 
+signal loaded
 signal value_changed(section: String, key: String, value: Variant)
 
 
@@ -11,6 +12,7 @@ func _ready() -> void:
 	file = _parse_default_as_config()
 	_load_user_config()
 	save()
+	loaded.emit()
 
 
 func save() -> void:

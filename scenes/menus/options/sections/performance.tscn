@@ -1,18 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://jmkjkp1jvkpj"]
+[gd_scene load_steps=8 format=3 uid="uid://jmkjkp1jvkpj"]
 
-[ext_resource type="Script" path="res://scenes/menus/options/sections/interface.gd" id="1_lsu8b"]
-[ext_resource type="Script" path="res://scenes/menus/options/checkbox_option.gd" id="2_4cqv6"]
-[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="3_p1may"]
+[ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://scenes/menus/options/sections/interface.gd" id="1_lsu8b"]
+[ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://scenes/menus/options/checkbox_option.gd" id="2_4cqv6"]
+[ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://scenes/menus/options/number_option.gd" id="2_a8kn0"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="3_p1may"]
 [ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="4_j1leb"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_7omr5"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_7omr5"]
+[ext_resource type="Script" uid="uid://cvona80crsbei" path="res://scenes/menus/options/list_option.gd" id="7_a8kn0"]
 
 [node name="performance" type="Node2D" node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_lsu8b")
-options = [NodePath("auto_pause"), NodePath("preload_notes"), NodePath("threaded_note_spawning")]
+options = [NodePath("fps_cap"), NodePath("vsync_mode"), NodePath("auto_pause"), NodePath("performance_info_visible"), NodePath("preload_notes"), NodePath("threaded_note_spawning")]
+
+[node name="fps_cap" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+position = Vector2(66, -180)
+script = ExtResource("2_a8kn0")
+section = &"performance"
+key = &"fps_cap"
+ranged = true
+minimum = -1.0
+maximum = 1000.0
+root = NodePath("..")
+PREVIEW = ""
+
+[node name="label" type="Node2D" parent="fps_cap"]
+position = Vector2(-140, 0)
+script = ExtResource("3_p1may")
+text = "fps cap:"
+centered = true
+
+[node name="value" type="Node2D" parent="fps_cap"]
+position = Vector2(68, -34)
+script = ExtResource("3_p1may")
+text = "< 0 >"
+
+[node name="vsync_mode" type="Node2D" parent="."]
+position = Vector2(139, -77)
+script = ExtResource("7_a8kn0")
+section = &"performance"
+key = &"vsync_mode"
+list = Array[String](["disabled", "enabled", "adaptive", "mailbox"])
+
+[node name="label" type="Node2D" parent="vsync_mode"]
+position = Vector2(-135, 0)
+script = ExtResource("3_p1may")
+text = "vsync mode:"
+centered = true
+
+[node name="value" type="Node2D" parent="vsync_mode"]
+position = Vector2(152, -34)
+script = ExtResource("3_p1may")
+text = "disabled"
 
 [node name="auto_pause" type="Node2D" parent="."]
-position = Vector2(-17, -180)
+position = Vector2(-17, 70)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"auto_pause"
@@ -30,8 +72,27 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
+[node name="performance_info_visible" type="Node2D" parent="."]
+position = Vector2(2, 173)
+script = ExtResource("2_4cqv6")
+section = &"performance"
+key = &"performance_info_visible"
+
+[node name="alphabet" type="Node2D" parent="performance_info_visible"]
+script = ExtResource("3_p1may")
+text = "debug label"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="performance_info_visible"]
+position = Vector2(341, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
 [node name="preload_notes" type="Node2D" parent="."]
-position = Vector2(51, -85)
+position = Vector2(51, 269)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"preload_notes"
@@ -50,7 +111,7 @@ offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
 [node name="threaded_note_spawning" type="Node2D" parent="."]
-position = Vector2(208, 3)
+position = Vector2(208, 359)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"threaded_note_spawning"
@@ -69,5 +130,6 @@ offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
 [connection signal="animation_finished" from="auto_pause/checkbox" to="auto_pause" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="performance_info_visible/checkbox" to="performance_info_visible" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="preload_notes/checkbox" to="preload_notes" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="threaded_note_spawning/checkbox" to="threaded_note_spawning" method="_on_checkbox_animation_finished"]

@@ -679,6 +679,7 @@ _data = {
 script = ExtResource("1_attca")
 icon = SubResource("Resource_vmsim")
 starts_as_player = true
+death_character = "uid://lxm28lqknvjd"
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-215, -441)

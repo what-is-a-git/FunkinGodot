@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://w4v0gymuehdt"]
 
-[ext_resource type="Script" path="res://scenes/game/assets/characters/character.gd" id="1_rkxpw"]
-[ext_resource type="Script" path="res://scripts/resources/icon.gd" id="2_jqq76"]
+[ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/assets/characters/character.gd" id="1_rkxpw"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_jqq76"]
 [ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://resources/images/game/assets/icons/bf.png" id="3_suw35"]
 [ext_resource type="SpriteFrames" uid="uid://cnq14uqdu43kj" path="res://resources/images/game/assets/characters/bf/dead_sprites.res" id="4_o3v6h"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_xir7k"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_xir7k"]
 
 [sub_resource type="Resource" id="Resource_e6vli"]
 script = ExtResource("2_jqq76")
@@ -274,10 +274,10 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mki60"]
 _data = {
-"RESET": SubResource("Animation_bgpi6"),
-"death": SubResource("Animation_ud1jc"),
-"loop": SubResource("Animation_1e4s5"),
-"retry": SubResource("Animation_lqyyf")
+&"RESET": SubResource("Animation_bgpi6"),
+&"death": SubResource("Animation_ud1jc"),
+&"loop": SubResource("Animation_1e4s5"),
+&"retry": SubResource("Animation_lqyyf")
 }
 
 [node name="bf-dead" type="Node2D"]
@@ -294,7 +294,7 @@ script = ExtResource("5_xir7k")
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mki60")
+&"": SubResource("AnimationLibrary_mki60")
 }
 
 [node name="camera_offset" type="Marker2D" parent="."]

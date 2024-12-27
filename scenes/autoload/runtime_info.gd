@@ -12,6 +12,7 @@ var tween: Tween
 
 func _ready() -> void:
 	visible = Config.get_value('performance', 'performance_info_visible')
+	Config.value_changed.connect(_on_value_changed)
 	
 	if OS.is_debug_build():
 		get_node('timer').wait_time = 0.2
@@ -70,28 +71,17 @@ func display() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action('toggle_debug') and event.is_pressed():
-		visible = not visible
-		Config.set_value('performance', 'performance_info_visible', visible)
-		
-		if visible:
-			label.modulate.a = 0.5
-			
-			if is_instance_valid(tween) and tween.is_running():
-				tween.kill()
-			
-			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			tween.tween_property(label, 'modulate:a', 1.0, 0.2)
-			display()
-		else:
-			visible = true
-			label.modulate.a = 1.0
-			
-			if is_instance_valid(tween) and tween.is_running():
-				tween.kill()
-			
-			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			tween.tween_property(label, 'modulate:a', 0.0, 0.2)
-			tween.tween_property(self, 'visible', false, 0.0)
+		Config.set_value('performance', 'performance_info_visible', not visible)
+
+
+func _on_value_changed(section: String, key: String, value: Variant) -> void:
+	if section != 'performance':
+		return
+	if key != 'performance_info_visible':
+		return
+	if value == null:
+		return
+	visible = bool(value)
 
 
 func get_rendering_driver() -> String:

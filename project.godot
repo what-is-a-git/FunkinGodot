@@ -53,7 +53,7 @@ naming/node_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/gdanimate/plugin.cfg")
 
 [file_customization]
 

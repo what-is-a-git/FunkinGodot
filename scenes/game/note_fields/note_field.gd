@@ -143,7 +143,7 @@ func _try_spawning() -> void:
 			_note_index += 1
 			continue
 		
-		var note: Note = _note_types.types['default'].instantiate()
+		var note: Note = _note_types.types.get(data.type, _note_types.types['default']).instantiate()
 		note._field = self
 		note.data = data.duplicate()
 		note.lane = absi(data.direction) % _lane_count

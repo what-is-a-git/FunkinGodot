@@ -20,9 +20,9 @@ func _process(delta: float) -> void:
 	_update_items(delta)
 	
 	if is_instance_valid(selected_option):
-		delta = minf(delta, 0.125)
+		delta = minf(delta, 0.25)
 		var target := clampf(selected_option.position.y, 0.0, max_y)
-		the_list.position.y = lerpf(the_list.position.y, -184.0 - target, delta * 7.0)
+		the_list.position.y = lerpf(the_list.position.y, -184.0 - target, delta * 4.0)
 
 
 func _input(event: InputEvent) -> void:

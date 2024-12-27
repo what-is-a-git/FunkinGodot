@@ -116,6 +116,16 @@ func _ready() -> void:
 	
 	note_types.types['default'] = _default_note
 	
+	# loading external types :3
+	for note in chart.notes:
+		if note_types.types.has(note.type):
+			continue
+		var path := 'res://scenes/game/notes/%s.tscn' % note.type
+		if not ResourceLoader.exists(path):
+			continue
+		
+		note_types.types[note.type] = load(path)
+	
 	if ResourceLoader.exists('res://songs/%s/assets.tres' % song):
 		# Load SongAssets tres.
 		assets = load('res://songs/%s/assets.tres' % song)

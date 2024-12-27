@@ -30,6 +30,9 @@ func _ready() -> void:
 	var window := get_window()
 	window.focus_entered.connect(_on_focus_enter)
 	window.focus_exited.connect(_on_focus_exit)
+	
+	Config.loaded.connect(_on_config_loaded)
+	Config.value_changed.connect(_on_value_changed)
 
 
 func _on_focus_enter() -> void:
@@ -62,6 +65,33 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 		get_tree().paused = false
 		return
+
+
+func _on_value_changed(section: String, key: String, value: Variant) -> void:
+	if value == null:
+		return
+	
+	if section == 'performance':
+		match key:
+			'fps_cap':
+				Engine.max_fps = value
+			'vsync_mode':
+				match value:
+					'enabled':
+						DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+					'adaptive':
+						DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+					'mailbox':
+						DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
+					_:
+						DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+
+func _on_config_loaded() -> void:
+	_on_value_changed('performance', 'fps_cap', 
+			Config.get_value('performance', 'fps_cap'))
+	_on_value_changed('performance', 'vsync_mode', 
+			Config.get_value('performance', 'vsync_mode'))
 
 
 static func free_children_from(node: Node, immediate: bool = false) -> void:

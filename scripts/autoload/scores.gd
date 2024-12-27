@@ -1,24 +1,6 @@
 extends Node
 
 
-"""
-data dictionary structure:
-	{
-		"song_name/song_difficulty": {
-			"score": 12345,
-			"misses": 14,
-			"accuracy": 50.4,
-			"rank": "D-"
-		}
-	}
-
-whenever you get a higher
-score on a song that is what
-replaces the score, even if
-your accuracy is lower or misses
-are higher or smth
-"""
-
 var data: Dictionary
 
 
@@ -54,6 +36,10 @@ func get_score(song: StringName, difficulty: StringName) -> Dictionary:
 			'accuracy': 'N/A',
 			'rank': 'N/A',
 		})
+
+
+func has_score(song: StringName, difficulty: StringName) -> bool:
+	return data.has(_get_score_key(song, difficulty))
 
 
 func set_score(song: StringName, difficulty: StringName, score: Dictionary) -> void:

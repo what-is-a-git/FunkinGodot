@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://bragoy3tisav2"]
 
-[ext_resource type="Script" path="res://scenes/game/assets/characters/character.gd" id="1_bbqcr"]
-[ext_resource type="Script" path="res://scripts/resources/icon.gd" id="2_jrmk7"]
+[ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/assets/characters/character.gd" id="1_bbqcr"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_jrmk7"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://resources/images/game/assets/icons/gf.png" id="3_2glvu"]
 [ext_resource type="SpriteFrames" path="res://resources/images/game/assets/characters/gf/speakers.res" id="4_ckyj7"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_a3eoy"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_a3eoy"]
 [ext_resource type="SpriteFrames" uid="uid://bppdumsv5svb1" path="res://resources/images/game/assets/characters/gf/sprites.res" id="6_dvdyh"]
 
 [sub_resource type="Resource" id="Resource_1qgms"]
@@ -637,13 +637,13 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mki60"]
 _data = {
-"RESET": SubResource("Animation_bgpi6"),
-"dance_left": SubResource("Animation_ud1jc"),
-"dance_right": SubResource("Animation_2gr36"),
-"sing_down": SubResource("Animation_qrx2w"),
-"sing_left": SubResource("Animation_25yr0"),
-"sing_right": SubResource("Animation_w46sn"),
-"sing_up": SubResource("Animation_gie7a")
+&"RESET": SubResource("Animation_bgpi6"),
+&"dance_left": SubResource("Animation_ud1jc"),
+&"dance_right": SubResource("Animation_2gr36"),
+&"sing_down": SubResource("Animation_qrx2w"),
+&"sing_left": SubResource("Animation_25yr0"),
+&"sing_right": SubResource("Animation_w46sn"),
+&"sing_up": SubResource("Animation_gie7a")
 }
 
 [node name="gf" type="Node2D"]
@@ -667,7 +667,7 @@ script = ExtResource("5_a3eoy")
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mki60")
+&"": SubResource("AnimationLibrary_mki60")
 }
 
 [node name="camera_offset" type="Marker2D" parent="."]

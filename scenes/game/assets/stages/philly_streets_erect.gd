@@ -39,6 +39,9 @@ func _ready() -> void:
 	plr.material.set_shader_parameter('brightness', -20.0)
 	
 	game.spectator.get_node(^'sprite').material = plr.material
+	if game.spectator.has_node(^'speakers'):
+		game.spectator.get_node(^'speakers').material = plr.material
+	
 	game.opponent.get_node(^'sprite').material = plr.material
 	reset_cars(true, true)
 

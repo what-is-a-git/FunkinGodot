@@ -25,7 +25,7 @@ func _ready() -> void:
 		game.target_camera_position = opponent._camera_offset.global_position
 		camera.position = game.target_camera_position
 		
-		game.hud.health_bar._ready()
+		game.hud.health_bar.reload_icons()
 		opponent_field._default_character = opponent
 
 

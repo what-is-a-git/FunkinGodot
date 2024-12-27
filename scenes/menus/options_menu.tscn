@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://3daku38i1a50"]
+[gd_scene load_steps=14 format=3 uid="uid://3daku38i1a50"]
 
-[ext_resource type="Script" path="res://scenes/menus/options_menu.gd" id="1_cbibk"]
+[ext_resource type="Script" uid="uid://b81xaok1c5hyh" path="res://scenes/menus/options_menu.gd" id="1_cbibk"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_jmigv"]
 [ext_resource type="SpriteFrames" uid="uid://wifv2wsiwcum" path="res://resources/images/menus/main_menu/buttons.res" id="3_yv0yv"]
-[ext_resource type="Script" path="res://scenes/menus/options/title_sprite.gd" id="4_6ck0r"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="4_k5v7g"]
-[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="5_qlnc3"]
+[ext_resource type="Script" uid="uid://y6vnycva8tfq" path="res://scenes/menus/options/title_sprite.gd" id="4_6ck0r"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="4_k5v7g"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="5_qlnc3"]
 [ext_resource type="SpriteFrames" path="res://resources/images/menus/options/categories.res" id="6_lf7w2"]
 [ext_resource type="PackedScene" uid="uid://drcqw4es4j7q4" path="res://scenes/menus/options/sections/accessibility.tscn" id="7_0g68v"]
 [ext_resource type="PackedScene" uid="uid://dl2ws5fsuesd1" path="res://scenes/menus/options/sections/gameplay.tscn" id="7_6v5hh"]
 [ext_resource type="PackedScene" uid="uid://w4x38w0bt6n1" path="res://scenes/menus/options/sections/interface.tscn" id="7_u8bnw"]
 [ext_resource type="PackedScene" uid="uid://jmkjkp1jvkpj" path="res://scenes/menus/options/sections/performance.tscn" id="8_26on6"]
-[ext_resource type="Script" path="res://scenes/menus/options/category.gd" id="11_3cmdf"]
+[ext_resource type="PackedScene" uid="uid://dd76grrhumccf" path="res://scenes/menus/options/sections/sound.tscn" id="9_23plx"]
+[ext_resource type="Script" uid="uid://plhr68emm461" path="res://scenes/menus/options/category.gd" id="11_3cmdf"]
 
 [node name="options_menu" type="Node2D"]
 script = ExtResource("1_cbibk")
@@ -55,7 +56,7 @@ category = ExtResource("7_6v5hh")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
-frame_progress = 0.612492
+frame_progress = 0.731482
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -69,7 +70,7 @@ category = ExtResource("7_u8bnw")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.324759
+frame_progress = 0.443746
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -83,7 +84,7 @@ category = ExtResource("8_26on6")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
-frame_progress = 0.92444
+frame_progress = 0.0434299
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -91,12 +92,13 @@ playing = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
+category = ExtResource("9_23plx")
 
 [node name="sprite" type="AnimatedSprite2D" parent="interface/categories/sound"]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
-frame_progress = 0.891239
+frame_progress = 0.0102289
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -110,7 +112,7 @@ category = ExtResource("7_0g68v")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
-frame_progress = 0.954965
+frame_progress = 0.0739582
 script = ExtResource("4_k5v7g")
 playing = true
 

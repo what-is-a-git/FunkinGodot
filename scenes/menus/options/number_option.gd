@@ -20,8 +20,8 @@ class_name NumberOption extends PreviewOption
 var timer: float = 0.0
 var value: float = 0.0:
 	set(new_value):
-		var final_value = new_value if not integers else int(new_value)
-		Config.set_value(section, key, final_value)
+		var final_value: Variant = new_value if not integers else int(new_value)
+		set_value(final_value)
 		value = new_value
 		
 		var left: String = '< '
@@ -90,6 +90,10 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_select()
 		GlobalAudio.get_player(^'MENU/CONFIRM').play()
+
+
+func set_value(value: Variant) -> void:
+	Config.set_value(section, key, value)
 
 
 func _value_changed() -> void:

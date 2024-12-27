@@ -1,6 +1,8 @@
 extends Control
 
 
+@onready var weeks: StoryModeWeeks = %weeks
+@onready var high_score: Label = %high_score
 @onready var left_arrow: AnimatedSprite = $left_arrow
 @onready var right_arrow: AnimatedSprite = $right_arrow
 @onready var difficulty: Sprite2D = $difficulty
@@ -28,6 +30,7 @@ func change_selection(amount: int = 0) -> void:
 	
 	_reload_difficulty_sprite()
 	_tween_difficulty_sprite()
+	_calculate_high_score()
 
 
 func _reload_difficulty_sprite() -> void:
@@ -52,3 +55,20 @@ func _tween_difficulty_sprite() -> void:
 	var tween := create_tween().set_parallel()
 	tween.tween_property(difficulty, 'modulate:a', 1.0, 0.07)
 	tween.tween_property(difficulty, 'position:y', 132.0, 0.07)
+
+
+func _calculate_high_score() -> void:
+	var score: int = 0
+	var difficulty: String = difficulties[selected]
+	var week: StoryWeekNode = weeks.get_child(StoryModeWeeks.selected_static)
+	var suffix: String = week.difficulty_suffixes.mapping.get(difficulty, '')
+	
+	for raw_song in week.songs:
+		var song := raw_song + suffix
+		if not Scores.has_score(song, difficulty):
+			high_score.text = 'High Score: N/A'
+			break
+		
+		score += Scores.get_score(song, difficulty).get('score', 0)
+	
+	high_score.text = 'High Score: %d' % score

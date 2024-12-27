@@ -1,4 +1,4 @@
-extends Control
+class_name StoryModeWeeks extends Control
 
 
 static var selected_static: int = 0

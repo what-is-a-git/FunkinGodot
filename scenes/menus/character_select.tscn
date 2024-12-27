@@ -1,0 +1,154 @@
+[gd_scene load_steps=21 format=3 uid="uid://62vvv8x8t7nm"]
+
+[ext_resource type="Texture2D" uid="uid://uy8oihb6pd4m" path="res://resources/images/menus/character_select/bg.png" id="1_oablf"]
+[ext_resource type="Script" uid="uid://p52omju8wqak" path="res://scenes/menus/character_select.gd" id="1_tjis5"]
+[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="2_rptr7"]
+[ext_resource type="SpriteFrames" path="res://resources/images/menus/character_select/charSelectStage.res" id="3_kbvb4"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="4_xae3q"]
+[ext_resource type="Texture2D" uid="uid://cavibbv2delc2" path="res://resources/images/menus/character_select/curtains.png" id="5_xae3q"]
+[ext_resource type="Texture2D" uid="uid://dkhehc56csbb2" path="res://resources/images/menus/character_select/charLight.png" id="6_u125y"]
+[ext_resource type="PackedScene" uid="uid://dh0j85o8ohuon" path="res://scenes/menus/character_select/gf.tscn" id="7_jblrn"]
+[ext_resource type="PackedScene" uid="uid://d3uuros7qs2p" path="res://scenes/menus/character_select/bf.tscn" id="8_okqu4"]
+[ext_resource type="Texture2D" uid="uid://4gefr8chrmni" path="res://resources/images/menus/character_select/foregroundBlur.png" id="9_okqu4"]
+[ext_resource type="Shader" uid="uid://boal0d6xvnwul" path="res://resources/shaders/flixel_multiply.gdshader" id="9_sf7fi"]
+[ext_resource type="SpriteFrames" path="res://resources/images/menus/character_select/dipshitBlur.res" id="11_8mvtt"]
+[ext_resource type="SpriteFrames" path="res://resources/images/menus/character_select/dipshitBacking.res" id="12_tjis5"]
+[ext_resource type="Texture2D" uid="uid://c7u4qpyu0eogq" path="res://resources/images/menus/character_select/chooseDipshit.png" id="13_3wfvo"]
+[ext_resource type="Shader" uid="uid://ctlwv54e12i3j" path="res://resources/shaders/mosaic_shader.gdshader" id="15_cggar"]
+[ext_resource type="Texture2D" uid="uid://86qag6byq5lj" path="res://resources/images/menus/character_select/characters/bf/title.png" id="16_3ax17"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xae3q"]
+blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrayq"]
+shader = ExtResource("9_sf7fi")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cggar"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5akvo"]
+shader = ExtResource("15_cggar")
+shader_parameter/block_size = Vector2(1, 1)
+
+[node name="character_select" type="Node2D"]
+script = ExtResource("1_tjis5")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="bg" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="sprite" type="Sprite2D" parent="bg"]
+position = Vector2(-153, -106)
+texture = ExtResource("1_oablf")
+centered = false
+
+[node name="crowd" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="sprite" type="Node2D" parent="crowd"]
+position = Vector2(-75, 209)
+script = ExtResource("2_rptr7")
+atlas = "res://resources/images/menus/character_select/crowd"
+frame = 7
+playing = true
+metadata/_custom_type_script = ExtResource("2_rptr7")
+
+[node name="select_stage" type="AnimatedSprite2D" parent="."]
+position = Vector2(-40, 391)
+sprite_frames = ExtResource("3_kbvb4")
+animation = &"stage full instance 1"
+frame_progress = 0.202034
+centered = false
+script = ExtResource("4_xae3q")
+playing = true
+metadata/_custom_type_script = ExtResource("4_xae3q")
+
+[node name="curtains" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.4, 1.4)
+
+[node name="sprite" type="Sprite2D" parent="curtains"]
+position = Vector2(-47, -49)
+texture = ExtResource("5_xae3q")
+centered = false
+
+[node name="bar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+
+[node name="sprite" type="Node2D" parent="bar"]
+material = SubResource("CanvasItemMaterial_xae3q")
+position = Vector2(0, 55)
+script = ExtResource("2_rptr7")
+atlas = "res://resources/images/menus/character_select/barThing"
+playing = true
+metadata/_custom_type_script = ExtResource("2_rptr7")
+
+[node name="player_light" type="Sprite2D" parent="."]
+position = Vector2(800, 250)
+texture = ExtResource("6_u125y")
+centered = false
+
+[node name="spectator_light" type="Sprite2D" parent="."]
+position = Vector2(180, 240)
+texture = ExtResource("6_u125y")
+centered = false
+
+[node name="spectator" parent="." instance=ExtResource("7_jblrn")]
+unique_name_in_owner = true
+
+[node name="player" parent="." instance=ExtResource("8_okqu4")]
+unique_name_in_owner = true
+
+[node name="speakers" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.8, 1.8)
+
+[node name="sprite" type="Node2D" parent="speakers"]
+position = Vector2(-73, 421)
+script = ExtResource("2_rptr7")
+atlas = "res://resources/images/menus/character_select/charSelectSpeakers"
+loop_mode = "Play Once"
+metadata/_custom_type_script = ExtResource("2_rptr7")
+
+[node name="foreground_blur" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wrayq")
+position = Vector2(-125, 170)
+texture = ExtResource("9_okqu4")
+centered = false
+
+[node name="dipshit_blur" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_cggar")
+position = Vector2(419, -65)
+sprite_frames = ExtResource("11_8mvtt")
+animation = &"CHOOSE vertical offset instance 1"
+frame_progress = 0.388374
+centered = false
+script = ExtResource("4_xae3q")
+playing = true
+metadata/_custom_type_script = ExtResource("4_xae3q")
+
+[node name="dipshit_backing" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_cggar")
+position = Vector2(423, -17)
+sprite_frames = ExtResource("12_tjis5")
+animation = &"CHOOSE horizontal offset instance 1"
+centered = false
+script = ExtResource("4_xae3q")
+metadata/_custom_type_script = ExtResource("4_xae3q")
+
+[node name="choose_dipshit" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(426, -13)
+texture = ExtResource("13_3wfvo")
+centered = false
+
+[node name="title" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5akvo")
+position = Vector2(1008, 100)
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("16_3ax17")
+
+[connection signal="finished" from="music" to="." method="_on_music_finished"]
