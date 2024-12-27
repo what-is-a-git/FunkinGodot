@@ -1,8 +1,7 @@
 extends Node2D
 
 
-const NOTE: PackedScene = preload('res://scenes/game/notes/note.tscn')
-
+@onready var NOTE: PackedScene = load('res://scenes/game/notes/note.tscn')
 @onready var notes: NoteField = $notes
 
 var lane: int = 0

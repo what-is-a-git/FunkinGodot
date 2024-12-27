@@ -411,7 +411,6 @@ func _song_finished(force: bool = false) -> void:
 		return
 	
 	playing = false
-	
 	if save_score:
 		var current_score := Scores.get_score(song, difficulty)
 		
@@ -426,24 +425,28 @@ func _song_finished(force: bool = false) -> void:
 	if not (playlist.is_empty() or force):
 		var new_song: StringName = playlist[0].name
 		var new_difficulty: StringName = playlist[0].difficulty
-		Game.chart = Chart.load_song(new_song, new_difficulty)
+		chart = Chart.load_song(new_song, new_difficulty)
 		
-		if not is_instance_valid(Game.chart):
+		if not is_instance_valid(chart):
 			var json_path := 'res://songs/%s/charts/%s.json' % [new_song, new_difficulty.to_lower()]
 			printerr('Song at path %s doesn\'t exist!' % json_path)
 			GlobalAudio.get_player('MENU/CANCEL').play()
 			SceneManager.switch_to('scenes/menus/main_menu.tscn')
+			playlist.clear()
 			return
 		
-		Game.song = new_song
-		Game.difficulty = new_difficulty.to_lower()
+		song = new_song
+		difficulty = new_difficulty.to_lower()
 		playlist.pop_front()
 		get_tree().reload_current_scene()
 		return
 	
-	GlobalAudio.get_player('MENU/CANCEL').play()
+	chart = null
+	instance = null
+	playlist.clear()
 	camera_position = Vector2.INF
 	camera_zoom = Vector2.INF
+	GlobalAudio.get_player('MENU/CANCEL').play()
 	match mode:
 		PlayMode.STORY:
 			SceneManager.switch_to('scenes/menus/story_mode_menu.tscn')
