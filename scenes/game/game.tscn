@@ -19,6 +19,7 @@ position = Vector2(640, 360)
 position_smoothing_speed = 4.0
 
 [node name="tracks" type="Node" parent="."]
+unique_name_in_owner = true
 editor_description = "Node to contain all audio tracks for the given song that is playing."
 script = ExtResource("2_j74rm")
 stop_on_finish = true
@@ -26,6 +27,7 @@ stop_on_finish = true
 [node name="player" type="AudioStreamPlayer" parent="tracks"]
 
 [node name="scripts" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_oquto")
 
 [node name="hud_layer" type="CanvasLayer" parent="."]

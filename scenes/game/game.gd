@@ -15,8 +15,8 @@ static var camera_zoom: Vector2 = Vector2.INF
 @onready var pause_menu: PackedScene = load('res://scenes/game/pause_menu.tscn')
 
 @onready var accuracy_calculator: AccuracyCalculator = %accuracy_calculator
-@onready var tracks: Tracks = $tracks
-@onready var scripts: ScriptContainer = $scripts
+@onready var tracks: Tracks = %tracks
+@onready var scripts: ScriptContainer = %scripts
 @onready var camera: Camera2D = $camera
 
 @onready var hud_layer: CanvasLayer = %hud_layer
@@ -72,6 +72,7 @@ signal hud_setup
 signal ready_post
 signal process_post(delta: float)
 signal song_start
+signal event_prepare(event: EventData)
 signal event_hit(event: EventData)
 signal song_finished(event: CancellableEvent)
 signal scroll_speed_changed
@@ -203,6 +204,28 @@ func _ready() -> void:
 	scripts.load_scripts(song)
 	
 	if not chart.events.is_empty():
+		# Note: this means all custom events just act as normal scripts
+		# which should be fine for 99.9% of use cases.
+		# it also means you have to manually check for event names
+		# but it's fine :p
+		var exceptions: Array[StringName] = [&'bpm change', &'camera pan', &'zoomcamera',]
+		for event in chart.events:
+			var event_name: StringName = event.name.to_lower()
+			if exceptions.has(event_name):
+				continue
+			exceptions.push_back(event_name)
+			
+			var path: String = 'res://scenes/game/events/%s.tscn' % [event_name]
+			if not ResourceLoader.exists(path):
+				continue
+			
+			var scene: PackedScene = load(path)
+			var node: Node = scene.instantiate()
+			scripts.add_child(node)
+		
+		for event in chart.events:
+			event_prepare.emit(event)
+		
 		while (not chart.events.is_empty()) and _event < chart.events.size() \
 				and chart.events[_event].time <= 0.0:
 			_on_event_hit(chart.events[_event])
@@ -312,7 +335,8 @@ func _on_measure_hit(measure: int) -> void:
 
 
 func _on_event_hit(event: EventData) -> void:
-	match event.name.to_lower():
+	var event_name := event.name.to_lower()
+	match event_name:
 		&'bpm change':
 			Conductor.tempo = event.data[0]
 		&'camera pan':

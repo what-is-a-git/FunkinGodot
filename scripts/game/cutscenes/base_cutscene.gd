@@ -8,8 +8,18 @@
 class_name BaseCutscene extends FunkinScript
 
 
+## Defines whether or not to play this cutscene when opened in freeplay.
+## [br][br]It will automatically queue free the base node upon
+## loading the script through a song in freeplay.
+@export var play_in_freeplay: bool = false
+
+
 func _ready() -> void:
 	super()
+	if Game.mode == Game.PlayMode.FREEPLAY and not play_in_freeplay:
+		queue_free()
+		return
+	
 	game.hud.pause_countdown = true
 
 

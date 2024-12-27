@@ -17,5 +17,5 @@ func load_scripts(song: StringName, song_path: String = '') -> void:
 		if not is_instance_valid(script):
 			continue
 		
-		var script_instance = script.instantiate()
+		var script_instance: Node = script.instantiate()
 		add_child(script_instance)
