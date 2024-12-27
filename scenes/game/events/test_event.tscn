@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6litwwkoedc4"]
-
-[ext_resource type="Script" uid="uid://ccygr6542u5ga" path="res://scripts/game/funkin_script.gd" id="1_cy7gg"]
-[ext_resource type="Script" uid="uid://kwilw23r6ril" path="res://scenes/game/events/test_event.gd" id="1_wseps"]
-
-[node name="test_event" type="Node"]
-script = ExtResource("1_wseps")
-metadata/_custom_type_script = ExtResource("1_cy7gg")

@@ -208,7 +208,7 @@ func _ready() -> void:
 		# which should be fine for 99.9% of use cases.
 		# it also means you have to manually check for event names
 		# but it's fine :p
-		var exceptions: Array[StringName] = [&'bpm change', &'camera pan', &'zoomcamera',]
+		var exceptions: Array[StringName] = []
 		for event in chart.events:
 			var event_name: StringName = event.name.to_lower()
 			if exceptions.has(event_name):
@@ -335,53 +335,6 @@ func _on_measure_hit(measure: int) -> void:
 
 
 func _on_event_hit(event: EventData) -> void:
-	var event_name := event.name.to_lower()
-	match event_name:
-		&'bpm change':
-			Conductor.tempo = event.data[0]
-		&'camera pan':
-			var target: Character = spectator
-			match event.data[0]:
-				CameraPan.Side.PLAYER:
-					target = player
-				CameraPan.Side.OPPONENT:
-					target = opponent
-			
-			target_camera_position = target._camera_offset.global_position
-			if event.time <= 0.0:
-				camera.position = target_camera_position
-		&'zoomcamera':
-			var data: Dictionary = event.data[0]
-			var steps: int = data.get('duration', 32)
-			var ease: String = data.get('ease', 'expoOut')
-			var mode: String = data.get('mode', 'stage')
-			var zoom: float = data.get('zoom', 1.05)
-			var tween := create_tween()
-			match ease:
-				'expoOut':
-					tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-				'elasticInOut':
-					tween.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
-				'quadInOut':
-					tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-				'smoothStepInOut':
-					tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-				'circOut':
-					tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-				'linear': # default anyways
-					pass
-				'INSTANT':
-					tween.kill()
-					target_camera_zoom = Vector2(zoom, zoom)
-					return
-				_:
-					printerr('Ease of %s not supported at this time.' % ease)
-			
-			tween.tween_property(self, ^'target_camera_zoom', Vector2(zoom, zoom), 
-					(0.25 / Conductor.beat_delta) * float(steps))
-		_:
-			pass
-	
 	event_hit.emit(event)
 
 
