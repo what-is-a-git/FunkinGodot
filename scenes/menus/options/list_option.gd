@@ -8,9 +8,10 @@ extends Option
 
 @onready var value_label: Alphabet = $value
 
-var value: String = '':
+var value: String:
 	set(new_value):
-		Config.set_value(section, key, new_value)
+		if new_value != Config.get_value(section, key):
+			Config.set_value(section, key, new_value)
 		value = new_value
 		value_label.text = value if display_raw else value.replace('_', ' ')
 

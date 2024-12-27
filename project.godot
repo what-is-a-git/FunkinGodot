@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Friday Night Funkin'"
-config/description="A funky rhythm game recreated in Godot!"
-config/version="0.2.2-indev"
+config/description="Friday Night Funkin' remade in Godot for performance and stability."
+config/version="1.0.0"
 config/tags=PackedStringArray("2d", "modding", "rhythm")
 run/main_scene="res://scenes/menus/title_screen.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
