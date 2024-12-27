@@ -22,6 +22,7 @@ var active: bool = true
 var random_lines: Array = ['test1', 'test2']
 var random_line_index: int = 0
 var tween: Tween
+var last_music_time: float = 0.0
 
 
 func _ready() -> void:
@@ -36,6 +37,7 @@ func _ready() -> void:
 	if not music_player.playing:
 		Conductor.reset()
 		music_player.play()
+		last_music_time = music_player.get_playback_position()
 		Conductor.tempo = 102.0
 		Conductor.target_audio = music_player
 	
@@ -51,6 +53,16 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# kinda hacky fix for loops, just kinda how it
+	# has to work to make sure we don't go back in
+	# time in regular gameplay with Conductor.time
+	var current_time := GlobalAudio.music.get_playback_position()
+	if current_time < last_music_time:
+		Conductor.reset()
+		Conductor.tempo = 102.0
+		Conductor.target_audio = GlobalAudio.music
+	last_music_time = current_time
+	
 	if not is_instance_valid(swag_material):
 		return
 	
