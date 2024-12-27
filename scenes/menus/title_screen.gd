@@ -33,12 +33,12 @@ func _ready() -> void:
 	
 	enter_animation.play('loop')
 	
+	Conductor.tempo = 102.0
 	var music_player := GlobalAudio.music
 	if not music_player.playing:
 		Conductor.reset()
 		music_player.play()
 		last_music_time = music_player.get_playback_position()
-		Conductor.tempo = 102.0
 		Conductor.target_audio = music_player
 	
 	if first_open:
@@ -59,7 +59,6 @@ func _process(delta: float) -> void:
 	var current_time := GlobalAudio.music.get_playback_position()
 	if current_time < last_music_time:
 		Conductor.reset()
-		Conductor.tempo = 102.0
 		Conductor.target_audio = GlobalAudio.music
 	last_music_time = current_time
 	
