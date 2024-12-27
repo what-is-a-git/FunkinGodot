@@ -499,6 +499,7 @@ centered = false
 script = ExtResource("5_vu483")
 
 [node name="retry" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(4, -476)
 sprite_frames = ExtResource("6_motvc")
 animation = &"Retry Text Loop"
