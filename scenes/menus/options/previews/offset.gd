@@ -9,6 +9,7 @@ var lane: int = 0
 
 
 func _ready() -> void:
+	Config.value_changed.connect(_on_value_changed)
 	Conductor.beat_hit.connect(_on_beat_hit)
 	notes._force_no_chart = true
 	notes._chart = null
@@ -41,3 +42,13 @@ func _on_beat_hit(beat: int) -> void:
 	note.lane = lane
 	
 	lane = wrapi(lane + 1, 0, 4)
+
+
+func _on_value_changed(section: String, key: String, value: Variant) -> void:
+	if section != 'gameplay':
+		return
+	if key != 'custom_scroll_speed':
+		return
+	if value == null:
+		return
+	notes._scroll_speed = value

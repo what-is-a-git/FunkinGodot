@@ -115,7 +115,7 @@ ranged = true
 minimum = 0.1
 step = 0.1
 root = NodePath("../../..")
-PREVIEW = ""
+PREVIEW = "uid://ctp6qq4w60hkd"
 current_preview = NodePath("../../../preview_bg/preview_marker")
 
 [node name="label" type="Node2D" parent="the_list/options/value"]
