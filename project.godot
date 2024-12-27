@@ -192,5 +192,4 @@ locale/translations=PackedStringArray("res://resources/locale/difficulties.en.tr
 
 [rendering]
 
-gl_compatibility/force_angle_on_devices=[]
 textures/vram_compression/import_s3tc_bptc=true

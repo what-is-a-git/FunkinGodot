@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://scenes/menus/options/sections/interface.gd" id="1_lsu8b"]
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://scenes/menus/options/checkbox_option.gd" id="2_4cqv6"]
-[ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://scenes/menus/options/number_option.gd" id="2_a8kn0"]
+[ext_resource type="Script" path="res://scenes/menus/options/list_number_option.gd" id="2_a8kn0"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="3_p1may"]
 [ext_resource type="SpriteFrames" uid="uid://dfv5k6fikmo5r" path="res://resources/images/menus/options/checkbox.res" id="4_j1leb"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_7omr5"]
@@ -13,16 +13,11 @@ position = Vector2(-320, 0)
 script = ExtResource("1_lsu8b")
 options = [NodePath("fps_cap"), NodePath("vsync_mode"), NodePath("auto_pause"), NodePath("performance_info_visible"), NodePath("preload_notes"), NodePath("threaded_note_spawning")]
 
-[node name="fps_cap" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="fps_cap" type="Node2D" parent="."]
 position = Vector2(66, -180)
 script = ExtResource("2_a8kn0")
-section = &"performance"
-key = &"fps_cap"
-ranged = true
-minimum = -1.0
-maximum = 1000.0
-root = NodePath("..")
-PREVIEW = ""
+list = Array[float]([0.0, 30.0, 60.0, 120.0, 144.0, 165.0, 240.0, 360.0, 1000.0])
+display_float = false
 
 [node name="label" type="Node2D" parent="fps_cap"]
 position = Vector2(-140, 0)
