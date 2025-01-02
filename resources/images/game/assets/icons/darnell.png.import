@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnw888uux6bmj"
-path.bptc="res://.godot/imported/darnell.png-a320fc5589af5563f47b8432c4cea730.bptc.ctex"
+path="res://.godot/imported/darnell.png-a320fc5589af5563f47b8432c4cea730.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/icons/darnell.png"
-dest_files=["res://.godot/imported/darnell.png-a320fc5589af5563f47b8432c4cea730.bptc.ctex"]
+dest_files=["res://.godot/imported/darnell.png-a320fc5589af5563f47b8432c4cea730.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -36,7 +36,7 @@ scroll_scale = Vector2(1.2, 1.2)
 [node name="small_light" type="Sprite2D" parent="lights"]
 z_index = 10
 material = SubResource("CanvasItemMaterial_62n7p")
-position = Vector2(967, -103)
+position = Vector2(940, -103)
 texture = ExtResource("2_l58ct")
 centered = false
 
@@ -54,7 +54,7 @@ z_index = 5
 position = Vector2(560, 290)
 sprite_frames = ExtResource("3_iarc1")
 animation = &"bop"
-frame_progress = 0.854489
+frame_progress = 0.922221
 centered = false
 script = ExtResource("4_dtqj5")
 playing = true
@@ -96,7 +96,7 @@ centered = false
 [node name="light_above" type="Sprite2D" parent="."]
 z_index = 4096
 material = SubResource("CanvasItemMaterial_1ebn4")
-position = Vector2(804, -117)
+position = Vector2(773, -117)
 texture = ExtResource("11_i0awy")
 centered = false
 

@@ -122,9 +122,13 @@ func _on_note_hit(note: Note) -> void:
 	
 	game.accuracy_calculator.record_hit(absf(difference))
 	
-	difference_label.text = '%.2fms' % [difference * 1000.0]
-	difference_label.modulate = Color8(255, 176, 96) \
-			if difference < 0.0 else Color8(111, 185, 255)
+	if player_field.takes_input:
+		difference_label.text = '%.2fms' % [difference * 1000.0]
+		difference_label.modulate = Color8(255, 176, 96) \
+				if difference < 0.0 else Color8(111, 185, 255)
+	else:
+		difference_label.text = 'Botplay'
+		difference_label.modulate = Color(0.6, 0.62, 0.7)
 	
 	if is_instance_valid(rating_tween) and rating_tween.is_running():
 		rating_tween.kill()

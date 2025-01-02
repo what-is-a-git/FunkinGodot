@@ -27,10 +27,13 @@ static var camera_zoom: Vector2 = Vector2.INF
 var target_camera_position: Vector2 = Vector2.ZERO
 var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
 var camera_bump_amount: Vector2 = Vector2(0.015, 0.015)
+var camera_lerps: bool = true
 var camera_bumps: bool = false
 var song_started: bool = false
 var save_score: bool = true
 
+# Used for fixing lerping delta issues when restarting songs :p
+var _first_frame: bool = true
 @onready var _stage: Node2D = $stage
 @onready var _characters: Node2D = $characters
 
@@ -268,11 +271,6 @@ func _process(delta: float) -> void:
 			SceneManager.switch_to('scenes/game/gameover.tscn', false)
 			return
 	
-	camera.position = camera.position.lerp(target_camera_position, delta * 3.0)
-	
-	if camera_bumps:
-		camera.zoom = camera.zoom.lerp(target_camera_zoom, delta * 3.0)
-	
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
@@ -286,6 +284,14 @@ func _process(delta: float) -> void:
 		var event := chart.events[_event]
 		_on_event_hit(event)
 		_event += 1
+	
+	if _first_frame:
+		_first_frame = false
+		return
+	if camera_lerps:
+		camera.position = camera.position.lerp(target_camera_position, delta * 3.0)
+		if camera_bumps:
+			camera.zoom = camera.zoom.lerp(target_camera_zoom, delta * 3.0)
 
 
 func _process_post(delta: float) -> void:
@@ -306,7 +312,7 @@ func _input(event: InputEvent) -> void:
 		add_child(menu)
 		process_mode = Node.PROCESS_MODE_DISABLED
 		Conductor.process_mode = Node.PROCESS_MODE_DISABLED
-	if OS.is_debug_build() and event.is_action('toggle_botplay'):
+	if event.is_action('toggle_botplay'):
 		save_score = false
 		_player_field.takes_input = not _player_field.takes_input
 		
