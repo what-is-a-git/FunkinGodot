@@ -12,7 +12,7 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 	if not Config.get_value('interface', 'scene_transitions'):
 		use_transition = false
 	
-	if not path.begins_with('res://'):
+	if (not path.begins_with('uid://')) and (not path.begins_with('res://')):
 		path = 'res://%s' % path
 	
 	var tree := get_tree()
