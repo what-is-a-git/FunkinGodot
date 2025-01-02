@@ -9,8 +9,9 @@ uniform float progress : hint_range(0, 1);
 uniform float diamondPixelSize = 10.0f;
 
 void fragment() {
-	float xFraction = fract(FRAGCOORD.x / diamondPixelSize);
-	float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
+	vec2 frag_coord = SCREEN_UV * (1.0 / SCREEN_PIXEL_SIZE);
+	float xFraction = fract(frag_coord.x / diamondPixelSize);
+	float yFraction = fract(frag_coord.y / diamondPixelSize);
 	float xDistance = abs(xFraction - 0.5);
 	float yDistance = abs(yFraction - 0.5);
 
