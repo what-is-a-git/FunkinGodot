@@ -113,10 +113,8 @@ func _ready() -> void:
 		var events: SongEvents = load('res://songs/%s/events.tres' % song)
 		chart.events.append_array(events.events)
 	
-	chart.notes.sort_custom(func(a, b):
-		return a.time < b.time)
-	chart.events.sort_custom(func(a, b):
-		return a.time < b.time)
+	Chart.sort_chart_notes(chart)
+	Chart.sort_chart_events(chart)
 	
 	note_types.types['default'] = _default_note
 	

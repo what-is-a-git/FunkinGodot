@@ -41,6 +41,11 @@ static func sort_chart_notes(chart: Chart) -> void:
 		return a.time < b.time)
 
 
+static func sort_chart_events(chart: Chart) -> void:
+	chart.events.sort_custom(func(a: EventData, b: EventData):
+		return a.time < b.time)
+
+
 static func remove_stacked_notes(chart: Chart) -> int:
 	var index: int = 0
 	var last_note: NoteData = null
@@ -67,21 +72,32 @@ static func remove_stacked_notes(chart: Chart) -> int:
 
 
 static func _try_legacy(base_path: String, difficulty: StringName) -> Chart:
-	var legacy_exists: bool = FileAccess.file_exists('%s/charts/%s.json' % [base_path, difficulty])
+	var legacy_exists: bool = ResourceLoader.exists('%s/charts/%s.json' % [base_path, difficulty])
 	if legacy_exists:
 		var path := '%s/charts/%s.json' % [base_path, difficulty]
 		var funkin := FunkinLegacyChart.new()
 		var json := FileAccess.get_file_as_string(path)
 		funkin.json = JSON.parse_string(json)
-		Game.scroll_speed = funkin.json.song.get('speed', 2.6)
-		return funkin.parse()
+		Game.scroll_speed = funkin.json.song.get('speed', 1.0)
+		
+		var extra_events: Array[EventData] = []
+		var events_path := '%s/charts/events.json' % [base_path]
+		if ResourceLoader.exists(events_path):
+			var events_json := FileAccess.get_file_as_string(events_path)
+			var data: Dictionary = JSON.parse_string(events_json)
+			extra_events.append_array(FunkinLegacyChart.parse_events(data.song))
+		
+		var chart := funkin.parse()
+		chart.events.append_array(extra_events)
+		sort_chart_events(chart)
+		return chart
 	
 	return null
 
 
 static func _try_fnfc(base_path: String, difficulty: StringName) -> Chart:
-	var fnfc_exists: bool = FileAccess.file_exists('%s/charts/chart.json' % [base_path]) and \
-			FileAccess.file_exists('%s/charts/meta.json' % [base_path])
+	var fnfc_exists: bool = ResourceLoader.exists('%s/charts/chart.json' % [base_path]) and \
+			ResourceLoader.exists('%s/charts/meta.json' % [base_path])
 	
 	if fnfc_exists:
 		var path_chart := '%s/charts/chart.json' % [base_path]
@@ -96,9 +112,9 @@ static func _try_fnfc(base_path: String, difficulty: StringName) -> Chart:
 			Game.scroll_speed = fnfc.json_chart.scrollSpeed
 		else:
 			if fnfc.json_chart.scrollSpeed.has(difficulty.to_lower()):
-				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get(difficulty.to_lower(), 2.6)
+				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get(difficulty.to_lower(), 1.0)
 			else:
-				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get('default', 2.6)
+				Game.scroll_speed = fnfc.json_chart.scrollSpeed.get('default', 1.0)
 		
 		return fnfc.parse(difficulty)
 	
