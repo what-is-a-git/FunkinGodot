@@ -4,7 +4,7 @@ extends Node2D
 static var index: int = 0
 static var difficulty_index: int = 0
 
-var list: FreeplayList
+@export var list: FreeplayList = preload('res://resources/freeplay_list.tres')
 
 @onready var background: Sprite2D = %background
 var target_background_color: Color = Color.WHITE
@@ -41,7 +41,6 @@ signal difficulty_changed(difficulty: StringName)
 func _ready() -> void:
 	randomize()
 	
-	list = load('res://resources/freeplay_list.tres')
 	for i: int in list.list.size():
 		_load_song(i)
 	
