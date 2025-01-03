@@ -142,6 +142,8 @@ func _try_spawning() -> void:
 		if skip:
 			_note_index += 1
 			continue
+		if data.length < Conductor.beat_delta / 4.0:
+			data.length = 0.0
 		
 		var note: Note = _note_types.types.get(data.type, _note_types.types['default']).instantiate()
 		note._field = self
