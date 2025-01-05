@@ -142,12 +142,14 @@ func _try_spawning() -> void:
 		if skip:
 			_note_index += 1
 			continue
-		if data.length < Conductor.beat_delta / 4.0:
+		
+		data = data.duplicate()
+		if data.length > 0.0 and data.length < (1.0 / Conductor.beat_delta) / 4.0:
 			data.length = 0.0
 		
 		var note: Note = _note_types.types.get(data.type, _note_types.types['default']).instantiate()
 		note._field = self
-		note.data = data.duplicate()
+		note.data = data
 		note.lane = absi(data.direction) % _lane_count
 		note.position.x = _receptors[0].position.x + 112.0 * (note.lane % _lane_count)
 		note.position.y = -100000.0
