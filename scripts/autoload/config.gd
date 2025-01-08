@@ -68,6 +68,7 @@ var default_configuration: Dictionary = {
 		'manual_offset': 0.0,
 		'scroll_speed_method': 'chart_based',
 		'custom_scroll_speed': 1.0,
+		'use_conductor_time': true,
 		'binds': {
 			'left': KEY_D,
 			'down': KEY_F,

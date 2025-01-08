@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FreeplayList" load_steps=34 format=3 uid="uid://c6srsdtwew2dx"]
+[gd_resource type="Resource" script_class="FreeplayList" load_steps=38 format=3 uid="uid://c6srsdtwew2dx"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_6tpon"]
 [ext_resource type="Script" uid="uid://d3miep1y6ya1p" path="res://scripts/resources/freeplay_list.gd" id="1_bpwad"]
@@ -128,7 +128,7 @@ song_difficulties = [&"easy", &"normal", &"hard"]
 icon = SubResource("Resource_puthd")
 metadata/_custom_type_script = ExtResource("1_vnt78")
 
-[sub_resource type="Resource" id="Resource_30exd"]
+[sub_resource type="Resource" id="Resource_a62cv"]
 script = ExtResource("4_dwhfr")
 mapping = {
 "erect": &"satin_panties_erect",
@@ -143,12 +143,42 @@ frames = Vector2i(2, 1)
 filter = 0
 metadata/_custom_type_script = ExtResource("1_6tpon")
 
-[sub_resource type="Resource" id="Resource_a62cv"]
+[sub_resource type="Resource" id="Resource_wndv4"]
 script = ExtResource("1_vnt78")
 song_name = &"satin_panties"
 song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
 icon = SubResource("Resource_sci4v")
+difficulty_remap = SubResource("Resource_a62cv")
+metadata/_custom_type_script = ExtResource("1_vnt78")
+
+[sub_resource type="Resource" id="Resource_30exd"]
+script = ExtResource("4_dwhfr")
+mapping = {
+"erect": &"high_erect",
+"nightmare": &"high_erect"
+}
+
+[sub_resource type="Resource" id="Resource_8sb6t"]
+script = ExtResource("1_vnt78")
+song_name = &"high"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_sci4v")
 difficulty_remap = SubResource("Resource_30exd")
+metadata/_custom_type_script = ExtResource("1_vnt78")
+
+[sub_resource type="Resource" id="Resource_hdiyt"]
+script = ExtResource("1_6tpon")
+texture = ExtResource("6_uie4k")
+color = Color(0.847059, 0.333333, 0.556863, 1)
+frames = Vector2i(2, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("1_6tpon")
+
+[sub_resource type="Resource" id="Resource_be34k"]
+script = ExtResource("1_vnt78")
+song_name = &"milf"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_hdiyt")
 metadata/_custom_type_script = ExtResource("1_vnt78")
 
 [sub_resource type="Resource" id="Resource_uie4k"]
@@ -181,4 +211,4 @@ icon = SubResource("Resource_hyym4")
 
 [resource]
 script = ExtResource("1_bpwad")
-list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_08tpj"), SubResource("Resource_1l15e"), SubResource("Resource_smd7f"), SubResource("Resource_a62cv"), SubResource("Resource_y6hjn"), SubResource("Resource_22f7a")])
+list = Array[ExtResource("1_vnt78")]([SubResource("Resource_bsxmn"), SubResource("Resource_bvc40"), SubResource("Resource_w108v"), SubResource("Resource_hu5ot"), SubResource("Resource_08tpj"), SubResource("Resource_1l15e"), SubResource("Resource_smd7f"), SubResource("Resource_wndv4"), SubResource("Resource_8sb6t"), SubResource("Resource_be34k"), SubResource("Resource_y6hjn"), SubResource("Resource_22f7a")])

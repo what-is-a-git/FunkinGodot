@@ -3,6 +3,7 @@ extends HUD
 
 @export var bump_amount: Vector2 = Vector2(0.03, 0.03)
 @export var do_countdown: bool = true
+@export var use_conductor_time: bool = true
 
 @onready var note_fields: Node2D = %note_fields
 @onready var health_bar: HealthBar = %health_bar
@@ -27,6 +28,7 @@ var skin: HUDSkin
 func _ready() -> void:
 	super()
 	
+	use_conductor_time = Config.get_value('gameplay', 'use_conductor_time')
 	player_field = note_fields.get_node('player')
 	opponent_field = note_fields.get_node('opponent')
 	
@@ -116,7 +118,12 @@ func _process(delta: float) -> void:
 func _on_note_hit(note: Note) -> void:
 	super(note)
 	var health := game.health
-	var difference: float = tracks.get_playback_position() - note.data.time
+	var difference: float = INF
+	if use_conductor_time:
+		difference = Conductor.time - note.data.time
+	else:
+		difference = tracks.get_playback_position() - note.data.time
+	
 	if not player_field.takes_input:
 		difference = 0.0
 	

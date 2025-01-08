@@ -67,6 +67,9 @@ func _process(delta: float) -> void:
 	var last_measure: int = floori(measure)
 	
 	if is_instance_valid(target_audio):
+		if not target_audio.playing:
+			return
+		
 		var last_time: float = time
 		var audio_position: float = target_audio.get_playback_position() \
 				+ AudioServer.get_time_since_last_mix()
