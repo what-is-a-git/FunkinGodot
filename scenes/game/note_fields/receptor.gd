@@ -24,6 +24,7 @@ static var input_zone: float = 0.18
 			_automatically_play_static = value
 var play_confirm: bool = true
 var _pressed: bool = false
+var _last_anim: StringName = &''
 @onready var _notes: Node2D = %notes
 
 signal on_hit_note(note: Note)
@@ -106,6 +107,7 @@ func _ready() -> void:
 
 
 func play_anim(anim: StringName, force: bool = false) -> void:
+	_last_anim = anim
 	sprite.play('%s %s' % [direction, anim])
 	
 	if force:

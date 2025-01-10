@@ -185,7 +185,12 @@ func _ready() -> void:
 		
 		# Set the NoteField characters.
 		_player_field._default_character = player
+		_player_field._skin = assets.player_skin
+		_player_field.reload_skin()
+		
 		_opponent_field._default_character = opponent
+		_opponent_field._skin = assets.opponent_skin
+		_opponent_field.reload_skin()
 		
 		skin = assets.hud_skin
 		

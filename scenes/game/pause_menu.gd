@@ -90,8 +90,11 @@ func _close() -> void:
 	get_viewport().set_input_as_handled()
 	active = false
 	visible = false
-	tree.current_scene.process_mode = Node.PROCESS_MODE_INHERIT
-	Conductor.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	if Game.instance.song_started:
 		Game.instance.tracks.check_sync(true)
+
+
+func _exit_tree() -> void:
+	tree.current_scene.process_mode = Node.PROCESS_MODE_INHERIT
+	Conductor.process_mode = Node.PROCESS_MODE_INHERIT

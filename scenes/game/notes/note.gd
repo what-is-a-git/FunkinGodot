@@ -2,6 +2,8 @@ class_name Note extends Node2D
 
 
 @export var sing_suffix: StringName = &''
+@export var use_skin: bool = true
+@export var splash: PackedScene = null
 
 var data: NoteData
 var lane: int = 0
@@ -20,7 +22,6 @@ var _sustain_offset: float = 0.0
 var _field: NoteField = null
 var _character: Character = null
 var _previous_step: int = -128
-var _splash: PackedScene = null
 
 
 func _ready() -> void:
@@ -36,21 +37,7 @@ func _ready() -> void:
 		_field = get_parent().get_parent()
 	
 	if length > 0.0:
-		var sustain_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain' % [
-			directions[lane]
-		], 0).duplicate()
-		sustain_texture.region.position.y += 1
-		sustain_texture.region.size.y -= 2
-		
-		sustain.texture = sustain_texture
-		
-		var tail_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain end' % [
-			directions[lane]
-		], 0).duplicate()
-		tail_texture.region.position.y += 1
-		tail_texture.region.size.y -= 1
-		
-		tail.texture = tail_texture
+		reload_sustain_sprites()
 		if Config.get_value('interface', 'sustain_layer') == 'below':
 			sustain.z_index -= 1
 		_update_sustain()
@@ -100,6 +87,7 @@ func _update_sustain() -> void:
 		# whole screen (which it is rn because -1280 is more
 		# than enough at 0.7 scale, which is the default)
 		if _field._scroll_speed_modifier < 0.0:
+			tail.pivot_offset.y = 0.0
 			tail.position.y = -tail.size.y
 			tail.flip_h = true
 			tail.flip_v = true
@@ -114,6 +102,7 @@ func _update_sustain() -> void:
 			sustain.global_position.y = global_position.y - \
 					sustain.size.y * global_scale.y
 		else:
+			tail.pivot_offset.y = tail.size.y
 			tail.position.y = sustain.size.y
 			tail.flip_h = false
 			tail.flip_v = false
@@ -127,3 +116,27 @@ func _update_sustain() -> void:
 		
 		sustain.position.y += _sustain_offset * 1000.0 * 0.45 * \
 				(_field._scroll_speed * absf(_field._scroll_speed_modifier))
+
+
+func reload_sustain_sprites() -> void:
+	if not is_instance_valid(sustain):
+		return
+	
+	var sustain_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain' % [
+		directions[lane]
+	], 0).duplicate()
+	sustain_texture.region.position.y += 1
+	sustain_texture.region.size.y -= 2
+	
+	sustain.texture = sustain_texture
+	
+	var tail_texture: AtlasTexture = sprite.sprite_frames.get_frame_texture('%s sustain end' % [
+		directions[lane]
+	], 0).duplicate()
+	tail_texture.region.position.y += 1
+	tail_texture.region.size.y -= 1
+	
+	tail.texture = tail_texture
+	tail.size.y = tail.texture.get_height()
+	
+	clip_rect.pivot_offset.x = clip_rect.size.x / 2.0

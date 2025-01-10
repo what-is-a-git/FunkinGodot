@@ -1,9 +1,27 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=3 format=3 uid="uid://y8bpsvcnfi6"]
+[gd_resource type="Resource" script_class="SongAssets" load_steps=8 format=3 uid="uid://y8bpsvcnfi6"]
 
+[ext_resource type="Script" uid="uid://dfdr435gif8gk" path="res://scripts/resources/note_skin.gd" id="1_orhes"]
 [ext_resource type="PackedScene" uid="uid://8gvi1td3sh2t" path="res://scenes/game/assets/stages/stage_erect.tscn" id="2_p7hxv"]
+[ext_resource type="SpriteFrames" path="res://resources/images/game/skins/default/notes.res" id="2_pdphh"]
+[ext_resource type="SpriteFrames" path="res://resources/images/game/skins/default/splashes.res" id="3_38xqt"]
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/song_assets.gd" id="3_vylcf"]
+[ext_resource type="SpriteFrames" uid="uid://y8en4nx7mbuw" path="res://resources/images/game/skins/default/receptors.res" id="4_nvjib"]
+
+[sub_resource type="Resource" id="Resource_wusbt"]
+script = ExtResource("1_orhes")
+strum_frames = ExtResource("4_nvjib")
+strum_filter = 0
+strum_scale = Vector2(1, 1)
+note_frames = ExtResource("2_pdphh")
+note_filter = 0
+note_scale = Vector2(1, 1)
+splash_frames = ExtResource("3_38xqt")
+splash_filter = 0
+splash_scale = Vector2(1, 1)
+metadata/_custom_type_script = ExtResource("1_orhes")
 
 [resource]
 script = ExtResource("3_vylcf")
 stage = ExtResource("2_p7hxv")
+player_skin = SubResource("Resource_wusbt")
 scripts = Array[PackedScene]([])

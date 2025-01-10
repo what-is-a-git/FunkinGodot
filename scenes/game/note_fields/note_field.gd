@@ -21,6 +21,7 @@ var _note_splash_alpha: float = 0.6
 var _lane_count: int
 var _game: Game = null
 var _force_no_chart: bool = false
+var _skin: NoteSkin = null
 
 signal note_hit(note: Note)
 signal note_miss(note: Note)
@@ -50,6 +51,8 @@ func _ready() -> void:
 		receptor._automatically_play_static = not takes_input
 		receptor.on_hit_note.connect(_on_hit_note)
 		receptor.on_miss_note.connect(miss_note)
+	
+	reload_skin()
 
 
 func _process(delta: float) -> void:
@@ -153,8 +156,23 @@ func _try_spawning() -> void:
 		note.lane = absi(data.direction) % _lane_count
 		note.position.x = _receptors[0].position.x + 112.0 * (note.lane % _lane_count)
 		note.position.y = -100000.0
-		note._splash = default_note_splash
+		if not is_instance_valid(note.splash):
+			note.splash = default_note_splash
+		
 		_notes.add_child(note)
+		
+		if note.use_skin and is_instance_valid(_skin):
+			var animation := note.sprite.animation
+			note.sprite.sprite_frames = _skin.note_frames
+			note.scale = _skin.note_scale
+			note.sprite.texture_filter = _skin.note_filter as CanvasItem.TextureFilter
+			
+			if is_instance_valid(note.sustain):
+				note.clip_rect.scale.x = 1.0 / note.scale.x
+				note.sustain.texture_filter = note.sprite.texture_filter
+				note.tail.texture_filter = note.sprite.texture_filter
+				note.reload_sustain_sprites()
+		
 		_note_index += 1
 
 
@@ -169,3 +187,23 @@ func get_receptor_from_lane(lane: int) -> Receptor:
 		if receptor.lane == lane:
 			return receptor
 	return null
+
+
+func reload_skin() -> void:
+	if not is_instance_valid(_skin):
+		return
+	
+	for receptor: Receptor in _receptors:
+		receptor.sprite.sprite_frames = _skin.strum_frames
+		receptor.sprite.scale = _skin.strum_scale
+		receptor.sprite.texture_filter = _skin.strum_filter as CanvasItem.TextureFilter
+		receptor.play_anim(receptor._last_anim)
+	
+	for note: Note in _notes.get_children():
+		if note.use_skin:
+			var animation := note.sprite.animation
+			note.sprite.sprite_frames = _skin.note_frames
+			note.sprite.scale = _skin.note_scale
+			note.sprite.texture_filter = _skin.note_filter as CanvasItem.TextureFilter
+			note.sprite.play(animation)
+			note.sprite.frame = 0

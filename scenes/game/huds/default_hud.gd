@@ -153,10 +153,17 @@ func _on_note_hit(note: Note) -> void:
 		&'shit':
 			rating_sprite.texture = skin.shit
 	
-	if note._splash != null and \
+	if is_instance_valid(note.splash) and \
 			(rating.name == &'marvelous' or rating.name == &'sick'):
-		var splash = note._splash.instantiate()
+		var splash: AnimatedSprite = note.splash.instantiate()
 		splash.note = note
+		
+		var skin := player_field._skin
+		if splash.use_skin and is_instance_valid(skin):
+			splash.sprite_frames = skin.strum_frames
+			splash.scale = skin.strum_scale
+			splash.texture_filter = skin.strum_filter as CanvasItem.TextureFilter
+		
 		add_child(splash)
 		splash.global_position = note._field._receptors_node.\
 				get_child(note.lane).global_position
