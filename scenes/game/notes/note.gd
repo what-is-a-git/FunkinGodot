@@ -53,11 +53,40 @@ func _ready() -> void:
 		tail.texture = tail_texture
 		if Config.get_value('interface', 'sustain_layer') == 'below':
 			sustain.z_index -= 1
+		_update_sustain()
 	else:
 		sustain.queue_free()
 
 
 func _process(delta: float) -> void:
+	_update_sustain()
+	
+	if not _hit:
+		return
+	
+	if length <= 0.0:
+		if is_instance_valid(_character):
+			_character.sing(self, true)
+		queue_free()
+		return
+	
+	sprite.visible = false
+	length -= delta
+	
+	var step: int = floori(Conductor.step)
+	if step > _previous_step:
+		if is_instance_valid(_character):
+			_character.sing(self, true)
+		if is_instance_valid(_field):
+			# Because of how this is coded this will simply play
+			# the press animation over and over rather than
+			# actually trying to hit the same note multiple times.
+			_field.get_receptor_from_lane(lane).hit_note(self)
+		
+		_previous_step = step
+
+
+func _update_sustain() -> void:
 	if not is_instance_valid(_field):
 		return
 	
@@ -98,27 +127,3 @@ func _process(delta: float) -> void:
 		
 		sustain.position.y += _sustain_offset * 1000.0 * 0.45 * \
 				(_field._scroll_speed * absf(_field._scroll_speed_modifier))
-	
-	if not _hit:
-		return
-	
-	if length <= 0.0:
-		if is_instance_valid(_character):
-			_character.sing(self, true)
-		
-		queue_free()
-		return
-	
-	sprite.visible = false
-	length -= delta
-	
-	var step: int = floori(Conductor.step)
-	if step > _previous_step:
-		if is_instance_valid(_character):
-			_character.sing(self, true)
-		
-		# Because of how this is coded this will simply play
-		# the press animation over and over rather than
-		# actually trying to hit the same note multiple times.
-		_field.get_receptor_from_lane(lane).hit_note(self)
-		_previous_step = step
