@@ -10,7 +10,6 @@ static var mode: PlayMode = PlayMode.FREEPLAY
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 static var camera_position: Vector2 = Vector2.INF
-static var camera_zoom: Vector2 = Vector2.INF
 
 @onready var pause_menu: PackedScene = load('res://scenes/game/pause_menu.tscn')
 
@@ -254,15 +253,12 @@ func _ready() -> void:
 	
 	if camera_position != Vector2.INF:
 		camera.position = camera_position
-	if camera_zoom != Vector2.INF:
-		camera.zoom = camera_zoom
 	ready_post.emit()
 
 
 func _process(delta: float) -> void:
 	call_deferred('_process_post', delta)
 	camera_position = camera.position
-	camera_zoom = camera.zoom
 	
 	if not playing:
 		return
@@ -411,7 +407,6 @@ func _song_finished(force: bool = false) -> void:
 	chart = null
 	playlist.clear()
 	camera_position = Vector2.INF
-	camera_zoom = Vector2.INF
 	GlobalAudio.get_player('MENU/CANCEL').play()
 	match mode:
 		PlayMode.STORY:
