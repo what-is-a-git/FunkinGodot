@@ -7,12 +7,15 @@ var json: Dictionary
 func parse() -> Chart:
 	var chart := Chart.new()
 	var data: Dictionary = json.song
+	# If your chart is completely empty, you have issues.
+	if data.notes.is_empty():
+		push_warning('Why the fuck did you give a 100% empty legacy chart')
+		return
 	
 	# section stuff
 	var bpm: float = data.bpm
 	var beat: float = 0.0
 	var time: float = 0.0
-	# If your chart is completely empty, you have issues.
 	var must_hit: bool = data.notes[0].mustHitSection
 	
 	chart.events.append_array(parse_events(data))

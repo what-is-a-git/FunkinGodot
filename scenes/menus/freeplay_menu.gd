@@ -4,7 +4,7 @@ extends Node2D
 static var index: int = 0
 static var difficulty_index: int = 0
 
-@export var list: FreeplayList = null
+@export var list: Array[FreeplaySong] = []
 
 @onready var background: Sprite2D = %background
 var target_background_color: Color = Color.WHITE
@@ -16,7 +16,7 @@ var song_nodes: Array[FreeplaySongNode] = []
 @onready var _info_panel: Panel = %info_panel
 
 var list_song: FreeplaySong:
-	get: return list.list[index]
+	get: return list[index]
 
 var current_song: String:
 	get:
@@ -40,10 +40,9 @@ signal difficulty_changed(difficulty: StringName)
 
 func _ready() -> void:
 	randomize()
-	if not is_instance_valid(list):
-		list = load('res://resources/freeplay_list.tres')
+	assert(not list.is_empty(), 'You need a list to have freeplay work correctly.')
 	
-	for i: int in list.list.size():
+	for i: int in list.size():
 		_load_song(i)
 	
 	if song_nodes.is_empty():
@@ -147,7 +146,7 @@ func select_song() -> void:
 
 
 func _load_song(i: int) -> void:
-	var song := list.list[i]
+	var song := list[i]
 	if song.song_difficulties.size() < 1:
 		printerr('Song is missing any difficulties!')
 		return

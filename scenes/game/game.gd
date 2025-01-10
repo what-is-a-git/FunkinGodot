@@ -83,15 +83,18 @@ signal died(event: CancellableEvent)
 
 
 func _init() -> void:
-	instance = self
-	
 	if not chart:
 		chart = Chart.load_song(song, difficulty)
-	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
-		metadata = load('res://songs/%s/meta.tres' % song)
+
+
+func _enter_tree() -> void:
+	instance = self
 
 
 func _exit_tree() -> void:
+	if instance == self:
+		instance = null
+	
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
@@ -127,6 +130,9 @@ func _ready() -> void:
 			continue
 		
 		note_types.types[note.type] = load(path)
+	
+	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
+		metadata = load('res://songs/%s/meta.tres' % song)
 	
 	if ResourceLoader.exists('res://songs/%s/assets.tres' % song):
 		# Load SongAssets tres.
@@ -183,6 +189,10 @@ func _ready() -> void:
 		_opponent_field._default_character = opponent
 		
 		skin = assets.hud_skin
+		
+		# we're done using assets so not point keeping
+		# the references around
+		assets = null
 		
 		if is_instance_valid(skin.pause_menu):
 			pause_menu = skin.pause_menu
@@ -399,7 +409,6 @@ func _song_finished(force: bool = false) -> void:
 		return
 	
 	chart = null
-	instance = null
 	playlist.clear()
 	camera_position = Vector2.INF
 	camera_zoom = Vector2.INF

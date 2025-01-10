@@ -1,12 +1,198 @@
-[gd_scene load_steps=15 format=3 uid="uid://3rua2gpac5p8"]
+[gd_scene load_steps=46 format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
 [ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://scenes/game/tracks.gd" id="2_fq3va"]
+[ext_resource type="Script" uid="uid://c4n3qjttdmbrg" path="res://scripts/resources/freeplay_song.gd" id="2_k47q8"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="3_l3rbe"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://scenes/menus/freeplay/info_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7yg7l"]
+[ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://resources/images/game/assets/icons/gf.png" id="4_gapdl"]
+[ext_resource type="Script" uid="uid://df2o86ah3b60w" path="res://scripts/resources/difficulty_map.gd" id="5_qk06g"]
+[ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://resources/images/game/assets/icons/dad.png" id="6_ax4le"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://scenes/menus/freeplay/score_panel.gd" id="6_mti1l"]
 [ext_resource type="Script" uid="uid://b3d82j8exp4ge" path="res://scenes/menus/freeplay/reset_panel.gd" id="7_detv5"]
+[ext_resource type="Texture2D" uid="uid://qvp8tkrjr2l7" path="res://resources/images/game/assets/icons/mom.png" id="7_l3rbe"]
+[ext_resource type="Texture2D" uid="uid://dnw888uux6bmj" path="res://resources/images/game/assets/icons/darnell.png" id="8_gapdl"]
+[ext_resource type="Texture2D" uid="uid://bk7jsl1s5ax2o" path="res://resources/images/game/assets/icons/face.png" id="9_qk06g"]
+
+[sub_resource type="Resource" id="Resource_1y04g"]
+script = ExtResource("3_l3rbe")
+texture = ExtResource("4_gapdl")
+color = Color(0.647059, 0, 0.301961, 1)
+frames = Vector2i(1, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("3_l3rbe")
+
+[sub_resource type="Resource" id="Resource_1p1y5"]
+script = ExtResource("2_k47q8")
+song_name = &"tutorial"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_1y04g")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_t8id3"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"bopeebo_erect",
+&"nightmare": &"bopeebo_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_ggl4h"]
+script = ExtResource("3_l3rbe")
+texture = ExtResource("6_ax4le")
+color = Color(0.686275, 0.4, 0.807843, 1)
+frames = Vector2i(1, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("3_l3rbe")
+
+[sub_resource type="Resource" id="Resource_7q3cy"]
+script = ExtResource("2_k47q8")
+song_name = &"bopeebo"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_ggl4h")
+difficulty_remap = SubResource("Resource_t8id3")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_k47q8"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"fresh_erect",
+&"nightmare": &"fresh_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_l3rbe"]
+script = ExtResource("2_k47q8")
+song_name = &"fresh"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_ggl4h")
+difficulty_remap = SubResource("Resource_k47q8")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_nevf3"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"dad_battle_erect",
+&"nightmare": &"dad_battle_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_qk06g"]
+script = ExtResource("2_k47q8")
+song_name = &"dad_battle"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_ggl4h")
+difficulty_remap = SubResource("Resource_nevf3")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_gapdl"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"satin_panties_erect",
+&"nightmare": &"satin_panties_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_ax4le"]
+script = ExtResource("3_l3rbe")
+texture = ExtResource("7_l3rbe")
+color = Color(0.847059, 0.333333, 0.556863, 1)
+frames = Vector2i(2, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("3_l3rbe")
+
+[sub_resource type="Resource" id="Resource_o750g"]
+script = ExtResource("2_k47q8")
+song_name = &"satin_panties"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_ax4le")
+difficulty_remap = SubResource("Resource_gapdl")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_io0o1"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"high_erect",
+&"nightmare": &"high_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_b2ygt"]
+script = ExtResource("2_k47q8")
+song_name = &"high"
+song_difficulties = [&"easy", &"normal", &"hard", "erect", "nightmare"]
+icon = SubResource("Resource_ax4le")
+difficulty_remap = SubResource("Resource_io0o1")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_tyci7"]
+script = ExtResource("5_qk06g")
+mapping = Dictionary[StringName, StringName]({
+&"erect": &"milf_erect",
+&"nightmare": &"milf_erect"
+})
+metadata/_custom_type_script = ExtResource("5_qk06g")
+
+[sub_resource type="Resource" id="Resource_4trhg"]
+script = ExtResource("2_k47q8")
+song_name = &"milf"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_ax4le")
+difficulty_remap = SubResource("Resource_tyci7")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_0h8vq"]
+script = ExtResource("3_l3rbe")
+texture = ExtResource("8_gapdl")
+color = Color(0.45098, 0.368627, 0.690196, 1)
+frames = Vector2i(2, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("3_l3rbe")
+
+[sub_resource type="Resource" id="Resource_bs7ia"]
+script = ExtResource("2_k47q8")
+song_name = &"darnell_bf"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_0h8vq")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_7tswt"]
+script = ExtResource("2_k47q8")
+song_name = &"bopeebo_pico"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_ggl4h")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_cl738"]
+script = ExtResource("2_k47q8")
+song_name = &"fresh_pico"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_ggl4h")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_0bmfe"]
+script = ExtResource("2_k47q8")
+song_name = &"dad_battle_pico"
+song_difficulties = [&"easy", &"normal", &"hard"]
+icon = SubResource("Resource_ggl4h")
+metadata/_custom_type_script = ExtResource("2_k47q8")
+
+[sub_resource type="Resource" id="Resource_6huv4"]
+script = ExtResource("3_l3rbe")
+texture = ExtResource("9_qk06g")
+color = Color(0.631373, 0.631373, 0.631373, 1)
+frames = Vector2i(2, 1)
+filter = 0
+metadata/_custom_type_script = ExtResource("3_l3rbe")
+
+[sub_resource type="Resource" id="Resource_n00kv"]
+script = ExtResource("2_k47q8")
+song_name = &"test"
+song_difficulties = ["normal"]
+icon = SubResource("Resource_6huv4")
+metadata/_custom_type_script = ExtResource("2_k47q8")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -40,6 +226,7 @@ font_size = 10
 
 [node name="freeplay_menu" type="Node2D"]
 script = ExtResource("1_p2lt6")
+list = Array[ExtResource("2_k47q8")]([SubResource("Resource_1p1y5"), SubResource("Resource_7q3cy"), SubResource("Resource_l3rbe"), SubResource("Resource_qk06g"), SubResource("Resource_o750g"), SubResource("Resource_b2ygt"), SubResource("Resource_4trhg"), SubResource("Resource_bs7ia"), SubResource("Resource_7tswt"), SubResource("Resource_cl738"), SubResource("Resource_0bmfe"), SubResource("Resource_n00kv")])
 
 [node name="track_timer" type="Timer" parent="."]
 unique_name_in_owner = true

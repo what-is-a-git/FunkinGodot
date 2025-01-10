@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://f75xq2p53bpl"]
 
 [ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://resources/images/game/skins/default/notes.png" id="1_0svdn"]
-[ext_resource type="Script" path="res://scenes/game/notes/note.gd" id="1_dpa0s"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="2_uegtt"]
+[ext_resource type="Script" uid="uid://dj0ps70uiqehu" path="res://scenes/game/notes/note.gd" id="1_dpa0s"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="2_uegtt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8m8o"]
 atlas = ExtResource("1_0svdn")
@@ -224,5 +224,5 @@ flip_v = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sv3fl")
-animation = &"down sustain end"
+animation = &"left note"
 script = ExtResource("2_uegtt")

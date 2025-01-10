@@ -38,6 +38,7 @@ func play_anim(anim: StringName, force: bool = false, special: bool = false) -> 
 	if not _animation_player.has_animation(anim):
 		return
 	
+	_in_special_anim = special
 	_animation = anim
 	_singing = _animation.begins_with('sing_')
 	
@@ -46,7 +47,6 @@ func play_anim(anim: StringName, force: bool = false, special: bool = false) -> 
 		return
 	
 	_animation_player.play(anim)
-	_in_special_anim = special
 
 
 func has_anim(anim: StringName) -> bool:

@@ -1,4 +1,4 @@
 class_name DifficultyMap extends Resource
 
 
-@export var mapping: Dictionary = {}
+@export var mapping: Dictionary[StringName, StringName] = {}

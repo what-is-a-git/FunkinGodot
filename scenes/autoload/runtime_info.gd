@@ -9,6 +9,8 @@ var texture_memory_peak: float = 0.0
 var static_memory_peak: float = 0.0
 var tween: Tween
 
+var times: Array[float] = []
+
 
 func _ready() -> void:
 	visible = Config.get_value('performance', 'performance_info_visible')
@@ -16,6 +18,10 @@ func _ready() -> void:
 	
 	if OS.is_debug_build():
 		get_node('timer').wait_time = 0.2
+
+
+func _process(delta: float) -> void:
+	times.push_back(delta)
 
 
 func display() -> void:
@@ -40,11 +46,16 @@ func display() -> void:
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name.to_pascal_case()
 	
+	var avg: float = 0.0
+	for time in times:
+		avg += time / float(times.size())
+	times.clear()
+	
 	label.size = Vector2.ZERO
 	var text_output: String = \
 			'%d FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s' % [
 		Performance.get_monitor(Performance.TIME_FPS),
-		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
+		avg * 1000.0,
 		String.humanize_size(video_memory_current), String.humanize_size(video_memory_peak),
 		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
 		version,
