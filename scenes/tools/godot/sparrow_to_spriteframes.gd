@@ -2,12 +2,12 @@ class_name SparrowConverter extends Control
 
 
 var use_offsets: bool = true
-var use_image_textures: bool = true
 var animations_looped: bool = false
 var animation_framerate: int = 24
 var source_file: String = ''
 
-@onready var file: Label = $panel/file
+@onready var file: Label = %file
+@onready var status: Label = %status
 
 
 func _set_offsets(value: bool) -> void:
@@ -16,10 +16,6 @@ func _set_offsets(value: bool) -> void:
 
 func _set_looped(value: bool) -> void:
 	animations_looped = value
-
-
-func _set_image_textures(toggled_on: bool) -> void:
-	use_image_textures = toggled_on
 
 
 func _set_framerate(value: int) -> void:
@@ -34,6 +30,7 @@ func _set_file(value: String) -> void:
 func _import() -> Error:
 	if not FileAccess.file_exists(source_file):
 		print('File not found at path "%s"!' % source_file)
+		status.text = 'File not found at path "%s"!' % source_file
 		return ERR_FILE_NOT_FOUND
 	
 	var xml: XMLParser = XMLParser.new()
@@ -56,6 +53,7 @@ func _import() -> Error:
 		'animation_framerate': animation_framerate,
 	}
 	
+	status.text = 'Processing.'
 	while xml.read() == OK:
 		if xml.get_node_type() != XMLParser.NODE_ELEMENT:
 			continue
@@ -68,6 +66,7 @@ func _import() -> Error:
 			
 			if not FileAccess.file_exists(image_path):
 				print('Image not found at imagePath (%s)!' % image_name)
+				status.text = 'Image not found at %s.' % [image_name]
 				return ERR_FILE_NOT_FOUND
 			
 			texture = ResourceLoader.load(image_path, 'CompressedTexture2D', ResourceLoader.CACHE_MODE_IGNORE)
@@ -99,7 +98,6 @@ func _import() -> Error:
 		frame.has_offsets = xml.has_attribute('frameX') and options.get('use_offsets', true)
 		
 		var frame_data: Array = _get_frame_name_and_number(frame)
-		
 		for sparrow_frame in sparrow_frames:
 			if sparrow_frame.source == frame.source and \
 					sparrow_frame.offsets == frame.offsets:
@@ -187,6 +185,7 @@ func _import() -> Error:
 		sprite_frames.add_frame(frame.animation, frame.atlas)
 
 	var filename: StringName = &'%s.res' % [source_file.get_basename()]
+	status.text = 'Saved to %s' % [filename]
 	return ResourceSaver.save(sprite_frames, filename, ResourceSaver.FLAG_COMPRESS)
 
 

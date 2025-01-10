@@ -3,10 +3,29 @@ class_name FunkinScript extends Node
 
 var game: Game
 
-var player: Character
-var opponent: Character
-var spectator: Character
-var stage: Stage
+var player: Character:
+	get:
+		if is_instance_valid(game):
+			return game.player
+		return null
+
+var opponent: Character:
+	get:
+		if is_instance_valid(game):
+			return game.opponent
+		return null
+
+var spectator: Character:
+	get:
+		if is_instance_valid(game):
+			return game.spectator
+		return null
+
+var stage: Stage:
+	get:
+		if is_instance_valid(game):
+			return game.stage
+		return null
 
 var player_field: NoteField
 var opponent_field: NoteField
@@ -21,11 +40,6 @@ func _ready() -> void:
 	
 	if is_instance_valid(Game.instance):
 		game = Game.instance
-		
-		player = game.player
-		opponent = game.opponent
-		spectator = game.spectator
-		stage = game.stage
 		
 		player_field = game._player_field
 		opponent_field = game._opponent_field

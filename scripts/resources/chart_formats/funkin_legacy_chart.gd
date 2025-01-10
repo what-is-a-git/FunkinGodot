@@ -97,7 +97,11 @@ static func parse_psych_events(data: Dictionary) -> Array[EventData]:
 		return events
 	
 	for object: Array in event_data:
-		var event_time: float = object[0]
+		# sorry not sorry leather engine <3
+		if not object[0] is float:
+			continue
+		
+		var event_time: float = object[0] / 1000.0
 		for event in object[1]:
 			var event_name: String = event[0]
 			var params: Array[String] = [event[1], event[2]]

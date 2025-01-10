@@ -44,6 +44,8 @@ func _apply_ease(tween: Tween, ease_string: String) -> void:
 			tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 		'quadOut':
 			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		'sineOut':
+			tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		'linear': # default anyways
 			pass
 		_:

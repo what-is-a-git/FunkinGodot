@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://u1gd5kt4gypw"]
+[gd_scene load_steps=18 format=3 uid="uid://u1gd5kt4gypw"]
 
 [ext_resource type="Script" uid="uid://cjow6k70i87vg" path="res://scenes/tools/godot/sparrow_to_spriteframes.gd" id="1_7u426"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://resources/images/menus/background.png" id="2_6mghc"]
@@ -95,7 +95,16 @@ expand_margin_left = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_jwy14"]
 font = ExtResource("4_b4mj3")
-outline_size = 8
+font_size = 32
+outline_size = 12
+outline_color = Color(0.109804, 0.0666667, 0.203922, 1)
+shadow_color = Color(0.0666667, 0.0117647, 0.117647, 0.580392)
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0bndx"]
+font = ExtResource("4_b4mj3")
+font_size = 32
+outline_size = 12
 outline_color = Color(0.109804, 0.0666667, 0.203922, 1)
 shadow_color = Color(0.0666667, 0.0117647, 0.117647, 0.580392)
 shadow_offset = Vector2(0, 3)
@@ -192,20 +201,6 @@ button_pressed = true
 text = "Offsets"
 alignment = 1
 
-[node name="image_textures" type="CheckBox" parent="panel"]
-layout_mode = 0
-offset_left = 524.0
-offset_top = 548.0
-offset_right = 759.0
-offset_bottom = 612.0
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_kjt1g")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pw4ef")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7s37j")
-theme_override_styles/normal = SubResource("StyleBoxFlat_sv6vt")
-button_pressed = true
-text = "Use ImageTextures"
-alignment = 1
-
 [node name="pick" type="Button" parent="panel"]
 layout_mode = 0
 offset_left = 1048.0
@@ -216,18 +211,35 @@ mouse_default_cursor_shape = 2
 text = "Pick Spritesheet"
 
 [node name="file" type="Label" parent="panel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 48.0
 offset_top = 32.0
 offset_right = -44.0
-offset_bottom = 64.0
+offset_bottom = 101.0
 grow_horizontal = 2
 theme = ExtResource("4_jbg5x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_d1wy3")
 text = "N / A"
 label_settings = SubResource("LabelSettings_jwy14")
+vertical_alignment = 1
+
+[node name="status" type="Label" parent="panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 48.0
+offset_top = 124.0
+offset_right = -44.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme = ExtResource("4_jbg5x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d1wy3")
+text = "Not started yet"
+label_settings = SubResource("LabelSettings_0bndx")
 vertical_alignment = 1
 
 [node name="file_dialog" type="FileDialog" parent="."]
@@ -239,11 +251,11 @@ mode_overrides_title = false
 file_mode = 0
 filters = PackedStringArray("*.xml")
 show_hidden_files = true
+use_native_dialog = true
 
 [connection signal="pressed" from="panel/convert" to="." method="_import"]
 [connection signal="value_changed" from="panel/framerate" to="." method="_set_framerate"]
 [connection signal="toggled" from="panel/looping" to="." method="_set_looped"]
 [connection signal="toggled" from="panel/offsets" to="." method="_set_offsets"]
-[connection signal="toggled" from="panel/image_textures" to="." method="_set_image_textures"]
 [connection signal="pressed" from="panel/pick" to="file_dialog" method="popup_centered"]
 [connection signal="file_selected" from="file_dialog" to="." method="_set_file"]

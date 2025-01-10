@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://cdlt4jc7j8122"]
 
-[ext_resource type="Script" path="res://scenes/game/assets/characters/character.gd" id="1_6r3o0"]
-[ext_resource type="Script" path="res://scripts/resources/icon.gd" id="2_2fkqd"]
+[ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/assets/characters/character.gd" id="1_6r3o0"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_2fkqd"]
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://resources/images/game/assets/icons/dad.png" id="3_sy3hy"]
 [ext_resource type="SpriteFrames" uid="uid://bqdn4q7cgjryv" path="res://resources/images/game/assets/characters/dad/sprites.res" id="4_4ice2"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="5_3oi7u"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_3oi7u"]
 
 [sub_resource type="Resource" id="Resource_4ohel"]
 script = ExtResource("2_2fkqd")
@@ -403,12 +403,12 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mki60"]
 _data = {
-"RESET": SubResource("Animation_bgpi6"),
-"idle": SubResource("Animation_ud1jc"),
-"sing_down": SubResource("Animation_wgt05"),
-"sing_left": SubResource("Animation_0v5yh"),
-"sing_right": SubResource("Animation_2i71f"),
-"sing_up": SubResource("Animation_m87l6")
+&"RESET": SubResource("Animation_bgpi6"),
+&"idle": SubResource("Animation_ud1jc"),
+&"sing_down": SubResource("Animation_wgt05"),
+&"sing_left": SubResource("Animation_0v5yh"),
+&"sing_right": SubResource("Animation_2i71f"),
+&"sing_up": SubResource("Animation_m87l6")
 }
 
 [node name="dad" type="Node2D"]
@@ -425,7 +425,7 @@ script = ExtResource("5_3oi7u")
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mki60")
+&"": SubResource("AnimationLibrary_mki60")
 }
 
 [node name="camera_offset" type="Marker2D" parent="."]
