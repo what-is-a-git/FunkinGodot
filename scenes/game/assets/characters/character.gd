@@ -96,7 +96,7 @@ func dance(force: bool = false) -> void:
 
 func _process(delta: float) -> void:
 	if _singing:
-		_sing_timer += delta * Conductor.beat_delta
+		_sing_timer += delta / Conductor.beat_delta
 		
 		if _sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
 			dance(true)

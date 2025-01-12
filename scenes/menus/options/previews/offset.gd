@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _on_beat_hit(beat: int) -> void:
 	var note := NOTE.instantiate()
 	note.data = NoteData.new()
-	note.data.time = Conductor.time + (1.0 / Conductor.beat_delta)
+	note.data.time = Conductor.time + Conductor.beat_delta
 	note.data.beat = float(beat + 1.0)
 	note.data.direction = lane
 	note.data.length = 0.0

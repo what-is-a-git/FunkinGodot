@@ -25,15 +25,14 @@ func parse() -> Chart:
 	chart.events.push_back(CameraPan.new(time, int(not must_hit)))
 	
 	for section: Dictionary in data.notes:
-		var beat_delta: float = bpm / 60.0
-		
+		var beat_delta: float = 60.0 / bpm
 		for note: Array in section.sectionNotes:
 			if int(note[1]) < 0:
 				continue
 			
 			var note_data := NoteData.new()
 			note_data.time = float(note[0]) / 1000.0
-			note_data.beat = beat + ((note_data.time - time) / beat_delta)
+			note_data.beat = beat + ((note_data.time - time) * beat_delta)
 			note_data.direction = int(note[1])
 			
 			if not section.mustHitSection:
@@ -55,7 +54,7 @@ func parse() -> Chart:
 			chart.events.push_back(CameraPan.new(time, int(not must_hit)))
 		
 		beat += 4.0
-		time += 4.0 / beat_delta
+		time += 4.0 * beat_delta
 	
 	Chart.sort_chart_notes(chart)
 	var stacked_notes := Chart.remove_stacked_notes(chart)
@@ -80,10 +79,10 @@ static func parse_kade_events(data: Dictionary) -> Array[EventData]:
 			if object.get('type', '').to_lower() != 'bpm change':
 				continue
 			
-			var beat_delta: float = bpm / 60.0
+			var beat_delta: float = 60.0 / bpm
 			var last_beat: float = beat
 			beat = object.get('position', -1.0)
-			time += (beat - last_beat) / beat_delta
+			time += (beat - last_beat) * beat_delta
 			bpm = object.get('value', -1.0)
 			events.push_back(BPMChange.new(time, bpm))
 	else:

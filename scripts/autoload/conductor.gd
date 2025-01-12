@@ -6,7 +6,7 @@ var tempo: float = 0.0
 var beat: float = 0.0
 var beat_delta: float = 0.0:
 	get:
-		return tempo / 60.0
+		return 60.0 / tempo
 
 var step: float = 0.0:
 	get:
@@ -76,10 +76,10 @@ func _process(delta: float) -> void:
 		
 		if audio_position + offset > time:
 			time = audio_position + offset
-			beat += (time - last_time) * beat_delta
+			beat += (time - last_time) / beat_delta
 	else:
 		time += delta * rate
-		beat += delta * rate * beat_delta
+		beat += delta * rate / beat_delta
 	
 	if floori(step) > last_step:
 		for step_value in range(last_step + 1, floori(step) + 1):

@@ -27,7 +27,7 @@ func _on_event_hit(event: EventData) -> void:
 	
 	_apply_ease(tween, ease)
 	tween.tween_property(game, ^'target_camera_zoom', Vector2(zoom, zoom), 
-			(0.25 / Conductor.beat_delta) * float(steps))
+			Conductor.beat_delta / 4.0 * float(steps))
 
 
 func _apply_ease(tween: Tween, ease_string: String) -> void:

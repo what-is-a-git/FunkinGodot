@@ -246,7 +246,7 @@ func _ready() -> void:
 			_on_event_hit(chart.events[_event])
 			_event += 1
 	
-	Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
+	Conductor.time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 	Conductor.beat = -4.0
 	Conductor.beat_hit.emit(Conductor.beat)
 	
@@ -283,7 +283,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(tracks) and not song_started:
 		if Conductor.time >= Conductor.offset and not tracks.playing:
 			tracks.play()
-			Conductor.beat = Conductor.offset / Conductor.beat_delta
+			Conductor.beat = Conductor.offset * Conductor.beat_delta
 			Conductor.target_audio = tracks.player
 			song_start.emit()
 			song_started = true

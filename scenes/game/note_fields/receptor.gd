@@ -69,8 +69,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			if note.lane != lane:
 				continue
 			
+			var range := maxf(Conductor.beat_delta / 2.0, 0.1)
 			# give a bit of lee-way
-			if note.length <= 1.0 / (Conductor.beat_delta * 8.0):
+			if note.length < range:
 				# we do this because the animations get funky sometimes lol
 				_automatically_play_static = true
 				continue

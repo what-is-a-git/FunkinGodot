@@ -58,13 +58,13 @@ func countdown_resume() -> void:
 	if is_nan(_force_time):
 		_force_time = Game.instance.tracks.get_playback_position()
 	Game.instance.tracks.set_playback_position(
-			maxf(_force_time - 4.0 / Conductor.beat_delta, 0.0))
+			maxf(_force_time - 4.0 * Conductor.beat_delta, 0.0))
 	countdown_offset = -floori(Conductor.beat) - 5
 	_force_countdown = true
 	pause_countdown = false
 	
 	Game.instance.tracks.player.volume_db = -120.0
-	create_tween().tween_property(Game.instance.tracks.player, ^'volume_db', 0.0, 4.0 / Conductor.beat_delta)
+	create_tween().tween_property(Game.instance.tracks.player, ^'volume_db', 0.0, 4.0 * Conductor.beat_delta)
 
 
 func _ready_post() -> void:
@@ -85,7 +85,7 @@ func _on_beat_hit(beat: int) -> void:
 		return
 	
 	if pause_countdown:
-		Conductor.time = (-4.0 / Conductor.beat_delta) + Conductor.offset
+		Conductor.time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 		Conductor.beat = -4.0
 		return
 	
@@ -214,9 +214,9 @@ func _display_countdown_sprite(index: int) -> void:
 	
 	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
-	tween.tween_property(sprite, 'modulate:a', 0.0, 1.0 / Conductor.beat_delta)
-	tween.tween_property(sprite, 'scale', Vector2.ONE, 1.0 / Conductor.beat_delta)
-	tween.tween_callback(sprite.queue_free).set_delay(1.0 / Conductor.beat_delta)
+	tween.tween_property(sprite, 'modulate:a', 0.0, Conductor.beat_delta)
+	tween.tween_property(sprite, 'scale', Vector2.ONE, Conductor.beat_delta)
+	tween.tween_callback(sprite.queue_free).set_delay(Conductor.beat_delta)
 
 
 func _play_countdown_sound(index: int) -> void:
@@ -235,7 +235,7 @@ func _play_countdown_sound(index: int) -> void:
 func _set_scroll_direction(value: StringName) -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)\
 			.set_parallel()
-	var duration: float = 1.0 / Conductor.beat_delta if game.song_started else 0.0
+	var duration: float = Conductor.beat_delta if game.song_started else 0.0
 	
 	match value:
 		&'up':
@@ -259,7 +259,7 @@ func _set_scroll_direction(value: StringName) -> void:
 func _set_centered_receptors(value: bool) -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)\
 			.set_parallel()
-	var duration: float = 1.0 / Conductor.beat_delta if game.song_started else 0.0
+	var duration: float = Conductor.beat_delta if game.song_started else 0.0
 	
 	if value:
 		if duration <= 0.0:

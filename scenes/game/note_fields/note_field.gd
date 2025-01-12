@@ -147,7 +147,7 @@ func _try_spawning() -> void:
 			continue
 		
 		data = data.duplicate()
-		if data.length > 0.0 and data.length < (1.0 / Conductor.beat_delta) / 4.0:
+		if data.length > 0.0 and data.length < Conductor.beat_delta / 4.0:
 			data.length = 0.0
 		
 		var note: Note = _note_types.types.get(data.type, _note_types.types['default']).instantiate()
