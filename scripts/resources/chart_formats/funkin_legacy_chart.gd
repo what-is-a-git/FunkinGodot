@@ -6,7 +6,14 @@ var json: Dictionary
 
 func parse() -> Chart:
 	var chart := Chart.new()
-	var data: Dictionary = json.song
+	var data: Dictionary = json
+	var notes_use_camera: bool = true
+	
+	if data.song is Dictionary:
+		data = data.song
+	else:
+		notes_use_camera = false
+	
 	# If your chart is completely empty, you have issues.
 	if data.notes.is_empty():
 		push_warning('Why the fuck did you give a 100% empty legacy chart')
@@ -35,7 +42,7 @@ func parse() -> Chart:
 			note_data.beat = beat + ((note_data.time - time) * beat_delta)
 			note_data.direction = int(note[1])
 			
-			if not section.mustHitSection:
+			if (not section.mustHitSection) and notes_use_camera:
 				note_data.direction = (note_data.direction + 4) % 8
 			
 			note_data.length = clampf(float(note[2]) / 1000.0, 0.0, INF)

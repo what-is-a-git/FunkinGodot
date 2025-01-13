@@ -78,14 +78,20 @@ static func _try_legacy(base_path: String, difficulty: StringName) -> Chart:
 		var funkin := FunkinLegacyChart.new()
 		var json := FileAccess.get_file_as_string(path)
 		funkin.json = JSON.parse_string(json)
-		Game.scroll_speed = funkin.json.song.get('speed', 1.0)
+		if funkin.json.song is Dictionary:
+			Game.scroll_speed = funkin.json.song.get('speed', 1.0)
+		else:
+			Game.scroll_speed = funkin.json.get('speed', 1.0)
 		
 		var extra_events: Array[EventData] = []
 		var events_path := '%s/charts/events.json' % [base_path]
 		if ResourceLoader.exists(events_path):
 			var events_json := FileAccess.get_file_as_string(events_path)
 			var data: Dictionary = JSON.parse_string(events_json)
-			extra_events.append_array(FunkinLegacyChart.parse_events(data.song))
+			if data.song is Dictionary:
+				extra_events.append_array(FunkinLegacyChart.parse_events(data.song))
+			else:
+				extra_events.append_array(FunkinLegacyChart.parse_events(data))
 		
 		var chart := funkin.parse()
 		chart.events.append_array(extra_events)
