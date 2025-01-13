@@ -78,11 +78,6 @@ func _process(delta: float) -> void:
 		note.position.y -= (Conductor.time - note.data.time) * 1000.0 * 0.45 \
 				* _scroll_speed * _scroll_speed_modifier
 		
-		# This is probably a bit more costly
-		# than you'd expected, but whatever.
-		if dynamic_positioning and not note._clip_target == NAN:
-			note._clip_target = receptor.global_position.y
-		
 		if (not note._hit) and (note.data.time + note.data.length
 				- Conductor.time < -Receptor.input_zone):
 			miss_note(note)
@@ -113,7 +108,6 @@ func _on_hit_note(note: Note):
 	
 	note_hit.emit(note)
 	note._hit = true
-	note._clip_target = _receptors[note.lane].global_position.y
 	
 	if note.length > 0.0:
 		note.length -= Conductor.time - note.data.time

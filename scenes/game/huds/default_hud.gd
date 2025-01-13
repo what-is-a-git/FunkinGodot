@@ -159,10 +159,10 @@ func _on_note_hit(note: Note) -> void:
 		splash.note = note
 		
 		var skin := player_field._skin
-		if splash.use_skin and is_instance_valid(skin):
-			splash.sprite_frames = skin.strum_frames
-			splash.scale = skin.strum_scale
-			splash.texture_filter = skin.strum_filter as CanvasItem.TextureFilter
+		if splash.use_skin and skin:
+			splash.sprite_frames = skin.splash_frames
+			splash.scale = skin.splash_scale
+			splash.texture_filter = skin.splash_filter as CanvasItem.TextureFilter
 		
 		add_child(splash)
 		splash.global_position = note._field._receptors_node.\

@@ -17,7 +17,6 @@ const directions: PackedStringArray = ['left', 'down', 'up', 'right']
 @onready var tail: TextureRect = sustain.get_node('tail')
 
 var _hit: bool = false
-var _clip_target: float = NAN
 var _sustain_offset: float = 0.0
 var _field: NoteField = null
 var _character: Character = null
@@ -42,7 +41,7 @@ func _ready() -> void:
 			sustain.z_index -= 1
 		_update_sustain()
 	else:
-		sustain.queue_free()
+		clip_rect.queue_free()
 
 
 func _process(delta: float) -> void:
@@ -82,6 +81,8 @@ func _update_sustain() -> void:
 				/ scale.y - tail.size.y
 		clip_rect.size.y = sustain.size.y + tail.size.y + 256.0
 		
+		var clip_target: float = _field._receptors[lane].position.y
+		
 		# I forgot the scale.y so many times but this works
 		# as longg as the clip rect is big enough to fill the
 		# whole screen (which it is rn because -1280 is more
@@ -92,15 +93,12 @@ func _update_sustain() -> void:
 			tail.flip_h = true
 			tail.flip_v = true
 			
-			if _hit:
-				clip_rect.global_position.y = _clip_target - \
-						clip_rect.size.y * global_scale.y
-			else:
-				clip_rect.global_position.y = global_position.y - \
-						clip_rect.size.y * global_scale.y
+			clip_rect.position.y = -clip_rect.size.y
+			sustain.position.y = clip_rect.size.y - sustain.size.y
 			
-			sustain.global_position.y = global_position.y - \
-					sustain.size.y * global_scale.y
+			if _hit:
+				clip_rect.position.y += clip_target - (position.y / scale.y)
+				sustain.position.y += position.y / scale.y
 		else:
 			tail.pivot_offset.y = tail.size.y
 			tail.position.y = sustain.size.y
@@ -108,8 +106,8 @@ func _update_sustain() -> void:
 			tail.flip_v = false
 			
 			if _hit:
-				clip_rect.global_position.y = _clip_target
-				sustain.global_position.y = global_position.y
+				clip_rect.position.y = clip_target - position.y / scale.y
+				sustain.position.y = position.y / scale.y
 			else:
 				clip_rect.position.y = 0.0
 				sustain.position.y = 0.0

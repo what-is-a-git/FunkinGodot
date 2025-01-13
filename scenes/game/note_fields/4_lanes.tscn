@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3diy2p3nknpi"]
 
-[ext_resource type="Script" path="res://scenes/game/note_fields/note_field.gd" id="1_amido"]
+[ext_resource type="Script" uid="uid://bkslv5tb4mquc" path="res://scenes/game/note_fields/note_field.gd" id="1_amido"]
 [ext_resource type="PackedScene" uid="uid://cmvbodmvsglsw" path="res://scenes/game/note_fields/receptor.tscn" id="2_7p0kv"]
 
 [node name="4_lanes" type="Node2D"]
@@ -8,7 +8,6 @@ script = ExtResource("1_amido")
 
 [node name="receptors" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1.52588e-05, 0)
 
 [node name="left" parent="receptors" instance=ExtResource("2_7p0kv")]
 position = Vector2(-167.75, 0)
