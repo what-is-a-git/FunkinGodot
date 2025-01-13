@@ -148,7 +148,6 @@ func _draw_symbol(element: Element) -> void:
 func _draw_sprite(element: Element) -> void:
 	draw_set_transform_matrix(_current_transform)
 	for collection in _collections:
-		#print(collection.map)
 		if not collection.map.has(element.name):
 			continue
 		var sprite: CollectedSprite = collection.map.get(element.name)

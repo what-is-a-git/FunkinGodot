@@ -337,9 +337,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_beat_hit(beat: int) -> void:
-	player.dance()
-	opponent.dance()
-	spectator.dance()
+	if is_instance_valid(player):
+		player.dance()
+	if is_instance_valid(opponent):
+		opponent.dance()
+	if is_instance_valid(spectator):
+		spectator.dance()
 
 
 func _on_measure_hit(measure: int) -> void:

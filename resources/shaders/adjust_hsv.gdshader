@@ -25,5 +25,5 @@ vec3 applyHSBCEffect(vec3 color) {
 
 void fragment() {
 	vec3 hsv = applyHSBCEffect(COLOR.rgb);
-	COLOR = vec4(hsv * COLOR.a, COLOR.a);
+	COLOR = vec4(hsv, COLOR.a);
 }

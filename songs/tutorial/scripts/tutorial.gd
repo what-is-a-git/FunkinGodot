@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	if opponent.name == &'null':
 		game.opponent = spectator
-		game.spectator = opponent
+		game.spectator = null
 		opponent = spectator
 		spectator = game.spectator
 		
