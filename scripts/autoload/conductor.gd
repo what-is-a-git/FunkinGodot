@@ -24,7 +24,7 @@ var rate: float = 1.0
 var active: bool = true
 
 var audio_offset: float:
-	get: return -AudioServer.get_output_latency()
+	get: return AudioServer.get_output_latency()
 var manual_offset: float = 0.0
 var offset: float = audio_offset - manual_offset
 
