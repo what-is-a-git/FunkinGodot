@@ -67,7 +67,7 @@ func display() -> void:
 			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
-			AudioServer.get_output_latency() * -1000.0,
+			AudioServer.get_output_latency() * 1000.0,
 			Conductor.offset * 1000.0,
 			Conductor.manual_offset * 1000.0,
 			Conductor.time, Conductor.beat, Conductor.step, Conductor.measure,
