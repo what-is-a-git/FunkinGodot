@@ -3,14 +3,15 @@ extends Node
 
 var fullscreened: bool = false:
 	set(value):
-		DisplayServer.window_set_mode(
-				DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if value else
-				DisplayServer.WINDOW_MODE_WINDOWED)
+		if not main_window.is_embedded():
+			main_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if value else Window.MODE_WINDOWED
 		fullscreened = value
+
 var game_size: Vector2:
-	get:
-		return get_viewport().get_visible_rect().size
+	get: return get_viewport().get_visible_rect().size
+
 var was_paused: bool = false
+var main_window: Window = null
 
 
 func _ready() -> void:
@@ -19,7 +20,7 @@ func _ready() -> void:
 	# Clear color without effect in editor.
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	
-	# Slightly faster input latency. (probably)
+	# Slightly lower input latency. (probably)
 	Input.use_accumulated_input = false
 	
 	# Might save a small amount of performance.
@@ -27,9 +28,9 @@ func _ready() -> void:
 	PhysicsServer2D.set_active(false)
 	PhysicsServer3D.set_active(false)
 	
-	var window := get_window()
-	window.focus_entered.connect(_on_focus_enter)
-	window.focus_exited.connect(_on_focus_exit)
+	main_window = get_window()
+	main_window.focus_entered.connect(_on_focus_enter)
+	main_window.focus_exited.connect(_on_focus_exit)
 	
 	Config.loaded.connect(_on_config_loaded)
 	Config.value_changed.connect(_on_value_changed)

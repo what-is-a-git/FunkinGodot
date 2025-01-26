@@ -2,6 +2,7 @@
 .godot/
 ~**
 **.tmp
+.fuse_hidden**
 
 # Godot export ignores
 bin/

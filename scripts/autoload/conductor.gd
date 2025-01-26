@@ -18,13 +18,18 @@ var measure: float = 0.0:
 
 var time: float = 0.0
 var target_audio: AudioStreamPlayer = null
+var target_length: float:
+	get:
+		if is_instance_valid(target_audio) and is_instance_valid(target_audio.stream):
+			return target_audio.stream.get_length()
+		
+		return -1.0
 
 var rate: float = 1.0
-
 var active: bool = true
 
 var audio_offset: float:
-	get: return AudioServer.get_output_latency()
+	get: return -AudioServer.get_output_latency()
 var manual_offset: float = 0.0
 var offset: float = audio_offset - manual_offset
 
@@ -34,14 +39,6 @@ var _resync_latency: bool = false
 signal step_hit(step: int)
 signal beat_hit(beat: int)
 signal measure_hit(measure: int)
-
-"""
-changes
-store time
-store beat
-
-beat = lastchange.beat + ((time - lastchange.time) / beat_delta)
-"""
 
 
 func _ready() -> void:
@@ -59,7 +56,7 @@ func _process(delta: float) -> void:
 	if _resync_latency:
 		var mix_time: float = AudioServer.get_time_since_last_mix()
 		if mix_time < _last_mix:
-			offset = audio_offset - manual_offset
+			reset_offset()
 		_last_mix = mix_time
 	
 	var last_step: int = floori(step)
@@ -77,6 +74,12 @@ func _process(delta: float) -> void:
 		if audio_position + offset > time:
 			time = audio_position + offset
 			beat += (time - last_time) / beat_delta
+		elif time >= target_length + offset:
+			# stoopid looping fix :3
+			time = 0.0
+			beat = 0.0
+			_process(delta)
+			return
 	else:
 		time += delta * rate
 		beat += delta * rate / beat_delta
@@ -99,6 +102,11 @@ func _on_scene_changed() -> void:
 func _on_config_value_changed(section: String, key: String, value: Variant) -> void:
 	if section == 'gameplay' and key == 'manual_offset':
 		manual_offset = value / 1000.0
+
+
+func _on_finished() -> void:
+	time = 0.0
+	beat = 0.0
 
 
 func reset() -> void:

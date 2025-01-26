@@ -11,7 +11,6 @@ func _on_event_hit(event: EventData) -> void:
 	var data: Dictionary = event.data[0]
 	var steps: int = data.get('duration', 32)
 	var ease: String = data.get('ease', 'expoOut')
-	var mode: String = data.get('mode', 'stage')
 	var zoom: float = data.get('zoom', 1.05)
 	if ease == 'INSTANT':
 		for tween in tweens:
