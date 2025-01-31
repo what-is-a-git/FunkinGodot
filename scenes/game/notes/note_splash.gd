@@ -10,16 +10,19 @@ var note: Note
 
 
 func _ready() -> void:
+	if not is_instance_valid(note):
+		return
+
 	modulate.a = note._field._note_splash_alpha
 	if modulate.a <= 0.0:
 		queue_free()
 		return
-	
+
 	speed_scale = randf_range(0.9, 1.1)
 	play('splash %d' % [randi_range(1, sprite_frames.get_animation_names().size())])
-	
+
 	if not use_skin:
 		return
-	
+
 	material = material as ShaderMaterial
 	material.set_shader_parameter(&'base_color', colors[note.lane])

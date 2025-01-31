@@ -228,6 +228,10 @@ pause_game={
 ]
 }
 
+[input_devices]
+
+buffering/agile_event_flushing=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://resources/locale/difficulties.en.translation")

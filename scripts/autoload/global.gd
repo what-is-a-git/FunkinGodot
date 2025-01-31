@@ -16,22 +16,22 @@ var main_window: Window = null
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
-	
+
 	# Clear color without effect in editor.
 	RenderingServer.set_default_clear_color(Color.BLACK)
-	
+
 	# Slightly lower input latency. (probably)
 	Input.use_accumulated_input = false
-	
+
 	# Might save a small amount of performance.
 	# Shouldn't be detrimental to this game specifically so...
 	PhysicsServer2D.set_active(false)
 	PhysicsServer3D.set_active(false)
-	
+
 	main_window = get_window()
 	main_window.focus_entered.connect(_on_focus_enter)
 	main_window.focus_exited.connect(_on_focus_exit)
-	
+
 	Config.loaded.connect(_on_config_loaded)
 	Config.value_changed.connect(_on_value_changed)
 
@@ -45,7 +45,7 @@ func _on_focus_enter() -> void:
 func _on_focus_exit() -> void:
 	if not Config.get_value('performance', 'auto_pause'):
 		return
-	
+
 	var tree := get_tree()
 	was_paused = tree.paused
 	tree.paused = true
@@ -71,7 +71,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _on_value_changed(section: String, key: String, value: Variant) -> void:
 	if value == null:
 		return
-	
+
 	if section == 'performance':
 		match key:
 			'fps_cap':
@@ -89,9 +89,9 @@ func _on_value_changed(section: String, key: String, value: Variant) -> void:
 
 
 func _on_config_loaded() -> void:
-	_on_value_changed('performance', 'fps_cap', 
+	_on_value_changed('performance', 'fps_cap',
 			Config.get_value('performance', 'fps_cap'))
-	_on_value_changed('performance', 'vsync_mode', 
+	_on_value_changed('performance', 'vsync_mode',
 			Config.get_value('performance', 'vsync_mode'))
 
 
