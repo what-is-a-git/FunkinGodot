@@ -1,14 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3n853hu8o3ik"]
+[gd_scene load_steps=5 format=3 uid="uid://d3n853hu8o3ik"]
 
 [ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_1gnl8"]
-[ext_resource type="Shader" uid="uid://dcjn75jlytgna" path="res://resources/shaders/pause_blur.gdshader" id="2_lalf1"]
 [ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
 [ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://resources/music/menus/pause_theme.ogg" id="4_6wbaw"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lalf1"]
-shader = ExtResource("2_lalf1")
-shader_parameter/lod = 1.0
 
 [node name="pause_menu" type="CanvasLayer"]
 process_mode = 3
@@ -21,7 +16,6 @@ anchors_preset = 0
 
 [node name="blur" type="ColorRect" parent="root"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_lalf1")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,15 +24,15 @@ offset_right = 1280.0
 offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.501407, 0.501406, 0.501406, 1)
+color = Color(0, 0, 0, 0.5)
 
 [node name="song_name" type="Node2D" parent="root"]
 unique_name_in_owner = true
 z_index = 4
-position = Vector2(640, 16)
+position = Vector2(987, 16)
 script = ExtResource("2_1gnl8")
 text = "Penis
-HARD"
+(HARD)"
 horizontal_alignment = "Right"
 metadata/_custom_type_script = ExtResource("2_1gnl8")
 

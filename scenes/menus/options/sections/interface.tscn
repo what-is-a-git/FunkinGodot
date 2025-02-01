@@ -10,7 +10,7 @@
 [node name="interface" type="Node2D" node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
-options = [NodePath("splash_alpha"), NodePath("sustain_layer"), NodePath("cpu_strums_press"), NodePath("scene_transitions"), NodePath("countdown_on_resume")]
+options = [NodePath("splash_alpha"), NodePath("sustain_layer"), NodePath("cpu_strums_press"), NodePath("scene_transitions"), NodePath("countdown_on_resume"), NodePath("pause_blur")]
 
 [node name="splash_alpha" type="Node2D" parent="." node_paths=PackedStringArray("root")]
 position = Vector2(171, -183)
@@ -110,6 +110,29 @@ sprite_frames = ExtResource("4_abqtr")
 animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
+
+[node name="pause_blur" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+position = Vector2(102, 368)
+script = ExtResource("6_1836p")
+section = &"interface"
+key = &"pause_blur"
+ranged = true
+minimum = 0.0
+maximum = 100.0
+value_suffix = &" percent"
+root = NodePath("..")
+PREVIEW = ""
+
+[node name="label" type="Node2D" parent="pause_blur"]
+position = Vector2(-140, 0)
+script = ExtResource("3_ih51s")
+text = "PAUSE BLUR:"
+centered = true
+
+[node name="value" type="Node2D" parent="pause_blur"]
+position = Vector2(124, -34)
+script = ExtResource("3_ih51s")
+text = "0"
 
 [connection signal="animation_finished" from="sustain_layer/checkbox" to="sustain_layer" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="cpu_strums_press/checkbox" to="cpu_strums_press" method="_on_checkbox_animation_finished"]

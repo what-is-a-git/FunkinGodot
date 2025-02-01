@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://b7fwxsepnt38j"]
 
-[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
+[ext_resource type="Script" uid="uid://blahra5leclk" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://resources/images/menus/main_menu/background.png" id="1_wymee"]
 [ext_resource type="Texture2D" uid="uid://bcq8cfghjibg1" path="res://resources/images/menus/main_menu/background_pink.png" id="2_dbg3w"]
-[ext_resource type="Script" path="res://scripts/menus/scene_main_menu_button.gd" id="4_4uv5u"]
+[ext_resource type="Script" uid="uid://xx5djqhvae85" path="res://scripts/menus/scene_main_menu_button.gd" id="4_4uv5u"]
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7kxsk"]
 [ext_resource type="SpriteFrames" uid="uid://wifv2wsiwcum" path="res://resources/images/menus/main_menu/buttons.res" id="4_c5hes"]
-[ext_resource type="Script" path="res://scripts/animated_sprite.gd" id="4_emyfo"]
-[ext_resource type="Script" path="res://scripts/menus/donate_main_menu_button.gd" id="8_6spca"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="4_emyfo"]
+[ext_resource type="Script" uid="uid://cp51s1dq8o8sh" path="res://scripts/menus/donate_main_menu_button.gd" id="8_6spca"]
 
 [sub_resource type="Animation" id="Animation_58e2s"]
 length = 0.001
@@ -137,7 +137,7 @@ animation_name = &"story mode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"story mode idle"
-frame_progress = 0.251541
+frame_progress = 0.0244881
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -153,7 +153,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.897738
+frame_progress = 0.670707
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -169,7 +169,7 @@ visible = false
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"kickstarter idle"
-frame_progress = 0.893211
+frame_progress = 0.66618
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -177,7 +177,7 @@ playing = true
 position = Vector2(0, 58)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"donate idle"
-frame_progress = 0.182263
+frame_progress = 0.95518
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -193,7 +193,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.624553
+frame_progress = 0.397503
 script = ExtResource("4_emyfo")
 playing = true
 

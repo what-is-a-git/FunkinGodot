@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var root: Control = $root
 @onready var music: AudioStreamPlayer = $music
 @onready var blur: ColorRect = %blur
+const BLUR_MATERIAL: String = 'uid://bvgfplmvuduef'
 
 @onready var song_name: Alphabet = %song_name
 @onready var play_type: Alphabet = %play_type
@@ -13,8 +14,7 @@ var music_volume: float = 0.0
 var active: bool = true
 var selected: int = 0
 var tree: SceneTree:
-	get:
-		return get_tree()
+	get: return get_tree()
 
 
 func _ready() -> void:
@@ -23,6 +23,12 @@ func _ready() -> void:
 	root.modulate.a = 0.5
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(root, 'modulate:a', 1.0, 0.5)
+
+	var blur_amount: float = Config.get_value('interface', 'pause_blur') / 100.0
+	if blur_amount > 0.0:
+		blur.material = load(BLUR_MATERIAL)
+		blur.material.set_shader_parameter('lod', blur_amount)
+		blur.color = Color(0.5, 0.5, 0.5, 1.0)
 
 	create_tween().tween_property(self, 'music_volume', 0.9, 2.0).set_delay(0.5)
 	if not is_instance_valid(Game.instance):
@@ -86,7 +92,6 @@ func _change_selection(amount: int = 0) -> void:
 
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()
-
 	for i: int in options.get_child_count():
 		var option := options.get_child(i)
 		option.target_y = i - selected
@@ -94,7 +99,6 @@ func _change_selection(amount: int = 0) -> void:
 
 
 func _close() -> void:
-	blur.queue_free()
 	queue_free()
 	get_viewport().set_input_as_handled()
 	active = false
