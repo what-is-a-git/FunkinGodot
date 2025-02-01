@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3n853hu8o3ik"]
+[gd_scene load_steps=7 format=3 uid="uid://d3n853hu8o3ik"]
 
-[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://resources/fonts/funkin.ttf" id="1_2640p"]
-[ext_resource type="Script" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
-[ext_resource type="Script" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
+[ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_1gnl8"]
+[ext_resource type="Shader" uid="uid://dcjn75jlytgna" path="res://resources/shaders/pause_blur.gdshader" id="2_lalf1"]
+[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
 [ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://resources/music/menus/pause_theme.ogg" id="4_6wbaw"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_83nit"]
-font = ExtResource("1_2640p")
-font_size = 36
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lalf1"]
+shader = ExtResource("2_lalf1")
+shader_parameter/lod = 1.0
 
 [node name="pause_menu" type="CanvasLayer"]
 process_mode = 3
@@ -16,34 +17,40 @@ script = ExtResource("1_vrvda")
 
 [node name="root" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 
-[node name="background" type="ColorRect" parent="root"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
-
-[node name="song_label" type="Label" parent="root"]
+[node name="blur" type="ColorRect" parent="root"]
 unique_name_in_owner = true
-auto_translate_mode = 1
+material = SubResource("ShaderMaterial_lalf1")
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_top = 16.0
-offset_bottom = 52.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
 grow_horizontal = 2
-text = "Penis (HARD) / Freeplay"
-label_settings = SubResource("LabelSettings_83nit")
-horizontal_alignment = 1
-vertical_alignment = 1
+grow_vertical = 2
+color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="song_name" type="Node2D" parent="root"]
+unique_name_in_owner = true
+z_index = 4
+position = Vector2(640, 16)
+script = ExtResource("2_1gnl8")
+text = "Penis
+HARD"
+horizontal_alignment = "Right"
+metadata/_custom_type_script = ExtResource("2_1gnl8")
+
+[node name="play_type" type="Node2D" parent="root"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.564)
+z_index = 4
+position = Vector2(982, 649)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_1gnl8")
+text = "Freeplay"
+metadata/_custom_type_script = ExtResource("2_1gnl8")
 
 [node name="options" type="Node2D" parent="."]
 unique_name_in_owner = true

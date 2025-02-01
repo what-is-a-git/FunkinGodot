@@ -260,6 +260,7 @@ offset_bottom = -45.0
 position = Vector2(-356, -98)
 script = ExtResource("2_7sfqk")
 atlas = "res://resources/images/game/assets/characters/nene/abot/eyes"
+frame = 13
 loop_mode = "Play Once"
 metadata/_custom_type_script = ExtResource("2_7sfqk")
 

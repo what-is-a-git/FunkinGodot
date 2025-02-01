@@ -3,7 +3,7 @@ extends Node
 
 var fullscreened: bool = false:
 	set(value):
-		if not main_window.is_embedded():
+		if not Engine.is_embedded_in_editor():
 			main_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if value else Window.MODE_WINDOWED
 		fullscreened = value
 
@@ -62,9 +62,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if not OS.is_debug_build():
 		return
-	if event.is_action('menu_reload') and is_instance_valid(get_tree().current_scene):
-		get_tree().reload_current_scene()
-		get_tree().paused = false
+	var tree := get_tree()
+	if event.is_action('menu_reload') and is_instance_valid(tree) \
+			and is_instance_valid(tree.current_scene):
+		tree.reload_current_scene()
+		tree.paused = false
 		return
 
 
