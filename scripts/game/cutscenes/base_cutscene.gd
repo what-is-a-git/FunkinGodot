@@ -1,5 +1,5 @@
 ## Extension of [FunkinScript] for making cutscenes.
-## 
+##
 ## General helper class to provide some helpful
 ## built-ins for making song cutscenes.
 ## This class is only a base for other cutscenes
@@ -19,7 +19,7 @@ func _ready() -> void:
 	if Game.mode == Game.PlayMode.FREEPLAY and not play_in_freeplay:
 		queue_free()
 		return
-	
+
 	game.hud.pause_countdown = true
 
 

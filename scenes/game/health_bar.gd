@@ -25,7 +25,7 @@ func _ready() -> void:
 	if not is_instance_valid(Game.instance):
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
-	
+
 	game = Game.instance
 	if not game.hud_setup.is_connected(_on_hud_setup):
 		game.hud_setup.connect(_on_hud_setup)
@@ -39,10 +39,10 @@ func _process(delta: float) -> void:
 	bar.value = game.health
 	icons.scale = Vector2(1.2, 1.2).lerp(Vector2.ONE, _icon_lerp())
 	_position_icons(game.health)
-	
+
 	var player_frames: int = player_icon.hframes * player_icon.vframes
 	var opponent_frames: int = opponent_icon.hframes * opponent_icon.vframes
-	
+
 	if bar.value >= 80.0:
 		player_icon.frame = 2 if player_frames >= 3 else 0
 		opponent_icon.frame = 1 if opponent_frames >= 2 else 0
@@ -66,13 +66,13 @@ func update_score_label() -> void:
 		[100.0, &'S+'],
 	]
 	rank = &'N/A'
-	
+
 	for rank_data: Array in ranks:
 		if game.accuracy >= rank_data[0]:
 			rank = rank_data[1]
 			continue
 		break
-	
+
 	score_label.text = 'Score:%d • Misses:%d • Accuracy:%.3f%% (%s)' % [
 		game.score,
 		game.misses,
@@ -86,14 +86,14 @@ func reload_icons() -> void:
 	if is_instance_valid(player_icon) and is_instance_valid(opponent_icon):
 		player_icon.queue_free()
 		opponent_icon.queue_free()
-	
+
 	reload_icon_colors()
-	
+
 	player_icon = Icon.create_sprite(Game.instance.player.icon)
 	player_icon.position.x = 50.0
 	icons.add_child(player_icon)
 	player_icon.flip_h = true
-	
+
 	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon)
 	opponent_icon.position.x = -50.0
 	icons.add_child(opponent_icon)

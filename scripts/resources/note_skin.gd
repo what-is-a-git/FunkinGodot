@@ -16,6 +16,7 @@ class_name NoteSkin extends Resource
 		'Nearest Mipmap Anisotropic', 'Linear Mipmap Anisotropic'
 ) var note_filter: int = 0
 @export var note_scale: Vector2 = Vector2.ONE * 0.7
+@export_range(0.0, 1.0, 0.001) var sustain_alpha: float = 0.7
 
 @export var splash_frames: SpriteFrames = preload('res://resources/images/game/skins/default/splashes.res')
 @export_enum(

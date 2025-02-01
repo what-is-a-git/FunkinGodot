@@ -2,7 +2,6 @@ extends HUD
 
 
 @export var bump_amount: Vector2 = Vector2(0.03, 0.03)
-@export var do_countdown: bool = true
 @export var use_conductor_time: bool = true
 
 @onready var note_fields: Node2D = %note_fields

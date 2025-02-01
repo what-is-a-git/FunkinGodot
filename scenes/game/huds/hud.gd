@@ -1,6 +1,7 @@
 class_name HUD extends Node2D
 
 
+@export var do_countdown: bool = true
 var player_field: NoteField
 var opponent_field: NoteField
 var game: Game
@@ -21,7 +22,7 @@ func _ready() -> void:
 	else:
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
-	
+
 	game.ready_post.connect(_ready_post)
 	Conductor.beat_hit.connect(_on_beat_hit)
 	Conductor.measure_hit.connect(_on_measure_hit)

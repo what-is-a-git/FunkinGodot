@@ -16,9 +16,9 @@ class_name VideoCutscene extends BaseCutscene
 
 func _ready() -> void:
 	super()
-	
+
 	_video_player.play()
-	
+
 	if hide_game:
 		game.visible = false
 		game.hud.visible = false
@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 ## if it was previously hidden.
 func finish() -> void:
 	super()
-	
+
 	if hide_game:
 		game.visible = true
 		game.hud.visible = true

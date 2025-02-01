@@ -158,6 +158,7 @@ func _try_spawning() -> void:
 
 			if is_instance_valid(note.sustain):
 				note.clip_rect.scale.x = 1.0 / note.scale.x
+				note.sustain.modulate.a = _skin.sustain_alpha
 				note.sustain.texture_filter = note.sprite.texture_filter
 				note.tail.texture_filter = note.sprite.texture_filter
 				note.reload_sustain_sprites()
