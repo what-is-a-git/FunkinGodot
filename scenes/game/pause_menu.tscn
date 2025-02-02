@@ -29,7 +29,8 @@ color = Color(0, 0, 0, 0.5)
 [node name="song_name" type="Node2D" parent="root"]
 unique_name_in_owner = true
 z_index = 4
-position = Vector2(987, 16)
+position = Vector2(1068, 16)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
 text = "Penis
 (HARD)"

@@ -28,6 +28,7 @@ var target_camera_zoom: Vector2 = Vector2(1.05, 1.05)
 var camera_bump_amount: Vector2 = Vector2(0.015, 0.015)
 var camera_lerps: bool = true
 var camera_bumps: bool = false
+var camera_speed: float = 1.0
 var song_started: bool = false
 var save_score: bool = true
 
@@ -122,13 +123,15 @@ func _ready() -> void:
 
 	# loading external types :3
 	for note in chart.notes:
-		if note_types.types.has(note.type):
+		var type: String = note.type.to_lower()
+		if note_types.types.has(type):
 			continue
-		var path := 'res://scenes/game/notes/%s.tscn' % note.type
+
+		var path := 'res://scenes/game/notes/%s.tscn' % type
 		if not ResourceLoader.exists(path):
 			continue
 
-		note_types.types[note.type] = load(path)
+		note_types.types[type] = load(path)
 
 	if ResourceLoader.exists('res://songs/%s/meta.tres' % song):
 		metadata = load('res://songs/%s/meta.tres' % song)
@@ -160,6 +163,7 @@ func _ready() -> void:
 		_stage.add_child(stage)
 		target_camera_zoom = Vector2(stage.default_zoom, stage.default_zoom)
 		camera.zoom = target_camera_zoom
+		camera_speed = stage.camera_speed
 
 		# Position and scale the characters.
 		var player_point: Node2D = stage.get_node('player')
@@ -298,7 +302,7 @@ func _process(delta: float) -> void:
 		_first_frame = false
 		return
 	if camera_lerps:
-		camera.position = camera.position.lerp(target_camera_position, delta * 3.0)
+		camera.position = camera.position.lerp(target_camera_position, delta * 3.0 * camera_speed)
 		if camera_bumps:
 			camera.zoom = camera.zoom.lerp(target_camera_zoom, delta * 3.0)
 

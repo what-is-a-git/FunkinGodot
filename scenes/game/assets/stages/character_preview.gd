@@ -28,7 +28,7 @@ func _draw() -> void:
 		return
 	if character:
 		character.queue_free()
-	
+
 	var scene: PackedScene = load(character_path)
 	character = scene.instantiate()
 	character.modulate.a = 0.5
