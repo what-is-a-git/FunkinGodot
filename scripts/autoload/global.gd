@@ -103,3 +103,18 @@ static func free_children_from(node: Node, immediate: bool = false) -> void:
 			child.free()
 		else:
 			child.queue_free()
+
+
+# NOTE: this method is VERY hacky and likely to stop working
+# at some point but i don't know of a better method rn? maybe
+# i should make a godot pr :p
+static func get_rendering_api() -> String:
+	var version := RenderingServer.get_video_adapter_api_version()
+	if version.begins_with('12'):
+		return 'D3D12'
+	if version.begins_with('3'):
+		return 'OpenGL'
+	if version.begins_with('1'):
+		return 'Vulkan'
+
+	return 'Metal'
