@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d4lyul6n3wfmw"]
 
-[ext_resource type="Script" path="res://scenes/autoload/runtime_info.gd" id="1_now7c"]
+[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://scenes/autoload/runtime_info.gd" id="1_now7c"]
 [ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://resources/fonts/mono.ttf" id="2_tntl2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rqscu"]
@@ -27,6 +27,7 @@ Funkin' Godot v0.0.1"
 label_settings = SubResource("LabelSettings_rqscu")
 
 [node name="timer" type="Timer" parent="."]
+unique_name_in_owner = true
 autostart = true
 
 [connection signal="ready" from="." to="." method="display"]

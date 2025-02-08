@@ -3,11 +3,13 @@ extends CanvasLayer
 
 @onready var label: Label = $label
 @onready var version: String = ProjectSettings.get_setting('application/config/version', 'Unknown')
+@onready var timer: Timer = %timer
 
 var video_memory_peak: float = 0.0
 var texture_memory_peak: float = 0.0
 var static_memory_peak: float = 0.0
 var tween: Tween
+var debug_info: bool = OS.is_debug_build()
 
 var times: Array[float] = []
 
@@ -15,9 +17,8 @@ var times: Array[float] = []
 func _ready() -> void:
 	visible = Config.get_value('performance', 'performance_info_visible')
 	Config.value_changed.connect(_on_value_changed)
-	
-	if OS.is_debug_build():
-		get_node('timer').wait_time = 0.2
+
+	_update_timer()
 
 
 func _process(delta: float) -> void:
@@ -27,30 +28,30 @@ func _process(delta: float) -> void:
 func display() -> void:
 	if not visible:
 		return
-	
+
 	var video_memory_current: float = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)
 	if video_memory_current > video_memory_peak:
 		video_memory_peak = video_memory_current
-	
+
 	var texture_memory_current: float = Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)
 	if texture_memory_current > texture_memory_peak:
 		texture_memory_peak = texture_memory_current
-	
+
 	var static_memory_current: float = Performance.get_monitor(Performance.MEMORY_STATIC)
 	if static_memory_current > static_memory_peak:
 		static_memory_peak = static_memory_current
-	
+
 	var scene_name: StringName = &'N/A'
 	var current_scene := get_tree().current_scene
-	
+
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name.to_pascal_case()
-	
+
 	var avg: float = 0.0
 	for time in times:
 		avg += time / float(times.size())
 	times.clear()
-	
+
 	label.size = Vector2.ZERO
 	var text_output: String = \
 			'%d FPS (%.2fms)\n%s / %s <GPU>\n%s / %s <TEX>\nFunkin\' Godot v%s' % [
@@ -60,8 +61,8 @@ func display() -> void:
 		String.humanize_size(texture_memory_current), String.humanize_size(texture_memory_peak),
 		version,
 	]
-	
-	if OS.is_debug_build():
+
+	if debug_info:
 		text_output += '\n\n[Debug]\nScene: %s\n%s / %s <CPU>\n%d Nodes (%d Orphaned)\n\n[Conductor]\n%.2fms AudioServer Offset (raw)\n%.2fms Offset (%.2fms manual)\n%.3fs Time\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM\n\n[Rendering]\n%d Draw Calls (%d Drawn Objects)\nAPI: %s' % [
 			scene_name,
 			String.humanize_size(static_memory_current), String.humanize_size(static_memory_peak),
@@ -74,15 +75,21 @@ func display() -> void:
 			Conductor.tempo,
 			Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 			Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
-			get_rendering_driver()
+			Global.get_rendering_api()
 		]
-	
+
 	label.text = text_output
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action('toggle_debug') and event.is_pressed():
+	if (not event.is_pressed()) or event.is_echo():
+		return
+	if event.is_action(&'toggle_debug'):
 		Config.set_value('performance', 'performance_info_visible', not visible)
+	if event.is_action(&'toggle_extra_info'):
+		debug_info = not debug_info
+		_update_timer()
+		display()
 
 
 func _on_value_changed(section: String, key: String, value: Variant) -> void:
@@ -95,13 +102,5 @@ func _on_value_changed(section: String, key: String, value: Variant) -> void:
 	visible = bool(value)
 
 
-func get_rendering_driver() -> String:
-	var version := RenderingServer.get_video_adapter_api_version()
-	if version.begins_with('12'):
-		return 'D3D12'
-	if version.begins_with('3'):
-		return 'OpenGL'
-	if version.begins_with('1'):
-		return 'Vulkan'
-	
-	return 'Metal'
+func _update_timer() -> void:
+	timer.wait_time = 0.2 if debug_info else 1.0
