@@ -142,6 +142,14 @@ func get_playback_position() -> float:
 			 + Conductor.offset
 
 
+## Gets the length from the currently available stream or 0 otherwise.
+func get_length() -> float:
+	if not is_instance_valid(player.stream):
+		return 0.0
+
+	return player.stream.get_length()
+
+
 ## Sets the playback position of all tracks and Conductor.time to the position
 ## specified.
 func set_playback_position(position: float) -> void:
