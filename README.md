@@ -22,8 +22,10 @@ thanks to Godot and its extensible Node and Resource systems.
 
 ## Godot Version
 
-This project is built for whatever the latest Godot dev build is as of the
-latest changes, which means 4.4dev7 as of writing. (December 26th 2024)
+This project is built for whatever the latest Godot dev build is as of the latest changes
+
+[Download Link (godotengine.org/download/archive)](https://godotengine.org/download/archive/)
+- It is recommended for you to use the latest Beta version, which is 4.4-beta3 as of writing (February 8th, 2025)
 
 ## State of this branch
 
