@@ -2,6 +2,8 @@ extends BaseOptionsSection
 
 
 @export var options: Array[Option] = []
+@export var max_distance: float = -200.0
+
 @onready var selected_option: Option
 
 
@@ -14,7 +16,7 @@ func _activate() -> void:
 func _process(delta: float) -> void:
 	if not (active and alive):
 		return
-	
+
 	_update_items(delta)
 
 
@@ -23,7 +25,7 @@ func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, options.size())
 	selected_option = options[selected]
 	selected_option._focus()
-	
+
 	if amount != 0:
 		GlobalAudio.get_player(^'MENU/SCROLL').play()
 
@@ -37,9 +39,9 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_echo():
 		return
-	
+
 	super(event)
-	
+
 	if event.is_action(&'ui_up') or event.is_action(&'ui_down'):
 		change_selection(Input.get_axis(&'ui_up', &'ui_down'))
 	if event.is_action(&'ui_accept'):
@@ -51,10 +53,10 @@ func _update_items(delta: float) -> void:
 	# 0.0714 ~~ 1 / 14 aka the max amount of delta allowed in our lerpfs
 	delta = minf(delta, 0.0714)
 	position.y = lerpf(
-			position.y, 
-			clampf(-selected_option.position.y, -200.0, 0.0),
+			position.y,
+			clampf(-selected_option.position.y, max_distance, 0.0),
 			delta * 4.0)
-	
+
 	for i: int in options.size():
 		var target_alpha: float = 1.0 if i == selected else 0.5
 		var child: Node2D = options[i] as Node2D

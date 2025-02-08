@@ -10,7 +10,8 @@
 [node name="interface" type="Node2D" node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
-options = [NodePath("splash_alpha"), NodePath("sustain_layer"), NodePath("cpu_strums_press"), NodePath("scene_transitions"), NodePath("countdown_on_resume"), NodePath("pause_blur")]
+options = [NodePath("splash_alpha"), NodePath("sustain_layer"), NodePath("cpu_strums_press"), NodePath("scene_transitions"), NodePath("countdown_on_resume"), NodePath("simple_pause_blur"), NodePath("pause_blur")]
+max_distance = -300.0
 
 [node name="splash_alpha" type="Node2D" parent="." node_paths=PackedStringArray("root")]
 position = Vector2(171, -183)
@@ -111,8 +112,27 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
+[node name="simple_pause_blur" type="Node2D" parent="."]
+position = Vector2(121, 436)
+script = ExtResource("2_422dy")
+section = &"interface"
+key = &"simple_pause_blur"
+
+[node name="alphabet" type="Node2D" parent="simple_pause_blur"]
+script = ExtResource("3_ih51s")
+text = "simple pause blur"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="simple_pause_blur"]
+position = Vector2(472, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_abqtr")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_fu6tn")
+
 [node name="pause_blur" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-position = Vector2(102, 368)
+position = Vector2(102, 528)
 script = ExtResource("6_1836p")
 section = &"interface"
 key = &"pause_blur"
@@ -138,3 +158,4 @@ text = "0"
 [connection signal="animation_finished" from="cpu_strums_press/checkbox" to="cpu_strums_press" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="scene_transitions/checkbox" to="scene_transitions" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="countdown_on_resume/checkbox" to="countdown_on_resume" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="simple_pause_blur/checkbox" to="simple_pause_blur" method="_on_checkbox_animation_finished"]

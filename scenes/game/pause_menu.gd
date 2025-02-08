@@ -5,7 +5,9 @@ extends CanvasLayer
 @onready var root: Control = $root
 @onready var music: AudioStreamPlayer = $music
 @onready var blur: ColorRect = %blur
-const BLUR_MATERIAL: String = 'uid://bvgfplmvuduef'
+
+const SIMPLE_BLUR_MATERIAL: String = 'uid://bvgfplmvuduef'
+const SLOW_BLUR_MATERIAL: String = 'uid://dcnfp5cgg5ivb'
 
 @onready var song_name: Alphabet = %song_name
 @onready var play_type: Alphabet = %play_type
@@ -24,11 +26,31 @@ func _ready() -> void:
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(root, 'modulate:a', 1.0, 0.5)
 
-	var blur_amount: float = Config.get_value('interface', 'pause_blur') / 100.0
+	var blur_amount: float = Config.get_value('interface', 'pause_blur') / 150.0
 	if blur_amount > 0.0:
-		blur.material = load(BLUR_MATERIAL)
+		var simple: bool = Config.get_value('interface', 'simple_pause_blur')
+		blur.material = load(SIMPLE_BLUR_MATERIAL if simple else SLOW_BLUR_MATERIAL)
 		blur.material.set_shader_parameter('lod', blur_amount)
 		blur.color = Color(0.5, 0.5, 0.5, 1.0)
+
+		# NOTE: one goofy side effect of this method is that
+		# it captures the fps counter, should be ok tho? idrc lol
+
+		# this option mostly exists so that the blur doesn't
+		# affect the FPS by default, because resampling the whole
+		# screen texture, while it looks better and more accurate
+		# to what i want, is very costly :>
+		if simple:
+			# this is kind of cursed but it works ig
+			var image := get_viewport().get_texture().get_image()
+			if is_instance_valid(image):
+				if not image.has_mipmaps():
+					image.generate_mipmaps()
+
+				var texture := ImageTexture.create_from_image(image)
+				blur.material.set_shader_parameter('SCREEN_TEXTURE', texture)
+			else:
+				printerr('Failed to get viewport texture image, oops!')
 
 	create_tween().tween_property(self, 'music_volume', 0.9, 2.0).set_delay(0.5)
 	if not is_instance_valid(Game.instance):
@@ -104,6 +126,8 @@ func _close() -> void:
 	active = false
 	visible = false
 
+	if not is_instance_valid(Game.instance):
+		return
 	if Game.instance.song_started:
 		Game.instance.tracks.check_sync(true)
 
