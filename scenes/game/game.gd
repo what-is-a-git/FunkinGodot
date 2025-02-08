@@ -6,6 +6,7 @@ static var difficulty: StringName = &'hard'
 static var chart: Chart = null
 static var scroll_speed: float = 3.3
 static var mode: PlayMode = PlayMode.FREEPLAY
+static var exit_scene: String = ''
 
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
@@ -420,6 +421,11 @@ func _song_finished(force: bool = false) -> void:
 	playlist.clear()
 	camera_position = Vector2.INF
 	GlobalAudio.get_player('MENU/CANCEL').play()
+
+	if not exit_scene.is_empty():
+		SceneManager.switch_to(exit_scene)
+		exit_scene = ''
+		return
 	match mode:
 		PlayMode.STORY:
 			SceneManager.switch_to('scenes/menus/story_mode_menu.tscn')
