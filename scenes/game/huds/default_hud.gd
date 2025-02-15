@@ -46,7 +46,9 @@ func setup() -> void:
 	skin = game.skin
 	tracks = game.tracks
 	combo_node.scale = skin.combo_scale
+	combo_node.texture_filter = skin.combo_filter
 	rating_sprite.scale = skin.rating_scale
+	rating_sprite.texture_filter = skin.rating_filter
 	countdown_container.scale = skin.countdown_scale
 
 	song_label.text = '%s • [%s]' % [game.metadata.display_name, Game.difficulty.to_upper()]
@@ -213,6 +215,7 @@ func _display_countdown_sprite(index: int) -> void:
 	var sprite := Sprite2D.new()
 	sprite.scale = Vector2(1.05, 1.05)
 	sprite.texture = skin.countdown_textures[index]
+	sprite.texture_filter = skin.rating_filter
 	countdown_container.add_child(sprite)
 
 	var tween := create_tween().set_trans(Tween.TRANS_SINE)\

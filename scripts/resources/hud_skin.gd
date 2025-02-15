@@ -9,6 +9,11 @@ class_name HUDSkin extends Resource
 @export var bad: Texture2D = preload('res://resources/images/game/skins/default/ratings/bad.png')
 @export var shit: Texture2D = preload('res://resources/images/game/skins/default/ratings/shit.png')
 @export var rating_scale: Vector2 = Vector2(0.7, 0.7)
+@export_enum(
+		'Inherit', 'Nearest', 'Linear',
+		'Nearest Mipmap', 'Linear Mipmap',
+		'Nearest Mipmap Anisotropic', 'Linear Mipmap Anisotropic'
+) var rating_filter: int = 0
 
 @export_category('Combo')
 
@@ -16,6 +21,11 @@ class_name HUDSkin extends Resource
 ## all preloaded by default.
 @export var combo_atlas: Texture2D = preload('res://resources/images/game/skins/default/combo/numbers.png')
 @export var combo_scale: Vector2 = Vector2(0.5, 0.5)
+@export_enum(
+		'Inherit', 'Nearest', 'Linear',
+		'Nearest Mipmap', 'Linear Mipmap',
+		'Nearest Mipmap Anisotropic', 'Linear Mipmap Anisotropic'
+) var combo_filter: int = 0
 
 @export_category('Countdown')
 
@@ -32,6 +42,11 @@ class_name HUDSkin extends Resource
 	preload('res://resources/sfx/game/countdown/go.ogg'),
 ]
 @export var countdown_scale: Vector2 = Vector2(0.7, 0.7)
+@export_enum(
+		'Inherit', 'Nearest', 'Linear',
+		'Nearest Mipmap', 'Linear Mipmap',
+		'Nearest Mipmap Anisotropic', 'Linear Mipmap Anisotropic'
+) var countdown_filter: int = 0
 
 @export_category('Misc')
 
