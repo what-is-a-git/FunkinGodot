@@ -60,15 +60,14 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(_animation):
 		frame = 0
 		return
-	
+
 	if not playing:
 		return
-	
+
 	_timer += delta
-	if _timer >= 1.0 / _animation.framerate:
-		var frame_diff := _timer / (1.0 / _animation.framerate)
-		frame += floori(frame_diff)
-		_timer -= (1.0 / _animation.framerate) * frame_diff
+	while _timer >= 1.0 / _animation.framerate:
+		frame += 1
+		_timer -= 1.0 / _animation.framerate
 		if frame > _timeline.length - 1:
 			match loop_mode:
 				'Loop':
@@ -84,11 +83,11 @@ func _cache_atlas() -> void:
 	var parsed := ParsedAtlas.new()
 	parsed.collections = _collections
 	parsed.animation = _animation
-	
+
 	var atlas_directory := atlas
 	if not atlas_directory.get_extension().is_empty():
 		atlas_directory = atlas_directory.get_base_dir()
-	
+
 	var err := ResourceSaver.save(parsed, \
 			'%s/Animation.res' % [atlas_directory], ResourceSaver.FLAG_COMPRESS)
 	if err != OK:
@@ -99,11 +98,11 @@ func _cache_atlas() -> void:
 func load_atlas(path: String) -> void:
 	_collections.clear()
 	_animation = null
-	
+
 	var atlas_directory := path
 	if not atlas_directory.get_extension().is_empty():
 		atlas_directory = atlas_directory.get_base_dir()
-	
+
 	var parsed_path := '%s/Animation.res' % atlas_directory
 	if ResourceLoader.exists(parsed_path):
 		var parsed: ParsedAtlas = load(parsed_path)
@@ -111,7 +110,7 @@ func load_atlas(path: String) -> void:
 		_collections = parsed.collections
 		frame = 0
 		return
-	
+
 	var files := ResourceLoader.list_directory(atlas_directory)
 	for file in files:
 		if file.begins_with('spritemap') and file.ends_with('.json'):
@@ -125,11 +124,11 @@ func load_atlas(path: String) -> void:
 				load('%s/%s.png' % [atlas_directory, file.get_basename()])
 			)
 			_collections.push_back(sprite_collection)
-	
+
 	var animation_string := FileAccess.get_file_as_string('%s/Animation.json' % [atlas_directory])
 	if animation_string.is_empty():
 		return
-	
+
 	var animation_json: Variant = JSON.parse_string(animation_string)
 	if animation_json == null:
 		return
@@ -141,7 +140,7 @@ func _draw_symbol(element: Element) -> void:
 	if not _animation.symbol_dictionary.has(element.name):
 		printerr('Tried to draw invalid symbol "%s"' % [element.name])
 		return
-	
+
 	_draw_timeline(_animation.symbol_dictionary.get(element.name), element.frame)
 
 
@@ -174,7 +173,7 @@ func _draw_sprite(element: Element) -> void:
 func _draw_timeline(timeline: Timeline, target_frame: int) -> void:
 	var layers := timeline.layers.duplicate()
 	layers.reverse()
-	
+
 	var layer_transform := _current_transform
 	for layer: Layer in layers:
 		for layer_frame in layer.frames:
@@ -195,6 +194,6 @@ func _draw_timeline(timeline: Timeline, target_frame: int) -> void:
 func _draw() -> void:
 	if not is_instance_valid(_timeline):
 		return
-	
+
 	_current_transform = Transform2D.IDENTITY
 	_draw_timeline(_timeline, frame)

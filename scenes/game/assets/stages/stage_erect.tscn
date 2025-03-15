@@ -54,11 +54,11 @@ z_index = 5
 position = Vector2(560, 290)
 sprite_frames = ExtResource("3_iarc1")
 animation = &"bop"
-frame_progress = 0.823941
+frame_progress = 0.809106
 centered = false
 script = ExtResource("4_dtqj5")
 playing = true
-metadata/_custom_type_script = ExtResource("4_dtqj5")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="bg" type="Sprite2D" parent="."]
 z_index = 20

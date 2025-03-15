@@ -20,7 +20,7 @@ static var input_zone: float = 0.18
 				sprite.animation_finished.connect(_on_animation_finished)
 			elif sprite.animation_finished.is_connected(_on_animation_finished):
 				sprite.animation_finished.disconnect(_on_animation_finished)
-			
+
 			_automatically_play_static = value
 var play_confirm: bool = true
 var _pressed: bool = false
@@ -36,25 +36,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_echo():
 		return
-	
+
 	if not event.is_action(&'input_%s' % direction):
 		return
-	
+
 	var pressed: bool = event.is_pressed()
 	if pressed:
 		_pressed = true
 		play_anim(&'press')
 		_automatically_play_static = false
-		
+
 		for note: Note in _notes.get_children():
 			if note._hit:
 				continue
 			if note.lane != lane:
 				continue
-			
+
 			var before_zone: bool = Conductor.time < note.data.time - input_zone
 			var after_zone: bool = Conductor.time > note.data.time + input_zone
-			
+
 			if not (before_zone or after_zone):
 				hit_note(note)
 				break
@@ -62,20 +62,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	else:
 		_pressed = false
 		play_anim(&'static')
-		
+
 		for note: Note in _notes.get_children():
 			if not note._hit:
 				continue
 			if note.lane != lane:
 				continue
-			
+
 			var range := maxf(Conductor.beat_delta / 2.0, 0.1)
 			# give a bit of lee-way
 			if note.length < range:
 				# we do this because the animations get funky sometimes lol
 				_automatically_play_static = true
 				continue
-			
+
 			on_miss_note.emit(note)
 
 
@@ -110,7 +110,7 @@ func _ready() -> void:
 func play_anim(anim: StringName, force: bool = false) -> void:
 	_last_anim = anim
 	sprite.play('%s %s' % [direction, anim])
-	
+
 	if force:
 		sprite.frame = 0
 
@@ -118,5 +118,5 @@ func play_anim(anim: StringName, force: bool = false) -> void:
 func _on_animation_finished() -> void:
 	if sprite.animation.ends_with('static'):
 		return
-	
+
 	play_anim(&'static')

@@ -16,7 +16,7 @@ dest_files=["res://.godot/imported/edit.svg-7ae58bb79e65f8231f84ebab6bb3fec4.cte
 [params]
 
 compress/mode=0
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

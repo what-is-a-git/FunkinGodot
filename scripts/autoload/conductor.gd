@@ -22,7 +22,7 @@ var target_length: float:
 	get:
 		if is_instance_valid(target_audio) and is_instance_valid(target_audio.stream):
 			return target_audio.stream.get_length()
-		
+
 		return -1.0
 
 var rate: float = 1.0
@@ -44,7 +44,7 @@ signal measure_hit(measure: int)
 func _ready() -> void:
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	Config.value_changed.connect(_on_config_value_changed)
-	_on_config_value_changed('gameplay', 'manual_offset', 
+	_on_config_value_changed('gameplay', 'manual_offset',
 			Config.get_value('gameplay', 'manual_offset'))
 	_on_scene_changed()
 
@@ -52,25 +52,26 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not active:
 		return
-	
+
 	if _resync_latency:
 		var mix_time: float = AudioServer.get_time_since_last_mix()
 		if mix_time < _last_mix:
 			reset_offset()
 		_last_mix = mix_time
-	
+
 	var last_step: int = floori(step)
 	var last_beat: int = floori(beat)
 	var last_measure: int = floori(measure)
-	
+
+	# TODO: fix target audio LOOKING LIKE STUTTERY ASS CHEEKS
 	if is_instance_valid(target_audio):
 		if not target_audio.playing:
 			return
-		
+
 		var last_time: float = time
 		var audio_position: float = target_audio.get_playback_position() \
 				+ AudioServer.get_time_since_last_mix()
-		
+
 		if audio_position + offset > time:
 			time = audio_position + offset
 			beat += (time - last_time) / beat_delta
@@ -83,7 +84,7 @@ func _process(delta: float) -> void:
 	else:
 		time += delta * rate
 		beat += delta * rate / beat_delta
-	
+
 	if floori(step) > last_step:
 		for step_value in range(last_step + 1, floori(step) + 1):
 			step_hit.emit(step_value)
