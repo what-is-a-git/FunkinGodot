@@ -15,7 +15,7 @@ signal on_video_ended()
 ## Whether to autoplay the video once its stream is set
 @export var autoplay: bool = true
 
-## The file to play the video with, must be a FFMpegVideoStream.
+## The file to play the video with.
 @export var file: String:
 	set(new_file):
 		stream.file = new_file
