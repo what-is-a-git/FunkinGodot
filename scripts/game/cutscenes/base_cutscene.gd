@@ -1,5 +1,5 @@
 ## Extension of [FunkinScript] for making cutscenes.
-##
+## 
 ## General helper class to provide some helpful
 ## built-ins for making song cutscenes.
 ## This class is only a base for other cutscenes
@@ -13,18 +13,19 @@ class_name BaseCutscene extends FunkinScript
 ## loading the script through a song in freeplay.
 @export var play_in_freeplay: bool = false
 
+## Whether to free the cutscene after its done playing.
+@export var auto_free: bool = true
 
 func _ready() -> void:
 	super()
 	if Game.mode == Game.PlayMode.FREEPLAY and not play_in_freeplay:
 		queue_free()
 		return
-
-	game.hud.pause_countdown = true
+	if game is Game: game.hud.pause_countdown = true
 
 
 ## Call this function to free this node and allow
 ## the game to start the countdown.
 func finish() -> void:
-	game.hud.pause_countdown = false
-	queue_free()
+	if game is Game: game.hud.pause_countdown = false
+	if auto_free: queue_free()
