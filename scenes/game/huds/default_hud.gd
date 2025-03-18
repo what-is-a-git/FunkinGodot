@@ -23,6 +23,8 @@ var countdown_offset: int = 0
 var tracks: Tracks
 var skin: HUDSkin
 
+@onready var preloading_viewport: SubViewport = %preloading_viewport
+
 
 func _ready() -> void:
 	super()
@@ -116,6 +118,8 @@ func _on_measure_hit(measure: int) -> void:
 func _process(delta: float) -> void:
 	if not (game.playing and game.camera_bumps):
 		return
+	if is_instance_valid(preloading_viewport):
+		preloading_viewport.queue_free()
 
 	scale = scale.lerp(Vector2.ONE, delta * 3.0)
 
@@ -297,5 +301,4 @@ func _preload_splash(scene: PackedScene) -> void:
 	if node is Node2D:
 		node.scale = Vector2.ONE * 0.001
 		node.modulate.a = 0.001
-	add_child(node)
-	RenderingServer.frame_post_draw.connect(node.queue_free, Object.CONNECT_ONE_SHOT)
+	preloading_viewport.add_child(node)

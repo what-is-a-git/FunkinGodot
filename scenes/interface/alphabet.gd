@@ -44,21 +44,21 @@ func _ready() -> void:
 func _create_characters() -> void:
 	for child: AnimatedSprite2D in get_children():
 		child.queue_free()
-	
+
 	size = Vector2i.ZERO
-	
+
 	var x_position: float = 0.0
 	var y_position: float = 0.0
 	var lines: Array[Dictionary] = []
 	var line_index: int = 0
-	
+
 	for character: String in text:
 		if lines.size() - 1 < line_index:
 			lines.push_back({
 				'size': Vector2i.ZERO,
 				'characters': [],
 			})
-		
+
 		if character == ' ':
 			x_position += 50.0
 			continue
@@ -67,34 +67,34 @@ func _create_characters() -> void:
 			y_position += 70.0
 			line_index += 1
 			continue
-		
+
 		var character_data := _create_character(x_position, y_position, character)
 		add_child(character_data[0])
-		
+
 		x_position += character_data[1].x
-		
+
 		if x_position > size.x:
 			size.x = x_position
 		if y_position + character_data[1].y > size.y:
 			size.y = y_position + character_data[1].y
-		
+
 		var line_dict := lines[line_index]
 		line_dict.get('characters', []).push_back(character_data[0])
-		
+
 		var line_size: Vector2i = line_dict.get('size', Vector2i.ZERO)
-		
+
 		# x should basically be always true lol
 		if x_position > line_size.x:
 			line_size.x = x_position
 		if y_position + character_data[1].y > line_size.y:
 			line_size.y = y_position + character_data[1].y
-		
+
 		line_dict['size'] = line_size
-	
+
 	if centered:
 		for child: AnimatedSprite2D in get_children():
 			child.position -= size * 0.5
-	
+
 	match horizontal_alignment:
 		'Left':
 			pass
@@ -102,7 +102,7 @@ func _create_characters() -> void:
 			for line: Dictionary in lines:
 				var characters: Array = line.get('characters', [])
 				var line_size: Vector2i = line.get('size', Vector2i.ZERO)
-				
+
 				if characters.is_empty() or line_size <= Vector2i.ZERO:
 					continue
 				for character: AnimatedSprite2D in characters:
@@ -110,26 +110,27 @@ func _create_characters() -> void:
 						character.position.x += (size.x - line_size.x) / 2.0
 					else: # Right
 						character.position.x -= line_size.x - size.x
-	
+
 	updated.emit()
 
 
 func _create_character(x: float, y: float, character: String) -> Array:
 	var animation_data := _character_to_animation(character)
-	
+
 	var node: AnimatedSprite2D = AnimatedSprite2D.new()
+	node.use_parent_material = true
 	node.centered = false
 	node.sprite_frames = frames
 	node.position = Vector2(x, y)
 	node.animation = animation_data.name + suffix
 	node.offset = animation_data.offset
 	node.play()
-	
+
 	var character_size: Vector2 = Vector2.ZERO
 	if node.sprite_frames.has_animation(node.animation):
 		var frame_texture := node.sprite_frames.get_frame_texture(node.animation, 0)
 		character_size = frame_texture.get_size()
-	
+
 	node.offset.y -= (character_size.y - 65.0) / 2.0
 	return [node, character_size]
 
@@ -140,7 +141,7 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 		data.name = character.to_lower() if no_casing else character
 		data.offset = Vector2.ZERO
 		return data
-	
+
 	# all used by bold.xml, not sure about default.xml support rn :3
 	match character:
 		'\'', '‘', '’':
@@ -188,10 +189,10 @@ func _character_to_animation(character: String) -> AlphabetAnimationData:
 			data.offset.y = -MAGIC_OFFSET * 0.6
 		_:
 			data.name = character
-	
+
 	if no_offset:
 		data.offset = Vector2.ZERO
-	
+
 	return data
 
 
@@ -212,7 +213,7 @@ static func string_to_character(input: String) -> String:
 		'down': return 'v'
 		'up': return 'ô'
 		'right': return '>'
-	
+
 	return input
 
 

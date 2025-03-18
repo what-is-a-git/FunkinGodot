@@ -235,7 +235,7 @@ one_shot = true
 [node name="tracks" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_fq3va")
-metadata/_custom_type_script = ExtResource("2_fq3va")
+metadata/_custom_type_script = "uid://bbfskuw2fyle3"
 
 [node name="player" type="AudioStreamPlayer" parent="tracks"]
 
