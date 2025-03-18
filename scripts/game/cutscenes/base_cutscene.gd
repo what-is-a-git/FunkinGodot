@@ -1,5 +1,5 @@
 ## Extension of [FunkinScript] for making cutscenes.
-## 
+##
 ## General helper class to provide some helpful
 ## built-ins for making song cutscenes.
 ## This class is only a base for other cutscenes
