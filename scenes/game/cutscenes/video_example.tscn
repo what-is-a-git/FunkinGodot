@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8ynd81bqjpe8"]
 
-[ext_resource type="Script" path="res://scripts/game/cutscenes/video_cutscene.gd" id="1_q08p3"]
+[ext_resource type="Script" uid="uid://cfoo44n1adnya" path="res://scripts/game/cutscenes/video_cutscene.gd" id="1_q08p3"]
 
 [node name="video_example" type="CanvasLayer"]
 layer = 32

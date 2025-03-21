@@ -246,8 +246,11 @@ func _ready() -> void:
 		for event in chart.events:
 			event_prepare.emit(event)
 
+		# we do int(time * 1000.0) because if it's less than 1 ms
+		# after the start of a song (i've seen this in base game charts before)
+		# then we should still call it lmfao (like camera pans)
 		while (not chart.events.is_empty()) and _event < chart.events.size() \
-				and chart.events[_event].time <= 0.0:
+				and int(chart.events[_event].time * 1000.0) <= 0.0:
 			_on_event_hit(chart.events[_event])
 			_event += 1
 

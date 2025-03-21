@@ -109,14 +109,14 @@ func _ready() -> void:
 
 func play_anim(anim: StringName, force: bool = false) -> void:
 	_last_anim = anim
-	sprite.play('%s %s' % [direction, anim])
+	sprite.play(&'%s %s' % [direction, anim])
 
 	if force:
 		sprite.frame = 0
 
 
 func _on_animation_finished() -> void:
-	if sprite.animation.ends_with('static'):
+	if sprite.animation.ends_with(&'static'):
 		return
 
 	play_anim(&'static')

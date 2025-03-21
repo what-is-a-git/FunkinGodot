@@ -2,7 +2,7 @@
 ## [VideoStreamPlayer] and then lets you play.
 class_name VideoCutscene extends BaseCutscene
 
-signal on_video_ended()
+signal on_video_ended
 
 ## Whether or not to hide the game and its hud
 ## while the video is playing.
@@ -15,26 +15,16 @@ signal on_video_ended()
 ## Whether to autoplay the video once its stream is set
 @export var autoplay: bool = true
 
-## The file to play the video with.
-@export var file: String:
-	set(new_file):
-		stream.file = new_file
-		if stream.file:
-			_video_player.stream = stream
-			if autoplay: play(true)
-		file = new_file
-
 @onready var _video_player: VideoStreamPlayer = %player
-
-var stream: FFmpegVideoStream = FFmpegVideoStream.new()
 
 func _ready() -> void:
 	super()
-	if _video_player.stream: _video_player.play()
+
+	if autoplay:
+		play()
 	if game and hide_game:
 		game.visible = false
-		if game is Game:
-			game.hud.visible = false
+		game.hud.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -51,7 +41,8 @@ func _input(event: InputEvent) -> void:
 ## [param]force[/param] To force the video to play regardless of whether it is already.
 func play(force: bool = false) -> void:
 	if _video_player.is_playing():
-		if not force: return
+		if not force:
+			return
 		_video_player.stop()
 	_video_player.show()
 	_video_player.play()
@@ -60,11 +51,12 @@ func play(force: bool = false) -> void:
 ## if it was previously hidden.
 func finish() -> void:
 	super()
+
 	if _video_player.is_playing():
 		_video_player.stop()
 	_video_player.hide()
 	on_video_ended.emit()
+
 	if game and hide_game:
 		game.visible = true
-		if game is Game:
-			game.hud.visible = true
+		game.hud.visible = true

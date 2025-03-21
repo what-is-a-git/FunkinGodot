@@ -21,11 +21,12 @@ func _ready() -> void:
 	if Game.mode == Game.PlayMode.FREEPLAY and not play_in_freeplay:
 		queue_free()
 		return
-	if game is Game: game.hud.pause_countdown = true
+	game.hud.pause_countdown = true
 
 
 ## Call this function to free this node and allow
 ## the game to start the countdown.
 func finish() -> void:
-	if game is Game: game.hud.pause_countdown = false
-	if auto_free: queue_free()
+	game.hud.pause_countdown = false
+	if auto_free:
+		queue_free()

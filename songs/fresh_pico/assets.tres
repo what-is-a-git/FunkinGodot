@@ -11,4 +11,4 @@ player = ExtResource("2_kace3")
 spectator = ExtResource("3_2wmbf")
 stage = ExtResource("4_gqndr")
 scripts = Array[PackedScene]([])
-metadata/_custom_type_script = ExtResource("1_nexrs")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

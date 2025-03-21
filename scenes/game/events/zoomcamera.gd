@@ -7,7 +7,7 @@ var tweens: Array[Tween] = []
 func _on_event_hit(event: EventData) -> void:
 	if event.name.to_lower() != &'zoomcamera':
 		return
-	
+
 	var data: Dictionary = event.data[0]
 	var steps: int = data.get('duration', 32)
 	var ease: String = data.get('ease', 'expoOut')
@@ -16,16 +16,16 @@ func _on_event_hit(event: EventData) -> void:
 		for tween in tweens:
 			tween.kill()
 		tweens.clear()
-		
+
 		game.target_camera_zoom = Vector2(zoom, zoom)
 		return
-	
+
 	var tween := create_tween()
 	tweens.push_back(tween)
 	tween.finished.connect(tweens.erase.bind(tween))
-	
+
 	_apply_ease(tween, ease)
-	tween.tween_property(game, ^'target_camera_zoom', Vector2(zoom, zoom), 
+	tween.tween_property(game, ^'target_camera_zoom', Vector2(zoom, zoom),
 			Conductor.beat_delta / 4.0 * float(steps))
 
 
@@ -45,6 +45,8 @@ func _apply_ease(tween: Tween, ease_string: String) -> void:
 			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		'sineOut':
 			tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		'sineInOut':
+			tween.set_trans(Tween.TRANS_SINE)
 		'linear': # default anyways
 			pass
 		_:
