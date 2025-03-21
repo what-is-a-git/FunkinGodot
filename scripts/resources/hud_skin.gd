@@ -51,3 +51,4 @@ class_name HUDSkin extends Resource
 @export_category('Misc')
 
 @export var pause_menu: PackedScene = null
+@export var pause_music: AudioStream = null

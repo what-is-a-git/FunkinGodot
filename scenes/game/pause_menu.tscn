@@ -35,7 +35,7 @@ script = ExtResource("2_1gnl8")
 text = "Penis
 (HARD)"
 horizontal_alignment = "Right"
-metadata/_custom_type_script = ExtResource("2_1gnl8")
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
 [node name="play_type" type="Node2D" parent="root"]
 unique_name_in_owner = true
@@ -45,7 +45,7 @@ position = Vector2(982, 649)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
 text = "Freeplay"
-metadata/_custom_type_script = ExtResource("2_1gnl8")
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
 [node name="options" type="Node2D" parent="."]
 unique_name_in_owner = true

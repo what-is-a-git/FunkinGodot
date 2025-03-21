@@ -199,12 +199,12 @@ func _ready() -> void:
 
 		skin = assets.hud_skin
 
+		if is_instance_valid(skin.pause_menu):
+			pause_menu = skin.pause_menu
+
 		# we're done using assets so not point keeping
 		# the references around
 		assets = null
-
-		if is_instance_valid(skin.pause_menu):
-			pause_menu = skin.pause_menu
 	else:
 		skin = load('res://resources/hud_skins/default.tres')
 

@@ -17,5 +17,5 @@ func record_hit(difference: float) -> void:
 func get_accuracy() -> float:
 	if hit_count <= 0:
 		return 0.0
-	
+
 	return total_accuracy / float(hit_count) * 100.0

@@ -12,7 +12,6 @@ const SLOW_BLUR_MATERIAL: String = 'uid://dcnfp5cgg5ivb'
 @onready var song_name: Alphabet = %song_name
 @onready var play_type: Alphabet = %play_type
 
-var music_volume: float = 0.0
 var active: bool = true
 var selected: int = 0
 var tree: SceneTree:
@@ -52,9 +51,13 @@ func _ready() -> void:
 			else:
 				printerr('Failed to get viewport texture image, oops!')
 
-	create_tween().tween_property(self, 'music_volume', 0.9, 2.0).set_delay(0.5)
+	create_tween().tween_property(music, ^'volume_linear', 0.9, 2.0).set_delay(0.5)
 	if not is_instance_valid(Game.instance):
 		return
+	if is_instance_valid(Game.instance.skin) and \
+			is_instance_valid(Game.instance.skin.pause_music):
+		music.stream = Game.instance.skin.pause_music
+		music.play()
 
 	var keys: Array = Game.PlayMode.keys()
 	song_name.text = '%s\n(%s)' % [Game.instance.metadata.display_name,
@@ -66,10 +69,6 @@ func _ready() -> void:
 	play_type.text = keys[Game.mode].to_upper()
 	play_type.position = Global.game_size - (Vector2(play_type.size) * 0.75) - \
 			Vector2(16.0, 16.0)
-
-
-func _process(delta: float) -> void:
-	music.volume_db = linear_to_db(music_volume)
 
 
 func _input(event: InputEvent) -> void:
