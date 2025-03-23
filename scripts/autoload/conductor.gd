@@ -17,6 +17,7 @@ var measure: float = 0.0:
 		return beat / 4.0
 
 var time: float = 0.0
+var raw_time: float = 0.0
 var target_audio: AudioStreamPlayer = null
 var target_length: float:
 	get:
@@ -35,6 +36,8 @@ var offset: float = audio_offset - manual_offset
 
 var _last_mix: float = 0.0
 var _resync_latency: bool = false
+
+const MAX_DESYNC: float = 25.0 / 1000.0
 
 signal step_hit(step: int)
 signal beat_hit(beat: int)
@@ -68,19 +71,25 @@ func _process(delta: float) -> void:
 		if not target_audio.playing:
 			return
 
-		var last_time: float = time
 		var audio_position: float = target_audio.get_playback_position() \
 				+ AudioServer.get_time_since_last_mix()
-
-		if audio_position + offset > time:
-			time = audio_position + offset
-			beat += (time - last_time) / beat_delta
-		elif time >= target_length + offset:
+		if audio_position >= target_length:
 			# stoopid looping fix :3
+			raw_time = 0.0
 			time = 0.0
 			beat = 0.0
-			_process(delta)
 			return
+
+		var last_time: float = raw_time
+		var desync: float = absf(raw_time - audio_position)
+		if audio_position >= raw_time or desync > MAX_DESYNC:
+			raw_time = audio_position
+			time = raw_time + offset
+			beat += (raw_time - last_time) / beat_delta
+		else:
+			raw_time += delta * target_audio.pitch_scale
+			time = raw_time + offset
+			beat += (raw_time - last_time) / beat_delta
 	else:
 		time += delta * rate
 		beat += delta * rate / beat_delta
@@ -112,6 +121,7 @@ func _on_finished() -> void:
 
 func reset() -> void:
 	reset_offset()
+	raw_time = 0.0
 	beat = 0.0
 	time = offset
 	target_audio = null
