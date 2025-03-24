@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://buugjy1a0ip73"
 path.bptc="res://.godot/imported/phillyCars.png-34eb20ce214710bd116de4533b058ced.bptc.ctex"
+path.astc="res://.godot/imported/phillyCars.png-34eb20ce214710bd116de4533b058ced.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/philly_streets/erect/phillyCars.png"
-dest_files=["res://.godot/imported/phillyCars.png-34eb20ce214710bd116de4533b058ced.bptc.ctex"]
+dest_files=["res://.godot/imported/phillyCars.png-34eb20ce214710bd116de4533b058ced.bptc.ctex", "res://.godot/imported/phillyCars.png-34eb20ce214710bd116de4533b058ced.astc.ctex"]
 
 [params]
 

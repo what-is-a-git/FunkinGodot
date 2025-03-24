@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c05dah5aarqg8"]
+[gd_scene load_steps=5 format=3 uid="uid://c05dah5aarqg8"]
 
-[ext_resource type="Script" path="res://scenes/game/gameover.gd" id="1_drfcy"]
+[ext_resource type="Script" uid="uid://dxe2rk2ymwaek" path="res://scenes/game/gameover.gd" id="1_drfcy"]
 [ext_resource type="AudioStream" uid="uid://dj3krjnstguwg" path="res://resources/music/game/gameover_theme.ogg" id="2_rrri4"]
 [ext_resource type="AudioStream" uid="uid://m36stqbwyc5k" path="res://resources/sfx/game/gameover/on_death.ogg" id="3_3j1mk"]
 [ext_resource type="AudioStream" uid="uid://cglpk5tuq0rha" path="res://resources/sfx/game/gameover/retry.ogg" id="3_x0mbf"]
-[ext_resource type="VideoStream" path="res://resources/videos/cutscenes/death.mp4" id="5_inguj"]
 
 [node name="gameover" type="Node2D"]
 script = ExtResource("1_drfcy")
@@ -41,7 +40,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("5_inguj")
 volume_db = 24.0
 expand = true
 bus = &"Music"

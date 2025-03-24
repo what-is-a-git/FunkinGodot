@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuv37idp7s44w"
 path.bptc="res://.godot/imported/spooky_dark.png-1f5eac76a3405d0de662368ad032ced1.bptc.ctex"
+path.astc="res://.godot/imported/spooky_dark.png-1f5eac76a3405d0de662368ad032ced1.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/spooky/spooky_dark.png"
-dest_files=["res://.godot/imported/spooky_dark.png-1f5eac76a3405d0de662368ad032ced1.bptc.ctex"]
+dest_files=["res://.godot/imported/spooky_dark.png-1f5eac76a3405d0de662368ad032ced1.bptc.ctex", "res://.godot/imported/spooky_dark.png-1f5eac76a3405d0de662368ad032ced1.astc.ctex"]
 
 [params]
 

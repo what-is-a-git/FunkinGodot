@@ -1,0 +1,227 @@
+[gd_scene load_steps=3 format=3 uid="uid://dln7pilk4eccf"]
+
+[ext_resource type="Script" uid="uid://chr6gh7537dwm" path="res://scenes/autoload/touch_controls.gd" id="1_wcbf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcbf3"]
+size = Vector2(320, 720)
+
+[node name="touch_controls" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1_wcbf3")
+
+[node name="menus" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="left" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -224.0
+offset_right = 160.0
+offset_bottom = -128.0
+grow_vertical = 0
+focus_mode = 0
+text = "<"
+
+[node name="down" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -128.0
+offset_right = 256.0
+offset_bottom = -32.0
+grow_vertical = 0
+focus_mode = 0
+text = "v"
+
+[node name="up" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -320.0
+offset_right = 256.0
+offset_bottom = -224.0
+grow_vertical = 0
+focus_mode = 0
+text = "^"
+
+[node name="right" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = -224.0
+offset_right = 352.0
+offset_bottom = -128.0
+grow_vertical = 0
+focus_mode = 0
+text = ">"
+
+[node name="cancel" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -128.0
+offset_right = -160.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+text = "C"
+
+[node name="accept" type="Button" parent="menus"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+text = "A"
+
+[node name="freeplay" type="Control" parent="menus"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="shift" type="Button" parent="menus/freeplay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -128.0
+offset_right = 48.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "SHIFT"
+
+[node name="game" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="left" type="ColorRect" parent="game"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.757, 0.294, 0.6, 0)
+
+[node name="button" type="TouchScreenButton" parent="game/left"]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "input_left"
+
+[node name="down" type="ColorRect" parent="game"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 320.0
+offset_right = 640.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0, 1, 1, 0)
+
+[node name="button" type="TouchScreenButton" parent="game/down"]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "input_down"
+
+[node name="up" type="ColorRect" parent="game"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 640.0
+offset_right = 960.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.071, 0.98, 0.016, 0)
+
+[node name="button" type="TouchScreenButton" parent="game/up"]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "input_up"
+
+[node name="right" type="ColorRect" parent="game"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 960.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.976, 0.224, 0.247, 0)
+
+[node name="button" type="TouchScreenButton" parent="game/right"]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "input_right"
+
+[node name="pause" type="Button" parent="game"]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 128.0
+focus_mode = 0
+text = "Pause"
+
+[connection signal="pressed" from="menus/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="menus/down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="menus/up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="menus/right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="menus/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="menus/accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="menus/freeplay/shift" to="." method="_on_shift_pressed"]
+[connection signal="gui_input" from="game/left" to="." method="_on_left_gui_input"]
+[connection signal="gui_input" from="game/down" to="." method="_on_down_gui_input"]
+[connection signal="gui_input" from="game/up" to="." method="_on_up_gui_input"]
+[connection signal="gui_input" from="game/right" to="." method="_on_right_gui_input"]
+[connection signal="pressed" from="game/pause" to="." method="_on_pause_pressed"]

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bj8w8e6620cr"
 path.bptc="res://.godot/imported/lightgreen.png-827c25bda21d477ccd44255dccc6628b.bptc.ctex"
+path.astc="res://.godot/imported/lightgreen.png-827c25bda21d477ccd44255dccc6628b.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/stage_erect/lightgreen.png"
-dest_files=["res://.godot/imported/lightgreen.png-827c25bda21d477ccd44255dccc6628b.bptc.ctex"]
+dest_files=["res://.godot/imported/lightgreen.png-827c25bda21d477ccd44255dccc6628b.bptc.ctex", "res://.godot/imported/lightgreen.png-827c25bda21d477ccd44255dccc6628b.astc.ctex"]
 
 [params]
 

@@ -1,7 +1,8 @@
-extends Node2D
+class_name MainMenu extends Node2D
 
 
 static var selected: int = 0
+static var freeplay_scene: String = 'uid://3rua2gpac5p8'
 
 @onready var items: VBoxContainer = $ui_layer/scroll_container/container
 @onready var version_label: Label = $ui_layer/version_label

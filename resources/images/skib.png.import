@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://5dlrqhx5jf3r"
 path.bptc="res://.godot/imported/skib.png-7a2ec3460f3f2b1da3cbdc7e94441d88.bptc.ctex"
+path.astc="res://.godot/imported/skib.png-7a2ec3460f3f2b1da3cbdc7e94441d88.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/skib.png"
-dest_files=["res://.godot/imported/skib.png-7a2ec3460f3f2b1da3cbdc7e94441d88.bptc.ctex"]
+dest_files=["res://.godot/imported/skib.png-7a2ec3460f3f2b1da3cbdc7e94441d88.bptc.ctex", "res://.godot/imported/skib.png-7a2ec3460f3f2b1da3cbdc7e94441d88.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bf0yvjn8cji58"
 path.bptc="res://.godot/imported/mistBack.png-e5d9aeb8e2bb2d1203268b8461f35929.bptc.ctex"
+path.astc="res://.godot/imported/mistBack.png-e5d9aeb8e2bb2d1203268b8461f35929.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/limo_erect/mistBack.png"
-dest_files=["res://.godot/imported/mistBack.png-e5d9aeb8e2bb2d1203268b8461f35929.bptc.ctex"]
+dest_files=["res://.godot/imported/mistBack.png-e5d9aeb8e2bb2d1203268b8461f35929.bptc.ctex", "res://.godot/imported/mistBack.png-e5d9aeb8e2bb2d1203268b8461f35929.astc.ctex"]
 
 [params]
 

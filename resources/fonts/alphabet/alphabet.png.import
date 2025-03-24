@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://db00qck5ydxrr"
 path.bptc="res://.godot/imported/alphabet.png-d6a2bb8230c5c17a356266a86690c699.bptc.ctex"
+path.astc="res://.godot/imported/alphabet.png-d6a2bb8230c5c17a356266a86690c699.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/fonts/alphabet/alphabet.png"
-dest_files=["res://.godot/imported/alphabet.png-d6a2bb8230c5c17a356266a86690c699.bptc.ctex"]
+dest_files=["res://.godot/imported/alphabet.png-d6a2bb8230c5c17a356266a86690c699.bptc.ctex", "res://.godot/imported/alphabet.png-d6a2bb8230c5c17a356266a86690c699.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbebj8xwc2gfm"
 path.bptc="res://.godot/imported/spritemap1.png-658348988f5739440e45c73755070edf.bptc.ctex"
+path.astc="res://.godot/imported/spritemap1.png-658348988f5739440e45c73755070edf.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/gf/sprites/spritemap1.png"
-dest_files=["res://.godot/imported/spritemap1.png-658348988f5739440e45c73755070edf.bptc.ctex"]
+dest_files=["res://.godot/imported/spritemap1.png-658348988f5739440e45c73755070edf.bptc.ctex", "res://.godot/imported/spritemap1.png-658348988f5739440e45c73755070edf.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://t8s6k254wn6b"
 path.bptc="res://.godot/imported/phillyHighwayLights_lightmap.png-6614ceb8b2898efe6bb146673d18aecf.bptc.ctex"
+path.astc="res://.godot/imported/phillyHighwayLights_lightmap.png-6614ceb8b2898efe6bb146673d18aecf.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/philly_streets/phillyHighwayLights_lightmap.png"
-dest_files=["res://.godot/imported/phillyHighwayLights_lightmap.png-6614ceb8b2898efe6bb146673d18aecf.bptc.ctex"]
+dest_files=["res://.godot/imported/phillyHighwayLights_lightmap.png-6614ceb8b2898efe6bb146673d18aecf.bptc.ctex", "res://.godot/imported/phillyHighwayLights_lightmap.png-6614ceb8b2898efe6bb146673d18aecf.astc.ctex"]
 
 [params]
 

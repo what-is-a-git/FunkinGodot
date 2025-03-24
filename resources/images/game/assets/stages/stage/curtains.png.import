@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3kftbmmrheuw"
 path.bptc="res://.godot/imported/curtains.png-2681aba195912d1899c9192bcab0df44.bptc.ctex"
+path.astc="res://.godot/imported/curtains.png-2681aba195912d1899c9192bcab0df44.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/stage/curtains.png"
-dest_files=["res://.godot/imported/curtains.png-2681aba195912d1899c9192bcab0df44.bptc.ctex"]
+dest_files=["res://.godot/imported/curtains.png-2681aba195912d1899c9192bcab0df44.bptc.ctex", "res://.godot/imported/curtains.png-2681aba195912d1899c9192bcab0df44.astc.ctex"]
 
 [params]
 

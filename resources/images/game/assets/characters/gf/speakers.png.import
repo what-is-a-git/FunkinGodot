@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://crpo3k5cgmogo"
 path.bptc="res://.godot/imported/speakers.png-a904ca98f2c13caff8f0204cfe32b2a5.bptc.ctex"
+path.astc="res://.godot/imported/speakers.png-a904ca98f2c13caff8f0204cfe32b2a5.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/gf/speakers.png"
-dest_files=["res://.godot/imported/speakers.png-a904ca98f2c13caff8f0204cfe32b2a5.bptc.ctex"]
+dest_files=["res://.godot/imported/speakers.png-a904ca98f2c13caff8f0204cfe32b2a5.bptc.ctex", "res://.godot/imported/speakers.png-a904ca98f2c13caff8f0204cfe32b2a5.astc.ctex"]
 
 [params]
 

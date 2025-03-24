@@ -1,4 +1,4 @@
-extends Node2D
+class_name FreeplayMenu extends Node2D
 
 
 static var index: int = 0
@@ -77,6 +77,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_accept'):
 		active = false
 		call_deferred('select_song')
+	if event.is_action(&'freeplay_open_characters'):
+		active = false
+		GlobalAudio.get_player('MENU/CANCEL').play()
+		SceneManager.switch_to('uid://62vvv8x8t7nm')
 
 	if event.is_action('ui_up') or event.is_action('ui_down'):
 		change_selection(Input.get_axis('ui_up', 'ui_down'))

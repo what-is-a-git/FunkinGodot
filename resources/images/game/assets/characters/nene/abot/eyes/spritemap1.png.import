@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://di27ctewxor5p"
 path.bptc="res://.godot/imported/spritemap1.png-63d41dbc0118fe6338baf6c1d77615a8.bptc.ctex"
+path.astc="res://.godot/imported/spritemap1.png-63d41dbc0118fe6338baf6c1d77615a8.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/nene/abot/eyes/spritemap1.png"
-dest_files=["res://.godot/imported/spritemap1.png-63d41dbc0118fe6338baf6c1d77615a8.bptc.ctex"]
+dest_files=["res://.godot/imported/spritemap1.png-63d41dbc0118fe6338baf6c1d77615a8.bptc.ctex", "res://.godot/imported/spritemap1.png-63d41dbc0118fe6338baf6c1d77615a8.astc.ctex"]
 
 [params]
 

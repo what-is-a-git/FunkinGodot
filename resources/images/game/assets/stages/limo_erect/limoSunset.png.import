@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://l6g6nongsi4t"
 path.bptc="res://.godot/imported/limoSunset.png-35134d01ab36273febfa9e13a28c460e.bptc.ctex"
+path.astc="res://.godot/imported/limoSunset.png-35134d01ab36273febfa9e13a28c460e.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/limo_erect/limoSunset.png"
-dest_files=["res://.godot/imported/limoSunset.png-35134d01ab36273febfa9e13a28c460e.bptc.ctex"]
+dest_files=["res://.godot/imported/limoSunset.png-35134d01ab36273febfa9e13a28c460e.bptc.ctex", "res://.godot/imported/limoSunset.png-35134d01ab36273febfa9e13a28c460e.astc.ctex"]
 
 [params]
 

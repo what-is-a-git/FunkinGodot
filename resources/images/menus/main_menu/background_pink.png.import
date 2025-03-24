@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcq8cfghjibg1"
 path.bptc="res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.bptc.ctex"
+path.astc="res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/menus/main_menu/background_pink.png"
-dest_files=["res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.bptc.ctex"]
+dest_files=["res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.bptc.ctex", "res://.godot/imported/background_pink.png-17fbf48a649d064ff2d5e4eff8f63df8.astc.ctex"]
 
 [params]
 

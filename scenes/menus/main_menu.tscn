@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b7fwxsepnt38j"]
+[gd_scene load_steps=13 format=3 uid="uid://b7fwxsepnt38j"]
 
 [ext_resource type="Script" uid="uid://blahra5leclk" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://resources/images/menus/main_menu/background.png" id="1_wymee"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://resources/fonts/vcr-jp.ttf" id="4_7kxsk"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://resources/images/menus/main_menu/buttons.res" id="4_c5hes"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="4_emyfo"]
+[ext_resource type="Script" uid="uid://c1hs6aw4yq5p" path="res://scripts/menus/freeplay_main_menu_button.gd" id="7_1hnlc"]
 
 [sub_resource type="Animation" id="Animation_58e2s"]
 length = 0.001
@@ -136,7 +137,7 @@ animation_name = &"storymode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
-frame_progress = 0.662415
+frame_progress = 0.961881
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -144,15 +145,14 @@ playing = true
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
-script = ExtResource("4_4uv5u")
-scene_path = "res://scenes/menus/freeplay_menu.tscn"
+script = ExtResource("7_1hnlc")
 animation_name = &"freeplay"
 
 [node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/freeplay"]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.0130141
+frame_progress = 0.312457
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -168,7 +168,7 @@ animation_name = &"credits"
 position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
-frame_progress = 0.191754
+frame_progress = 0.491205
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -184,7 +184,7 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.739822
+frame_progress = 0.0392905
 script = ExtResource("4_emyfo")
 playing = true
 

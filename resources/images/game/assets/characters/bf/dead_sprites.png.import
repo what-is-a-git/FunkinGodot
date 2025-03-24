@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c06ygpw7m7dxm"
 path.bptc="res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.bptc.ctex"
+path.astc="res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/bf/dead_sprites.png"
-dest_files=["res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.bptc.ctex"]
+dest_files=["res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.bptc.ctex", "res://.godot/imported/dead_sprites.png-c6e001a53538de9e64e4e8cbdf2977cc.astc.ctex"]
 
 [params]
 

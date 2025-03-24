@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://04chxwlihb7f"
 path.bptc="res://.godot/imported/headphones.svg-57ad29abe1fb6bdf3560d755edcb2280.bptc.ctex"
+path.astc="res://.godot/imported/headphones.svg-57ad29abe1fb6bdf3560d755edcb2280.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/icons/headphones.svg"
-dest_files=["res://.godot/imported/headphones.svg-57ad29abe1fb6bdf3560d755edcb2280.bptc.ctex"]
+dest_files=["res://.godot/imported/headphones.svg-57ad29abe1fb6bdf3560d755edcb2280.bptc.ctex", "res://.godot/imported/headphones.svg-57ad29abe1fb6bdf3560d755edcb2280.astc.ctex"]
 
 [params]
 

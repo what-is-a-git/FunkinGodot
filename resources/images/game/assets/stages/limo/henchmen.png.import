@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2ihjg8f6vfy4"
 path.bptc="res://.godot/imported/henchmen.png-eb065f9950c071e256052ff08f3860fc.bptc.ctex"
+path.astc="res://.godot/imported/henchmen.png-eb065f9950c071e256052ff08f3860fc.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/limo/henchmen.png"
-dest_files=["res://.godot/imported/henchmen.png-eb065f9950c071e256052ff08f3860fc.bptc.ctex"]
+dest_files=["res://.godot/imported/henchmen.png-eb065f9950c071e256052ff08f3860fc.bptc.ctex", "res://.godot/imported/henchmen.png-eb065f9950c071e256052ff08f3860fc.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bna8cxh2gukil"
 path.bptc="res://.godot/imported/phillyForegroundCity.png-cc1823cae4bad3d56fd37b2f79b5fec0.bptc.ctex"
+path.astc="res://.godot/imported/phillyForegroundCity.png-cc1823cae4bad3d56fd37b2f79b5fec0.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/philly_streets/erect/phillyForegroundCity.png"
-dest_files=["res://.godot/imported/phillyForegroundCity.png-cc1823cae4bad3d56fd37b2f79b5fec0.bptc.ctex"]
+dest_files=["res://.godot/imported/phillyForegroundCity.png-cc1823cae4bad3d56fd37b2f79b5fec0.bptc.ctex", "res://.godot/imported/phillyForegroundCity.png-cc1823cae4bad3d56fd37b2f79b5fec0.astc.ctex"]
 
 [params]
 

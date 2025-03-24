@@ -433,7 +433,7 @@ func _song_finished(force: bool = false) -> void:
 		PlayMode.STORY:
 			SceneManager.switch_to('scenes/menus/story_mode_menu.tscn')
 		PlayMode.FREEPLAY:
-			SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')
+			SceneManager.switch_to(MainMenu.freeplay_scene)
 		_:
 			SceneManager.switch_to('scenes/menus/title_screen.tscn')
 

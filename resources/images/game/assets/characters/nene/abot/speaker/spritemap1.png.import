@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://drdl2bb76ju7g"
 path.bptc="res://.godot/imported/spritemap1.png-7cb35ba54c0f4a59475310e598521b8e.bptc.ctex"
+path.astc="res://.godot/imported/spritemap1.png-7cb35ba54c0f4a59475310e598521b8e.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/nene/abot/speaker/spritemap1.png"
-dest_files=["res://.godot/imported/spritemap1.png-7cb35ba54c0f4a59475310e598521b8e.bptc.ctex"]
+dest_files=["res://.godot/imported/spritemap1.png-7cb35ba54c0f4a59475310e598521b8e.bptc.ctex", "res://.godot/imported/spritemap1.png-7cb35ba54c0f4a59475310e598521b8e.astc.ctex"]
 
 [params]
 

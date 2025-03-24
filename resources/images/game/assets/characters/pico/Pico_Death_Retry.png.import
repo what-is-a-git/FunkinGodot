@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpbtif72iy7cl"
 path.bptc="res://.godot/imported/Pico_Death_Retry.png-9c31d93570127381650b0b97aad95d75.bptc.ctex"
+path.astc="res://.godot/imported/Pico_Death_Retry.png-9c31d93570127381650b0b97aad95d75.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/pico/Pico_Death_Retry.png"
-dest_files=["res://.godot/imported/Pico_Death_Retry.png-9c31d93570127381650b0b97aad95d75.bptc.ctex"]
+dest_files=["res://.godot/imported/Pico_Death_Retry.png-9c31d93570127381650b0b97aad95d75.bptc.ctex", "res://.godot/imported/Pico_Death_Retry.png-9c31d93570127381650b0b97aad95d75.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3ac3wi373b11"
 path.bptc="res://.godot/imported/cherry.svg-59d6e4808ae266694503745ffbd135af.bptc.ctex"
+path.astc="res://.godot/imported/cherry.svg-59d6e4808ae266694503745ffbd135af.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/menus/credits/cherry.svg"
-dest_files=["res://.godot/imported/cherry.svg-59d6e4808ae266694503745ffbd135af.bptc.ctex"]
+dest_files=["res://.godot/imported/cherry.svg-59d6e4808ae266694503745ffbd135af.bptc.ctex", "res://.godot/imported/cherry.svg-59d6e4808ae266694503745ffbd135af.astc.ctex"]
 
 [params]
 

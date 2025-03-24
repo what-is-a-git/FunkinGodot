@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkq11tqsokn86"
 path.bptc="res://.godot/imported/brightLightSmall.png-0754d66cb4942b3da9c76557ada57440.bptc.ctex"
+path.astc="res://.godot/imported/brightLightSmall.png-0754d66cb4942b3da9c76557ada57440.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/stage_erect/brightLightSmall.png"
-dest_files=["res://.godot/imported/brightLightSmall.png-0754d66cb4942b3da9c76557ada57440.bptc.ctex"]
+dest_files=["res://.godot/imported/brightLightSmall.png-0754d66cb4942b3da9c76557ada57440.bptc.ctex", "res://.godot/imported/brightLightSmall.png-0754d66cb4942b3da9c76557ada57440.astc.ctex"]
 
 [params]
 

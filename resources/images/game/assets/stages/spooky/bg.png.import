@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjnpvvuqnv6ax"
 path.bptc="res://.godot/imported/bg.png-12a40ecfb7d48836adc57931d87dc0ca.bptc.ctex"
+path.astc="res://.godot/imported/bg.png-12a40ecfb7d48836adc57931d87dc0ca.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/stages/spooky/bg.png"
-dest_files=["res://.godot/imported/bg.png-12a40ecfb7d48836adc57931d87dc0ca.bptc.ctex"]
+dest_files=["res://.godot/imported/bg.png-12a40ecfb7d48836adc57931d87dc0ca.bptc.ctex", "res://.godot/imported/bg.png-12a40ecfb7d48836adc57931d87dc0ca.astc.ctex"]
 
 [params]
 

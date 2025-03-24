@@ -19,32 +19,33 @@ var active: bool = true
 func _ready() -> void:
 	randomize()
 	active = true
-	
+
 	var value := randi_range(1, 1000)
 	if value == 273:
 		active = false
-		secret.get_node('player').play()
+		secret.get_node(^'player').stream = load('uid://6jxbt142o25i')
+		secret.get_node(^'player').play()
 		return
 	else:
 		print('You failed the roll! Rolled a %d.' % value)
 		secret.queue_free()
-	
+
 	Conductor.reset()
 	Conductor.tempo = 100.0
 	Conductor.target_audio = music_player
-	
+
 	camera.zoom = camera_zoom
 	camera.global_position = camera_position
 	camera.position_smoothing_enabled = false
 	get_tree().create_timer(0.5).timeout.connect(func():
 		camera.position_smoothing_enabled = true
 		camera.position = character.position + character._camera_offset.position)
-	
+
 	character = load(character_path).instantiate()
-	
+
 	if is_instance_valid(character.gameover_assets):
 		var assets := character.gameover_assets
-		
+
 		if is_instance_valid(assets.on_death):
 			on_death.stream = assets.on_death
 		if is_instance_valid(assets.looping_music):
@@ -52,7 +53,7 @@ func _ready() -> void:
 			Conductor.tempo = assets.music_bpm # hehe
 		if is_instance_valid(assets.retry):
 			retry.stream = assets.retry
-	
+
 	add_child(character)
 	character.global_position = character_position
 	if character.has_anim(&'death'):
@@ -73,13 +74,13 @@ func _input(event: InputEvent) -> void:
 	if not active:
 		if event.is_action('menu_reload'):
 			get_viewport().set_input_as_handled()
-		
+
 		return
-	
+
 	if event.is_action('ui_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		
+
 		match Game.mode:
 			Game.PlayMode.FREEPLAY:
 				SceneManager.switch_to('scenes/menus/freeplay_menu.tscn')

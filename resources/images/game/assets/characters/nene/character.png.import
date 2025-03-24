@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx2e4r1xoa0o7"
 path.bptc="res://.godot/imported/character.png-70188bc7d9c9f7b1f40340034bdec5dc.bptc.ctex"
+path.astc="res://.godot/imported/character.png-70188bc7d9c9f7b1f40340034bdec5dc.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/nene/character.png"
-dest_files=["res://.godot/imported/character.png-70188bc7d9c9f7b1f40340034bdec5dc.bptc.ctex"]
+dest_files=["res://.godot/imported/character.png-70188bc7d9c9f7b1f40340034bdec5dc.bptc.ctex", "res://.godot/imported/character.png-70188bc7d9c9f7b1f40340034bdec5dc.astc.ctex"]
 
 [params]
 

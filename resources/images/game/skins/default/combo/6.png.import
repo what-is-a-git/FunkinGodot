@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfpupdtl1n88"
 path.bptc="res://.godot/imported/6.png-b6bf0725870b7982322b6152feb4f1c3.bptc.ctex"
+path.astc="res://.godot/imported/6.png-b6bf0725870b7982322b6152feb4f1c3.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/skins/default/combo/6.png"
-dest_files=["res://.godot/imported/6.png-b6bf0725870b7982322b6152feb4f1c3.bptc.ctex"]
+dest_files=["res://.godot/imported/6.png-b6bf0725870b7982322b6152feb4f1c3.bptc.ctex", "res://.godot/imported/6.png-b6bf0725870b7982322b6152feb4f1c3.astc.ctex"]
 
 [params]
 

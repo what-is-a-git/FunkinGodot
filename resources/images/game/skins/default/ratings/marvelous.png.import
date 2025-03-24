@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn6fmp8et8ktw"
 path.bptc="res://.godot/imported/marvelous.png-ade534a3734c7b18d47ab820d222fcd0.bptc.ctex"
+path.astc="res://.godot/imported/marvelous.png-ade534a3734c7b18d47ab820d222fcd0.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/skins/default/ratings/marvelous.png"
-dest_files=["res://.godot/imported/marvelous.png-ade534a3734c7b18d47ab820d222fcd0.bptc.ctex"]
+dest_files=["res://.godot/imported/marvelous.png-ade534a3734c7b18d47ab820d222fcd0.bptc.ctex", "res://.godot/imported/marvelous.png-ade534a3734c7b18d47ab820d222fcd0.astc.ctex"]
 
 [params]
 

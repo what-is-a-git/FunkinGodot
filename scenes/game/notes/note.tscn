@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://f75xq2p53bpl"]
+[gd_scene load_steps=7 format=3 uid="uid://f75xq2p53bpl"]
 
 [ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://resources/images/game/skins/default/notes.png" id="1_0svdn"]
 [ext_resource type="Script" uid="uid://dj0ps70uiqehu" path="res://scenes/game/notes/note.gd" id="1_dpa0s"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="2_uegtt"]
+[ext_resource type="SpriteFrames" path="res://resources/images/game/skins/default/notes.res" id="3_wnwtv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8m8o"]
 atlas = ExtResource("1_0svdn")
@@ -11,168 +12,6 @@ region = Rect2(207, 312, 50, 41)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgo8q"]
 atlas = ExtResource("1_0svdn")
 region = Rect2(314, 197, 50, 63)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m73jc"]
-load_path = "res://.godot/imported/notes.png-c38c695aa18702fd0b84666e67eebf21.bptc.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_piexi"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(156, 156, 157, 154)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k8blb"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(156, 311, 50, 44)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mubte"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 131, 50, 64)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulnc4"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(1, 159, 154, 157)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3g4k"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(207, 311, 50, 44)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qckl0"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 196, 50, 64)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5l0yb"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(1, 1, 154, 157)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0l0dk"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 261, 50, 44)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukg30"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 1, 50, 64)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q8c2i"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(156, 1, 157, 154)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qpnpv"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 306, 50, 44)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_na6fl"]
-atlas = SubResource("CompressedTexture2D_m73jc")
-region = Rect2(314, 66, 50, 64)
-filter_clip = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_sv3fl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_piexi")
-}],
-"loop": false,
-"name": &"down note",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k8blb")
-}],
-"loop": false,
-"name": &"down sustain",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mubte")
-}],
-"loop": false,
-"name": &"down sustain end",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ulnc4")
-}],
-"loop": false,
-"name": &"left note",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k3g4k")
-}],
-"loop": false,
-"name": &"left sustain",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qckl0")
-}],
-"loop": false,
-"name": &"left sustain end",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5l0yb")
-}],
-"loop": false,
-"name": &"right note",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0l0dk")
-}],
-"loop": false,
-"name": &"right sustain",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukg30")
-}],
-"loop": false,
-"name": &"right sustain end",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q8c2i")
-}],
-"loop": false,
-"name": &"up note",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qpnpv")
-}],
-"loop": false,
-"name": &"up sustain",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_na6fl")
-}],
-"loop": false,
-"name": &"up sustain end",
-"speed": 24.0
-}]
 
 [node name="note" type="Node2D"]
 scale = Vector2(0.7, 0.7)
@@ -223,6 +62,6 @@ flip_h = true
 flip_v = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_sv3fl")
+sprite_frames = ExtResource("3_wnwtv")
 animation = &"left note"
 script = ExtResource("2_uegtt")

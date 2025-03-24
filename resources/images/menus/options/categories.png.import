@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://1g4r4a6hsts0"
 path.bptc="res://.godot/imported/categories.png-eeaaef1408132a53dbba988725ac9d18.bptc.ctex"
+path.astc="res://.godot/imported/categories.png-eeaaef1408132a53dbba988725ac9d18.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/menus/options/categories.png"
-dest_files=["res://.godot/imported/categories.png-eeaaef1408132a53dbba988725ac9d18.bptc.ctex"]
+dest_files=["res://.godot/imported/categories.png-eeaaef1408132a53dbba988725ac9d18.bptc.ctex", "res://.godot/imported/categories.png-eeaaef1408132a53dbba988725ac9d18.astc.ctex"]
 
 [params]
 

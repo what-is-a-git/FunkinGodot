@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://4qant1okv1gk"
 path.bptc="res://.godot/imported/piano.svg-460ec13b5febd2ae65f804d82582242c.bptc.ctex"
+path.astc="res://.godot/imported/piano.svg-460ec13b5febd2ae65f804d82582242c.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/icons/piano.svg"
-dest_files=["res://.godot/imported/piano.svg-460ec13b5febd2ae65f804d82582242c.bptc.ctex"]
+dest_files=["res://.godot/imported/piano.svg-460ec13b5febd2ae65f804d82582242c.bptc.ctex", "res://.godot/imported/piano.svg-460ec13b5febd2ae65f804d82582242c.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://co8jppbmi4uuc"
 path.bptc="res://.godot/imported/sprites.png-8edc4a7102f754361405565c25db0e51.bptc.ctex"
+path.astc="res://.godot/imported/sprites.png-8edc4a7102f754361405565c25db0e51.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/mom/sprites.png"
-dest_files=["res://.godot/imported/sprites.png-8edc4a7102f754361405565c25db0e51.bptc.ctex"]
+dest_files=["res://.godot/imported/sprites.png-8edc4a7102f754361405565c25db0e51.bptc.ctex", "res://.godot/imported/sprites.png-8edc4a7102f754361405565c25db0e51.astc.ctex"]
 
 [params]
 

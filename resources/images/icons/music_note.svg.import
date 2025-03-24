@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdyx2m586qlte"
 path.bptc="res://.godot/imported/music_note.svg-d8cf533b95c446a91d69b3dbb82a0ad2.bptc.ctex"
+path.astc="res://.godot/imported/music_note.svg-d8cf533b95c446a91d69b3dbb82a0ad2.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/icons/music_note.svg"
-dest_files=["res://.godot/imported/music_note.svg-d8cf533b95c446a91d69b3dbb82a0ad2.bptc.ctex"]
+dest_files=["res://.godot/imported/music_note.svg-d8cf533b95c446a91d69b3dbb82a0ad2.bptc.ctex", "res://.godot/imported/music_note.svg-d8cf533b95c446a91d69b3dbb82a0ad2.astc.ctex"]
 
 [params]
 

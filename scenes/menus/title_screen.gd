@@ -30,9 +30,9 @@ func _ready() -> void:
 		Config.first_launch = false
 		SceneManager.switch_to('scenes/menus/first_launch.tscn', false)
 		return
-	
+
 	enter_animation.play('loop')
-	
+
 	Conductor.tempo = 102.0
 	var music_player := GlobalAudio.music
 	if not music_player.playing:
@@ -40,13 +40,13 @@ func _ready() -> void:
 		music_player.play()
 		last_music_time = music_player.get_playback_position()
 		Conductor.target_audio = music_player
-	
+
 	if first_open:
 		_start_intro()
 	else:
 		intro_sequence.queue_free()
 		post_intro.visible = true
-	
+
 	first_open = false
 	Conductor.beat_hit.connect(_on_beat_hit)
 	_on_beat_hit(0)
@@ -61,12 +61,12 @@ func _process(delta: float) -> void:
 		Conductor.reset()
 		Conductor.target_audio = GlobalAudio.music
 	last_music_time = current_time
-	
+
 	if not is_instance_valid(swag_material):
 		return
-	
+
 	var swag_axis: float = Input.get_axis('ui_left', 'ui_right')
-	swag_material.set_shader_parameter('value', 
+	swag_material.set_shader_parameter('value',
 			swag_material.get_shader_parameter('value') + delta * 0.1 * swag_axis)
 
 
@@ -75,12 +75,12 @@ func _on_beat_hit(beat: int) -> void:
 	girlfriend_animation.play('dance_left' if dance_left else 'dance_right')
 	logo_sprite.play('bump')
 	logo_sprite.frame = 0
-	
+
 	if introing:
 		if float(beat) >= intro_animation.current_animation_length:
 			_skip_intro()
 			return
-		
+
 		var previous: String = alphabet.text
 		intro_animation.seek(float(beat), true)
 		if alphabet.text == '!random':
@@ -97,16 +97,16 @@ func _input(event: InputEvent) -> void:
 		if introing:
 			_skip_intro()
 			return
-		
+
 		active = false
 		GlobalAudio.get_player('MENU/CONFIRM').play()
 		enter_animation.play('press')
-		
+
 		flash.color = Color.WHITE
-		
+
 		if is_instance_valid(tween) and tween.is_running():
 			tween.kill()
-		
+
 		tween = create_tween()
 		tween.tween_property(flash, 'color:a', 0.0, 1.0)
 		tween.tween_callback(SceneManager.switch_to.bind('scenes/menus/main_menu.tscn'))
@@ -114,10 +114,10 @@ func _input(event: InputEvent) -> void:
 
 func _start_intro() -> void:
 	randomize()
-	
+
 	introing = true
 	intro_animation.play(&'intro')
-	
+
 	var lines: String = FileAccess.get_file_as_string('res://resources/intro_messages.txt')
 	lines = lines.strip_edges()
 	var lines_array := lines.split('\n', false)
@@ -135,6 +135,6 @@ func _skip_intro() -> void:
 	intro_sequence.queue_free()
 	post_intro.visible = true
 	flash.color = Color.WHITE
-	
+
 	tween = create_tween()
 	tween.tween_property(flash, 'color:a', 0.0, 1.0)

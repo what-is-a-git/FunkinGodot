@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg27mscciq4kl"
 path.bptc="res://.godot/imported/sprites.png-fd21ddf6bdbf7cd56f53e27f44ecfe96.bptc.ctex"
+path.astc="res://.godot/imported/sprites.png-fd21ddf6bdbf7cd56f53e27f44ecfe96.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/bf/sprites.png"
-dest_files=["res://.godot/imported/sprites.png-fd21ddf6bdbf7cd56f53e27f44ecfe96.bptc.ctex"]
+dest_files=["res://.godot/imported/sprites.png-fd21ddf6bdbf7cd56f53e27f44ecfe96.bptc.ctex", "res://.godot/imported/sprites.png-fd21ddf6bdbf7cd56f53e27f44ecfe96.astc.ctex"]
 
 [params]
 

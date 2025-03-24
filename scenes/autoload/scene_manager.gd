@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 
+var current_path: String = ''
+
 @onready var transition: ColorRect = $transition
 var tween: Tween
 
@@ -15,10 +17,10 @@ func _ready() -> void:
 func switch_to(path: String, use_transition: bool = true) -> void:
 	if not Config.get_value('interface', 'scene_transitions'):
 		use_transition = false
-	
+
 	if (not path.begins_with('uid://')) and (not path.begins_with('res://')):
 		path = 'res://%s' % path
-	
+
 	var tree := get_tree()
 	var killed := is_instance_valid(tween) and tween.is_running()
 	if killed:
@@ -31,10 +33,11 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 		tween.tween_callback(func():
 			if is_instance_valid(tween) and tween.is_running():
 				tween.kill()
-			
+
+			current_path = path
 			tree.call_deferred('change_scene_to_file', path)
 			scene_changed.emit()
-			
+
 			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(transition.material, 'shader_parameter/progress', 0.0, 0.5)
 			tween.tween_callback(func():
@@ -44,6 +47,7 @@ func switch_to(path: String, use_transition: bool = true) -> void:
 		if killed:
 			transition.material.set_shader_parameter('progress', 0.0)
 			visible = false
-		
+
+		current_path = path
 		tree.call_deferred('change_scene_to_file', path)
 		scene_changed.emit()

@@ -69,6 +69,7 @@ var default_configuration: Dictionary = {
 		'scroll_speed_method': 'chart_based',
 		'custom_scroll_speed': 1.0,
 		'use_conductor_time': true,
+		'use_touch': true,
 		'binds': {
 			'left': KEY_D,
 			'down': KEY_F,

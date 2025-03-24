@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgkt2ctlovm34"
 path.bptc="res://.godot/imported/go.png-a789f6c16c5ecd4132b2a622effdaef5.bptc.ctex"
+path.astc="res://.godot/imported/go.png-a789f6c16c5ecd4132b2a622effdaef5.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/skins/default/countdown/go.png"
-dest_files=["res://.godot/imported/go.png-a789f6c16c5ecd4132b2a622effdaef5.bptc.ctex"]
+dest_files=["res://.godot/imported/go.png-a789f6c16c5ecd4132b2a622effdaef5.bptc.ctex", "res://.godot/imported/go.png-a789f6c16c5ecd4132b2a622effdaef5.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bndm7gp3qwu2d"
 path.bptc="res://.godot/imported/monster.png-ce474a75f2b2a1c28e6c8cdde5d64ccc.bptc.ctex"
+path.astc="res://.godot/imported/monster.png-ce474a75f2b2a1c28e6c8cdde5d64ccc.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://resources/images/game/assets/characters/monster/monster.png"
-dest_files=["res://.godot/imported/monster.png-ce474a75f2b2a1c28e6c8cdde5d64ccc.bptc.ctex"]
+dest_files=["res://.godot/imported/monster.png-ce474a75f2b2a1c28e6c8cdde5d64ccc.bptc.ctex", "res://.godot/imported/monster.png-ce474a75f2b2a1c28e6c8cdde5d64ccc.astc.ctex"]
 
 [params]
 
