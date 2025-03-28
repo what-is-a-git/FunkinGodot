@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dhtct6lrdao7r"]
+[gd_scene load_steps=20 format=3 uid="uid://dhtct6lrdao7r"]
 
 [ext_resource type="Script" uid="uid://co5ccgkvmutk5" path="res://scenes/game/assets/stages/philly_streets_erect.gd" id="1_hmgxw"]
 [ext_resource type="Texture2D" uid="uid://gai5mgxmcuw5" path="res://resources/images/game/assets/stages/philly_streets/erect/phillySkyline.png" id="2_0jnji"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b5l64riaq05l0" path="res://resources/images/game/assets/stages/philly_streets/erect/greyGradient.png" id="8_ubkch"]
 [ext_resource type="SpriteFrames" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyCars.res" id="9_j1c5h"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="10_o5oj6"]
+[ext_resource type="Material" uid="uid://dusbajrs5d28b" path="res://resources/materials/multiply.tres" id="10_xtlem"]
 [ext_resource type="SpriteFrames" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyTraffic.res" id="11_o5oj6"]
 [ext_resource type="Texture2D" uid="uid://bkb7c6uj1fafq" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyTraffic_lightmap.png" id="12_fcxpl"]
 [ext_resource type="Texture2D" uid="uid://c05kfndvl1v01" path="res://resources/images/game/assets/stages/philly_streets/erect/phillyForeground.png" id="13_dkt1u"]
@@ -19,27 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://bhhmtkl0te62f" path="res://resources/images/game/assets/stages/philly_streets/erect/mistBack.png" id="17_gl3gy"]
 [ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://scenes/game/assets/stages/character_preview.gd" id="17_hydkt"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hydkt"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xtlem"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_26rwe"]
-blend_mode = 3
-
 [node name="philly_streets_erect" type="Node2D"]
 script = ExtResource("1_hmgxw")
 default_zoom = 0.77
-
-[node name="bg" type="Parallax2D" parent="."]
-
-[node name="color_rect" type="ColorRect" parent="bg"]
-offset_right = 1280.0
-offset_bottom = 720.0
-scale = Vector2(2, 2)
-pivot_offset = Vector2(640, 360)
-color = Color(0, 0, 0, 1)
 
 [node name="skyline" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 0.2)
@@ -77,7 +60,7 @@ centered = false
 [node name="highway_lights_lightmap" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.6)
 z_index = 50
-material = SubResource("CanvasItemMaterial_hydkt")
+material = ExtResource("15_hydkt")
 position = Vector2(284, 305)
 texture = ExtResource("6_c6ct7")
 centered = false
@@ -91,7 +74,7 @@ centered = false
 [node name="grey" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.3)
 z_index = 91
-material = SubResource("CanvasItemMaterial_xtlem")
+material = ExtResource("15_hydkt")
 position = Vector2(88, 317)
 texture = ExtResource("8_ubkch")
 centered = false
@@ -99,7 +82,7 @@ centered = false
 [node name="grey_2" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.8)
 z_index = 91
-material = SubResource("CanvasItemMaterial_26rwe")
+material = ExtResource("10_xtlem")
 position = Vector2(88, 317)
 texture = ExtResource("8_ubkch")
 centered = false
@@ -114,7 +97,7 @@ sprite_frames = ExtResource("9_j1c5h")
 animation = &"car1"
 centered = false
 script = ExtResource("10_o5oj6")
-metadata/_custom_type_script = ExtResource("10_o5oj6")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="2" type="AnimatedSprite2D" parent="cars"]
 z_index = 78
@@ -123,7 +106,7 @@ sprite_frames = ExtResource("9_j1c5h")
 animation = &"car1"
 centered = false
 script = ExtResource("10_o5oj6")
-metadata/_custom_type_script = ExtResource("10_o5oj6")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="traffic" type="AnimatedSprite2D" parent="cars"]
 z_index = 90
@@ -132,12 +115,12 @@ sprite_frames = ExtResource("11_o5oj6")
 animation = &"redtogreen"
 centered = false
 script = ExtResource("10_o5oj6")
-metadata/_custom_type_script = ExtResource("10_o5oj6")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="traffic_lightmap" type="Sprite2D" parent="cars"]
 modulate = Color(1, 1, 1, 0.6)
 z_index = 90
-material = SubResource("CanvasItemMaterial_hydkt")
+material = ExtResource("15_hydkt")
 position = Vector2(1840, 608)
 texture = ExtResource("12_fcxpl")
 centered = false
@@ -157,7 +140,6 @@ repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="skybox"]
 z_index = 10
-texture_repeat = 2
 position = Vector2(-650, -375)
 scale = Vector2(1.159, 1.001)
 texture = ExtResource("15_j2dnk")

@@ -32,34 +32,34 @@ func _ready() -> void:
 	game.opponent._camera_offset.position += Vector2(230.0, 75.0)
 	var plr: AnimatedSprite = game.player.get_node(^'sprite')
 	plr.material = ShaderMaterial.new()
-	plr.material.shader = load('res://resources/shaders/adjust_hsv.gdshader')
+	plr.material.shader = load('uid://bgwusoh6kicj3')
 	plr.material.set_shader_parameter('hue', -5.0)
 	plr.material.set_shader_parameter('saturation', -40.0)
 	plr.material.set_shader_parameter('contrast', -25.0)
 	plr.material.set_shader_parameter('brightness', -20.0)
-	
+
 	game.spectator.get_node(^'sprite').material = plr.material
 	if game.spectator.has_node(^'speakers'):
 		game.spectator.get_node(^'speakers').material = plr.material
-	
+
 	game.opponent.get_node(^'sprite').material = plr.material
 	reset_cars(true, true)
 
 
 func _on_beat_hit(beat: int) -> void:
 	super(beat)
-	
+
 	var target_beat := last_change + change_interval
 	if randf_range(0.0, 100.0) <= 10.0 and beat != target_beat and car_1_interruptable:
 		if light_state:
 			drive_car_1()
 		else:
 			drive_car_1_lights()
-	
+
 	if randf_range(0.0, 100.0) <= 10.0 and beat != target_beat and car_2_interruptable \
 			and not light_state:
 		drive_car_2_back()
-	
+
 	if beat == target_beat:
 		change_lights()
 
@@ -116,7 +116,7 @@ func drive_car_1() -> void:
 		cancel_tween(tween)
 	var variant := randi_range(1, 4)
 	car_1.play(&'car%d' % [variant,])
-	
+
 	var offset := Vector2.ZERO
 	var dur: float = 2.0
 	match variant:
@@ -145,7 +145,7 @@ func drive_car_1_lights() -> void:
 		cancel_tween(tween)
 	var variant := randi_range(1, 4)
 	car_1.play(&'car%d' % [variant,])
-	
+
 	var offset := Vector2.ZERO
 	var dur: float = 2.0
 	match variant:
@@ -187,7 +187,7 @@ func stupid_car_1_movement(dur: float, delay: float, rt_s: float, rt_f: float,
 	var angle_tween := create_tween().set_trans(Tween.TRANS_SINE)
 	angle_tween.tween_property(car_1, ^'rotation_degrees', rt_f, dur).set_delay(delay)
 	car_1_tweens.push_back(angle_tween)
-	
+
 	car_1.global_position = path[0]
 	var movement_tween := create_tween().set_trans(Tween.TRANS_SINE)
 	movement_tween.tween_property(car_1, ^'global_position', path[1], dur / 2.0).set_delay(delay)
@@ -202,7 +202,7 @@ func stupid_car_2_movement(dur: float, delay: float, rt_s: float, rt_f: float,
 	var angle_tween := create_tween().set_trans(Tween.TRANS_SINE)
 	angle_tween.tween_property(car_2, ^'rotation_degrees', rt_f, dur).set_delay(delay)
 	car_2_tweens.push_back(angle_tween)
-	
+
 	car_2.global_position = path[0]
 	var movement_tween := create_tween().set_trans(Tween.TRANS_SINE)
 	movement_tween.tween_property(car_2, ^'global_position', path[1], dur / 2.0).set_delay(delay)
@@ -217,7 +217,7 @@ func drive_car_2_back() -> void:
 		cancel_tween(tween)
 	var variant := randi_range(1, 4)
 	car_2.play(&'car%d' % [variant,])
-	
+
 	var offset := Vector2.ZERO
 	var dur: float = 2.0
 	match variant:
